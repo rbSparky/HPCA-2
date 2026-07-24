@@ -1,0 +1,19 @@
+seed: 7
+null_seed: 7007
+valid_configs:
+  - cora_gcnii16
+  - pubmed_gcnii16
+  - cora_deepres28_w128
+  - chameleon_gcnii16
+diagnostic_configs:
+  - cora_resgcn16
+  - pubmed_deepres28_w128
+panel_widths: [4, 8, 16, 32]
+max_windows: [1, 2, 4, 8, 13]
+topology_tile_rows: 128
+rho_residual: 1.50
+decoder_width_bits: 64
+gather_width_values: 32
+accumulator_width_values: 32
+eta: 0.05
+rebuild_fraction: 0.01

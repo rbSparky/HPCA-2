@@ -1,0 +1,12 @@
+{
+  "26_panel_encoder_comparison.csv": "3d63aac76fb312d50c25f29002fb091bb6b8d913266a855ded4e11c75dada0b3",
+  "27_panel_partition_quality.csv": "5ea0b2ace3b070318e74487159be43d7df090583be08186b07de37c68156f57a",
+  "28_row_panel_schedule.csv": "bb400cb022d9843d320a55ea85df6ae70c4fde31c8c186cec61c52f377cee571",
+  "29_scalesim_panel_cycles.csv": "429c76ce76b988dd70d5c48c95c63d957668bf85531f0654d32fc7e4aa9cdcd6",
+  "30_accumulator_capacity.csv": "4fc2acb882cb97959aefec1eb7a717f7c63e7da752937d25f5ceadc6c87c3dae",
+  "31_panel_null_controls.csv": "3574772256239ec74d4b45e8af48f7ec32952a75e8061d1967e14c84f8213e76",
+  "32_panel_sensitivity.csv": "9e052244e3c65b7a0cb86e09e7f4c078c7b6551376c71eedcf99a5fb7218653e",
+  "33_phase3a_summary.csv": "5247d498417e2cf649e8b8511ac2efb631380381b7e3c34bfb9d845a6738510e",
+  "34_phase3a_failures.csv": "809c884a3dda87cd560e579ef713133f8dc0c0e16a421280e1eada910c7a8142",
+  "phase3a_gates.csv": "2a8a1fcaf6f2cab4da4e62d4a238573046ca34f3f1d6d44d89a67d7188e5aba5"
+}

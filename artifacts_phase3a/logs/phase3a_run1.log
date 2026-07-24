@@ -1,0 +1,77 @@
+PHASE3A_CONFIG_START=cora_gcnii16
+PHASE3A_CONFIG_START=pubmed_gcnii16
+PHASE3A_CONFIG_START=cora_deepres28_w128
+PHASE3A_CONFIG_START=chameleon_gcnii16
+PHASE3A_CONFIG_START=cora_resgcn16
+PHASE3A_CONFIG_START=pubmed_deepres28_w128
+PHASE3A_SEGMENT=cora_gcnii16:4:W13:PANEL4
+PHASE3A_SEGMENT=cora_gcnii16:4:W13:PANEL8
+PHASE3A_SEGMENT=cora_gcnii16:4:W13:PANEL16
+PHASE3A_SEGMENT=cora_gcnii16:4:W13:PANEL32
+PHASE3A_CONFIG_DONE=cora_gcnii16
+PHASE3A_SEGMENT=pubmed_gcnii16:4:W13:PANEL4
+PHASE3A_SEGMENT=pubmed_gcnii16:4:W13:PANEL8
+PHASE3A_SEGMENT=pubmed_gcnii16:4:W13:PANEL16
+PHASE3A_SEGMENT=pubmed_gcnii16:4:W13:PANEL32
+PHASE3A_CONFIG_DONE=pubmed_gcnii16
+PHASE3A_SEGMENT=cora_deepres28_w128:4:W13:PANEL4
+PHASE3A_SEGMENT=cora_deepres28_w128:4:W13:PANEL8
+PHASE3A_SEGMENT=cora_deepres28_w128:4:W13:PANEL16
+PHASE3A_SEGMENT=cora_deepres28_w128:4:W13:PANEL32
+PHASE3A_SEGMENT=cora_deepres28_w128:17:W12:PANEL4
+PHASE3A_SEGMENT=cora_deepres28_w128:17:W12:PANEL8
+PHASE3A_SEGMENT=cora_deepres28_w128:17:W12:PANEL16
+PHASE3A_SEGMENT=cora_deepres28_w128:17:W12:PANEL32
+PHASE3A_CONFIG_DONE=cora_deepres28_w128
+PHASE3A_SEGMENT=chameleon_gcnii16:4:W13:PANEL4
+PHASE3A_SEGMENT=chameleon_gcnii16:4:W13:PANEL8
+PHASE3A_SEGMENT=chameleon_gcnii16:4:W13:PANEL16
+PHASE3A_SEGMENT=chameleon_gcnii16:4:W13:PANEL32
+PHASE3A_CONFIG_DONE=chameleon_gcnii16
+PHASE3A_SEGMENT=cora_resgcn16:4:W13:PANEL4
+PHASE3A_SEGMENT=cora_resgcn16:4:W13:PANEL8
+PHASE3A_SEGMENT=cora_resgcn16:4:W13:PANEL16
+PHASE3A_SEGMENT=cora_resgcn16:4:W13:PANEL32
+PHASE3A_CONFIG_DONE=cora_resgcn16
+PHASE3A_SEGMENT=pubmed_deepres28_w128:4:W13:PANEL32
+PHASE3A_SEGMENT=pubmed_deepres28_w128:17:W12:PANEL32
+PHASE3A_CONFIG_DONE=pubmed_deepres28_w128
+PHASE3A_NULLS_START=cora_gcnii16
+PHASE3A_NULLS_DONE=cora_gcnii16
+PHASE3A_NULLS_START=pubmed_gcnii16
+PHASE3A_NULLS_DONE=pubmed_gcnii16
+PHASE3A_NULLS_START=cora_deepres28_w128
+PHASE3A_NULLS_DONE=cora_deepres28_w128
+Traceback (most recent call last):
+  File "/home/rishabh/miniconda/envs/taugat_pyg/lib/python3.11/site-packages/pandas/compat/_optional.py", line 135, in import_optional_dependency
+    module = importlib.import_module(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rishabh/miniconda/envs/taugat_pyg/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1140, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'tabulate'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/phase3a_cli.py", line 559, in <module>
+    main()
+  File "/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/phase3a_cli.py", line 555, in main
+    main_run(parser.parse_args().config)
+  File "/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/phase3a_cli.py", line 533, in main_run
+    "## Gate table","",gates.to_markdown(index=False),"","## Principal summary","",
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rishabh/miniconda/envs/taugat_pyg/lib/python3.11/site-packages/pandas/util/_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rishabh/miniconda/envs/taugat_pyg/lib/python3.11/site-packages/pandas/core/frame.py", line 2988, in to_markdown
+    tabulate = import_optional_dependency("tabulate")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rishabh/miniconda/envs/taugat_pyg/lib/python3.11/site-packages/pandas/compat/_optional.py", line 138, in import_optional_dependency
+    raise ImportError(msg)
+ImportError: Missing optional dependency 'tabulate'.  Use pip or conda to install tabulate.

@@ -1,0 +1,94 @@
+6ca5569 Implement MOSAIC-PANEL Phase-3A validation
+ HANDOFF_PHASE3A.md                                 |    16 +
+ .../environment/phase3a_environment.json           |     9 +
+ artifacts_phase3a/logs/phase3a_corrected_run1.log  |    46 +
+ artifacts_phase3a/logs/phase3a_corrected_run2.log  |    49 +
+ artifacts_phase3a/logs/phase3a_final_run.log       |    60 +
+ artifacts_phase3a/logs/phase3a_handoff_run.log     |    49 +
+ artifacts_phase3a/logs/phase3a_run1.log            |    77 +
+ artifacts_phase3a/phase1_hash_file_hashes.sha256   |     2 +
+ artifacts_phase3a/phase3a_command.txt              |     2 +
+ artifacts_phase3a/phase3a_run1.sha256              |    10 +
+ artifacts_phase3a/phase3a_run2.sha256              |    10 +
+ artifacts_phase3a/repository/git_diff.patch        |     0
+ artifacts_phase3a/repository/git_diff_stat.txt     |     0
+ artifacts_phase3a/repository/git_status.txt        |    20 +
+ artifacts_phase3a/repository/parent_commit.txt     |     1 +
+ artifacts_phase3a/scalesim/array_16/command.log    | 23636 +++++++++++++++++++
+ artifacts_phase3a/scalesim/array_16/layout.csv     |  1409 ++
+ .../reports/mosaic_panel_16/BANDWIDTH_REPORT.csv   |  1409 ++
+ .../reports/mosaic_panel_16/COMPUTE_REPORT.csv     |  1409 ++
+ .../mosaic_panel_16/DETAILED_ACCESS_REPORT.csv     |  1409 ++
+ artifacts_phase3a/scalesim/array_16/scale.cfg      |    38 +
+ .../scalesim/array_16/shape_cache.json             |  5634 +++++
+ artifacts_phase3a/scalesim/array_16/topology.csv   |  1409 ++
+ artifacts_phase3a/scalesim/array_32/command.log    | 22811 ++++++++++++++++++
+ artifacts_phase3a/scalesim/array_32/layout.csv     |  1409 ++
+ .../reports/mosaic_panel_32/BANDWIDTH_REPORT.csv   |  1409 ++
+ .../reports/mosaic_panel_32/COMPUTE_REPORT.csv     |  1409 ++
+ .../mosaic_panel_32/DETAILED_ACCESS_REPORT.csv     |  1409 ++
+ artifacts_phase3a/scalesim/array_32/scale.cfg      |    38 +
+ .../scalesim/array_32/shape_cache.json             |  5634 +++++
+ artifacts_phase3a/scalesim/array_32/topology.csv   |  1409 ++
+ artifacts_phase3a/scalesim/array_64/command.log    | 22630 ++++++++++++++++++
+ artifacts_phase3a/scalesim/array_64/layout.csv     |  1409 ++
+ .../reports/mosaic_panel_64/BANDWIDTH_REPORT.csv   |  1409 ++
+ .../reports/mosaic_panel_64/COMPUTE_REPORT.csv     |  1409 ++
+ .../mosaic_panel_64/DETAILED_ACCESS_REPORT.csv     |  1409 ++
+ artifacts_phase3a/scalesim/array_64/scale.cfg      |    38 +
+ .../scalesim/array_64/shape_cache.json             |  5634 +++++
+ artifacts_phase3a/scalesim/array_64/topology.csv   |  1409 ++
+ configs/phase3a_quick.yaml                         |    19 +
+ results_phase3a/26_panel_encoder_comparison.csv    |   213 +
+ results_phase3a/27_panel_partition_quality.csv     |   149 +
+ results_phase3a/28_row_panel_schedule.csv          | 10391 ++++++++
+ results_phase3a/29_scalesim_panel_cycles.csv       |  2772 +++
+ results_phase3a/30_accumulator_capacity.csv        |   158 +
+ results_phase3a/31_panel_null_controls.csv         |    16 +
+ results_phase3a/32_panel_sensitivity.csv           |    37 +
+ results_phase3a/33_phase3a_summary.csv             |     7 +
+ results_phase3a/34_phase3a_failures.csv            |     1 +
+ results_phase3a/PHASE3A_RESULTS.md                 |    43 +
+ results_phase3a/capacity_breakdown.pdf             |   Bin 0 -> 13105 bytes
+ results_phase3a/capacity_breakdown.png             |   Bin 0 -> 60997 bytes
+ results_phase3a/oracle_gap.pdf                     |   Bin 0 -> 11929 bytes
+ results_phase3a/oracle_gap.png                     |   Bin 0 -> 33850 bytes
+ results_phase3a/panel_bytes_by_builder.pdf         |   Bin 0 -> 14823 bytes
+ results_phase3a/panel_bytes_by_builder.png         |   Bin 0 -> 39390 bytes
+ results_phase3a/panel_capture_padding_residual.pdf |   Bin 0 -> 12590 bytes
+ results_phase3a/panel_capture_padding_residual.png |   Bin 0 -> 47342 bytes
+ results_phase3a/panel_cycle_breakdown.pdf          |   Bin 0 -> 13768 bytes
+ results_phase3a/panel_cycle_breakdown.png          |   Bin 0 -> 56338 bytes
+ results_phase3a/panel_shape_utilization.pdf        |   Bin 0 -> 11603 bytes
+ results_phase3a/panel_shape_utilization.png        |   Bin 0 -> 24228 bytes
+ results_phase3a/panel_speedup_by_builder.pdf       |   Bin 0 -> 14594 bytes
+ results_phase3a/panel_speedup_by_builder.png       |   Bin 0 -> 39954 bytes
+ results_phase3a/panel_speedup_by_width.pdf         |   Bin 0 -> 11633 bytes
+ results_phase3a/panel_speedup_by_width.png         |   Bin 0 -> 38080 bytes
+ results_phase3a/panel_vs_phase2_anchor.pdf         |   Bin 0 -> 12115 bytes
+ results_phase3a/panel_vs_phase2_anchor.png         |   Bin 0 -> 36241 bytes
+ results_phase3a/phase3a_gates.csv                  |    13 +
+ results_phase3a/principal_hashes.json              |    12 +
+ results_phase3a/real_vs_null_panel.pdf             |   Bin 0 -> 10048 bytes
+ results_phase3a/real_vs_null_panel.png             |   Bin 0 -> 33304 bytes
+ results_phase3a/segment_length_distribution.pdf    |   Bin 0 -> 12180 bytes
+ results_phase3a/segment_length_distribution.png    |   Bin 0 -> 37218 bytes
+ .../within_vs_cross_panel_similarity.pdf           |   Bin 0 -> 17175 bytes
+ .../within_vs_cross_panel_similarity.png           |   Bin 0 -> 48353 bytes
+ scripts/run_phase3a.sh                             |     9 +
+ src/mosaic_validation/panel_encoding.py            |   645 +
+ src/mosaic_validation/panel_scalesim.py            |   127 +
+ src/mosaic_validation/phase3a_cli.py               |   787 +
+ tests/test_panel_capacity_accounting.py            |    12 +
+ tests/test_panel_cost_monotonicity.py              |    14 +
+ tests/test_panel_dp_optimality.py                  |    14 +
+ tests/test_panel_escape_legality.py                |    18 +
+ tests/test_panel_exact_decomposition.py            |    26 +
+ tests/test_panel_numeric_equivalence.py            |    25 +
+ tests/test_panel_online_policy.py                  |    10 +
+ tests/test_panel_partition_legality.py             |    25 +
+ tests/test_panel_row_list_roundtrip.py             |    11 +
+ tests/test_panel_scalesim_cycle_sum.py             |     9 +
+ tests/test_panel_scatter_add_count.py              |    20 +
+ tests/test_panel_top_m_optimality.py               |    27 +
+ 92 files changed, 123189 insertions(+)

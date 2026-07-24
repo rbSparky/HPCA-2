@@ -1,0 +1,2 @@
+PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python -m mosaic_validation.phase3a_cli --config configs/phase3a_quick.yaml
+PYTHONPATH='' PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 /home/rishabh/miniconda/envs/taugat_pyg/bin/python -m pytest -q

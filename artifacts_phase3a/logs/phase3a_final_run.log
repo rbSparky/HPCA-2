@@ -1,0 +1,60 @@
+PHASE3A_CONFIG_START=cora_gcnii16
+PHASE3A_CONFIG_START=pubmed_gcnii16
+PHASE3A_CONFIG_START=cora_deepres28_w128
+PHASE3A_CONFIG_START=chameleon_gcnii16
+PHASE3A_CONFIG_START=cora_resgcn16
+PHASE3A_CONFIG_START=pubmed_deepres28_w128
+PHASE3A_SEGMENT=cora_gcnii16:4:W13:PANEL4
+PHASE3A_SEGMENT=cora_gcnii16:4:W13:PANEL8
+PHASE3A_SEGMENT=cora_gcnii16:4:W13:PANEL16
+PHASE3A_SEGMENT=cora_gcnii16:4:W13:PANEL32
+PHASE3A_CONFIG_DONE=cora_gcnii16
+PHASE3A_SEGMENT=pubmed_gcnii16:4:W13:PANEL4
+PHASE3A_SEGMENT=pubmed_gcnii16:4:W13:PANEL8
+PHASE3A_SEGMENT=pubmed_gcnii16:4:W13:PANEL16
+PHASE3A_SEGMENT=pubmed_gcnii16:4:W13:PANEL32
+PHASE3A_CONFIG_DONE=pubmed_gcnii16
+PHASE3A_SEGMENT=cora_deepres28_w128:4:W13:PANEL4
+PHASE3A_SEGMENT=cora_deepres28_w128:4:W13:PANEL8
+PHASE3A_SEGMENT=cora_deepres28_w128:4:W13:PANEL16
+PHASE3A_SEGMENT=cora_deepres28_w128:4:W13:PANEL32
+PHASE3A_SEGMENT=cora_deepres28_w128:17:W12:PANEL4
+PHASE3A_SEGMENT=cora_deepres28_w128:17:W12:PANEL8
+PHASE3A_SEGMENT=cora_deepres28_w128:17:W12:PANEL16
+PHASE3A_SEGMENT=cora_deepres28_w128:17:W12:PANEL32
+PHASE3A_CONFIG_DONE=cora_deepres28_w128
+PHASE3A_SEGMENT=chameleon_gcnii16:4:W13:PANEL4
+PHASE3A_SEGMENT=chameleon_gcnii16:4:W13:PANEL8
+PHASE3A_SEGMENT=chameleon_gcnii16:4:W13:PANEL16
+PHASE3A_SEGMENT=chameleon_gcnii16:4:W13:PANEL32
+PHASE3A_CONFIG_DONE=chameleon_gcnii16
+PHASE3A_NULLS_START=cora_gcnii16
+PHASE3A_NULLS_DONE=cora_gcnii16
+PHASE3A_NULLS_START=pubmed_gcnii16
+PHASE3A_NULLS_DONE=pubmed_gcnii16
+PHASE3A_NULLS_START=cora_deepres28_w128
+PHASE3A_NULLS_DONE=cora_deepres28_w128
+PHASE3A_ORACLE_DONE=cora_gcnii16
+PHASE3A_ORACLE_DONE=pubmed_gcnii16
+PHASE3A_ORACLE_DONE=cora_deepres28_w128
+PHASE3A_ORACLE_DONE=chameleon_gcnii16
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/phase3a_cli.py", line 784, in <module>
+    main()
+  File "/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/phase3a_cli.py", line 780, in main
+    main_run(parser.parse_args().config)
+  File "/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/phase3a_cli.py", line 709, in main_run
+    best = grouped.loc[grouped.total_hybrid_cycles.idxmin()]
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rishabh/miniconda/envs/taugat_pyg/lib/python3.11/site-packages/pandas/core/series.py", line 2686, in idxmin
+    i = self.argmin(axis, skipna, *args, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rishabh/miniconda/envs/taugat_pyg/lib/python3.11/site-packages/pandas/core/base.py", line 789, in argmin
+    result = nanops.nanargmin(delegate, skipna=skipna)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rishabh/miniconda/envs/taugat_pyg/lib/python3.11/site-packages/pandas/core/nanops.py", line 1194, in nanargmin
+    result = values.argmin(axis)
+             ^^^^^^^^^^^^^^^^^^^
+ValueError: attempt to get argmin of an empty sequence
