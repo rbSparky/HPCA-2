@@ -11,3 +11,6 @@ phase0_results
 phase0_checkpoints
 third_party
 MOSAIC_DELTA_PHASE1_HANDOFF.zip
+results_phase2/
+artifacts_phase2/
+MOSAIC_ANCHOR_PHASE2_HANDOFF.zip
