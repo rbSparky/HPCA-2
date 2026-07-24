@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+results_phase1/
+checkpoints_phase1/
+artifacts_phase1/
+.phase1-python
+.scalesim-python
+data
+phase0_results
+phase0_checkpoints
+third_party
+MOSAIC_DELTA_PHASE1_HANDOFF.zip

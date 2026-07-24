@@ -28,3 +28,15 @@ def save_masks(masks: list[np.ndarray], directory: Path) -> None:
             density=np.asarray(mask.mean(), dtype=np.float32),
         )
 
+
+def load_masks(directory: Path) -> list[np.ndarray]:
+    """Load packed Phase-0/Phase-1 masks without modifying their source."""
+    masks: list[np.ndarray] = []
+    for path in sorted(directory.glob("layer_*.npz")):
+        with np.load(path) as stored:
+            rows, width = map(int, stored["shape"])
+            unpacked = np.unpackbits(stored["packed"], axis=1)[:, :width]
+            masks.append(unpacked[:rows].astype(np.bool_))
+    if not masks:
+        raise FileNotFoundError(f"No packed masks found under {directory}")
+    return masks

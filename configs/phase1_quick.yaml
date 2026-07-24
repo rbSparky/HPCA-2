@@ -1,0 +1,37 @@
+seed: 7
+null_seed: 7007
+principal:
+  window_length: 4
+  cohort_size: 32
+  tile_size: 128
+  rho_independent_sparse: 2.0
+  rho_delta: 1.25
+  mask_decode_width_bits: 64
+  rebase_control_fraction: 0.01
+  selector_overhead_fraction: 0.001
+sensitivity:
+  window_lengths: [1, 2, 4, 8]
+  cohort_sizes: [16, 32, 64]
+  tile_sizes: [64, 128, 256]
+  rho_delta: [1.10, 1.25, 1.50, 1.75]
+  mask_decode_width_bits: [32, 64, 128]
+  rebase_control_fractions: [0.005, 0.01, 0.02]
+deepres_v2:
+  width: 128
+  layers: 28
+  dropout: 0.20
+  residual_scale: 0.20
+  learning_rate: 0.005
+  weight_decay: 0.0005
+  max_epochs: 220
+  min_epochs: 60
+  validation_interval: 2
+  patience_checks: 30
+  fallback:
+    dropout: 0.50
+    residual_scale: 0.10
+    learning_rate: 0.01
+models:
+  - {id: cora_deepres28_w128, dataset: Cora, min_test_accuracy: 0.68, time_cap_minutes: 12}
+  - {id: pubmed_deepres28_w128, dataset: PubMed, min_test_accuracy: 0.75, time_cap_minutes: 25}
+
