@@ -1,0 +1,13 @@
+          config_id                control_type  density  support_ratio_to_beicsr  metadata_reduction  exact_decode_pass  control_support_ratio_over_real  real_support_ratio_advantage
+       cora_gcnii16                    real_fp8 0.778774                 0.425406            0.574594               True                         1.000000                      0.000000
+       cora_gcnii16 density_matched_independent 0.778546                 1.077150           -0.077150               True                         2.532051                      0.651744
+       cora_gcnii16               node_permuted 0.778774                 1.078059           -0.078059               True                         2.534188                      0.652653
+     pubmed_gcnii16                    real_fp8 0.660113                 0.386110            0.613890               True                         1.000000                      0.000000
+     pubmed_gcnii16 density_matched_independent 0.660061                 1.134733           -0.134733               True                         2.938889                      0.748624
+     pubmed_gcnii16               node_permuted 0.660113                 1.103679           -0.103679               True                         2.858459                      0.717569
+cora_deepres28_w128                    real_fp8 0.440464                 0.678464            0.321536               True                         1.000000                      0.000000
+cora_deepres28_w128 density_matched_independent 0.440706                 1.063811           -0.063811               True                         1.567970                      0.385347
+cora_deepres28_w128               node_permuted 0.440464                 1.060089           -0.060089               True                         1.562484                      0.381625
+  chameleon_gcnii16                    real_fp8 0.508756                 0.443769            0.556231               True                         1.000000                      0.000000
+  chameleon_gcnii16 density_matched_independent 0.508956                 1.123205           -0.123205               True                         2.531060                      0.679437
+  chameleon_gcnii16               node_permuted 0.508756                 1.112395           -0.112395               True                         2.506699                      0.668626

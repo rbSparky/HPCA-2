@@ -1,0 +1,9 @@
+{
+  "python": "/home/rishabh/miniconda/envs/taugat_pyg/bin/python",
+  "python_version": "3.11.13",
+  "torch": "2.8.0+cu128",
+  "cuda_available": true,
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "value_format": "FP8 E4M3",
+  "wall_seconds": 84.94401321100304
+}

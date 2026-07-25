@@ -1,0 +1,5 @@
+config_id,checkpoint,fp32_test_accuracy,fp8_test_accuracy,test_accuracy_drop,support_change_fraction
+cora_gcnii16,/home/rishabh/HPCA2/mosaic_delta_phase1/phase0_checkpoints/cora_gcnii16.pt,0.7900000214576721,0.7890000343322754,0.0009999871253967285,0.22122574849448925
+pubmed_gcnii16,/home/rishabh/HPCA2/mosaic_delta_phase1/phase0_checkpoints/pubmed_gcnii16.pt,0.7980000376701355,0.796000063419342,0.001999974250793457,0.3398872288068477
+cora_deepres28_w128,/home/rishabh/HPCA2/mosaic_delta_phase1/checkpoints_phase1/cora_deepres28_w128_primary.pt,0.7570000290870667,0.7560000419616699,0.0009999871253967285,0.559535635155096
+chameleon_gcnii16,/home/rishabh/HPCA2/mosaic_delta_phase1/phase0_checkpoints/chameleon_gcnii16.pt,0.3684210479259491,0.3662280738353729,0.002192974090576172,0.49124448920644576

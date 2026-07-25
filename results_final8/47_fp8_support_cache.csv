@@ -1,0 +1,17 @@
+config_id,slice_width,reconstructed_support_bytes,anchor_cache_bytes,prefix_bytes,peak_live_bytes,fits_64KiB
+cora_gcnii16,32,512,768,512,1792,True
+cora_gcnii16,64,1024,576,512,2112,True
+cora_gcnii16,96,1024,576,512,2112,True
+cora_gcnii16,128,1024,576,512,2112,True
+pubmed_gcnii16,32,512,704,512,1728,True
+pubmed_gcnii16,64,1024,512,512,2048,True
+pubmed_gcnii16,96,1024,512,512,2048,True
+pubmed_gcnii16,128,1024,512,512,2048,True
+cora_deepres28_w128,32,512,1536,512,2560,True
+cora_deepres28_w128,64,1024,1280,512,2816,True
+cora_deepres28_w128,96,1536,1280,512,3328,True
+cora_deepres28_w128,128,2048,1088,512,3648,True
+chameleon_gcnii16,32,512,896,512,1920,True
+chameleon_gcnii16,64,1024,768,512,2304,True
+chameleon_gcnii16,96,1024,768,512,2304,True
+chameleon_gcnii16,128,1024,768,512,2304,True

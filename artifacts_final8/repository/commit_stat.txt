@@ -1,0 +1,53 @@
+eb10420 Validate FP8 XORFLOW with parallel tile decoding
+ HANDOFF_FINAL8.md                                  |    39 +
+ HANDOFF_RESCUE_AUDIT.md                            |    33 +
+ .../environment/final8_environment.json            |     9 +
+ artifacts_final8/final8_complete_run1.sha256       |     8 +
+ artifacts_final8/final8_complete_run2.sha256       |     8 +
+ artifacts_final8/final8_run1.sha256                |     7 +
+ artifacts_final8/final8_run2.sha256                |     7 +
+ artifacts_final8/logs/final8_controls.log          |    13 +
+ artifacts_final8/logs/final8_run1.log              |     5 +
+ artifacts_final8/logs/final8_run2.log              |     5 +
+ .../masks/chameleon_gcnii16_fp8_supports.npz       |   Bin 0 -> 99996 bytes
+ .../masks/cora_deepres28_w128_fp8_supports.npz     |   Bin 0 -> 516500 bytes
+ .../masks/cora_gcnii16_fp8_supports.npz            |   Bin 0 -> 121781 bytes
+ .../masks/pubmed_gcnii16_fp8_supports.npz          |   Bin 0 -> 700829 bytes
+ artifacts_rescue_audit/rescue_audit.log            |     9 +
+ .../scalesim_array_8/command.log                   | 10432 +++++++++++++++++++
+ artifacts_rescue_audit/scalesim_array_8/layout.csv |   508 +
+ .../reports/mosaic_panel_8/BANDWIDTH_REPORT.csv    |   508 +
+ .../reports/mosaic_panel_8/COMPUTE_REPORT.csv      |   508 +
+ .../mosaic_panel_8/DETAILED_ACCESS_REPORT.csv      |   508 +
+ artifacts_rescue_audit/scalesim_array_8/scale.cfg  |    38 +
+ .../scalesim_array_8/shape_cache.json              |  2030 ++++
+ .../scalesim_array_8/topology.csv                  |   508 +
+ results_final8/44_fp8_accuracy.csv                 |     5 +
+ results_final8/45_fp8_format_metadata.csv          |    17 +
+ results_final8/46_fp8_cache_traffic.csv            |  1369 +++
+ results_final8/47_fp8_support_cache.csv            |    17 +
+ results_final8/48_final8_summary.csv               |     5 +
+ results_final8/49_decoder_parallelism.csv          |    73 +
+ results_final8/50_fp8_null_controls.csv            |    13 +
+ results_final8/FINAL8_RESULTS.md                   |    80 +
+ results_final8/final8_gates.csv                    |     8 +
+ results_final8/fp8_accuracy.pdf                    |   Bin 0 -> 12101 bytes
+ results_final8/fp8_accuracy.png                    |   Bin 0 -> 35741 bytes
+ results_final8/fp8_xorflow_speedup.pdf             |   Bin 0 -> 12237 bytes
+ results_final8/fp8_xorflow_speedup.png             |   Bin 0 -> 35129 bytes
+ results_final8/fp8_xorflow_traffic.pdf             |   Bin 0 -> 11902 bytes
+ results_final8/fp8_xorflow_traffic.png             |   Bin 0 -> 31047 bytes
+ results_final8/hashes.json                         |    10 +
+ results_rescue_audit/RESCUE_AUDIT.md               |    93 +
+ results_rescue_audit/precision_pivot_bounds.csv    |    13 +
+ results_rescue_audit/rescue_audit.csv              |     5 +
+ scripts/finalize_final8.py                         |   100 +
+ scripts/run_final8.sh                              |    11 +
+ src/mosaic_validation/final8_cli.py                |   487 +
+ src/mosaic_validation/final8_controls.py           |    79 +
+ src/mosaic_validation/int8_validation.py           |   149 +
+ src/mosaic_validation/rescue_audit.py              |   210 +
+ src/mosaic_validation/xorflow.py                   |   199 +
+ tests/test_final8_xorflow.py                       |    37 +
+ tests/test_xorflow_core.py                         |    42 +
+ 51 files changed, 18205 insertions(+)
