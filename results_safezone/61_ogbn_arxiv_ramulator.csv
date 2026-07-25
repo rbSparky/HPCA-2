@@ -1,0 +1,2 @@
+config_id,beicsr_hbm_cycles,xorflow_hbm_cycles,metadata_bytes,decode_cycles,descriptor_cycles_each,hbm_only_speedup,serialized_speedup,double_buffered_speedup,all_requests_drained
+ogbn_arxiv_deepres8_w128,6276052,4483316,6918848,27028,21168,1.3998683117585287,1.3896509597679538,1.397989203646855,True

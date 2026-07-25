@@ -1,0 +1,18 @@
+diff --git a/src/ramulator/python/bindings.cpp b/src/ramulator/python/bindings.cpp
+index fb1dd34..66ebdbb 100644
+--- a/src/ramulator/python/bindings.cpp
++++ b/src/ramulator/python/bindings.cpp
+@@ -66,6 +66,13 @@ class Simulation {
+         m_memory_system->tick();
+       }
+     }
++    // Standalone trace frontends finish when their final request is accepted,
++    // not when controller queues drain. Tick a fixed, reported drain interval
++    // so short and long traces include completed requests. Experiments verify
++    // served == submitted and subtract this identical tail from max cycles.
++    for (int drain = 0; drain < 4096; drain++) {
++      m_memory_system->tick();
++    }
+   }
+ 
+   void finalize() {

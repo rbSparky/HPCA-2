@@ -78,11 +78,23 @@ def _edge_sources(edge_index: np.ndarray, order: str, source_tile: int = 512) ->
     return src[idx].astype(np.int64)
 
 
-def _line_trace(mask: np.ndarray, sources: np.ndarray, width: int, fmt: str) -> tuple[np.ndarray, dict]:
+def _line_trace(
+    mask: np.ndarray,
+    sources: np.ndarray,
+    width: int,
+    fmt: str,
+    reserve_override: int | None = None,
+) -> tuple[np.ndarray, dict]:
     """Materialize exact useful cache-line IDs for fixed reserved row slices."""
     nodes, features = mask.shape
     slices = math.ceil(features / width)
-    reserve = align64(width + math.ceil(width / 8) + 8)
+    reserve = (
+        int(reserve_override)
+        if reserve_override is not None
+        else align64(width + math.ceil(width / 8) + 8)
+    )
+    if reserve < align64(width + math.ceil(width / 8) + 8) or reserve % 64:
+        raise ValueError("reserve override must be a legal aligned row-slice capacity")
     row_lines: list[np.ndarray] = []
     useful = waste = touched = 0
     for row in range(nodes):

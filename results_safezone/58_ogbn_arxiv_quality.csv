@@ -1,0 +1,2 @@
+config_id,nodes,edges,epochs,best_epoch,train_seconds,fp32_test_accuracy,fp8_test_accuracy,accuracy_drop,median_density
+ogbn_arxiv_deepres8_w128,169343,2315598,220,202,60.634886282000025,0.6960681676864624,0.6960887312889099,-2.0563602447509766e-05,0.46958230669410606

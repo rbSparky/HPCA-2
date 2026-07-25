@@ -1,0 +1,17 @@
+Safe-zone validation environment
+================================
+Date: 2026-07-25 UTC
+Project root: /home/rishabh/HPCA2/mosaic_delta_phase1
+Python: /home/rishabh/miniconda/envs/taugat_pyg/bin/python
+Python version: 3.11.13
+PyTorch: 2.8.0+cu128
+PyTorch Geometric: 2.6.1
+NumPy: 2.4.4
+CUDA available: true
+GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+Yosys: YoWASP Yosys 0.67, git 2d1509d1b
+Ramulator: 2.1, commit 99a0e1e87a9321587492fef5b0bd6197928f8d68
+Repository base commit: a24b825e5d56ccaff7c9a0f750e2a2ec232c80bd
+
+The existing taugat_pyg environment was reused. No environment or downloaded
+dataset is included in the handoff archive.

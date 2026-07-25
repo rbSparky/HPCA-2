@@ -1,0 +1,489 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.67 (git sha1 2d1509d1b, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)
+
+-- Running command `
+  read_verilog -sv -D FORMAL /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv;
+  prep -top xorflow_decoder_lane;
+  sat -verify -set mode 0 -prove formal_dense_ok 1;
+  sat -verify -set mode 1 -prove formal_nondense_ok 1;
+  sat -verify -set mode 2 -prove formal_gap0_ok 1;
+  sat -verify -set mode 2 -prove formal_gap7_ok 1;
+' --
+
+1. Executing Verilog-2005 frontend: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv
+Parsing SystemVerilog input from `/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv' to AST representation.
+Generating RTLIL representation for module `\xorflow_decoder_lane'.
+Generating RTLIL representation for module `\xorflow_decoder_bank'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \xorflow_decoder_lane
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \xorflow_decoder_lane
+Removing unused module `\xorflow_decoder_bank'.
+Removed 1 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 32 assignments to connections.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$160'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$158'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$156'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$155'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$153'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$151'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$149'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$148'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$146'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$144'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$142'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$141'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$139'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$137'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$135'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$134'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$133'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$131'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$129'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$128'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$127'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$125'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$123'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$122'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$121'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:40$120'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$118'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$117'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$116'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:40$115'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:36$114'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$113'.
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[7]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$160'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[7]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$158'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[7]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$156'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[7]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$155'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[6]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$153'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[6]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$151'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[6]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$149'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[6]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$148'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[5]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$146'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[5]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$144'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[5]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$142'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[5]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$141'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[4]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$139'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[4]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$137'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[4]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$135'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[4]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$134'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[3]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$133'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[3]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$131'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[3]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$129'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[3]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$128'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[2]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$127'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[2]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$125'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[2]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$123'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[2]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$122'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[1]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$121'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[1]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:40$120'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[1]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$118'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[1]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$117'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[0]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$116'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[0]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:40$115'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[0]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:36$114'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[0]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$113'.
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$160'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$158'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$156'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$155'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$153'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$151'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$149'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$148'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$146'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$144'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$142'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$141'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$139'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$137'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$135'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$134'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$133'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$131'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$129'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$128'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$127'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$125'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$123'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$122'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$121'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:40$120'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$118'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$117'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$116'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:40$115'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:36$114'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$113'.
+Cleaned up 0 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane.
+<suppressed ~20 debug messages>
+
+2.3. Executing FUTURE pass.
+
+2.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane.
+
+2.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane..
+Removed 8 unused cells and 94 unused wires.
+<suppressed ~9 debug messages>
+
+2.6. Executing CHECK pass (checking for obvious problems).
+Checking module xorflow_decoder_lane...
+Found and reported 0 problems.
+
+2.7. Executing OPT pass (performing simple optimizations).
+
+2.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane.
+
+2.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\xorflow_decoder_lane'.
+Computing hashes of 105 cells of `\xorflow_decoder_lane'.
+Finding duplicate cells in `\xorflow_decoder_lane'.
+Computing hashes of 75 cells of `\xorflow_decoder_lane'.
+Finding duplicate cells in `\xorflow_decoder_lane'.
+<suppressed ~90 debug messages>
+Removed a total of 30 cells.
+
+2.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \xorflow_decoder_lane..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~22 debug messages>
+
+2.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \xorflow_decoder_lane.
+Performed a total of 0 changes.
+
+2.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\xorflow_decoder_lane'.
+Computing hashes of 75 cells of `\xorflow_decoder_lane'.
+Finding duplicate cells in `\xorflow_decoder_lane'.
+Removed a total of 0 cells.
+
+2.7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane..
+Removed 0 unused cells and 30 unused wires.
+<suppressed ~1 debug messages>
+
+2.7.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane.
+
+2.7.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+2.7.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \xorflow_decoder_lane..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~22 debug messages>
+
+2.7.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \xorflow_decoder_lane.
+Performed a total of 0 changes.
+
+2.7.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\xorflow_decoder_lane'.
+Computing hashes of 75 cells of `\xorflow_decoder_lane'.
+Finding duplicate cells in `\xorflow_decoder_lane'.
+Removed a total of 0 cells.
+
+2.7.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane..
+
+2.7.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane.
+
+2.7.14. Finished fast OPT passes. (There is nothing left to do.)
+
+2.8. Executing WREDUCE pass (reducing word size of cells).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$19 ($add).
+Removed top 31 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$27 ($lt).
+Removed top 31 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$40 ($lt).
+Removed top 30 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$53 ($lt).
+Removed top 1 bits (of 2) from port B of cell xorflow_decoder_lane.$eq$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:54$61 ($eq).
+Removed top 30 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$66 ($lt).
+Removed top 29 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$77 ($lt).
+Removed top 29 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$88 ($lt).
+Removed top 29 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$99 ($lt).
+Removed top 29 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$110 ($lt).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$119 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$119 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$119 ($add).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$124 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$124 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$124 ($add).
+Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$126 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$126 ($add).
+Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$126 ($add).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$130 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$130 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$130 ($add).
+Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$132 ($add).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$132 ($add).
+Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$132 ($add).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$136 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$136 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$136 ($add).
+Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$138 ($add).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$138 ($add).
+Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$138 ($add).
+Removed top 4 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$140 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$140 ($add).
+Removed top 3 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$140 ($add).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$143 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$143 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$143 ($add).
+Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$145 ($add).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$145 ($add).
+Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$145 ($add).
+Removed top 4 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$147 ($add).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$147 ($add).
+Removed top 3 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$147 ($add).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$150 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$150 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$150 ($add).
+Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$152 ($add).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$152 ($add).
+Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$152 ($add).
+Removed top 4 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$154 ($add).
+Removed top 4 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$154 ($add).
+Removed top 3 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$154 ($add).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$157 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$157 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$157 ($add).
+Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$159 ($add).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$159 ($add).
+Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$159 ($add).
+Removed top 4 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$161 ($add).
+Removed top 4 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$161 ($add).
+Removed top 3 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$161 ($add).
+Removed top 3 bits (of 14) from wire xorflow_decoder_lane.gap_s3[7].
+Removed top 3 bits (of 14) from wire xorflow_decoder_lane.gap_s3[6].
+Removed top 3 bits (of 14) from wire xorflow_decoder_lane.gap_s3[5].
+Removed top 3 bits (of 14) from wire xorflow_decoder_lane.gap_s3[4].
+Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s3[3].
+Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s3[2].
+Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s3[1].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s3[0].
+Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s2[7].
+Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s2[6].
+Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s2[5].
+Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s2[4].
+Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s2[3].
+Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s2[2].
+Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s2[1].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s2[0].
+Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[7].
+Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[6].
+Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[5].
+Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[4].
+Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[3].
+Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[2].
+Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[1].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s1[0].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[7].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[6].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[5].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[4].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[3].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[2].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[1].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[0].
+
+2.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane..
+Removed 0 unused cells and 32 unused wires.
+<suppressed ~1 debug messages>
+
+2.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.11. Executing OPT pass (performing simple optimizations).
+
+2.11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane.
+
+2.11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\xorflow_decoder_lane'.
+Computing hashes of 75 cells of `\xorflow_decoder_lane'.
+Finding duplicate cells in `\xorflow_decoder_lane'.
+Removed a total of 0 cells.
+
+2.11.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane..
+
+2.11.4. Finished fast OPT passes.
+
+2.12. Executing SORT pass.
+
+2.13. Printing statistics.
+
+=== xorflow_decoder_lane ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       80 wires
+      758 wire bits
+       43 public wires
+      565 public wire bits
+       11 ports
+      272 port bits
+       75 cells
+       25   $add
+        5   $eq
+       12   $logic_and
+        2   $logic_not
+        8   $logic_or
+        8   $lt
+       13   $mux
+        1   $ne
+        1   $reduce_bool
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module xorflow_decoder_lane...
+Found and reported 0 problems.
+
+3. Executing SAT pass (solving SAT problems in the circuit).
+Using SAT solver `minisat`.
+
+Setting up SAT problem:
+Import set-constraint: \mode = 2'00
+Final constraint equation: \mode = 2'00
+Imported 75 cells to SAT database.
+Import proof-constraint: \formal_dense_ok = 1'1
+Final proof equation: \formal_dense_ok = 1'1
+
+Solving problem with 5295 variables and 14684 clauses..
+SAT proof finished - no model found: SUCCESS!
+
+                  /$$$$$$      /$$$$$$$$     /$$$$$$$    
+                 /$$__  $$    | $$_____/    | $$__  $$   
+                | $$  \ $$    | $$          | $$  \ $$   
+                | $$  | $$    | $$$$$       | $$  | $$   
+                | $$  | $$    | $$__/       | $$  | $$   
+                | $$/$$ $$    | $$          | $$  | $$   
+                |  $$$$$$/ /$$| $$$$$$$$ /$$| $$$$$$$//$$
+                 \____ $$$|__/|________/|__/|_______/|__/
+                       \__/                              
+
+4. Executing SAT pass (solving SAT problems in the circuit).
+Using SAT solver `minisat`.
+
+Setting up SAT problem:
+Import set-constraint: \mode = 2'01
+Final constraint equation: \mode = 2'01
+Imported 75 cells to SAT database.
+Import proof-constraint: \formal_nondense_ok = 1'1
+Final proof equation: \formal_nondense_ok = 1'1
+
+Solving problem with 5295 variables and 14684 clauses..
+SAT proof finished - no model found: SUCCESS!
+
+                  /$$$$$$      /$$$$$$$$     /$$$$$$$    
+                 /$$__  $$    | $$_____/    | $$__  $$   
+                | $$  \ $$    | $$          | $$  \ $$   
+                | $$  | $$    | $$$$$       | $$  | $$   
+                | $$  | $$    | $$__/       | $$  | $$   
+                | $$/$$ $$    | $$          | $$  | $$   
+                |  $$$$$$/ /$$| $$$$$$$$ /$$| $$$$$$$//$$
+                 \____ $$$|__/|________/|__/|_______/|__/
+                       \__/                              
+
+5. Executing SAT pass (solving SAT problems in the circuit).
+Using SAT solver `minisat`.
+
+Setting up SAT problem:
+Import set-constraint: \mode = 2'10
+Final constraint equation: \mode = 2'10
+Imported 75 cells to SAT database.
+Import proof-constraint: \formal_gap0_ok = 1'1
+Final proof equation: \formal_gap0_ok = 1'1
+
+Solving problem with 5295 variables and 14684 clauses..
+SAT proof finished - no model found: SUCCESS!
+
+                  /$$$$$$      /$$$$$$$$     /$$$$$$$    
+                 /$$__  $$    | $$_____/    | $$__  $$   
+                | $$  \ $$    | $$          | $$  \ $$   
+                | $$  | $$    | $$$$$       | $$  | $$   
+                | $$  | $$    | $$__/       | $$  | $$   
+                | $$/$$ $$    | $$          | $$  | $$   
+                |  $$$$$$/ /$$| $$$$$$$$ /$$| $$$$$$$//$$
+                 \____ $$$|__/|________/|__/|_______/|__/
+                       \__/                              
+
+6. Executing SAT pass (solving SAT problems in the circuit).
+Using SAT solver `minisat`.
+
+Setting up SAT problem:
+Import set-constraint: \mode = 2'10
+Final constraint equation: \mode = 2'10
+Imported 75 cells to SAT database.
+Import proof-constraint: \formal_gap7_ok = 1'1
+Final proof equation: \formal_gap7_ok = 1'1
+
+Solving problem with 5295 variables and 14684 clauses..
+SAT proof finished - no model found: SUCCESS!
+
+                  /$$$$$$      /$$$$$$$$     /$$$$$$$    
+                 /$$__  $$    | $$_____/    | $$__  $$   
+                | $$  \ $$    | $$          | $$  \ $$   
+                | $$  | $$    | $$$$$       | $$  | $$   
+                | $$  | $$    | $$__/       | $$  | $$   
+                | $$/$$ $$    | $$          | $$  | $$   
+                |  $$$$$$/ /$$| $$$$$$$$ /$$| $$$$$$$//$$
+                 \____ $$$|__/|________/|__/|_______/|__/
+                       \__/                              
+
+End of script. Logfile hash: 389724ca82, time: 0.19s, user: 0.20s, system: 0.00s
+Yosys 0.67 (git sha1 2d1509d1b, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)
+Time spent: 65% 4x sat (0 sec), 15% 2x read_verilog (0 sec), ...

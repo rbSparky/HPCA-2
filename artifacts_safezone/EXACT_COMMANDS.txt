@@ -1,0 +1,18 @@
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python -m pytest -q
+bash scripts/synth_decoder.sh
+PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/safezone_stream_audit.py
+PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/safezone_seed_runs.py
+PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/safezone_seed_reanalyze.py
+PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/safezone_packed_layout.py
+PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/safezone_dram_traces.py
+/home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/safezone_parse_dram.py
+/home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/safezone_parse_injection.py
+/home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/safezone_cache_sensitivity.py
+PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/safezone_ogbn_arxiv.py
+PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/safezone_ogbn_analyze.py
+PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/safezone_scale_validation.py
+/home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/safezone_report.py
+
+The final report-only command was executed twice with identical CSV/report
+hashes. Raw .trace files were checksummed and removed after Ramulator parsing
+because they are deterministic, regenerable, and consumed roughly 390 MiB.

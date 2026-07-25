@@ -1,0 +1,415 @@
+{
+  "frontend": {
+    "impl": "LoadStoreTrace"
+  },
+  "memory_system": {
+    "channel_mapper": {
+      "impl": "CacheLineInterleave"
+    },
+    "controller": [
+      {
+        "addr_mapper": {
+          "impl": "RoBaRaCoCh"
+        },
+        "avg_read_latency": 49.328125,
+        "cycles": 13759,
+        "id": "Channel 0",
+        "impl": "HBM12",
+        "num_maintenance_reqs": 6,
+        "num_maintenance_reqs_served": 6,
+        "num_read_reqs": 4672,
+        "num_read_reqs_forwarded": 0,
+        "num_read_reqs_served": 4672,
+        "num_write_reqs": 0,
+        "num_write_reqs_coalesced": 0,
+        "num_write_reqs_served": 0,
+        "priority_queue_len": 213,
+        "priority_queue_len_avg": 0.015481,
+        "queue_len": 127183,
+        "queue_len_avg": 9.243623,
+        "read_latency": 230461,
+        "read_queue_len": 126970,
+        "read_queue_len_avg": 9.228142,
+        "read_row_conflicts": 1760,
+        "read_row_conflicts_core_0": 0,
+        "read_row_hits": 2811,
+        "read_row_hits_core_0": 0,
+        "read_row_misses": 101,
+        "read_row_misses_core_0": 0,
+        "read_throughput_MBps": 10865.90625,
+        "refresh_manager": {
+          "impl": "AllBank"
+        },
+        "row_conflicts": 1760,
+        "row_hits": 2811,
+        "row_misses": 101,
+        "row_policy": {
+          "impl": "Open"
+        },
+        "scheduler": {
+          "impl": "FRFCFS"
+        },
+        "total_throughput_MBps": 10865.90625,
+        "write_queue_len": 0,
+        "write_queue_len_avg": 0.0,
+        "write_row_conflicts": 0,
+        "write_row_hits": 0,
+        "write_row_misses": 0,
+        "write_throughput_MBps": 0.0
+      },
+      {
+        "addr_mapper": {
+          "impl": "RoBaRaCoCh"
+        },
+        "avg_read_latency": 48.968109,
+        "cycles": 13759,
+        "id": "Channel 1",
+        "impl": "HBM12",
+        "num_maintenance_reqs": 6,
+        "num_maintenance_reqs_served": 6,
+        "num_read_reqs": 4672,
+        "num_read_reqs_forwarded": 0,
+        "num_read_reqs_served": 4672,
+        "num_write_reqs": 0,
+        "num_write_reqs_coalesced": 0,
+        "num_write_reqs_served": 0,
+        "priority_queue_len": 183,
+        "priority_queue_len_avg": 0.0133,
+        "queue_len": 125653,
+        "queue_len_avg": 9.132422,
+        "read_latency": 228779,
+        "read_queue_len": 125470,
+        "read_queue_len_avg": 9.119123,
+        "read_row_conflicts": 1752,
+        "read_row_conflicts_core_0": 0,
+        "read_row_hits": 2817,
+        "read_row_hits_core_0": 0,
+        "read_row_misses": 103,
+        "read_row_misses_core_0": 0,
+        "read_throughput_MBps": 10865.90625,
+        "refresh_manager": {
+          "impl": "AllBank"
+        },
+        "row_conflicts": 1752,
+        "row_hits": 2817,
+        "row_misses": 103,
+        "row_policy": {
+          "impl": "Open"
+        },
+        "scheduler": {
+          "impl": "FRFCFS"
+        },
+        "total_throughput_MBps": 10865.90625,
+        "write_queue_len": 0,
+        "write_queue_len_avg": 0.0,
+        "write_row_conflicts": 0,
+        "write_row_hits": 0,
+        "write_row_misses": 0,
+        "write_throughput_MBps": 0.0
+      },
+      {
+        "addr_mapper": {
+          "impl": "RoBaRaCoCh"
+        },
+        "avg_read_latency": 49.452221,
+        "cycles": 13759,
+        "id": "Channel 2",
+        "impl": "HBM12",
+        "num_maintenance_reqs": 6,
+        "num_maintenance_reqs_served": 6,
+        "num_read_reqs": 4615,
+        "num_read_reqs_forwarded": 0,
+        "num_read_reqs_served": 4615,
+        "num_write_reqs": 0,
+        "num_write_reqs_coalesced": 0,
+        "num_write_reqs_served": 0,
+        "priority_queue_len": 243,
+        "priority_queue_len_avg": 0.017661,
+        "queue_len": 126779,
+        "queue_len_avg": 9.21426,
+        "read_latency": 228222,
+        "read_queue_len": 126536,
+        "read_queue_len_avg": 9.196599,
+        "read_row_conflicts": 1711,
+        "read_row_conflicts_core_0": 0,
+        "read_row_hits": 2807,
+        "read_row_hits_core_0": 0,
+        "read_row_misses": 97,
+        "read_row_misses_core_0": 0,
+        "read_throughput_MBps": 10733.337891,
+        "refresh_manager": {
+          "impl": "AllBank"
+        },
+        "row_conflicts": 1711,
+        "row_hits": 2807,
+        "row_misses": 97,
+        "row_policy": {
+          "impl": "Open"
+        },
+        "scheduler": {
+          "impl": "FRFCFS"
+        },
+        "total_throughput_MBps": 10733.337891,
+        "write_queue_len": 0,
+        "write_queue_len_avg": 0.0,
+        "write_row_conflicts": 0,
+        "write_row_hits": 0,
+        "write_row_misses": 0,
+        "write_throughput_MBps": 0.0
+      },
+      {
+        "addr_mapper": {
+          "impl": "RoBaRaCoCh"
+        },
+        "avg_read_latency": 49.383747,
+        "cycles": 13759,
+        "id": "Channel 3",
+        "impl": "HBM12",
+        "num_maintenance_reqs": 6,
+        "num_maintenance_reqs_served": 6,
+        "num_read_reqs": 4615,
+        "num_read_reqs_forwarded": 0,
+        "num_read_reqs_served": 4615,
+        "num_write_reqs": 0,
+        "num_write_reqs_coalesced": 0,
+        "num_write_reqs_served": 0,
+        "priority_queue_len": 233,
+        "priority_queue_len_avg": 0.016934,
+        "queue_len": 126538,
+        "queue_len_avg": 9.196744,
+        "read_latency": 227906,
+        "read_queue_len": 126305,
+        "read_queue_len_avg": 9.17981,
+        "read_row_conflicts": 1706,
+        "read_row_conflicts_core_0": 0,
+        "read_row_hits": 2813,
+        "read_row_hits_core_0": 0,
+        "read_row_misses": 96,
+        "read_row_misses_core_0": 0,
+        "read_throughput_MBps": 10733.337891,
+        "refresh_manager": {
+          "impl": "AllBank"
+        },
+        "row_conflicts": 1706,
+        "row_hits": 2813,
+        "row_misses": 96,
+        "row_policy": {
+          "impl": "Open"
+        },
+        "scheduler": {
+          "impl": "FRFCFS"
+        },
+        "total_throughput_MBps": 10733.337891,
+        "write_queue_len": 0,
+        "write_queue_len_avg": 0.0,
+        "write_row_conflicts": 0,
+        "write_row_hits": 0,
+        "write_row_misses": 0,
+        "write_throughput_MBps": 0.0
+      },
+      {
+        "addr_mapper": {
+          "impl": "RoBaRaCoCh"
+        },
+        "avg_read_latency": 50.900955,
+        "cycles": 13759,
+        "id": "Channel 4",
+        "impl": "HBM12",
+        "num_maintenance_reqs": 6,
+        "num_maintenance_reqs_served": 6,
+        "num_read_reqs": 4604,
+        "num_read_reqs_forwarded": 0,
+        "num_read_reqs_served": 4604,
+        "num_write_reqs": 0,
+        "num_write_reqs_coalesced": 0,
+        "num_write_reqs_served": 0,
+        "priority_queue_len": 225,
+        "priority_queue_len_avg": 0.016353,
+        "queue_len": 132134,
+        "queue_len_avg": 9.603459,
+        "read_latency": 234348,
+        "read_queue_len": 131909,
+        "read_queue_len_avg": 9.587107,
+        "read_row_conflicts": 1778,
+        "read_row_conflicts_core_0": 0,
+        "read_row_hits": 2728,
+        "read_row_hits_core_0": 0,
+        "read_row_misses": 98,
+        "read_row_misses_core_0": 0,
+        "read_throughput_MBps": 10707.755859,
+        "refresh_manager": {
+          "impl": "AllBank"
+        },
+        "row_conflicts": 1778,
+        "row_hits": 2728,
+        "row_misses": 98,
+        "row_policy": {
+          "impl": "Open"
+        },
+        "scheduler": {
+          "impl": "FRFCFS"
+        },
+        "total_throughput_MBps": 10707.755859,
+        "write_queue_len": 0,
+        "write_queue_len_avg": 0.0,
+        "write_row_conflicts": 0,
+        "write_row_hits": 0,
+        "write_row_misses": 0,
+        "write_throughput_MBps": 0.0
+      },
+      {
+        "addr_mapper": {
+          "impl": "RoBaRaCoCh"
+        },
+        "avg_read_latency": 50.907253,
+        "cycles": 13759,
+        "id": "Channel 5",
+        "impl": "HBM12",
+        "num_maintenance_reqs": 6,
+        "num_maintenance_reqs_served": 6,
+        "num_read_reqs": 4604,
+        "num_read_reqs_forwarded": 0,
+        "num_read_reqs_served": 4604,
+        "num_write_reqs": 0,
+        "num_write_reqs_coalesced": 0,
+        "num_write_reqs_served": 0,
+        "priority_queue_len": 223,
+        "priority_queue_len_avg": 0.016208,
+        "queue_len": 132180,
+        "queue_len_avg": 9.606803,
+        "read_latency": 234377,
+        "read_queue_len": 131957,
+        "read_queue_len_avg": 9.590595,
+        "read_row_conflicts": 1778,
+        "read_row_conflicts_core_0": 0,
+        "read_row_hits": 2728,
+        "read_row_hits_core_0": 0,
+        "read_row_misses": 98,
+        "read_row_misses_core_0": 0,
+        "read_throughput_MBps": 10707.755859,
+        "refresh_manager": {
+          "impl": "AllBank"
+        },
+        "row_conflicts": 1778,
+        "row_hits": 2728,
+        "row_misses": 98,
+        "row_policy": {
+          "impl": "Open"
+        },
+        "scheduler": {
+          "impl": "FRFCFS"
+        },
+        "total_throughput_MBps": 10707.755859,
+        "write_queue_len": 0,
+        "write_queue_len_avg": 0.0,
+        "write_row_conflicts": 0,
+        "write_row_hits": 0,
+        "write_row_misses": 0,
+        "write_throughput_MBps": 0.0
+      },
+      {
+        "addr_mapper": {
+          "impl": "RoBaRaCoCh"
+        },
+        "avg_read_latency": 48.361343,
+        "cycles": 13759,
+        "id": "Channel 6",
+        "impl": "HBM12",
+        "num_maintenance_reqs": 6,
+        "num_maintenance_reqs_served": 6,
+        "num_read_reqs": 4558,
+        "num_read_reqs_forwarded": 0,
+        "num_read_reqs_served": 4558,
+        "num_write_reqs": 0,
+        "num_write_reqs_coalesced": 0,
+        "num_write_reqs_served": 0,
+        "priority_queue_len": 233,
+        "priority_queue_len_avg": 0.016934,
+        "queue_len": 120280,
+        "queue_len_avg": 8.741915,
+        "read_latency": 220431,
+        "read_queue_len": 120047,
+        "read_queue_len_avg": 8.72498,
+        "read_row_conflicts": 1684,
+        "read_row_conflicts_core_0": 0,
+        "read_row_hits": 2769,
+        "read_row_hits_core_0": 0,
+        "read_row_misses": 105,
+        "read_row_misses_core_0": 0,
+        "read_throughput_MBps": 10600.770508,
+        "refresh_manager": {
+          "impl": "AllBank"
+        },
+        "row_conflicts": 1684,
+        "row_hits": 2769,
+        "row_misses": 105,
+        "row_policy": {
+          "impl": "Open"
+        },
+        "scheduler": {
+          "impl": "FRFCFS"
+        },
+        "total_throughput_MBps": 10600.770508,
+        "write_queue_len": 0,
+        "write_queue_len_avg": 0.0,
+        "write_row_conflicts": 0,
+        "write_row_hits": 0,
+        "write_row_misses": 0,
+        "write_throughput_MBps": 0.0
+      },
+      {
+        "addr_mapper": {
+          "impl": "RoBaRaCoCh"
+        },
+        "avg_read_latency": 48.443615,
+        "cycles": 13759,
+        "id": "Channel 7",
+        "impl": "HBM12",
+        "num_maintenance_reqs": 6,
+        "num_maintenance_reqs_served": 6,
+        "num_read_reqs": 4558,
+        "num_read_reqs_forwarded": 0,
+        "num_read_reqs_served": 4558,
+        "num_write_reqs": 0,
+        "num_write_reqs_coalesced": 0,
+        "num_write_reqs_served": 0,
+        "priority_queue_len": 235,
+        "priority_queue_len_avg": 0.01708,
+        "queue_len": 120619,
+        "queue_len_avg": 8.766553,
+        "read_latency": 220806,
+        "read_queue_len": 120384,
+        "read_queue_len_avg": 8.749473,
+        "read_row_conflicts": 1682,
+        "read_row_conflicts_core_0": 0,
+        "read_row_hits": 2767,
+        "read_row_hits_core_0": 0,
+        "read_row_misses": 109,
+        "read_row_misses_core_0": 0,
+        "read_throughput_MBps": 10600.770508,
+        "refresh_manager": {
+          "impl": "AllBank"
+        },
+        "row_conflicts": 1682,
+        "row_hits": 2767,
+        "row_misses": 109,
+        "row_policy": {
+          "impl": "Open"
+        },
+        "scheduler": {
+          "impl": "FRFCFS"
+        },
+        "total_throughput_MBps": 10600.770508,
+        "write_queue_len": 0,
+        "write_queue_len_avg": 0.0,
+        "write_row_conflicts": 0,
+        "write_row_hits": 0,
+        "write_row_misses": 0,
+        "write_throughput_MBps": 0.0
+      }
+    ],
+    "impl": "GenericDRAM",
+    "total_num_read_requests": 36898,
+    "total_num_write_requests": 0
+  }
+}

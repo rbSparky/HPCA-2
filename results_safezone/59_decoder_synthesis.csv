@@ -1,0 +1,3 @@
+module,generic_cells,longest_gate_path,formal_properties_passed
+xorflow_decoder_lane,1663,33,4
+xorflow_decoder_bank_32lane,53344,35,4

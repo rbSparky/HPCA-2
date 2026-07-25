@@ -1,0 +1,2 @@
+config_id,support_bits,beicsr_support_bits,support_ratio_to_beicsr,beicsr_bytes,xorflow_bytes,traffic_reduction,roofline_serialized_speedup,roofline_double_buffered_speedup,exactness_pass
+ogbn_arxiv_deepres8_w128,75303424,108379520,0.6948123040220144,517165488,372166128,0.2803732332579779,1.359113270646731,1.3840178122258366,True
