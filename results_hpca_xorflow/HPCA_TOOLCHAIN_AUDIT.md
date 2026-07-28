@@ -11,9 +11,18 @@ full-chip measured hardware performance.
 | DRAMsim3 | built locally and tiny trace completed | `tools/vendor/DRAMsim3/build/dramsim3main`, `artifacts_hpca_xorflow/dramsim3/tiny.log` |
 | Ramulator2 | existing Arxiv request/served runs passed | `results_hpca_xorflow/03_ramulator_pairs.csv` |
 | CACTI | source checkout available; numeric run pending | `tools/vendor/cacti/` |
-| Verilator/OpenROAD | not installed | no executable found; no fabricated PPA numbers |
+| Verilator | installed and lint passed | Verilator 5.020; `artifacts_safezone/decoder/verilator_lint.log` |
+| Yosys | installed; synthesis/formal passed | Yosys 0.33; lane 1,663 cells/path 33, bank 53,312 cells/path 35 |
+| OpenROAD | not installed | no executable found; no fabricated PPA numbers |
 
 DRAMsim3 is used as an independent timing cross-check with its available
 DDR4 configuration; this is not HBM2 timing. CACTI/OpenROAD numbers are not
 reported until the tools are actually callable. The remaining PPA evidence is
 therefore logic synthesis/formal plus the exact limitation record above.
+
+The post-install RTL command was:
+
+```bash
+verilator --lint-only -Wall -Wno-fatal rtl/xorflow_decoder.sv
+scripts/synth_decoder.sh
+```

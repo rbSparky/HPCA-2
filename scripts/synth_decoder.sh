@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-YOSYS_BIN="/home/rishabh/miniconda/envs/taugat_pyg/bin/yowasp-yosys"
+YOSYS_BIN="${YOSYS_BIN:-$(command -v yosys || true)}"
+if [[ -z "$YOSYS_BIN" ]]; then
+  YOSYS_BIN="/home/rishabh/miniconda/envs/taugat_pyg/bin/yowasp-yosys"
+fi
 OUT="$PROJECT_ROOT/artifacts_safezone/decoder"
 mkdir -p "$OUT"
 
