@@ -14,6 +14,18 @@ Generated from completed, hashed artifacts on 2026-07-28. This report includes o
 | Ramulator HBM2 tiny smoke | PASS | `artifacts_hpca_xorflow/ramulator/overnight_tiny.json` |
 | PPA tools | UNAVAILABLE, explicitly recorded | smoke manifest (`yosys`, Verilator, CACTI, OpenROAD absent) |
 
+## Failure resolution
+
+The evidence index retains three failed Ramulator attempts for auditability. They are **superseded infrastructure attempts**, not failed scientific configurations:
+
+| Attempt | Cause | Resolution | Final status |
+|---|---|---|---|
+| Cora pair smoke | Cached Cora support trace was not present on the remote mirror | Replaced with a bounded four-request trace | SUPERSEDED |
+| Tiny Ramulator smoke (CUDA environment) | Ramulator extension was compiled for system Python 3.12, not the CUDA Python 3.11 environment | Pinned `/usr/bin/python3.12` and correct library path | SUPERSEDED |
+| Tiny Ramulator smoke (wrapper quoting) | Initial environment-variable quoting prevented extension loading | Corrected shell exports and reran | **PASS** |
+
+No completed principal model or exact-decoding run is invalidated by these tool-admission failures. The raw attempts remain in [HPCA_RESULTS_INDEX.csv](HPCA_RESULTS_INDEX.csv) and the corrected output is [overnight_tiny.json](../artifacts_hpca_xorflow/ramulator/overnight_tiny.json).
+
 ## Model quality
 
 FP8 support traces were evaluated after trained FP32 models; accuracy values below are FP8/FP16 inference values. `BORDERLINE` is supplementary and is not used to satisfy a hard gate.
@@ -108,4 +120,3 @@ The strongest positive result is Reddit: 36.86% modeled traffic reduction and 1.
 | Run logs | [artifacts_hpca_xorflow/logs/](../artifacts_hpca_xorflow/logs/) |
 | Environment smoke | [overnight_smoke.json](../artifacts_hpca_xorflow/overnight_smoke.json) |
 | Ramulator smoke output | [overnight_tiny.json](../artifacts_hpca_xorflow/ramulator/overnight_tiny.json) |
-

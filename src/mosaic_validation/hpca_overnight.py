@@ -127,8 +127,13 @@ class Ledger:
         ]
         lines += [f"| {stage} | {stages[stage]} | {weights[stage]}% |" for stage in weights]
         lines += ["", "## Indexed artifacts", "", "| Stage | Item | Status | Validity | Metric | Artifact | Log | Reason |", "|---|---|---|---|---|---|---|---|"]
-        for row in self.rows:
-            lines.append("| {stage} | {item_id} | {status} | {validity} | {metric} {value} | `{artifact}` | `{log}` | {reason} |".format(**row))
+        for index, row in enumerate(self.rows):
+            display = dict(row)
+            later_success = any(other["stage"] == row["stage"] and other["item_id"] == row["item_id"] and other["status"] == "SUCCEEDED" for other in self.rows[index + 1:])
+            if row["status"] == "FAILED" and later_success:
+                display["status"] = "SUPERSEDED"
+                display["reason"] = row["reason"] + "; corrected rerun passed"
+            lines.append("| {stage} | {item_id} | {status} | {validity} | {metric} {value} | `{artifact}` | `{log}` | {reason} |".format(**display))
         lines += ["", "## Complete execution queue", "", "The queue is fixed by the manifest; completed work remains listed and unsubmitted work is never silently omitted.", "", "| Queue item | Stage | Dependency | Estimate (min) | Status | Job ID | Log |", "|---|---|---|---:|---|---|---|"]
         queue = self._queue_snapshot()
         for item in queue:
