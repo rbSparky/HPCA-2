@@ -12,6 +12,16 @@ progress_weights:
   controls: 15
   tools: 15
   report: 10
+queue:
+  - {queue_id: smoke, stage: smoke, depends_on: "none", estimated_minutes: 5, priority: admission}
+  - {queue_id: primary_arxiv17, stage: primary, depends_on: smoke, estimated_minutes: 8, priority: principal}
+  - {queue_id: primary_arxiv27, stage: primary, depends_on: primary_arxiv17, estimated_minutes: 8, priority: principal}
+  - {queue_id: primary_reddit, stage: primary, depends_on: primary_arxiv27, estimated_minutes: 50, priority: principal}
+  - {queue_id: primary_yelp_borderline, stage: primary, depends_on: primary_reddit, estimated_minutes: 20, priority: supplementary}
+  - {queue_id: primary_flickr, stage: primary, depends_on: primary_yelp_borderline, estimated_minutes: 20, priority: transfer}
+  - {queue_id: controls, stage: controls, depends_on: primary_flickr, estimated_minutes: 10, priority: controls}
+  - {queue_id: tools, stage: tools, depends_on: controls, estimated_minutes: 5, priority: tool_smoke}
+  - {queue_id: report, stage: report, depends_on: tools, estimated_minutes: 2, priority: reporting}
 workloads:
   - config_id: ogbn_arxiv_deepres8_w128_s17
     dataset: OGBN-Arxiv

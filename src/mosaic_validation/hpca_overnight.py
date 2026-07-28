@@ -128,7 +128,43 @@ class Ledger:
         lines += ["", "## Indexed artifacts", "", "| Stage | Item | Status | Validity | Metric | Artifact | Log | Reason |", "|---|---|---|---|---|---|---|---|"]
         for row in self.rows:
             lines.append("| {stage} | {item_id} | {status} | {validity} | {metric} {value} | `{artifact}` | `{log}` | {reason} |".format(**row))
+        lines += ["", "## Complete execution queue", "", "The queue is fixed by the manifest; completed work remains listed and unsubmitted work is never silently omitted.", "", "| Queue item | Stage | Dependency | Estimate (min) | Status | Job ID | Log |", "|---|---|---|---:|---|---|---|"]
+        queue = self._queue_snapshot()
+        for item in queue:
+            lines.append("| {queue_id} | {stage} | {depends_on} | {estimated_minutes} | {status} | {job_id} | `{log}` |".format(**item))
+        remaining_minutes = sum(float(item["estimated_minutes"]) for item in queue if item["status"] in {"QUEUED", "PENDING", "RUNNING"})
+        lines += ["", f"**Estimated remaining queue time:** `{remaining_minutes:.1f} minutes` (serialized GPU-1 estimate; completed runtimes are not counted)."]
         self.md_path.write_text("\n".join(lines) + "\n")
+
+    def _queue_snapshot(self) -> list[dict[str, str]]:
+        """Resolve every manifest queue item against local runner state."""
+        declared = self.config.get("queue", [])
+        job_root = self.project / ".xorflow_jobs"
+        jobs: list[dict[str, str]] = []
+        if job_root.exists():
+            for directory in sorted(job_root.iterdir()):
+                if not directory.is_dir():
+                    continue
+                command = (directory / "command.sh").read_text(errors="replace") if (directory / "command.sh").exists() else ""
+                jobs.append({"job_id": directory.name, "status": (directory / "status").read_text().strip().upper() if (directory / "status").exists() else "QUEUED", "command": command, "log": str(directory / "stdout_stderr.log")})
+        resolved: list[dict[str, str]] = []
+        for item in declared:
+            queue_id = str(item["queue_id"]); stage = str(item["stage"])
+            matching = [job for job in jobs if queue_id in job["command"] or f"--stage {stage}" in job["command"]]
+            # Prefer the latest matching job, while allowing a stage to have a
+            # corrective rerun (the failed attempt remains in the evidence log).
+            job = matching[-1] if matching else None
+            stage_rows = [row for row in self.rows if row["stage"] == stage]
+            latest_stage = stage_rows[-1]["status"] if stage_rows else ""
+            status = job["status"] if job else ({"SUCCEEDED": "COMPLETE", "FAILED": "BLOCKED"}.get(latest_stage, "PENDING"))
+            if status == "SUCCEEDED":
+                status = "COMPLETE"
+            elif status == "CANCELLED":
+                status = "CANCELLED"
+            elif status not in {"RUNNING", "QUEUED", "PENDING", "BLOCKED", "COMPLETE"}:
+                status = "QUEUED"
+            resolved.append({"queue_id": queue_id, "stage": stage, "depends_on": str(item.get("depends_on", "none")), "estimated_minutes": str(item.get("estimated_minutes", "")), "status": status, "job_id": job["job_id"] if job else "-", "log": job["log"] if job else "-"})
+        return resolved
 
 
 def load_config(project: Path, path: Path | None) -> dict[str, Any]:
