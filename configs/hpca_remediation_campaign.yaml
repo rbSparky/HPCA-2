@@ -1,0 +1,14 @@
+# Follow-on tasks queued behind the main campaign.  They repair only explicit
+# engineering/model-validity issues found by the fixed primary manifest; no
+# task selects a representation or training setting from support metrics.
+campaign_id: "paper_suite_remediation_20260728_v1"
+deadline_utc: "2026-07-31T23:59:00Z"
+deadline_margin_minutes: 30
+tasks:
+  - {task_id: regression_remote_retry, stage: admission, estimated_minutes: 20, weight: 1, command: "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -m pytest -q"}
+  - {task_id: analyze_arxiv_depth4_repaired, stage: model_sensitivity, estimated_minutes: 20, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres4_w128_s7 arxiv_depth4_repaired"}
+  - {task_id: train_arxiv_graphsage8_residual, stage: operators, estimated_minutes: 60, weight: 2, command: "python scripts/train_hpca_workload.py --dataset ogbn-arxiv --config-id ogbn_arxiv_graphsage8_residual_w128_s7 --model-kind graphsage --width 128 --layers 8 --max-epochs 160 --learning-rate 0.005"}
+  - {task_id: train_arxiv_gin8_residual, stage: operators, estimated_minutes: 60, weight: 2, command: "python scripts/train_hpca_workload.py --dataset ogbn-arxiv --config-id ogbn_arxiv_gin8_residual_w128_s7 --model-kind gin --width 128 --layers 8 --max-epochs 160 --learning-rate 0.005"}
+  - {task_id: analyze_arxiv_graphsage8_residual, stage: operators, estimated_minutes: 30, weight: 1, depends_on: [train_arxiv_graphsage8_residual], command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_graphsage8_residual_w128_s7 arxiv_graphsage8_residual"}
+  - {task_id: analyze_arxiv_gin8_residual, stage: operators, estimated_minutes: 30, weight: 1, depends_on: [train_arxiv_gin8_residual], command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_gin8_residual_w128_s7 arxiv_gin8_residual"}
+  - {task_id: consolidated_report, stage: report, estimated_minutes: 5, weight: 1, command: "PYTHONPATH=src python scripts/report_hpca_complete_suite.py"}
