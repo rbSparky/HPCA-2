@@ -120,6 +120,7 @@ class Ledger:
             f"**Suite progress:** `[{bar}] {progress:.0f}%` (fixed manifest weights)",
             f"**Hard deadline:** `{self.config['deadline_utc']}` — **hours remaining:** `{remaining:.2f}`",
             "**Policy:** `BORDERLINE` results are supplementary only; they never satisfy hard gates.",
+            "**Reviewer-facing completed-results report:** [HPCA_PAPER_READY_RESULTS.md](HPCA_PAPER_READY_RESULTS.md)",
             "",
             "| Stage | Status | Weight |",
             "|---|---:|---:|",
