@@ -22,6 +22,7 @@ def main() -> None:
         "pipelined_synthesis": (artifacts / "pipelined_synthesis.log", "End of script"),
         "pipelined_cosim": (artifacts / "pipelined_cosim.log", "PASS cycles=9999"),
         "cacti": (artifacts / "cacti_default.log", "Access time (ns):"),
+        "openroad": (artifacts / "openroad_version.log", "OpenROAD"),
     }
     rows: list[dict[str, str]] = []
     for name, (path, marker) in checks.items():
