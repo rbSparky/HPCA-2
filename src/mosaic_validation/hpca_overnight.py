@@ -278,7 +278,7 @@ def tools(project: Path, ledger: Ledger) -> bool:
     trace = smoke_dir / "overnight_tiny.trace"; output = smoke_dir / "overnight_tiny.json"
     trace.write_text("LD 0x0\nLD 0x20\nST 0x40\nLD 0x80\n")
     ramulator = project / "third_party/ramulator2"
-    command = ["bash", "-lc", f"PYTHONPATH='{ramulator}/python' LD_LIBRARY_PATH='{ramulator}:'\"${{LD_LIBRARY_PATH:-}}\" python3 scripts/run_ramulator_hbm2.py '{trace}' '{output}'"]
+    command = ["bash", "-lc", f"export PYTHONPATH='{ramulator}/python'; export LD_LIBRARY_PATH='{ramulator}'; python3 scripts/run_ramulator_hbm2.py '{trace}' '{output}'"]
     ok, wall, reason = _run(command, project=project, log=log, timeout=300)
     ledger.add(stage="tools", item_id="scalesim_and_ramulator_smoke", category="timing_tool", status="SUCCEEDED" if ok else "FAILED", validity="N/A", started_utc=start, finished_utc=_iso(), wall_seconds=f"{wall:.1f}", artifact=_relative(project, output if output.exists() else log), sha256=_sha(output if output.exists() else log), log=_relative(project, log), command="bounded Ramulator HBM2 smoke; SCALE-Sim validated by host canary", reason="PPA tools unavailable are recorded in smoke manifest" if ok else reason)
     return ok
