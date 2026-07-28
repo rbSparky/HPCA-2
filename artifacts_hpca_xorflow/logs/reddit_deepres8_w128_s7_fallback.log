@@ -1,0 +1,5 @@
+{"best_val_loss": 3.3485178709030152, "checks": 0, "epoch": 2, "event": "validation", "val_accuracy": 0.1515625, "val_loss": 3.3485178709030152}
+{"best_val_loss": 3.3485178709030152, "checks": 1, "epoch": 4, "event": "validation", "val_accuracy": 0.1515625, "val_loss": 3.3504279375076296}
+{"best_val_loss": 3.3485178709030152, "checks": 2, "epoch": 6, "event": "validation", "val_accuracy": 0.1515625, "val_loss": 3.3643749475479128}
+{"best_val_loss": 3.345579981803894, "checks": 0, "epoch": 8, "event": "validation", "val_accuracy": 0.1515625, "val_loss": 3.345579981803894}
+{"best_val_loss": 3.345579981803894, "checks": 1, "epoch": 10, "event": "validation", "val_accuracy": 0.1515625, "val_loss": 3.3472604274749758}

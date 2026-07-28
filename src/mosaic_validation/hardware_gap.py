@@ -38,6 +38,41 @@ class HardwareEventCode:
         return sum(math.ceil(len(block) / 8) for block in self.blocks)
 
 
+class _BitWriter:
+    """Little-endian bit writer used by the deployable stream format."""
+
+    def __init__(self) -> None:
+        self._value = 0
+        self.bits = 0
+
+    def write(self, value: int, width: int) -> None:
+        if width < 0 or value < 0 or value >= (1 << width):
+            raise ValueError("bit field does not fit")
+        self._value |= int(value) << self.bits
+        self.bits += width
+
+    def bytes(self) -> bytes:
+        return self._value.to_bytes((self.bits + 7) // 8, "little")
+
+
+class _BitReader:
+    """Matching bounds-checked little-endian stream reader."""
+
+    def __init__(self, payload: bytes, valid_bits: int) -> None:
+        if valid_bits < 0 or valid_bits > len(payload) * 8:
+            raise ValueError("invalid bit count")
+        self._value = int.from_bytes(payload, "little")
+        self._valid_bits = valid_bits
+        self.position = 0
+
+    def read(self, width: int) -> int:
+        if width < 0 or self.position + width > self._valid_bits:
+            raise ValueError("truncated hardware event stream")
+        value = (self._value >> self.position) & ((1 << width) - 1)
+        self.position += width
+        return int(value)
+
+
 def encode_hardware_event_set(mask_or_ids: np.ndarray, universe: int | None = None) -> HardwareEventCode:
     """Select dense, fixed-ID, or dispatchable fixed-gap8 encoding exactly."""
     value = np.asarray(mask_or_ids)
@@ -78,6 +113,99 @@ def encode_hardware_event_set(mask_or_ids: np.ndarray, universe: int | None = No
         tuple(tuple(int(x) for x in block) for block in blocks)
         if selected == "FIXED_GAP8" else (),
     )
+
+
+def pack_hardware_event_code(code: HardwareEventCode) -> tuple[bytes, int]:
+    """Return the exact hardware byte stream and its meaningful bit count.
+
+    The descriptor supplies the universe.  The payload itself uses the same
+    field widths as :func:`encode_hardware_event_set`, so ``bit_count`` is
+    guaranteed to equal ``code.encoded_bits`` rather than being a separate
+    accounting approximation.
+    """
+    writer = _BitWriter()
+    count_bits = bits_for(code.universe + 1)
+    id_bits = bits_for(code.universe)
+    events = tuple(int(value) for value in code.events)
+    if code.selected_format == "DENSE_XOR":
+        writer.write(0, 2)
+        bitmap = code.decode()
+        for bit in bitmap:
+            writer.write(int(bit), 1)
+    elif code.selected_format == "FIXED_IDS":
+        writer.write(1, 2)
+        writer.write(len(events), count_bits)
+        for event in events:
+            writer.write(event, id_bits)
+    elif code.selected_format == "FIXED_GAP8":
+        writer.write(2, 2)
+        writer.write(0, 2)  # fixed eight-bit gap policy selector
+        writer.write(len(events), count_bits)
+        writer.write(len(code.blocks), 8)
+        for block in code.blocks:
+            if not block or len(block) > 32:
+                raise ValueError("invalid fixed-gap8 block")
+            writer.write(block[0], id_bits)
+            writer.write(len(block), 5)
+            for previous, current in zip(block, block[1:], strict=False):
+                gap = int(current - previous)
+                if gap <= 0 or gap > 255:
+                    raise ValueError("fixed-gap8 block has an illegal gap")
+                writer.write(gap, 8)
+    else:  # pragma: no cover - protects future enum additions
+        raise ValueError(f"unsupported event format: {code.selected_format}")
+    if writer.bits != code.encoded_bits:
+        raise AssertionError((writer.bits, code.encoded_bits, code.selected_format))
+    return writer.bytes(), writer.bits
+
+
+def unpack_hardware_event_code(payload: bytes, bit_count: int, universe: int) -> HardwareEventCode:
+    """Decode one exact deployable event stream without predecessor state."""
+    reader = _BitReader(payload, bit_count)
+    selected = reader.read(2)
+    count_bits = bits_for(universe + 1)
+    id_bits = bits_for(universe)
+    if selected == 0:
+        events = tuple(index for index in range(universe) if reader.read(1))
+        result = HardwareEventCode(universe, events, "DENSE_XOR", bit_count)
+    elif selected == 1:
+        count = reader.read(count_bits)
+        events = tuple(reader.read(id_bits) for _ in range(count))
+        result = HardwareEventCode(universe, events, "FIXED_IDS", bit_count)
+    elif selected == 2:
+        policy = reader.read(2)
+        if policy != 0:
+            raise ValueError("unsupported gap policy")
+        expected_events = reader.read(count_bits)
+        block_count = reader.read(8)
+        blocks: list[tuple[int, ...]] = []
+        events_list: list[int] = []
+        for _ in range(block_count):
+            first = reader.read(id_bits)
+            length = reader.read(5)
+            if length < 1 or length > 32:
+                raise ValueError("invalid block length")
+            block = [first]
+            for _ in range(length - 1):
+                block.append(block[-1] + reader.read(8))
+            blocks.append(tuple(block))
+            events_list.extend(block)
+        if len(events_list) != expected_events:
+            raise ValueError("event count does not match gap blocks")
+        events = tuple(events_list)
+        result = HardwareEventCode(universe, events, "FIXED_GAP8", bit_count, tuple(blocks))
+    else:
+        raise ValueError("reserved event format")
+    if reader.position != bit_count or any(event >= universe for event in result.events):
+        raise ValueError("malformed hardware event stream")
+    if tuple(sorted(set(result.events))) != result.events:
+        raise ValueError("event IDs must be sorted and unique")
+    # Reconstructing through the selector checks that no inconsistent header
+    # was accepted even if a caller passes a hand-constructed payload.
+    expected = encode_hardware_event_set(np.asarray(result.events), universe=universe)
+    if expected.selected_format != result.selected_format or expected.encoded_bits != bit_count:
+        raise ValueError("stream does not satisfy its selected hardware format")
+    return result
 
 
 def select_hardware_dictionary(anchor: np.ndarray, cohort_size: int = 32) -> tuple[str, int, int]:

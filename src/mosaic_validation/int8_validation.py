@@ -65,6 +65,21 @@ def quantize_weights(model: nn.Module) -> nn.Module:
     return result
 
 
+def quantize_weights_fp16(model: nn.Module) -> nn.Module:
+    """Round matrix weights to IEEE FP16 while preserving FP32 execution.
+
+    This is a deterministic fake-FP16 contract: storage precision is FP16,
+    while PyG kernels retain FP32 accumulation and avoid unsupported mixed
+    dtype paths on CPU.  Every compared format receives this same rounding.
+    """
+    result = copy.deepcopy(model)
+    with torch.no_grad():
+        for name, parameter in result.named_parameters():
+            if parameter.ndim >= 2 and "norm" not in name:
+                parameter.copy_(parameter.detach().to(torch.float16).to(parameter.dtype))
+    return result
+
+
 def _gcnii_int8_forward(self, x, edge_index, trace=False):
     x0 = fake_quant_relu_preserve_support(self.input(x))
     x = x0
@@ -116,14 +131,21 @@ def _deepres_fp8_forward(self, x, edge_index, trace=False):
 
 
 def make_int8_model(model: nn.Module, quantize_model_weights: bool = False,
-                    value_format: str = "uint8") -> nn.Module:
+                    value_format: str = "uint8", weight_format: str = "fp32") -> nn.Module:
     """Create a support-preserving INT8-activation inference model.
 
     XORFLOW compresses feature values, not model parameters, so the principal
     experiment keeps weights at their original precision. Weight INT8 remains
     an optional, separately reported sensitivity.
     """
-    result = quantize_weights(model) if quantize_model_weights else copy.deepcopy(model)
+    if quantize_model_weights or weight_format == "int8":
+        result = quantize_weights(model)
+    elif weight_format == "fp16":
+        result = quantize_weights_fp16(model)
+    elif weight_format == "fp32":
+        result = copy.deepcopy(model)
+    else:
+        raise ValueError(f"unsupported weight format: {weight_format}")
     if isinstance(result, GCNII):
         forward = _gcnii_fp8_forward if value_format == "fp8" else _gcnii_int8_forward
         result.forward = types.MethodType(forward, result)

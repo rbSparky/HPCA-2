@@ -1,0 +1,2 @@
+MOSAIC_PYTHON=/home/rishabh/miniconda/envs/taugat_pyg/bin/python bash scripts/run_phase2.sh
+MOSAIC_PYTHON=/home/rishabh/miniconda/envs/taugat_pyg/bin/python bash scripts/run_phase2.sh

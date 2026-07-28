@@ -1,0 +1,13 @@
+SAFEZONE_SEED=17 CONFIG=cora_gcnii16
+SAFEZONE_SEED=17 CONFIG=pubmed_gcnii16
+SAFEZONE_SEED=17 CONFIG=cora_deepres28_w128
+SAFEZONE_SEED=27 CONFIG=cora_gcnii16
+SAFEZONE_SEED=27 CONFIG=pubmed_gcnii16
+SAFEZONE_SEED=27 CONFIG=cora_deepres28_w128
+          config_id  seed  epochs  best_epoch  train_seconds  fp32_test_accuracy  fp8_test_accuracy  accuracy_drop  median_density  fixed_gap8_support_bits  raw_serialized_speedup  selected_speedup  exactness_pass
+       cora_gcnii16    17     120         116       9.829783               0.811              0.812         -0.001        0.746769                  1074688                1.023382          1.023382            True
+     pubmed_gcnii16    17     120          88      51.809139               0.802              0.803         -0.001        0.747788                  7924224                1.189269          1.189269            True
+cora_deepres28_w128    17      90          30      18.579995               0.761              0.758          0.003        0.405079                  6231552                1.119776          1.119776            True
+       cora_gcnii16    27     120         116       8.886961               0.788              0.786          0.002        0.713309                  1034240                1.002183          1.002183            True
+     pubmed_gcnii16    27     118          78      50.594180               0.785              0.785          0.000        0.738380                  6904320                1.182685          1.182685            True
+cora_deepres28_w128    27      88          28      17.694949               0.718              0.719         -0.001        0.406423                  5956608                1.216279          1.216279            True

@@ -1,0 +1,35 @@
+/home/rishabh/miniconda/envs/taugat_pyg/bin/python -m mosaic_validation.scalesim_smoke_runner -c artifacts_hpca_xorflow/scalesim/7d77358b22a5d1e0/scale.cfg -t artifacts_hpca_xorflow/scalesim/7d77358b22a5d1e0/topology.csv -l /home/rishabh/HPCA2/mosaic_delta_phase1/third_party/SCALE-Sim/layouts/conv_nets/test.csv -p artifacts_hpca_xorflow/scalesim/7d77358b22a5d1e0/reports
+
+STDOUT
+====================================================
+******************* SCALE SIM **********************
+====================================================
+Array Size: 	32x32
+SRAM IFMAP (kB): 	256
+SRAM Filter (kB): 	256
+SRAM OFMAP (kB): 	256
+Dataflow: 	Weight Stationary
+topology file path: 	artifacts_hpca_xorflow/scalesim/7d77358b22a5d1e0/topology.csv
+layout file path: 	/home/rishabh/HPCA2/mosaic_delta_phase1/third_party/SCALE-Sim/layouts/conv_nets/test.csv
+Working in ESTIMATE BANDWIDTH mode.
+====================================================
+
+Running Layer 0
+Total cycles: 4361
+Compute cycles: 2015
+Stall cycles: 0
+Overall utilization: 25.41%
+Mapping efficiency: 100.00%
+Average IFMAP SRAM BW: 8.131 words/cycle
+Average Filter SRAM BW: 8.131 words/cycle
+Average OFMAP SRAM BW: 8.131 words/cycle
+Average IFMAP DRAM BW: 7.802 words/cycle
+Average Filter DRAM BW: 8.929 words/cycle
+Average OFMAP DRAM BW: 32.000 words/cycle
+************ SCALE SIM Run Complete ****************
+
+STDERR
+
+  0%|          | 0/2016 [00:00<?, ?it/s]
+ 80%|███████▉  | 1605/2016 [00:00<00:00, 16044.51it/s]
+100%|██████████| 2016/2016 [00:00<00:00, 15318.85it/s]

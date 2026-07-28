@@ -1,0 +1,10 @@
+[
+  {
+    "classes": 100,
+    "dataset": "Yelp",
+    "edges": 13954819,
+    "features": 300,
+    "multilabel": true,
+    "nodes": 716847
+  }
+]

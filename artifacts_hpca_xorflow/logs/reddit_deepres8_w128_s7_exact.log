@@ -1,0 +1,19 @@
+/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/hpca_sparse.py:45: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at /pytorch/aten/src/ATen/SparseCsrTensorImpl.cpp:53.)
+  return torch.sparse_csr_tensor(
+{"best_val_loss": 3.396960735321045, "checks": 0, "epoch": 2, "event": "validation", "val_accuracy": 0.14661575853824615, "val_loss": 3.396960735321045}
+{"best_val_loss": 3.3513553142547607, "checks": 0, "epoch": 4, "event": "validation", "val_accuracy": 0.14661575853824615, "val_loss": 3.3513553142547607}
+{"best_val_loss": 3.3513553142547607, "checks": 1, "epoch": 6, "event": "validation", "val_accuracy": 0.14661575853824615, "val_loss": 3.359701633453369}
+{"best_val_loss": 3.3513553142547607, "checks": 2, "epoch": 8, "event": "validation", "val_accuracy": 0.14661575853824615, "val_loss": 3.3522610664367676}
+{"best_val_loss": 3.346573829650879, "checks": 0, "epoch": 10, "event": "validation", "val_accuracy": 0.14661575853824615, "val_loss": 3.346573829650879}
+{"best_val_loss": 3.345823287963867, "checks": 0, "epoch": 12, "event": "validation", "val_accuracy": 0.14661575853824615, "val_loss": 3.345823287963867}
+{"best_val_loss": 3.343743324279785, "checks": 0, "epoch": 14, "event": "validation", "val_accuracy": 0.14661575853824615, "val_loss": 3.343743324279785}
+{"best_val_loss": 3.3372182846069336, "checks": 0, "epoch": 16, "event": "validation", "val_accuracy": 0.14661575853824615, "val_loss": 3.3372182846069336}
+{"best_val_loss": 3.3342220783233643, "checks": 0, "epoch": 18, "event": "validation", "val_accuracy": 0.14661575853824615, "val_loss": 3.3342220783233643}
+{"best_val_loss": 3.330998659133911, "checks": 0, "epoch": 20, "event": "validation", "val_accuracy": 0.14690949022769928, "val_loss": 3.330998659133911}
+{"best_val_loss": 3.3211867809295654, "checks": 0, "epoch": 22, "event": "validation", "val_accuracy": 0.1470353752374649, "val_loss": 3.3211867809295654}
+{"best_val_loss": 3.312215805053711, "checks": 0, "epoch": 24, "event": "validation", "val_accuracy": 0.14867189526557922, "val_loss": 3.312215805053711}
+{"best_val_loss": 3.2966861724853516, "checks": 0, "epoch": 26, "event": "validation", "val_accuracy": 0.15047627687454224, "val_loss": 3.2966861724853516}
+{"best_val_loss": 3.2966861724853516, "checks": 1, "epoch": 28, "event": "validation", "val_accuracy": 0.12017960101366043, "val_loss": 3.3279080390930176}
+{"best_val_loss": 3.2966861724853516, "checks": 2, "epoch": 30, "event": "validation", "val_accuracy": 0.14145441353321075, "val_loss": 3.359837293624878}
+{"best_val_loss": 3.2966861724853516, "checks": 3, "epoch": 32, "event": "validation", "val_accuracy": 0.14661575853824615, "val_loss": 3.3347790241241455}
+{"best_val_loss": 3.2966861724853516, "checks": 4, "epoch": 34, "event": "validation", "val_accuracy": 0.14711929857730865, "val_loss": 3.3479738235473633}

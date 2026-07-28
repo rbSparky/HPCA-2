@@ -1,0 +1,7 @@
+python3 /home/rishabh/HPCA2/mosaic_delta_phase1/scripts/run_ramulator_hbm2.py /home/rishabh/HPCA2/mosaic_delta_phase1/artifacts_hpca_xorflow/ramulator/xorflow_hbm_lrr085mq/xorflow.trace /home/rishabh/HPCA2/mosaic_delta_phase1/artifacts_hpca_xorflow/ramulator/ogbn_arxiv_deepres8_w128_l6_xorflow_ramulator.json
+
+STDOUT
+
+STDERR
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/rishabh/HPCA2/mosaic_delta_phase1/artifacts_hpca_xorflow/ramulator/xorflow_hbm_lrr085mq/xorflow.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 12759572 lines.

@@ -1,0 +1,10 @@
+gate_id,status,evidence
+exactness,PASS,all real/synthetic masks exact
+temporal_compression,FAIL,principal metadata/segments/DP
+economic,AMBER,fixed principal setting
+sparse_target_architecture,PASS,valid deepres_v2 target
+cohort_locality,AMBER,random gain/oracle recovery/padding
+null_controls,PASS,density and temporal/node nulls
+robustness,PASS,rho=1.50 and fallback overhead
+runtime_reproducibility,PASS,"<=90m, tests, hashes, GPU record"
+phase1_decision,ITERATE_DELTA_ENCODING,predeclared logic

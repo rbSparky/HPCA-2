@@ -1,0 +1,91 @@
+{"best_val_loss": 3.449797511100769, "checks": 0, "epoch": 2, "event": "validation", "val_accuracy": 0.0546875, "val_loss": 3.449797511100769}
+{"best_val_loss": 3.388112723827362, "checks": 0, "epoch": 4, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.388112723827362}
+{"best_val_loss": 3.388112723827362, "checks": 1, "epoch": 6, "event": "validation", "val_accuracy": 0.0546875, "val_loss": 3.4609320759773254}
+{"best_val_loss": 3.388112723827362, "checks": 2, "epoch": 8, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.4290496110916138}
+{"best_val_loss": 3.386589288711548, "checks": 0, "epoch": 10, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.386589288711548}
+{"best_val_loss": 3.386589288711548, "checks": 1, "epoch": 12, "event": "validation", "val_accuracy": 0.0546875, "val_loss": 3.431222677230835}
+{"best_val_loss": 3.386589288711548, "checks": 2, "epoch": 14, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.402600646018982}
+{"best_val_loss": 3.386589288711548, "checks": 3, "epoch": 16, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.392769157886505}
+{"best_val_loss": 3.386589288711548, "checks": 4, "epoch": 18, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.406810164451599}
+{"best_val_loss": 3.386589288711548, "checks": 5, "epoch": 20, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.386768102645874}
+{"best_val_loss": 3.382343828678131, "checks": 0, "epoch": 22, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.382343828678131}
+{"best_val_loss": 3.362946629524231, "checks": 0, "epoch": 24, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.362946629524231}
+{"best_val_loss": 3.362946629524231, "checks": 1, "epoch": 26, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.370175004005432}
+{"best_val_loss": 3.362946629524231, "checks": 2, "epoch": 28, "event": "validation", "val_accuracy": 0.046875, "val_loss": 3.4075481295585632}
+{"best_val_loss": 3.362946629524231, "checks": 3, "epoch": 30, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.371669113636017}
+{"best_val_loss": 3.362946629524231, "checks": 4, "epoch": 32, "event": "validation", "val_accuracy": 0.08203125, "val_loss": 3.4115970134735107}
+{"best_val_loss": 3.362946629524231, "checks": 5, "epoch": 34, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.4037814140319824}
+{"best_val_loss": 3.362946629524231, "checks": 6, "epoch": 36, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.37650328874588}
+{"best_val_loss": 3.362946629524231, "checks": 7, "epoch": 38, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.4156946539878845}
+{"best_val_loss": 3.362946629524231, "checks": 8, "epoch": 40, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.376538872718811}
+{"best_val_loss": 3.362946629524231, "checks": 9, "epoch": 42, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.3729714155197144}
+{"best_val_loss": 3.362946629524231, "checks": 10, "epoch": 44, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.422922134399414}
+{"best_val_loss": 3.362946629524231, "checks": 11, "epoch": 46, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.4209941625595093}
+{"best_val_loss": 3.362946629524231, "checks": 12, "epoch": 48, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.368915319442749}
+{"best_val_loss": 3.3469764590263367, "checks": 0, "epoch": 50, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.3469764590263367}
+{"best_val_loss": 3.3469764590263367, "checks": 1, "epoch": 52, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.3598430156707764}
+{"best_val_loss": 3.3469764590263367, "checks": 2, "epoch": 54, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.3552151918411255}
+{"best_val_loss": 3.3469764590263367, "checks": 3, "epoch": 56, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.3785046339035034}
+{"best_val_loss": 3.3469764590263367, "checks": 4, "epoch": 58, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.388061761856079}
+{"best_val_loss": 3.3469764590263367, "checks": 5, "epoch": 60, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.3862311840057373}
+{"best_val_loss": 3.3469764590263367, "checks": 6, "epoch": 62, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.380017042160034}
+{"best_val_loss": 3.3469764590263367, "checks": 7, "epoch": 64, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.3640122413635254}
+{"best_val_loss": 3.3469764590263367, "checks": 8, "epoch": 66, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.366149425506592}
+{"best_val_loss": 3.3469764590263367, "checks": 9, "epoch": 68, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.3916959166526794}
+{"best_val_loss": 3.3469764590263367, "checks": 10, "epoch": 70, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.415715217590332}
+{"best_val_loss": 3.3469764590263367, "checks": 11, "epoch": 72, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.368620991706848}
+{"best_val_loss": 3.3469764590263367, "checks": 12, "epoch": 74, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.3827940225601196}
+{"best_val_loss": 3.3469764590263367, "checks": 13, "epoch": 76, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.363369107246399}
+{"best_val_loss": 3.3469764590263367, "checks": 14, "epoch": 78, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.3534446358680725}
+{"best_val_loss": 3.3469764590263367, "checks": 15, "epoch": 80, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.366512894630432}
+{"best_val_loss": 3.3469764590263367, "checks": 16, "epoch": 82, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.3838595151901245}
+{"best_val_loss": 3.3469764590263367, "checks": 17, "epoch": 84, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.366703987121582}
+{"best_val_loss": 3.3469764590263367, "checks": 18, "epoch": 86, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.366709887981415}
+{"best_val_loss": 3.3469764590263367, "checks": 19, "epoch": 88, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.379105508327484}
+{"best_val_loss": 3.3469764590263367, "checks": 20, "epoch": 90, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.3718438744544983}
+{"best_val_loss": 3.3469764590263367, "checks": 21, "epoch": 92, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.364981949329376}
+{"best_val_loss": 3.3469764590263367, "checks": 22, "epoch": 94, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.382302701473236}
+{"best_val_loss": 3.3469764590263367, "checks": 23, "epoch": 96, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.3689470887184143}
+{"best_val_loss": 3.3469764590263367, "checks": 24, "epoch": 98, "event": "validation", "val_accuracy": 0.18359375, "val_loss": 3.358283758163452}
+/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/hpca_sparse.py:45: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at /pytorch/aten/src/ATen/SparseCsrTensorImpl.cpp:53.)
+  return torch.sparse_csr_tensor(
+{
+  "accuracy_drop": 0.0,
+  "aggregation_backend": "normalized_csr",
+  "best_epoch": 50,
+  "best_val_loss": 3.3469764590263367,
+  "checkpoint": "/home/rishabh/HPCA2/mosaic_delta_phase1/artifacts_hpca_xorflow/workloads/reddit_deepres8_w128_s7/model.pt",
+  "config_id": "reddit_deepres8_w128_s7",
+  "dataset": "Reddit",
+  "device": "cuda",
+  "dropout": 0.2,
+  "epoch2_val_loss": 3.449797511100769,
+  "epochs": 100,
+  "finite_loss": true,
+  "fp32_test_accuracy": 0.14832234382629395,
+  "fp32_test_loss": 3.3570237159729004,
+  "fp32_train_accuracy": 0.1076444759964943,
+  "fp32_train_loss": 3.4393160343170166,
+  "fp32_val_accuracy": 0.14661575853824615,
+  "fp32_val_loss": 3.3557558059692383,
+  "fp8_fp16_test_accuracy": 0.14832234382629395,
+  "fp8_fp16_test_loss": 3.356877565383911,
+  "fp8_fp16_train_accuracy": 0.1076444759964943,
+  "fp8_fp16_train_loss": 3.4394829273223877,
+  "fp8_fp16_val_accuracy": 0.14661575853824615,
+  "fp8_fp16_val_loss": 3.3556554317474365,
+  "layers": 8,
+  "learning_rate": 0.005,
+  "max_epochs": 160,
+  "min_epochs": 50,
+  "patience": 25,
+  "residual_scale": 0.2,
+  "sampled_batches_per_epoch": 8,
+  "sampled_neighbors": 2,
+  "seed": 7,
+  "supports_path": "/home/rishabh/HPCA2/mosaic_delta_phase1/artifacts_hpca_xorflow/workloads/reddit_deepres8_w128_s7/fp8_supports.npz",
+  "train_seconds": 173.93301818500004,
+  "training_backend": "sampled_neighbor",
+  "weight_decay": 0.0005,
+  "width": 128
+}

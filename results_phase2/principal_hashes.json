@@ -1,0 +1,15 @@
+{
+  "phase2_shapes.csv": "1ae144992247cdeb63e98b501ce844f02f16cdc6ae8201faf1b3b6d345880f8f",
+  "phase2_layout.csv": "ab4df6ef3517f6f92194be20b778fdf9e0a44164f1f0abcb7af78676b804ab3a",
+  "16_encoder_comparison.csv": "d7ef60e553983d315a2666451db5dcf646dc7e02f7dc0f8ad61e2297e173b411",
+  "23_phase2_sensitivity.csv": "0cad25c0d3764be8104147ddd4df8b069edc43ee705885d5923b9c478ce57910",
+  "18_entropy_efficiency.csv": "75113e295e88172c6b8f3578b0c488b93377b9adb7a383281ca69e8a34e3f606",
+  "17_anchor_mode_breakdown.csv": "8f506f01bb5f0bac271e2b4f8a7b64ba742e249d48cedbd14511da4a5b6526d1",
+  "21_scalesim_calibration.csv": "fa121b1c6438698882ea2ed3c3d610ddce52ae97578b40f97428d63c2585ebd4",
+  "22_null_controls.csv": "8417bc4f26a6c7449cc8020aa78b3e15c8a39f629cbe8503345c3cc3a144d0dc",
+  "24_phase2_summary.csv": "b6bcd367c3c38f152aa22f339f5cde4a9b1add9bf162b5ce499acb97b04b25a7",
+  "phase2_gates.csv": "cb3a0b83ecaa748751480942ff389d19f4abeaca22b3f9e003f6dcfe2686d1cf",
+  "20_adaptive_segments.csv": "1d879cc8ca97b905f666deca9799a9776608a4d1d29a7bc4489e1f96082b641f",
+  "25_phase2_failures.csv": "809c884a3dda87cd560e579ef713133f8dc0c0e16a421280e1eada910c7a8142",
+  "19_chain_liveness_replay.csv": "0c4ec1a1dd93d2e0ae2ff4b5819470adc2aa8a6929b94cbb40ca00201c3b83bc"
+}

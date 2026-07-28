@@ -1,0 +1,14 @@
+..............                                                           [100%]
+=============================== warnings summary ===============================
+../../miniconda/envs/taugat_pyg/lib/python3.11/site-packages/huggingface_hub/constants.py:244
+  /home/rishabh/miniconda/envs/taugat_pyg/lib/python3.11/site-packages/huggingface_hub/constants.py:244: DeprecationWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+14 passed, 1 warning in 7.32s
+/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/phase1_reporting.py:78: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+  values = frame.fillna("").astype(str)
+PHASE1_DECISION=ITERATE_DELTA_ENCODING
+HANDOFF=/home/rishabh/HPCA2/mosaic_delta_phase1/MOSAIC_DELTA_PHASE1_HANDOFF.zip
+RESULTS=/home/rishabh/HPCA2/mosaic_delta_phase1/results_phase1/PHASE1_RESULTS.md
+WALL_SECONDS=1666.366

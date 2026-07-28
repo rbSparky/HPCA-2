@@ -1,0 +1,7 @@
+python3 /home/rishabh/HPCA2/mosaic_delta_phase1/scripts/run_ramulator_hbm2.py /home/rishabh/HPCA2/mosaic_delta_phase1/artifacts_hpca_xorflow/ramulator/xorflow_hbm__5954xij/beicsr.trace /home/rishabh/HPCA2/mosaic_delta_phase1/artifacts_hpca_xorflow/ramulator/cora_gcnii16_l4_beicsr_ramulator.json
+
+STDOUT
+
+STDERR
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/rishabh/HPCA2/mosaic_delta_phase1/artifacts_hpca_xorflow/ramulator/xorflow_hbm__5954xij/beicsr.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 43574 lines.

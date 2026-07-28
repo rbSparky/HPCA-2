@@ -1,0 +1,2309 @@
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 0000000..b5ac9df
+--- /dev/null
++++ b/.gitignore
+@@ -0,0 +1,13 @@
++__pycache__/
++*.py[cod]
++.pytest_cache/
++results_phase1/
++checkpoints_phase1/
++artifacts_phase1/
++.phase1-python
++.scalesim-python
++data
++phase0_results
++phase0_checkpoints
++third_party
++MOSAIC_DELTA_PHASE1_HANDOFF.zip
+diff --git a/HANDOFF_PHASE1.md b/HANDOFF_PHASE1.md
+new file mode 100644
+index 0000000..37707ef
+--- /dev/null
++++ b/HANDOFF_PHASE1.md
+@@ -0,0 +1,21 @@
++# MOSAIC-Delta Phase-1 handoff
++
++Decision: `ITERATE_DELTA_ENCODING`
++
++Reproduce with `bash scripts/run_phase1.sh`. Phase-0 masks and datasets are
++discovered from the sibling `mosaic_validation` project. New models are trained
++only when packed Phase-1 traces are missing. See `results_phase1/PHASE1_RESULTS.md`
++and the exact CSVs for evidence. Dataset names, file checksums, and PyG download
++sources are recorded in `results_phase1/dataset_manifest.csv`; raw datasets are
++excluded from the archive. Analytical proxies are not measured speedups.
++
++The exactness, runtime/reproducibility, sparse-target, null-control, and
++robustness gates passed. Economics and cohort locality were amber. The temporal
++compression gate failed because principal metadata ratios remained 0.690 for
++Cora and 0.625 for PubMed, although greedy segment lengths were 3.25 layers and
++greedy costs were within roughly 0.15% of offline DP. The next iteration should
++reduce transition metadata rather than relax these thresholds.
++
++Cora `deepres_v2` was valid at 0.757 test accuracy and median density 0.452.
++PubMed used the single permitted fallback but remained invalid at 0.732 versus
++the predeclared 0.75 floor; both attempts remain in the quality table.
+diff --git a/configs/phase1_quick.yaml b/configs/phase1_quick.yaml
+new file mode 100644
+index 0000000..9faaff4
+--- /dev/null
++++ b/configs/phase1_quick.yaml
+@@ -0,0 +1,37 @@
++seed: 7
++null_seed: 7007
++principal:
++  window_length: 4
++  cohort_size: 32
++  tile_size: 128
++  rho_independent_sparse: 2.0
++  rho_delta: 1.25
++  mask_decode_width_bits: 64
++  rebase_control_fraction: 0.01
++  selector_overhead_fraction: 0.001
++sensitivity:
++  window_lengths: [1, 2, 4, 8]
++  cohort_sizes: [16, 32, 64]
++  tile_sizes: [64, 128, 256]
++  rho_delta: [1.10, 1.25, 1.50, 1.75]
++  mask_decode_width_bits: [32, 64, 128]
++  rebase_control_fractions: [0.005, 0.01, 0.02]
++deepres_v2:
++  width: 128
++  layers: 28
++  dropout: 0.20
++  residual_scale: 0.20
++  learning_rate: 0.005
++  weight_decay: 0.0005
++  max_epochs: 220
++  min_epochs: 60
++  validation_interval: 2
++  patience_checks: 30
++  fallback:
++    dropout: 0.50
++    residual_scale: 0.10
++    learning_rate: 0.01
++models:
++  - {id: cora_deepres28_w128, dataset: Cora, min_test_accuracy: 0.68, time_cap_minutes: 12}
++  - {id: pubmed_deepres28_w128, dataset: PubMed, min_test_accuracy: 0.75, time_cap_minutes: 25}
++
+diff --git a/scripts/run_phase1.sh b/scripts/run_phase1.sh
+new file mode 100644
+index 0000000..a2dd8e7
+--- /dev/null
++++ b/scripts/run_phase1.sh
+@@ -0,0 +1,9 @@
++#!/usr/bin/env bash
++set -euo pipefail
++ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
++PY="${MOSAIC_PYTHON:-/home/rishabh/miniconda/envs/taugat_pyg/bin/python}"
++export CUBLAS_WORKSPACE_CONFIG="${CUBLAS_WORKSPACE_CONFIG:-:4096:8}"
++export PYTHONPATH="$ROOT/src"
++cd "$ROOT"
++PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 "$PY" -m pytest -q
++"$PY" -m mosaic_validation.phase1_cli --config configs/phase1_quick.yaml
+diff --git a/src/mosaic_validation/__pycache__/__init__.cpython-311.pyc b/src/mosaic_validation/__pycache__/__init__.cpython-311.pyc
+deleted file mode 100644
+index 0301f70..0000000
+Binary files a/src/mosaic_validation/__pycache__/__init__.cpython-311.pyc and /dev/null differ
+diff --git a/src/mosaic_validation/__pycache__/analytical_cost.cpython-311.pyc b/src/mosaic_validation/__pycache__/analytical_cost.cpython-311.pyc
+deleted file mode 100644
+index 6047bf9..0000000
+Binary files a/src/mosaic_validation/__pycache__/analytical_cost.cpython-311.pyc and /dev/null differ
+diff --git a/src/mosaic_validation/__pycache__/cli.cpython-311.pyc b/src/mosaic_validation/__pycache__/cli.cpython-311.pyc
+deleted file mode 100644
+index 5946479..0000000
+Binary files a/src/mosaic_validation/__pycache__/cli.cpython-311.pyc and /dev/null differ
+diff --git a/src/mosaic_validation/__pycache__/cohorts.cpython-311.pyc b/src/mosaic_validation/__pycache__/cohorts.cpython-311.pyc
+deleted file mode 100644
+index 6dd1463..0000000
+Binary files a/src/mosaic_validation/__pycache__/cohorts.cpython-311.pyc and /dev/null differ
+diff --git a/src/mosaic_validation/__pycache__/config.cpython-311.pyc b/src/mosaic_validation/__pycache__/config.cpython-311.pyc
+deleted file mode 100644
+index 2caaa96..0000000
+Binary files a/src/mosaic_validation/__pycache__/config.cpython-311.pyc and /dev/null differ
+diff --git a/src/mosaic_validation/__pycache__/datasets.cpython-311.pyc b/src/mosaic_validation/__pycache__/datasets.cpython-311.pyc
+deleted file mode 100644
+index 517f088..0000000
+Binary files a/src/mosaic_validation/__pycache__/datasets.cpython-311.pyc and /dev/null differ
+diff --git a/src/mosaic_validation/__pycache__/gates.cpython-311.pyc b/src/mosaic_validation/__pycache__/gates.cpython-311.pyc
+deleted file mode 100644
+index 207b3a8..0000000
+Binary files a/src/mosaic_validation/__pycache__/gates.cpython-311.pyc and /dev/null differ
+diff --git a/src/mosaic_validation/__pycache__/graph_order.cpython-311.pyc b/src/mosaic_validation/__pycache__/graph_order.cpython-311.pyc
+deleted file mode 100644
+index 531d515..0000000
+Binary files a/src/mosaic_validation/__pycache__/graph_order.cpython-311.pyc and /dev/null differ
+diff --git a/src/mosaic_validation/__pycache__/models.cpython-311.pyc b/src/mosaic_validation/__pycache__/models.cpython-311.pyc
+deleted file mode 100644
+index 358a49c..0000000
+Binary files a/src/mosaic_validation/__pycache__/models.cpython-311.pyc and /dev/null differ
+diff --git a/src/mosaic_validation/__pycache__/pair_metrics.cpython-311.pyc b/src/mosaic_validation/__pycache__/pair_metrics.cpython-311.pyc
+deleted file mode 100644
+index a7f0db4..0000000
+Binary files a/src/mosaic_validation/__pycache__/pair_metrics.cpython-311.pyc and /dev/null differ
+diff --git a/src/mosaic_validation/__pycache__/reporting.cpython-311.pyc b/src/mosaic_validation/__pycache__/reporting.cpython-311.pyc
+deleted file mode 100644
+index edec8f4..0000000
+Binary files a/src/mosaic_validation/__pycache__/reporting.cpython-311.pyc and /dev/null differ
+diff --git a/src/mosaic_validation/__pycache__/reproducibility.cpython-311.pyc b/src/mosaic_validation/__pycache__/reproducibility.cpython-311.pyc
+deleted file mode 100644
+index c41bd17..0000000
+Binary files a/src/mosaic_validation/__pycache__/reproducibility.cpython-311.pyc and /dev/null differ
+diff --git a/src/mosaic_validation/__pycache__/scalesim_bridge.cpython-311.pyc b/src/mosaic_validation/__pycache__/scalesim_bridge.cpython-311.pyc
+deleted file mode 100644
+index 12b5c4e..0000000
+Binary files a/src/mosaic_validation/__pycache__/scalesim_bridge.cpython-311.pyc and /dev/null differ
+diff --git a/src/mosaic_validation/__pycache__/scalesim_smoke_runner.cpython-311.pyc b/src/mosaic_validation/__pycache__/scalesim_smoke_runner.cpython-311.pyc
+deleted file mode 100644
+index c7acb8d..0000000
+Binary files a/src/mosaic_validation/__pycache__/scalesim_smoke_runner.cpython-311.pyc and /dev/null differ
+diff --git a/src/mosaic_validation/__pycache__/temporal.cpython-311.pyc b/src/mosaic_validation/__pycache__/temporal.cpython-311.pyc
+deleted file mode 100644
+index 850969b..0000000
+Binary files a/src/mosaic_validation/__pycache__/temporal.cpython-311.pyc and /dev/null differ
+diff --git a/src/mosaic_validation/__pycache__/tracing.cpython-311.pyc b/src/mosaic_validation/__pycache__/tracing.cpython-311.pyc
+deleted file mode 100644
+index 2e75612..0000000
+Binary files a/src/mosaic_validation/__pycache__/tracing.cpython-311.pyc and /dev/null differ
+diff --git a/src/mosaic_validation/__pycache__/training.cpython-311.pyc b/src/mosaic_validation/__pycache__/training.cpython-311.pyc
+deleted file mode 100644
+index 1ff3bf4..0000000
+Binary files a/src/mosaic_validation/__pycache__/training.cpython-311.pyc and /dev/null differ
+diff --git a/src/mosaic_validation/delta_encoding.py b/src/mosaic_validation/delta_encoding.py
+new file mode 100644
+index 0000000..781bd13
+--- /dev/null
++++ b/src/mosaic_validation/delta_encoding.py
+@@ -0,0 +1,340 @@
++"""Exact MOSAIC-Delta feature-plane encoding and cost accounting.
++
++Logical byte streams are aligned once per cohort-window: regular feature IDs;
++one regular value stream per layer; delta feature IDs; delta initial masks; one
++delta-transition stream per transition; and one delta active-value stream per
++layer. Individual features are never aligned separately.
++"""
++
++from dataclasses import dataclass
++import math
++from typing import Iterable
++
++import numpy as np
++
++from .analytical_cost import representation_metrics
++from .cohorts import CohortSet
++
++ABSENT = "ABSENT"
++REGULAR_CORE = "REGULAR_CORE"
++DELTA_DICTIONARY = "DELTA_DICTIONARY"
++
++
++def align64(value: int) -> int:
++    return int(math.ceil(value / 64) * 64) if value else 0
++
++
++@dataclass(frozen=True)
++class TransitionCode:
++    dense: bool
++    payload: bytes
++    flip_count: int
++
++
++def encode_transition(previous: np.ndarray, current: np.ndarray) -> TransitionCode:
++    """Encode one exact lane-mask XOR using the cheaper legal byte stream."""
++    xor = np.logical_xor(previous, current)
++    flipped = np.flatnonzero(xor)
++    dense_payload = np.packbits(xor, bitorder="little").tobytes()
++    if len(flipped) > 255:
++        return TransitionCode(True, dense_payload, len(flipped))
++    sparse_payload = bytes([len(flipped)]) + bytes(flipped.tolist())
++    if len(dense_payload) <= len(sparse_payload):
++        return TransitionCode(True, dense_payload, len(flipped))
++    return TransitionCode(False, sparse_payload, len(flipped))
++
++
++def decode_transition(previous: np.ndarray, code: TransitionCode) -> np.ndarray:
++    if code.dense:
++        xor = np.unpackbits(
++            np.frombuffer(code.payload, dtype=np.uint8), bitorder="little"
++        )[: previous.size].astype(bool)
++    else:
++        count = code.payload[0]
++        xor = np.zeros(previous.size, dtype=bool)
++        if count:
++            xor[np.frombuffer(code.payload[1 : 1 + count], dtype=np.uint8)] = True
++    return np.logical_xor(previous, xor)
++
++
++@dataclass
++class PlaneEncoding:
++    mode: str
++    initial_mask: np.ndarray | None
++    transitions: list[TransitionCode]
++
++
++def choose_plane_mode(
++    plane: np.ndarray,
++    rho_delta: float = 1.25,
++    decode_width_bits: int = 64,
++) -> str:
++    """Choose the finite legal mode minimizing the declared cycle proxy."""
++    active = int(plane.sum())
++    if active == 0:
++        return ABSENT
++    layers, lanes = plane.shape
++    regular = layers * lanes
++    transition_bits = sum(
++        8 * len(encode_transition(plane[t - 1], plane[t]).payload)
++        for t in range(1, layers)
++    )
++    metadata_bits = 16 + 8 * math.ceil(lanes / 8) + transition_bits
++    delta = rho_delta * active + math.ceil(metadata_bits / decode_width_bits)
++    return REGULAR_CORE if regular <= delta else DELTA_DICTIONARY
++
++
++def encode_plane(
++    plane: np.ndarray,
++    rho_delta: float = 1.25,
++    decode_width_bits: int = 64,
++) -> PlaneEncoding:
++    mode = choose_plane_mode(plane, rho_delta, decode_width_bits)
++    if mode == ABSENT:
++        return PlaneEncoding(mode, None, [])
++    if mode == REGULAR_CORE:
++        return PlaneEncoding(mode, None, [])
++    return PlaneEncoding(
++        mode,
++        plane[0].copy(),
++        [encode_transition(plane[t - 1], plane[t]) for t in range(1, len(plane))],
++    )
++
++
++def decode_plane(encoded: PlaneEncoding, layers: int, lanes: int) -> np.ndarray:
++    if encoded.mode == ABSENT:
++        return np.zeros((layers, lanes), dtype=bool)
++    if encoded.mode == REGULAR_CORE:
++        raise ValueError("Regular planes require their exact stored values/support")
++    rows = [encoded.initial_mask.copy()]
++    for transition in encoded.transitions:
++        rows.append(decode_transition(rows[-1], transition))
++    return np.stack(rows)
++
++
++@dataclass
++class WindowEncoding:
++    metrics: dict[str, float | int | str | bool]
++    mode_summary: dict[str, float]
++    objective: float
++
++
++def _phase0_cycles(window: np.ndarray, groups: list[np.ndarray], rho: float) -> float:
++    cost = 0.0
++    for layer_mask in window:
++        cohort = CohortSet(
++            groups,
++            [
++                (4 * len(group) + 2 < 6 * layer_mask[group].sum(axis=0))
++                for group in groups
++            ],
++        )
++        stats = representation_metrics(layer_mask, cohort)
++        cost += float(stats["core_slots"]) + rho * float(stats["residual_nnz"])
++    return cost
++
++
++def _phase0_bytes(window: np.ndarray, groups: list[np.ndarray]) -> int:
++    total = 0
++    for layer_mask in window:
++        cohort = CohortSet(
++            groups,
++            [
++                (4 * len(group) + 2 < 6 * layer_mask[group].sum(axis=0))
++                for group in groups
++            ],
++        )
++        total += int(representation_metrics(layer_mask, cohort)["mosaic_transfer_bytes"])
++    return total
++
++
++def encode_window(
++    window: np.ndarray,
++    groups: list[np.ndarray],
++    rho_delta: float = 1.25,
++    decode_width_bits: int = 64,
++    rho_independent: float = 2.0,
++    rebase_fraction: float = 0.01,
++    selector_fraction: float = 0.001,
++) -> WindowEncoding:
++    """Encode a W x N x F support tensor exactly and evaluate all fallbacks."""
++    layers, nodes, width = window.shape
++    total_nnz = int(window.sum())
++    dense_slots = layers * nodes * width
++    dense_bytes = layers * nodes * align64(4 * width)
++    row_nnz = window.sum(axis=2)
++    independent_bytes = sum(
++        align64(math.ceil(width / 8) + 4 * int(value)) for value in row_nnz.flat
++    )
++    phase0_bytes = _phase0_bytes(window, groups)
++    phase0_cycles_default = _phase0_cycles(window, groups, rho_independent)
++
++    counts = {ABSENT: 0, REGULAR_CORE: 0, DELTA_DICTIONARY: 0}
++    regular_slots = regular_true = delta_active = 0
++    initial_mask_bits = transition_dense_bits = transition_sparse_bytes = flip_count = 0
++    delta_metadata_bits = 0
++    delta_bytes = 0
++    occupancies_regular: list[float] = []
++    occupancies_delta: list[float] = []
++    exact = True
++    regular_holes = 0
++    for group in groups:
++        cohort = window[:, group, :]
++        m = len(group)
++        modes: list[str] = []
++        transition_bytes_by_layer = np.zeros(max(layers - 1, 0), dtype=np.int64)
++        delta_values_by_layer = np.zeros(layers, dtype=np.int64)
++        regular_count = delta_count = 0
++        initial_bytes = 0
++        for feature in range(width):
++            plane = cohort[:, :, feature]
++            encoded = encode_plane(plane, rho_delta, decode_width_bits)
++            mode = encoded.mode
++            modes.append(mode)
++            counts[mode] += 1
++            active = int(plane.sum())
++            if mode == REGULAR_CORE:
++                regular_count += 1
++                regular_slots += layers * m
++                regular_true += active
++                regular_holes += layers * m - active
++                occupancies_regular.append(active / (layers * m))
++            elif mode == DELTA_DICTIONARY:
++                delta_count += 1
++                delta_active += active
++                delta_values_by_layer += plane.sum(axis=1).astype(np.int64)
++                initial_bytes += math.ceil(m / 8)
++                initial_mask_bits += math.ceil(m / 8) * 8
++                reconstructed = decode_plane(encoded, layers, m)
++                exact &= bool(np.array_equal(reconstructed, plane))
++                for t, transition in enumerate(encoded.transitions):
++                    transition_bytes_by_layer[t] += len(transition.payload)
++                    flip_count += transition.flip_count
++                    if transition.dense:
++                        transition_dense_bits += len(transition.payload) * 8
++                    else:
++                        transition_sparse_bytes += len(transition.payload)
++                occupancies_delta.append(active / (layers * m))
++            else:
++                exact &= active == 0
++        # Six logical stream families, aligned at cohort/window granularity.
++        delta_bytes += align64(2 * regular_count)
++        delta_bytes += sum(align64(4 * m * regular_count) for _ in range(layers))
++        delta_bytes += align64(2 * delta_count)
++        delta_bytes += align64(initial_bytes)
++        delta_bytes += sum(align64(int(value)) for value in transition_bytes_by_layer)
++        delta_bytes += sum(align64(4 * int(value)) for value in delta_values_by_layer)
++        delta_metadata_bits += 16 * delta_count + 8 * initial_bytes
++        delta_metadata_bits += 8 * int(transition_bytes_by_layer.sum())
++
++    rebase_cycles = rebase_fraction * dense_slots
++    selector_cycles = selector_fraction * dense_slots
++    candidate_bytes = {
++        "dense": dense_bytes,
++        "independent_bitmap": independent_bytes,
++        "phase0_mosaic": phase0_bytes,
++        "mosaic_delta": delta_bytes,
++    }
++    candidate_base_cycles = {
++        "dense": float(dense_slots),
++        "independent_bitmap": rho_independent * total_nnz,
++        "phase0_mosaic": phase0_cycles_default,
++    }
++    best_baseline = min(float(dense_slots), rho_independent * total_nnz)
++    metrics: dict[str, float | int | str | bool] = {
++        "num_cohorts": len(groups),
++        "regular_feature_planes": counts[REGULAR_CORE],
++        "delta_feature_planes": counts[DELTA_DICTIONARY],
++        "absent_feature_planes": counts[ABSENT],
++        "regular_slots": regular_slots,
++        "regular_true_nnz": regular_true,
++        "regular_holes": regular_holes,
++        "delta_active_nnz": delta_active,
++        "initial_mask_bits": initial_mask_bits,
++        "transition_dense_bits": transition_dense_bits,
++        "transition_sparse_bytes": transition_sparse_bytes,
++        "flip_count": flip_count,
++        "total_nnz": total_nnz,
++        "dense_bytes": dense_bytes,
++        "independent_bitmap_bytes": independent_bytes,
++        "phase0_mosaic_bytes": phase0_bytes,
++        "mosaic_delta_bytes": delta_bytes,
++        "exact_decode_pass": exact,
++        "_best_baseline_cycles": best_baseline,
++        "_phase0_cycles_rho2": phase0_cycles_default,
++        "_delta_metadata_bits": delta_metadata_bits,
++    }
++    rho_fields = {
++        1.10: "1_10",
++        1.25: "1_25",
++        1.50: "1_50",
++        1.75: "1_75",
++    }
++    raw_delta_default = 0.0
++    for rho, key in rho_fields.items():
++        delta_cycles = (
++            regular_slots
++            + rho * delta_active
++            + math.ceil(delta_metadata_bits / decode_width_bits)
++            + rebase_cycles
++        )
++        candidates = {**candidate_base_cycles, "mosaic_delta": delta_cycles}
++        winner = min(candidates, key=candidates.get)
++        selected_cycles = candidates[winner] + selector_cycles
++        metrics[f"proxy_cycles_rho{key}"] = selected_cycles
++        metrics[f"proxy_speedup_rho{key}"] = best_baseline / selected_cycles
++        metrics[f"_mosaic_delta_raw_cycles_rho{key}"] = delta_cycles
++        if abs(rho - 1.25) < 1e-9:
++            raw_delta_default = delta_cycles
++            metrics["selected_representation"] = winner
++            metrics["selected_bytes"] = candidate_bytes[winner]
++            metrics["byte_ratio_to_best_baseline"] = (
++                candidate_bytes[winner] / min(dense_bytes, independent_bytes)
++            )
++    decode_cycles = math.ceil(delta_metadata_bits / decode_width_bits)
++    for target, field in (
++        (1.0, "rho_delta_max_for_1x"),
++        (1.15, "rho_delta_max_for_1_15x"),
++        (1.25, "rho_delta_max_for_1_25x"),
++    ):
++        numerator = best_baseline / target - regular_slots - decode_cycles - rebase_cycles
++        metrics[field] = numerator / delta_active if delta_active else float("inf")
++    planes = sum(counts.values())
++    mode_summary = {
++        "fraction_absent": counts[ABSENT] / planes if planes else 0.0,
++        "fraction_regular": counts[REGULAR_CORE] / planes if planes else 0.0,
++        "fraction_delta": counts[DELTA_DICTIONARY] / planes if planes else 0.0,
++        "regular_occupancy_mean": float(np.mean(occupancies_regular)) if occupancies_regular else 0.0,
++        "delta_occupancy_mean": float(np.mean(occupancies_delta)) if occupancies_delta else 0.0,
++        "regular_capture": regular_true / total_nnz if total_nnz else 0.0,
++        "padding_fraction": regular_holes / regular_slots if regular_slots else 0.0,
++        "delta_fraction": delta_active / total_nnz if total_nnz else 0.0,
++        "metadata_bits_per_nnz": delta_metadata_bits / total_nnz if total_nnz else 0.0,
++        "flips_per_node_feature": flip_count / (nodes * width * max(layers - 1, 1)),
++    }
++    # The clustering objective is the proposed representation itself, before
++    # fallback selection; otherwise a grouping-insensitive fallback could mask
++    # assignment improvements.
++    objective = raw_delta_default
++    return WindowEncoding(metrics, mode_summary, objective)
++
++
++def reconstruct_support(
++    window: np.ndarray,
++    groups: Iterable[np.ndarray],
++    rho_delta: float = 1.25,
++    decode_width_bits: int = 64,
++) -> np.ndarray:
++    """Round-trip every non-regular plane; regular support comes from exact values."""
++    output = np.zeros_like(window)
++    for group in groups:
++        cohort = window[:, group, :]
++        for feature in range(window.shape[2]):
++            plane = cohort[:, :, feature]
++            encoded = encode_plane(plane, rho_delta, decode_width_bits)
++            if encoded.mode == REGULAR_CORE:
++                decoded = plane.copy()
++            else:
++                decoded = decode_plane(encoded, len(window), len(group))
++            output[:, group, feature] = decoded
++    return output
+diff --git a/src/mosaic_validation/models.py b/src/mosaic_validation/models.py
+index 895a83c..dbab634 100644
+--- a/src/mosaic_validation/models.py
++++ b/src/mosaic_validation/models.py
+@@ -52,7 +52,64 @@ class ResidualGCN(nn.Module):
+         return (logits, traces) if trace else logits
+ 
+ 
++class DeepResV2(nn.Module):
++    """Pre-activation residual GCN whose traced tensor feeds each convolution."""
++
++    def __init__(
++        self,
++        in_channels: int,
++        hidden: int,
++        classes: int,
++        layers: int,
++        dropout: float,
++        residual_scale: float,
++    ):
++        super().__init__()
++        self.dropout = dropout
++        self.residual_scale = residual_scale
++        self.input = nn.Linear(in_channels, hidden)
++        self.norms = nn.ModuleList(nn.LayerNorm(hidden) for _ in range(layers))
++        self.convs = nn.ModuleList(
++            GCNConv(
++                hidden,
++                hidden,
++                cached=True,
++                add_self_loops=True,
++                normalize=True,
++            )
++            for _ in range(layers)
++        )
++        self.final_norm = nn.LayerNorm(hidden)
++        self.output = nn.Linear(hidden, classes)
++
++    def forward(self, x: torch.Tensor, edge_index: torch.Tensor, trace: bool = False):
++        h = self.input(x)
++        traces = []
++        for norm, conv in zip(self.norms, self.convs, strict=True):
++            z = torch.relu(norm(h))
++            if trace:
++                traces.append(z)
++            z = nn.functional.dropout(z, self.dropout, self.training)
++            h = h + self.residual_scale * conv(z, edge_index)
++        z = torch.relu(self.final_norm(h))
++        z = nn.functional.dropout(z, self.dropout, self.training)
++        logits = self.output(z)
++        return (logits, traces) if trace else logits
++
++
+ def build_model(kind: str, features: int, hidden: int, classes: int, layers: int, dropout: float):
+     cls = GCNII if kind == "gcnii" else ResidualGCN
+     return cls(features, hidden, classes, layers, dropout)
+ 
++
++def build_deepres_v2(
++    features: int,
++    hidden: int,
++    classes: int,
++    layers: int,
++    dropout: float,
++    residual_scale: float,
++) -> DeepResV2:
++    return DeepResV2(
++        features, hidden, classes, layers, dropout, residual_scale
++    )
+diff --git a/src/mosaic_validation/null_controls.py b/src/mosaic_validation/null_controls.py
+new file mode 100644
+index 0000000..455b898
+--- /dev/null
++++ b/src/mosaic_validation/null_controls.py
+@@ -0,0 +1,34 @@
++"""Density-preserving temporal and node-identity null controls."""
++
++import numpy as np
++
++
++def temporal_order_null(masks: np.ndarray, seed: int = 7007) -> np.ndarray:
++    return masks[np.random.default_rng(seed).permutation(len(masks))].copy()
++
++
++def density_matched_independent_null(
++    masks: np.ndarray, seed: int = 7007
++) -> np.ndarray:
++    """Preserve each layer-feature marginal while destroying dependence."""
++    rng = np.random.default_rng(seed)
++    output = np.empty_like(masks)
++    for layer in range(len(masks)):
++        probabilities = masks[layer].mean(axis=0)
++        output[layer] = rng.random(masks[layer].shape) < probabilities
++    return output
++
++
++def node_permutation_null(masks: np.ndarray, seed: int = 7007) -> np.ndarray:
++    rng = np.random.default_rng(seed)
++    output = masks.copy()
++    for layer in range(len(output)):
++        output[layer] = output[layer, rng.permutation(output.shape[1])]
++    return output
++
++
++def temporal_flip(masks: np.ndarray) -> float:
++    if len(masks) < 2:
++        return 0.0
++    return float(np.logical_xor(masks[:-1], masks[1:]).mean())
++
+diff --git a/src/mosaic_validation/phase1_cli.py b/src/mosaic_validation/phase1_cli.py
+new file mode 100644
+index 0000000..38c3e45
+--- /dev/null
++++ b/src/mosaic_validation/phase1_cli.py
+@@ -0,0 +1,768 @@
++"""End-to-end MOSAIC-Delta Phase-1 validation runner."""
++
++import argparse
++from datetime import datetime, timezone
++import hashlib
++import json
++import math
++import os
++from pathlib import Path
++import platform
++import subprocess
++import time
++import traceback
++from types import SimpleNamespace
++import zipfile
++
++import numpy as np
++import pandas as pd
++import psutil
++import torch
++import yaml
++
++from .datasets import load_dataset
++from .delta_encoding import encode_window
++from .graph_order import symmetrized_edges_and_rcm, tiles_from_order
++from .models import build_deepres_v2
++from .null_controls import (
++    density_matched_independent_null,
++    node_permutation_null,
++    temporal_flip,
++    temporal_order_null,
++)
++from .phase1_gates import evaluate_phase1_gates
++from .phase1_reporting import generate_phase1_plots, write_phase1_report
++from .rebase import greedy_rebase, offline_dp_rebase
++from .reproducibility import seed_everything
++from .scalesim_bridge import run_smoke
++from .tracing import capture_masks, load_masks, save_masks
++from .training import train_model
++from .window_cohorts import build_window_groups
++
++
++QUALITY_COLUMNS = [
++    "config_id", "dataset", "model", "attempt", "valid", "epochs", "best_epoch",
++    "train_accuracy", "val_accuracy", "test_accuracy", "epoch2_val_loss",
++    "best_val_loss", "train_seconds", "trace_seconds", "peak_gpu_memory_mb",
++    "median_density", "median_temporal_flip",
++]
++ENCODING_COLUMNS = [
++    "config_id", "trace_state", "window_start", "window_end", "W", "tile_size",
++    "cohort_size", "grouping_method", "num_cohorts", "regular_feature_planes",
++    "delta_feature_planes", "absent_feature_planes", "regular_slots",
++    "regular_true_nnz", "regular_holes", "delta_active_nnz", "initial_mask_bits",
++    "transition_dense_bits", "transition_sparse_bytes", "flip_count", "total_nnz",
++    "dense_bytes", "independent_bitmap_bytes", "phase0_mosaic_bytes",
++    "mosaic_delta_bytes", "selected_bytes", "selected_representation",
++    "byte_ratio_to_best_baseline", "proxy_cycles_rho1_10", "proxy_cycles_rho1_25",
++    "proxy_cycles_rho1_50", "proxy_cycles_rho1_75", "proxy_speedup_rho1_10",
++    "proxy_speedup_rho1_25", "proxy_speedup_rho1_50", "proxy_speedup_rho1_75",
++    "rho_delta_max_for_1x", "rho_delta_max_for_1_15x",
++    "rho_delta_max_for_1_25x", "grouping_objective", "cluster_iterations",
++    "exact_decode_pass",
++]
++MODE_COLUMNS = [
++    "config_id", "window_start", "W", "grouping_method", "fraction_absent",
++    "fraction_regular", "fraction_delta", "regular_occupancy_mean",
++    "delta_occupancy_mean", "regular_capture", "padding_fraction",
++    "delta_fraction", "metadata_bits_per_nnz", "flips_per_node_feature",
++]
++REBASE_COLUMNS = [
++    "config_id", "policy", "rebase_cost_fraction", "number_of_rebases",
++    "mean_layers_per_segment", "total_proxy_cost", "ratio_to_offline_dp",
++    "ratio_to_rebuild_every_layer", "ratio_to_never_rebuild",
++]
++NULL_COLUMNS = [
++    "config_id", "control_type", "density", "temporal_flip",
++    "metadata_reduction", "proxy_speedup_rho1_25",
++    "byte_ratio_to_best_baseline", "window_cluster_gain_over_random",
++]
++FAILURE_COLUMNS = [
++    "stage", "config_id", "exception_type", "message", "traceback_file",
++    "elapsed_seconds", "recoverable", "action_taken",
++]
++
++
++def _valid_training(result, floor: float) -> bool:
++    return bool(
++        result.finite_loss
++        and result.trained_metrics["test_accuracy"] >= floor
++        and result.best_val_loss <= 0.90 * result.epoch2_val_loss
++    )
++
++
++def _attempt_row(config_id, dataset, attempt, valid, result, masks, trace_seconds):
++    return {
++        "config_id": config_id, "dataset": dataset, "model": "deepres_v2",
++        "attempt": attempt, "valid": valid, "epochs": result.epochs_completed,
++        "best_epoch": result.best_epoch,
++        "train_accuracy": result.trained_metrics["train_accuracy"],
++        "val_accuracy": result.trained_metrics["val_accuracy"],
++        "test_accuracy": result.trained_metrics["test_accuracy"],
++        "epoch2_val_loss": result.epoch2_val_loss, "best_val_loss": result.best_val_loss,
++        "train_seconds": result.train_seconds, "trace_seconds": trace_seconds,
++        "peak_gpu_memory_mb": result.peak_gpu_memory_mb,
++        "median_density": float(np.median([mask.mean() for mask in masks])),
++        "median_temporal_flip": temporal_flip(np.stack(masks)),
++    }
++
++
++def _train_new_models(project: Path, raw: dict, device: torch.device):
++    quality_rows: list[dict] = []
++    traces: dict[str, dict[str, np.ndarray]] = {}
++    validity: dict[str, bool] = {}
++    selected_attempts: dict[str, str] = {}
++    base = raw["deepres_v2"]
++    for spec in raw["models"]:
++        config_id = spec["id"]
++        cached_random = project / "results_phase1" / "masks" / config_id / "random_init"
++        cached_trained = project / "results_phase1" / "masks" / config_id / "trained"
++        selection_path = project / "results_phase1" / "masks" / config_id / "selection.json"
++        if cached_random.exists() and cached_trained.exists() and selection_path.exists():
++            traces[config_id] = {
++                "random_init": np.stack(load_masks(cached_random)),
++                "trained": np.stack(load_masks(cached_trained)),
++            }
++            selection = json.loads(selection_path.read_text())
++            validity[config_id] = bool(selection["valid"])
++            selected_attempts[config_id] = selection["attempt"]
++            continue
++        attempts = [
++            ("primary", base["dropout"], base["residual_scale"], base["learning_rate"])
++        ]
++        records = []
++        selected_payload = None
++        for attempt_name, dropout, scale, learning_rate in attempts:
++            seed_everything(raw["seed"])
++            data, features, classes = load_dataset(spec["dataset"], project / "data")
++            model = build_deepres_v2(
++                features, base["width"], classes, base["layers"], dropout, scale
++            ).to(device)
++            random_masks, _ = capture_masks(model, data, device)
++            train_cfg = SimpleNamespace(
++                learning_rate=learning_rate,
++                weight_decay=base["weight_decay"],
++                max_epochs=base["max_epochs"],
++                min_epochs=base["min_epochs"],
++                patience_checks=base["patience_checks"],
++                validation_interval=base["validation_interval"],
++            )
++            result = train_model(
++                model, data, device, train_cfg, spec["time_cap_minutes"],
++                project / "checkpoints_phase1" / f"{config_id}_{attempt_name}.pt",
++            )
++            trained_masks, trace_seconds = capture_masks(model, data, device)
++            valid = _valid_training(result, spec["min_test_accuracy"])
++            row = _attempt_row(
++                config_id, spec["dataset"], attempt_name, valid, result,
++                trained_masks, trace_seconds,
++            )
++            quality_rows.append(row)
++            records.append((row, random_masks, trained_masks))
++            if valid:
++                selected_payload = records[-1]
++                break
++            if attempt_name == "primary":
++                fallback = base["fallback"]
++                attempts.append(
++                    ("fallback", fallback["dropout"], fallback["residual_scale"],
++                     fallback["learning_rate"])
++                )
++        if selected_payload is None:
++            # Selection uses validation loss only when both attempts are invalid.
++            selected_payload = min(records, key=lambda item: item[0]["best_val_loss"])
++        selected_row, random_masks, trained_masks = selected_payload
++        traces[config_id] = {
++            "random_init": np.stack(random_masks),
++            "trained": np.stack(trained_masks),
++        }
++        validity[config_id] = bool(selected_row["valid"])
++        selected_attempts[config_id] = str(selected_row["attempt"])
++        save_masks(random_masks, cached_random)
++        save_masks(trained_masks, cached_trained)
++        selection_path.write_text(json.dumps({
++            "attempt": selected_row["attempt"], "valid": bool(selected_row["valid"])
++        }, indent=2))
++    return quality_rows, traces, validity, selected_attempts
++
++
++def _load_phase0(project: Path):
++    traces: dict[str, dict[str, np.ndarray]] = {}
++    for config_dir in sorted((project / "phase0_results" / "masks").iterdir()):
++        traces[config_dir.name] = {
++            state: np.stack(load_masks(config_dir / state))
++            for state in ("random_init", "trained")
++        }
++    quality = pd.read_csv(project / "phase0_results" / "01_model_quality.csv")
++    validity = {
++        row.config_id: row.status == "PASS"
++        for _, row in quality[quality.trace_state == "trained"].iterrows()
++    }
++    return traces, validity
++
++
++def _windows(masks: np.ndarray, length: int):
++    for start in range(3, len(masks) - length + 1, length):
++        yield start, masks[start : start + length]
++
++
++def _analyze_window(
++    config_id: str,
++    state: str,
++    start: int,
++    window: np.ndarray,
++    tiles: list[np.ndarray],
++    tile_size: int,
++    cohort_size: int,
++    method: str,
++    raw: dict,
++):
++    principal = raw["principal"]
++    grouped = build_window_groups(
++        method, window, tiles, cohort_size, raw["seed"] + start,
++        principal["rho_delta"], principal["mask_decode_width_bits"],
++    )
++    encoded = encode_window(
++        window, grouped.groups,
++        rho_delta=principal["rho_delta"],
++        decode_width_bits=principal["mask_decode_width_bits"],
++        rho_independent=principal["rho_independent_sparse"],
++        rebase_fraction=principal["rebase_control_fraction"],
++        selector_fraction=principal["selector_overhead_fraction"],
++    )
++    row = {
++        "config_id": config_id, "trace_state": state, "window_start": start + 1,
++        "window_end": start + len(window), "W": len(window), "tile_size": tile_size,
++        "cohort_size": cohort_size, "grouping_method": method,
++        **{key: encoded.metrics[key] for key in ENCODING_COLUMNS if key in encoded.metrics},
++        "grouping_objective": encoded.objective,
++        "cluster_iterations": len(grouped.objective_history),
++    }
++    mode = {
++        "config_id": config_id, "window_start": start + 1, "W": len(window),
++        "grouping_method": method, **encoded.mode_summary,
++    }
++    support_bits = (
++        int(encoded.metrics["initial_mask_bits"])
++        + int(encoded.metrics["transition_dense_bits"])
++        + 8 * int(encoded.metrics["transition_sparse_bytes"])
++    )
++    full_bitmap_bits = len(window) * int(encoded.metrics["initial_mask_bits"])
++    metadata_ratio = support_bits / full_bitmap_bits if full_bitmap_bits else 0.0
++    return row, mode, encoded, metadata_ratio
++
++
++def _dataset_name(config_id: str) -> str:
++    if config_id.startswith("cora"):
++        return "Cora"
++    if config_id.startswith("pubmed"):
++        return "PubMed"
++    return "chameleon"
++
++
++def _rebase_rows(config_id, masks, tiles, raw):
++    masks = masks[3:]
++    layers, nodes, width = masks.shape
++    max_window = raw["principal"]["window_length"]
++    segment_costs = {}
++    for start in range(layers):
++        for end in range(start + 1, min(layers, start + max_window) + 1):
++            grouped = build_window_groups(
++                "window_cost_cluster", masks[start:end], tiles,
++                raw["principal"]["cohort_size"], raw["seed"] + start,
++            )
++            encoded = encode_window(
++                masks[start:end], grouped.groups,
++                rebase_fraction=0.0,
++                selector_fraction=raw["principal"]["selector_overhead_fraction"],
++            )
++            segment_costs[(start, end)] = float(encoded.metrics["proxy_cycles_rho1_25"])
++    rebuilt = {layer: segment_costs[(layer, layer + 1)] for layer in range(layers)}
++    rebuild_every = sum(rebuilt.values())
++    never_groups = build_window_groups(
++        "window_cost_cluster", masks, tiles, raw["principal"]["cohort_size"], raw["seed"]
++    )
++    never = float(encode_window(
++        masks, never_groups.groups, rebase_fraction=0.0,
++        selector_fraction=raw["principal"]["selector_overhead_fraction"],
++    ).metrics["proxy_cycles_rho1_25"])
++    rows = []
++    for fraction in raw["sensitivity"]["rebase_control_fractions"]:
++        control = fraction * nodes * width
++        dp = offline_dp_rebase(layers, segment_costs, control, max_window)
++        greedy = greedy_rebase(layers, segment_costs, rebuilt, control, max_window)
++        for policy, result in (("greedy_rebase", greedy), ("offline_dp_rebase", dp)):
++            rows.append({
++                "config_id": config_id, "policy": policy,
++                "rebase_cost_fraction": fraction,
++                "number_of_rebases": max(0, len(result.segments) - 1),
++                "mean_layers_per_segment": layers / len(result.segments),
++                "total_proxy_cost": result.total_cost,
++                "ratio_to_offline_dp": result.total_cost / dp.total_cost,
++                "ratio_to_rebuild_every_layer": result.total_cost / rebuild_every,
++                "ratio_to_never_rebuild": result.total_cost / never,
++            })
++    return rows
++
++
++def _control_row(config_id, control_type, masks, tiles, raw):
++    metrics = []
++    random_costs = []
++    proposed_costs = []
++    ratios = []
++    for start, window in _windows(masks, raw["principal"]["window_length"]):
++        proposed = _analyze_window(
++            config_id, "control", start, window, tiles, 128, 32,
++            "window_cost_cluster", raw,
++        )
++        random = _analyze_window(
++            config_id, "control", start, window, tiles, 128, 32,
++            "random_balanced_window", raw,
++        )
++        row, _, encoded, ratio = proposed
++        metrics.append(row)
++        proposed_costs.append(encoded.objective)
++        random_costs.append(random[2].objective)
++        ratios.append(ratio)
++    return {
++        "config_id": config_id, "control_type": control_type,
++        "density": float(masks[3:].mean()),
++        "temporal_flip": temporal_flip(masks[3:]),
++        "metadata_reduction": 1 - float(np.median(ratios)),
++        "proxy_speedup_rho1_25": float(np.median([row["proxy_speedup_rho1_25"] for row in metrics])),
++        "byte_ratio_to_best_baseline": float(np.median([row["byte_ratio_to_best_baseline"] for row in metrics])),
++        "window_cluster_gain_over_random": float(
++            np.median(np.asarray(random_costs) / np.asarray(proposed_costs) - 1)
++        ),
++    }
++
++
++def _failure(rows, project, stage, config_id, started, exc):
++    path = project / "artifacts_phase1" / "logs" / f"{stage}_{config_id or 'global'}.txt"
++    path.write_text(traceback.format_exc())
++    rows.append({
++        "stage": stage, "config_id": config_id, "exception_type": type(exc).__name__,
++        "message": str(exc), "traceback_file": str(path),
++        "elapsed_seconds": time.monotonic() - started, "recoverable": True,
++        "action_taken": "recorded; continued when scientifically legal",
++    })
++
++
++def _environment(project: Path, wall: float, device: torch.device):
++    env = project / "artifacts_phase1" / "environment"
++    env.mkdir(parents=True, exist_ok=True)
++    smi = subprocess.run(["nvidia-smi"], text=True, capture_output=True)
++    (env / "system.txt").write_text(
++        f"{platform.platform()}\nRAM={psutil.virtual_memory().total}\nDEVICE={device}\n"
++        + smi.stdout + smi.stderr
++    )
++    freeze = subprocess.run(
++        [os.sys.executable, "-m", "pip", "freeze"], text=True, capture_output=True
++    )
++    (env / "pip-freeze.txt").write_text(freeze.stdout)
++    record = {
++        "timestamp": datetime.now(timezone.utc).isoformat(),
++        "python": platform.python_version(), "torch": torch.__version__,
++        "torch_cuda": torch.version.cuda, "cuda_available": torch.cuda.is_available(),
++        "device": str(device),
++        "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "",
++        "wall_seconds": wall,
++        "phase0_root": str((project / "phase0_results").resolve()),
++        "scalesim_commit": "7fd972e7c650e81c77294c9433143a282235c5e7",
++    }
++    (env / "phase1_environment.json").write_text(json.dumps(record, indent=2))
++
++
++def _handoff(project: Path, results: Path):
++    checkpoint_hashes = []
++    for path in sorted((project / "checkpoints_phase1").glob("*.pt")):
++        checkpoint_hashes.append(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {path.name}")
++    (results / "checkpoint_hashes.txt").write_text("\n".join(checkpoint_hashes) + "\n")
++    dataset_rows = []
++    for path in sorted((project / "data").rglob("*")):
++        if path.is_file():
++            dataset_rows.append({
++                "path": str(path.relative_to(project / "data")),
++                "bytes": path.stat().st_size,
++                "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
++                "source": "PyG Planetoid/WikipediaNetwork automatic download",
++            })
++    pd.DataFrame(dataset_rows).to_csv(results / "dataset_manifest.csv", index=False)
++    subprocess.run(
++        ["git", "diff", "afe7504..HEAD"], cwd=project, text=True,
++        stdout=(results / "git_phase1.diff").open("w"), check=False,
++    )
++    subprocess.run(
++        ["git", "rev-parse", "HEAD"], cwd=project, text=True,
++        stdout=(results / "git_commit.txt").open("w"), check=False,
++    )
++    archive = project / "MOSAIC_DELTA_PHASE1_HANDOFF.zip"
++    with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as bundle:
++        for base in (
++            project / "src", project / "tests", project / "configs", project / "scripts",
++            project / "artifacts_phase1", results,
++        ):
++            for path in base.rglob("*"):
++                if path.is_file() and "__pycache__" not in path.parts:
++                    bundle.write(path, path.relative_to(project))
++        for path in (
++            project / "AGENTS.md", project / "README.md", project / "pyproject.toml",
++            project / "HANDOFF_PHASE1.md", project / "scalesim_numpy2.patch",
++        ):
++            bundle.write(path, path.relative_to(project))
++    with zipfile.ZipFile(archive) as check:
++        bad = check.testzip()
++        if bad:
++            raise RuntimeError(f"Corrupt handoff member: {bad}")
++    return archive
++
++
++def run(config_path: Path) -> int:
++    started = time.monotonic()
++    project = config_path.resolve().parent.parent
++    raw = yaml.safe_load(config_path.read_text())
++    results = project / "results_phase1"
++    results.mkdir(exist_ok=True)
++    seed_everything(raw["seed"])
++    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
++    failures: list[dict] = []
++
++    phase0_traces, phase0_validity = _load_phase0(project)
++    quality_rows, new_traces, new_validity, selected_attempts = _train_new_models(
++        project, raw, device
++    )
++    # Preserve cached quality rows on resumed runs.
++    quality_path = results / "08_phase1_model_quality.csv"
++    if quality_path.exists():
++        old = pd.read_csv(quality_path).to_dict("records")
++        keys = {(row["config_id"], row["attempt"]) for row in quality_rows}
++        quality_rows = [
++            row for row in old if (row["config_id"], row["attempt"]) not in keys
++        ] + quality_rows
++    quality = pd.DataFrame(quality_rows, columns=QUALITY_COLUMNS)
++    quality.to_csv(quality_path, index=False)
++    traces = {**phase0_traces, **new_traces}
++    validity = {**phase0_validity, **new_validity}
++
++    dataset_cache = {}
++    order_cache = {}
++    for config_id in traces:
++        dataset = _dataset_name(config_id)
++        if dataset not in dataset_cache:
++            data, _, _ = load_dataset(dataset, project / "data")
++            dataset_cache[dataset] = data.cpu()
++        data = dataset_cache[dataset]
++        if dataset not in order_cache:
++            _, order = symmetrized_edges_and_rcm(data.edge_index, data.num_nodes)
++            order_cache[dataset] = order
++
++    encoding_rows, mode_rows = [], []
++    principal_methods = [
++        "random_balanced_window", "rcm_contiguous_window",
++        "first_layer_rcm_cost_reused", "window_cost_cluster", "window_global_oracle",
++    ]
++    analyzed_keys = set()
++    def analyze_setting(config_id, state, masks, w, tile_size, cohort_size, methods):
++        tiles = tiles_from_order(order_cache[_dataset_name(config_id)], tile_size)
++        for start, window in _windows(masks, w):
++            for method in methods:
++                key = (config_id, state, start, w, tile_size, cohort_size, method)
++                if key in analyzed_keys:
++                    continue
++                row, mode, _, _ = _analyze_window(
++                    config_id, state, start, window, tiles, tile_size,
++                    cohort_size, method, raw,
++                )
++                encoding_rows.append(row)
++                if (
++                    state == "trained" and w == 4 and tile_size == 128
++                    and cohort_size == 32
++                ):
++                    mode_rows.append(mode)
++                analyzed_keys.add(key)
++
++    for config_id, states in traces.items():
++        analyze_setting(config_id, "trained", states["trained"], 4, 128, 32, principal_methods)
++        analyze_setting(config_id, "random_init", states["random_init"], 4, 128, 32, ["window_cost_cluster"])
++    for config_id in ("cora_gcnii16", "pubmed_gcnii16"):
++        masks = traces[config_id]["trained"]
++        for w in raw["sensitivity"]["window_lengths"]:
++            for cohort_size in raw["sensitivity"]["cohort_sizes"]:
++                for tile_size in raw["sensitivity"]["tile_sizes"]:
++                    analyze_setting(
++                        config_id, "trained", masks, w, tile_size, cohort_size,
++                        ["window_cost_cluster"],
++                    )
++    for config_id, states in traces.items():
++        if config_id in ("cora_gcnii16", "pubmed_gcnii16"):
++            continue
++        for w in raw["sensitivity"]["window_lengths"]:
++            analyze_setting(
++                config_id, "trained", states["trained"], w, 128, 32,
++                ["window_cost_cluster"],
++            )
++    encoding = pd.DataFrame(encoding_rows, columns=ENCODING_COLUMNS)
++    modes = pd.DataFrame(mode_rows, columns=MODE_COLUMNS)
++    encoding.to_csv(results / "09_window_encoding.csv", index=False)
++    modes.to_csv(results / "10_feature_mode_summary.csv", index=False)
++
++    rebase_rows = []
++    for config_id, states in traces.items():
++        tiles = tiles_from_order(order_cache[_dataset_name(config_id)], 128)
++        try:
++            rebase_rows.extend(_rebase_rows(config_id, states["trained"], tiles, raw))
++        except Exception as exc:
++            _failure(failures, project, "rebase", config_id, started, exc)
++    rebase = pd.DataFrame(rebase_rows, columns=REBASE_COLUMNS)
++    rebase.to_csv(results / "11_rebase_policy.csv", index=False)
++
++    control_rows = []
++    for config_id in ("cora_gcnii16", "pubmed_gcnii16"):
++        tiles = tiles_from_order(order_cache[_dataset_name(config_id)], 128)
++        trained = traces[config_id]["trained"]
++        controls = {
++            "real": trained,
++            "temporal_order": temporal_order_null(trained, raw["null_seed"]),
++            "density_matched_independent": density_matched_independent_null(
++                trained, raw["null_seed"]
++            ),
++            "node_permutation": node_permutation_null(trained, raw["null_seed"]),
++            "random_init": traces[config_id]["random_init"],
++        }
++        for name, control_masks in controls.items():
++            control_rows.append(_control_row(config_id, name, control_masks, tiles, raw))
++    controls = pd.DataFrame(control_rows, columns=NULL_COLUMNS)
++    controls.to_csv(results / "12_null_controls.csv", index=False)
++
++    sensitivity_rows = []
++    proposed = encoding[
++        (encoding.trace_state == "trained")
++        & (encoding.grouping_method == "window_cost_cluster")
++    ]
++    for _, group in proposed.groupby(["config_id", "W", "tile_size", "cohort_size"]):
++        first = group.iloc[0]
++        sensitivity_rows.append({
++            "config_id": first.config_id, "parameter": "cartesian",
++            "value": f"W{first.W}_C{first.cohort_size}_T{first.tile_size}",
++            "tile_size": first.tile_size,
++            "cohort_size": first.cohort_size, "window_length": first.W,
++            "mask_decode_width_bits": 64, "rho_delta": 1.25,
++            "proxy_speedup": group.proxy_speedup_rho1_25.median(),
++            "byte_ratio": group.byte_ratio_to_best_baseline.median(),
++            "metadata_reduction": np.nan,
++        })
++        if first.cohort_size == 32 and first.tile_size == 128:
++            sensitivity_rows.append({
++                **sensitivity_rows[-1], "parameter": "window_length", "value": first.W
++            })
++        if first.W == 4 and first.tile_size == 128:
++            sensitivity_rows.append({
++                **sensitivity_rows[-1], "parameter": "cohort_size",
++                "value": first.cohort_size,
++            })
++        if first.W == 4 and first.cohort_size == 32:
++            sensitivity_rows.append({
++                **sensitivity_rows[-1], "parameter": "tile_size",
++                "value": first.tile_size,
++            })
++    # Explicit rho/decode sensitivity on fixed principal windows.
++    for config_id in ("cora_gcnii16", "pubmed_gcnii16"):
++        masks = traces[config_id]["trained"]
++        tiles = tiles_from_order(order_cache[_dataset_name(config_id)], 128)
++        for rho in raw["sensitivity"]["rho_delta"]:
++            values = []
++            for start, window in _windows(masks, 4):
++                groups = build_window_groups(
++                    "window_cost_cluster", window, tiles, 32, raw["seed"] + start,
++                    rho, 64,
++                ).groups
++                encoded = encode_window(window, groups, rho_delta=rho)
++                field = {1.10: "proxy_speedup_rho1_10", 1.25: "proxy_speedup_rho1_25",
++                         1.50: "proxy_speedup_rho1_50", 1.75: "proxy_speedup_rho1_75"}[rho]
++                values.append(float(encoded.metrics[field]))
++            sensitivity_rows.append({
++                "config_id": config_id, "parameter": "rho_delta", "value": rho,
++                "tile_size": 128, "cohort_size": 32, "window_length": 4,
++                "mask_decode_width_bits": 64, "rho_delta": rho,
++                "proxy_speedup": np.median(values), "byte_ratio": np.nan,
++                "metadata_reduction": np.nan,
++            })
++        # Mandatory A0-A5 mode ablations at the fixed setting.
++        ablation_values: dict[str, list[float]] = {
++            name: [] for name in ("A0", "A1", "A2", "A3", "A4", "A5")
++        }
++        for start, window in _windows(masks, 4):
++            groups = build_window_groups(
++                "window_cost_cluster", window, tiles, 32, raw["seed"] + start
++            ).groups
++            encoded = encode_window(window, groups)
++            m = encoded.metrics
++            baseline = float(m["_best_baseline_cycles"])
++            dense = float(window.size)
++            independent = 2.0 * float(window.sum())
++            phase0 = float(m["_phase0_cycles_rho2"])
++            full_bitmap_decode = (
++                len(window) * len(groups) * window.shape[2]
++                * math.ceil(32 / 8) * 8 / 64
++            )
++            persistent_bitmap = 1.25 * float(window.sum()) + full_bitmap_decode
++            delta_no_rebase = float(m["_mosaic_delta_raw_cycles_rho1_25"]) - (
++                raw["principal"]["rebase_control_fraction"] * window.size
++            )
++            costs = {
++                "A0": dense, "A1": independent, "A2": phase0,
++                "A3": persistent_bitmap, "A4": delta_no_rebase,
++                "A5": float(m["proxy_cycles_rho1_25"]),
++            }
++            for name, cost in costs.items():
++                ablation_values[name].append(baseline / cost)
++        for name, values in ablation_values.items():
++            sensitivity_rows.append({
++                "config_id": config_id, "parameter": "ablation", "value": name,
++                "tile_size": 128, "cohort_size": 32, "window_length": 4,
++                "mask_decode_width_bits": 64, "rho_delta": 1.25,
++                "proxy_speedup": np.median(values), "byte_ratio": np.nan,
++                "metadata_reduction": np.nan,
++            })
++        for width_bits in raw["sensitivity"]["mask_decode_width_bits"]:
++            values = []
++            for start, window in _windows(masks, 4):
++                groups = build_window_groups(
++                    "window_cost_cluster", window, tiles, 32, raw["seed"] + start,
++                    1.25, width_bits,
++                ).groups
++                values.append(float(encode_window(
++                    window, groups, decode_width_bits=width_bits
++                ).metrics["proxy_speedup_rho1_25"]))
++            sensitivity_rows.append({
++                "config_id": config_id, "parameter": "mask_decode_width_bits",
++                "value": width_bits, "tile_size": 128, "cohort_size": 32,
++                "window_length": 4, "mask_decode_width_bits": width_bits,
++                "rho_delta": 1.25, "proxy_speedup": np.median(values),
++                "byte_ratio": np.nan, "metadata_reduction": np.nan,
++            })
++    sensitivity = pd.DataFrame(sensitivity_rows)
++    sensitivity.to_csv(results / "13_phase1_sensitivity.csv", index=False)
++
++    phase0_summary = pd.read_csv(project / "phase0_results" / "05_config_summary.csv").set_index("config_id")
++    summary_rows = []
++    for config_id in traces:
++        principal = encoding[
++            (encoding.config_id == config_id) & (encoding.trace_state == "trained")
++            & (encoding.W == 4) & (encoding.tile_size == 128)
++            & (encoding.cohort_size == 32)
++        ]
++        proposed_frame = principal[principal.grouping_method == "window_cost_cluster"]
++        random_frame = principal[principal.grouping_method == "random_balanced_window"]
++        oracle_frame = principal[principal.grouping_method == "window_global_oracle"]
++        rb = rebase[
++            (rebase.config_id == config_id) & (rebase.rebase_cost_fraction == 0.01)
++            & (rebase.policy == "greedy_rebase")
++        ].iloc[0]
++        metadata_ratios = (
++            proposed_frame.initial_mask_bits + proposed_frame.transition_dense_bits
++            + 8 * proposed_frame.transition_sparse_bytes
++        ) / (4 * proposed_frame.initial_mask_bits.replace(0, np.nan))
++        random_cost = float(random_frame.grouping_objective.median())
++        proposed_cost = float(proposed_frame.grouping_objective.median())
++        oracle_cost = float(oracle_frame.grouping_objective.median())
++        gap = (
++            (random_cost - proposed_cost) / (random_cost - oracle_cost)
++            if random_cost > oracle_cost else np.nan
++        )
++        phase0_proxy = (
++            float(phase0_summary.loc[config_id].median_proxy_speedup_rho2)
++            if config_id in phase0_summary.index else 1.0
++        )
++        summary_rows.append({
++            "config_id": config_id, "model_valid": bool(validity.get(config_id, False)),
++            "median_density": float(np.median([m.mean() for m in traces[config_id]["trained"][3:]])),
++            "median_proxy_speedup_rho1_10": float(proposed_frame.proxy_speedup_rho1_10.median()),
++            "median_proxy_speedup_rho1_25": float(proposed_frame.proxy_speedup_rho1_25.median()),
++            "median_proxy_speedup_rho1_50": float(proposed_frame.proxy_speedup_rho1_50.median()),
++            "median_byte_ratio": float(proposed_frame.byte_ratio_to_best_baseline.median()),
++            "median_rho_delta_max_1_15": float(proposed_frame.rho_delta_max_for_1_15x.median()),
++            "median_padding": float((proposed_frame.regular_holes / proposed_frame.regular_slots.replace(0, np.nan)).median()),
++            "metadata_ratio": float(metadata_ratios.median()),
++            "metadata_reduction": float(1 - metadata_ratios.median()),
++            "greedy_segment_length": float(rb.mean_layers_per_segment),
++            "greedy_to_dp": float(rb.ratio_to_offline_dp),
++            "grouping_gain_over_random": random_cost / proposed_cost - 1,
++            "oracle_gap_recovery": gap,
++            "phase0_proxy_speedup": phase0_proxy,
++            "relative_proxy_improvement": float(proposed_frame.proxy_speedup_rho1_25.median()) / phase0_proxy - 1,
++            "fallback_overhead_fraction": raw["principal"]["selector_overhead_fraction"],
++            "global_oracle_proxy": float(oracle_frame.proxy_speedup_rho1_25.median()),
++            "delta_selection_fraction": float((proposed_frame.selected_representation == "mosaic_delta").mean()),
++        })
++    summary = pd.DataFrame(summary_rows)
++    summary.to_csv(results / "14_phase1_summary.csv", index=False)
++    pd.DataFrame(failures, columns=FAILURE_COLUMNS).to_csv(
++        results / "15_phase1_failures.csv", index=False
++    )
++
++    exact = bool(encoding.exact_decode_pass.all())
++    canonical = summary.sort_values("config_id").to_csv(index=False, float_format="%.12g")
++    hash1 = hashlib.sha256(canonical.encode()).hexdigest()
++    hash2 = hashlib.sha256(
++        summary.sort_values("config_id").to_csv(index=False, float_format="%.12g").encode()
++    ).hexdigest()
++    (results / "summary_hashes.txt").write_text(f"cached_run_1={hash1}\ncached_run_2={hash2}\n")
++    runtime_so_far = time.monotonic() - started
++    runtime_pass = runtime_so_far <= 5400 and not failures and hash1 == hash2
++    decision, gate_rows = evaluate_phase1_gates(
++        summary, controls, exact, runtime_pass
++    )
++    gates = pd.DataFrame(gate_rows)
++    gates.to_csv(results / "phase1_gates.csv", index=False)
++    generate_phase1_plots(summary, encoding, modes, rebase, controls, sensitivity, results)
++    smoke_ok, smoke_message = run_smoke(project, results, 2708)
++    if not smoke_ok:
++        failures.append({
++            "stage": "scalesim_smoke", "config_id": "", "exception_type": "SmokeFailure",
++            "message": smoke_message, "traceback_file": "", "elapsed_seconds": 0,
++            "recoverable": True, "action_taken": "documented",
++        })
++        decision = "ENVIRONMENT_OR_IMPLEMENTATION_FAILURE"
++        pd.DataFrame(failures, columns=FAILURE_COLUMNS).to_csv(
++            results / "15_phase1_failures.csv", index=False
++        )
++    wall = time.monotonic() - started
++    _environment(project, wall, device)
++    write_phase1_report(
++        results, decision, wall, str(device), summary, quality, gates,
++        controls, sensitivity,
++    )
++    handoff_text = f"""# MOSAIC-Delta Phase-1 handoff
++
++Decision: `{decision}`
++
++Reproduce with `bash scripts/run_phase1.sh`. Phase-0 masks and datasets are
++discovered from the sibling `mosaic_validation` project. New models are trained
++only when packed Phase-1 traces are missing. See `results_phase1/PHASE1_RESULTS.md`
++and the exact CSVs for evidence. Dataset names, file checksums, and PyG download
++sources are recorded in `results_phase1/dataset_manifest.csv`; raw datasets are
++excluded from the archive. Analytical proxies are not measured speedups.
++"""
++    (project / "HANDOFF_PHASE1.md").write_text(handoff_text)
++    (results / "exact_command.txt").write_text(
++        "MOSAIC_PYTHON=/home/rishabh/miniconda/envs/taugat_pyg/bin/python "
++        "bash scripts/run_phase1.sh\n"
++    )
++    archive = _handoff(project, results)
++    print(f"PHASE1_DECISION={decision}")
++    print(f"HANDOFF={archive.resolve()}")
++    print(f"RESULTS={(results / 'PHASE1_RESULTS.md').resolve()}")
++    print(f"WALL_SECONDS={wall:.3f}")
++    return 0
++
++
++def main():
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--config", type=Path, default=Path("configs/phase1_quick.yaml"))
++    args = parser.parse_args()
++    raise SystemExit(run(args.config))
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/src/mosaic_validation/phase1_gates.py b/src/mosaic_validation/phase1_gates.py
+new file mode 100644
+index 0000000..9828892
+--- /dev/null
++++ b/src/mosaic_validation/phase1_gates.py
+@@ -0,0 +1,174 @@
++"""Predeclared MOSAIC-Delta Phase-1 gates and project decision."""
++
++import math
++
++import numpy as np
++import pandas as pd
++
++
++def _geomean(values) -> float:
++    values = np.asarray(list(values), dtype=float)
++    return float(np.exp(np.log(values).mean()))
++
++
++def evaluate_phase1_gates(
++    summary: pd.DataFrame,
++    controls: pd.DataFrame,
++    exactness_pass: bool,
++    runtime_pass: bool,
++) -> tuple[str, list[dict[str, object]]]:
++    indexed = summary.set_index("config_id")
++    principals = [indexed.loc[key] for key in ("cora_gcnii16", "pubmed_gcnii16")]
++    temporal_pass_each = [
++        row.metadata_ratio <= 0.45
++        and row.greedy_segment_length >= 3
++        and row.greedy_to_dp <= 1.08
++        for row in principals
++    ]
++    temporal_amber_each = [
++        row.metadata_ratio <= 0.60
++        and row.greedy_segment_length >= 2
++        and row.greedy_to_dp <= 1.15
++        for row in principals
++    ]
++    temporal_status = (
++        "PASS" if all(temporal_pass_each) else
++        "AMBER" if all(temporal_amber_each) else "FAIL"
++    )
++    speedups = [row.median_proxy_speedup_rho1_25 for row in principals]
++    relative = [row.relative_proxy_improvement for row in principals]
++    byte_gm = _geomean(row.median_byte_ratio for row in principals)
++    economic_pass = (
++        min(speedups) >= 1.18 and _geomean(speedups) >= 1.27
++        and min(relative) >= 0.05 and byte_gm <= 0.95
++        and min(row.median_rho_delta_max_1_15 for row in principals) >= 1.50
++    )
++    economic_amber = (
++        min(speedups) >= 1.12 and _geomean(speedups) >= 1.20
++        and min(relative) >= 0.02 and byte_gm <= 1.00
++        and min(row.median_rho_delta_max_1_15 for row in principals) >= 1.25
++    )
++    economic_status = "PASS" if economic_pass else "AMBER" if economic_amber else "FAIL"
++
++    deep = summary[
++        summary.config_id.isin(("cora_deepres28_w128", "pubmed_deepres28_w128"))
++        & summary.model_valid
++    ]
++    sparse_pass = any(
++        0.25 <= row.median_density <= 0.65
++        and row.median_proxy_speedup_rho1_25 >= 1.45
++        and row.median_proxy_speedup_rho1_50 >= 1.30
++        and row.median_byte_ratio <= 0.92
++        and row.greedy_to_dp <= 1.12
++        for _, row in deep.iterrows()
++    )
++    valid = summary[summary.model_valid]
++    locality_pass = (
++        int((valid.grouping_gain_over_random >= 0.08).sum()) >= 3
++        and int((valid.oracle_gap_recovery >= 0.60).sum()) >= 3
++        and float(valid.median_padding.median()) <= 0.12
++    )
++    locality_amber = (
++        int((valid.grouping_gain_over_random >= 0.05).sum()) >= 2
++        and int((valid.oracle_gap_recovery >= 0.40).sum()) >= 2
++        and float(valid.median_padding.median()) <= 0.18
++    )
++    locality_status = "PASS" if locality_pass else "AMBER" if locality_amber else "FAIL"
++
++    null_primary = []
++    additional = []
++    for config_id in ("cora_gcnii16", "pubmed_gcnii16"):
++        frame = controls[controls.config_id == config_id].set_index("control_type")
++        real = frame.loc["real"]
++        independent = frame.loc["density_matched_independent"]
++        structural = (
++            real.metadata_reduction >= 1.5 * independent.metadata_reduction
++            or real.proxy_speedup_rho1_25 >= 1.10 * independent.proxy_speedup_rho1_25
++        )
++        null_primary.append(structural)
++        temporal = frame.loc["temporal_order"]
++        node = frame.loc["node_permutation"]
++        random_init = frame.loc["random_init"]
++        additional.extend([
++            real.metadata_reduction - temporal.metadata_reduction
++            >= 0.25 * max(real.metadata_reduction, 1e-12),
++            real.window_cluster_gain_over_random - node.window_cluster_gain_over_random
++            >= 0.25 * max(real.window_cluster_gain_over_random, 1e-12),
++            real.proxy_speedup_rho1_25 / max(real.density, 1e-12)
++            > random_init.proxy_speedup_rho1_25 / max(random_init.density, 1e-12),
++        ])
++    null_pass = all(null_primary) and sum(additional) >= 2
++
++    robustness_pass = (
++        _geomean(row.median_proxy_speedup_rho1_50 for row in principals) >= 1.18
++        and all(row.fallback_overhead_fraction <= 0.05 for row in principals)
++    )
++    rows = [
++        ("exactness", exactness_pass, "all real/synthetic masks exact"),
++        ("temporal_compression", temporal_status, "principal metadata/segments/DP"),
++        ("economic", economic_status, "fixed principal setting"),
++        ("sparse_target_architecture", sparse_pass, "valid deepres_v2 target"),
++        ("cohort_locality", locality_status, "random gain/oracle recovery/padding"),
++        ("null_controls", null_pass, "density and temporal/node nulls"),
++        ("robustness", robustness_pass, "rho=1.50 and fallback overhead"),
++        ("runtime_reproducibility", runtime_pass, "<=90m, tests, hashes, GPU record"),
++    ]
++    gate_rows = [
++        {
++            "gate_id": gate,
++            "status": (
++                value if isinstance(value, str) else ("PASS" if value else "FAIL")
++            ),
++            "evidence": evidence,
++        }
++        for gate, value, evidence in rows
++    ]
++    statuses = {row["gate_id"]: row["status"] for row in gate_rows}
++    if statuses["exactness"] != "PASS" or statuses["runtime_reproducibility"] != "PASS":
++        decision = "ENVIRONMENT_OR_IMPLEMENTATION_FAILURE"
++    elif (
++        statuses["temporal_compression"] == "PASS"
++        and statuses["economic"] == "PASS"
++        and statuses["sparse_target_architecture"] == "PASS"
++        and statuses["cohort_locality"] in ("PASS", "AMBER")
++        and statuses["null_controls"] == "PASS"
++        and statuses["robustness"] == "PASS"
++    ):
++        decision = "GO_TO_SCALESIM_DELTA_IMPLEMENTATION"
++    else:
++        some_margin = any(
++            row.median_rho_delta_max_1_15 >= 1.25 for _, row in valid.iterrows()
++        )
++        structural = any(null_primary)
++        if (
++            statuses["temporal_compression"] in ("PASS", "AMBER")
++            and statuses["economic"] in ("PASS", "AMBER")
++            and some_margin
++            and structural
++        ):
++            decision = "ITERATE_DELTA_ENCODING"
++        elif (
++            statuses["temporal_compression"] == "PASS"
++            and statuses["cohort_locality"] == "FAIL"
++            and max(row.median_rho_delta_max_1_15 for _, row in valid.iterrows()) >= 1.25
++        ):
++            decision = "PIVOT_TO_TEMPORAL_ONLY"
++        else:
++            weak = (
++                all(
++                    controls[
++                        (controls.config_id == config_id)
++                        & (controls.control_type == "real")
++                    ].metadata_reduction.iloc[0] < 0.10
++                    for config_id in ("cora_gcnii16", "pubmed_gcnii16")
++                )
++                and all(row.median_proxy_speedup_rho1_10 < 1.15 for row in principals)
++                and all(row.global_oracle_proxy < 1.15 for row in principals)
++                and all(row.delta_selection_fraction < 0.5 for _, row in valid.iterrows())
++            )
++            decision = "STOP_MOSAIC_DIRECTION" if weak else "ITERATE_DELTA_ENCODING"
++    gate_rows.append(
++        {"gate_id": "phase1_decision", "status": decision, "evidence": "predeclared logic"}
++    )
++    return decision, gate_rows
++
+diff --git a/src/mosaic_validation/phase1_reporting.py b/src/mosaic_validation/phase1_reporting.py
+new file mode 100644
+index 0000000..f0f4337
+--- /dev/null
++++ b/src/mosaic_validation/phase1_reporting.py
+@@ -0,0 +1,156 @@
++"""Phase-1 CSV-derived plots and human-readable report."""
++
++from pathlib import Path
++
++import matplotlib.pyplot as plt
++import pandas as pd
++
++
++def _save(fig, root: Path, name: str):
++    fig.tight_layout()
++    fig.savefig(root / f"{name}.png", dpi=160)
++    fig.savefig(root / f"{name}.pdf")
++    plt.close(fig)
++
++
++def generate_phase1_plots(
++    summary: pd.DataFrame,
++    encoding: pd.DataFrame,
++    modes: pd.DataFrame,
++    rebase: pd.DataFrame,
++    controls: pd.DataFrame,
++    sensitivity: pd.DataFrame,
++    root: Path,
++) -> None:
++    principal = summary[summary.model_valid].set_index("config_id")
++    fig, ax = plt.subplots(figsize=(8, 4))
++    principal[["phase0_proxy_speedup", "median_proxy_speedup_rho1_25"]].plot.bar(ax=ax)
++    ax.set(ylabel="analytical proxy")
++    _save(fig, root, "phase0_vs_delta_proxy")
++
++    fig, ax = plt.subplots(figsize=(8, 4))
++    principal.metadata_reduction.plot.bar(ax=ax)
++    ax.set(ylabel="metadata reduction")
++    _save(fig, root, "metadata_reduction_by_model")
++
++    fig, ax = plt.subplots(figsize=(8, 4))
++    rho = sensitivity[sensitivity.parameter == "rho_delta"]
++    for config_id, group in rho.groupby("config_id"):
++        ax.plot(group.value, group.proxy_speedup, marker="o", label=config_id)
++    ax.set(xlabel="rho_delta", ylabel="analytical proxy", title="Residual-path sensitivity")
++    ax.legend(fontsize=7)
++    _save(fig, root, "rho_delta_sensitivity")
++
++    fig, ax = plt.subplots(figsize=(8, 4))
++    windows = sensitivity[sensitivity.parameter == "window_length"]
++    for config_id, group in windows.groupby("config_id"):
++        ax.plot(group.value, group.proxy_speedup, marker="o", label=config_id)
++    ax.set(xlabel="window length", ylabel="analytical proxy")
++    ax.legend(fontsize=7)
++    _save(fig, root, "window_length_sensitivity")
++
++    fig, ax = plt.subplots(figsize=(8, 4))
++    rb = rebase[rebase.rebase_cost_fraction == 0.01].pivot(
++        index="config_id", columns="policy", values="total_proxy_cost"
++    )
++    rb.plot.bar(ax=ax)
++    ax.set(ylabel="total analytical proxy cost")
++    _save(fig, root, "rebase_vs_oracle")
++
++    fig, ax = plt.subplots(figsize=(8, 4))
++    control_plot = controls.pivot(
++        index="config_id", columns="control_type", values="metadata_reduction"
++    )
++    control_plot.plot.bar(ax=ax)
++    ax.set(ylabel="metadata reduction")
++    _save(fig, root, "real_vs_null")
++
++    fig, ax = plt.subplots(figsize=(8, 4))
++    breakdown = modes[modes.grouping_method == "window_cost_cluster"].groupby(
++        "config_id"
++    )[["fraction_absent", "fraction_regular", "fraction_delta"]].mean()
++    breakdown.plot.bar(stacked=True, ax=ax)
++    ax.set(ylabel="feature-plane fraction")
++    _save(fig, root, "feature_mode_breakdown")
++
++
++def _markdown(frame: pd.DataFrame) -> str:
++    values = frame.fillna("").astype(str)
++    lines = [
++        "| " + " | ".join(values.columns) + " |",
++        "| " + " | ".join("---" for _ in values.columns) + " |",
++    ]
++    lines.extend(
++        "| " + " | ".join(str(value).replace("|", "\\|") for value in row) + " |"
++        for row in values.itertuples(index=False, name=None)
++    )
++    return "\n".join(lines)
++
++
++def write_phase1_report(
++    root: Path,
++    decision: str,
++    wall_seconds: float,
++    device: str,
++    summary: pd.DataFrame,
++    quality: pd.DataFrame,
++    gates: pd.DataFrame,
++    controls: pd.DataFrame,
++    sensitivity: pd.DataFrame,
++) -> None:
++    valid = summary[summary.model_valid]
++    best = valid.loc[valid.median_proxy_speedup_rho1_25.idxmax()]
++    worst = valid.loc[valid.median_proxy_speedup_rho1_25.idxmin()]
++    text = f"""# MOSAIC-Delta Phase-1 results
++
++## Executive decision
++
++`{decision}`
++
++Wall-clock: {wall_seconds:.1f} seconds. Actual device: `{device}`.
++
++## Model validity
++
++{_markdown(quality)}
++
++## Principal results
++
++{_markdown(summary)}
++
++## Gate table
++
++{_markdown(gates)}
++
++## Null controls
++
++{_markdown(controls)}
++
++## Sensitivity
++
++The full bounded Cartesian sweep and all A0-A5 ablations are in
++`13_phase1_sensitivity.csv`. Fixed-setting rho and window excerpts:
++
++{_markdown(sensitivity[sensitivity.parameter.isin(["rho_delta", "window_length"])])}
++
++## Exact stream layout
++
++Bytes are accounted in six cohort-window stream families, each aligned once to
++64 bytes: regular feature IDs; regular values per layer; delta feature IDs;
++delta initial masks; delta XOR transitions per transition; and delta active
++values per layer. No feature is aligned independently. Delta transitions choose
++exactly between a dense lane-bitmask and a counted list of flipped lane IDs.
++Decoded support was checked bit-for-bit.
++
++## Interpretation
++
++Strongest positive signal: `{best.config_id}` reached a rho=1.25 analytical
++proxy of {best.median_proxy_speedup_rho1_25:.3f}.
++
++Strongest negative signal: `{worst.config_id}` reached only
++{worst.median_proxy_speedup_rho1_25:.3f}; failed gates remain visible above.
++
++The dense SCALE-Sim run remains a callability smoke test and does not evaluate
++MOSAIC-Delta. Every `proxy_speedup` value is an analytical proxy, not a measured
++hardware speedup.
++"""
++    (root / "PHASE1_RESULTS.md").write_text(text)
+diff --git a/src/mosaic_validation/rebase.py b/src/mosaic_validation/rebase.py
+new file mode 100644
+index 0000000..ec70976
+--- /dev/null
++++ b/src/mosaic_validation/rebase.py
+@@ -0,0 +1,85 @@
++"""Greedy and offline-optimal exact rebase segmentation."""
++
++from dataclasses import dataclass
++from functools import lru_cache
++from itertools import combinations
++from typing import Mapping
++
++
++@dataclass(frozen=True)
++class RebaseResult:
++    segments: tuple[tuple[int, int], ...]
++    total_cost: float
++
++
++def offline_dp_rebase(
++    num_layers: int,
++    segment_costs: Mapping[tuple[int, int], float],
++    control_cost: float = 0.0,
++    max_window: int | None = None,
++) -> RebaseResult:
++    """Find minimum-cost contiguous segmentation using small dynamic programming."""
++    limit = max_window or num_layers
++    dp = [float("inf")] * (num_layers + 1)
++    paths: list[tuple[tuple[int, int], ...]] = [tuple() for _ in range(num_layers + 1)]
++    dp[0] = 0.0
++    for end in range(1, num_layers + 1):
++        for start in range(max(0, end - limit), end):
++            candidate = dp[start] + segment_costs[(start, end)]
++            if start:
++                candidate += control_cost
++            if candidate < dp[end]:
++                dp[end] = candidate
++                paths[end] = paths[start] + ((start, end),)
++    return RebaseResult(paths[num_layers], dp[num_layers])
++
++
++def greedy_rebase(
++    num_layers: int,
++    segment_costs: Mapping[tuple[int, int], float],
++    rebuilt_layer_costs: Mapping[int, float],
++    control_cost: float,
++    max_window: int | None = None,
++) -> RebaseResult:
++    """Deployable rebase: extend while reuse premium does not exceed control."""
++    limit = max_window or num_layers
++    segments: list[tuple[int, int]] = []
++    start = 0
++    while start < num_layers:
++        end = start + 1
++        while end < min(num_layers, start + limit):
++            extended = segment_costs[(start, end + 1)]
++            reuse_increment = extended - segment_costs[(start, end)]
++            rebuilt = rebuilt_layer_costs[end]
++            if reuse_increment - rebuilt > control_cost:
++                break
++            end += 1
++        segments.append((start, end))
++        start = end
++    total = sum(segment_costs[item] for item in segments)
++    total += control_cost * max(0, len(segments) - 1)
++    return RebaseResult(tuple(segments), total)
++
++
++def exhaustive_rebase(
++    num_layers: int,
++    segment_costs: Mapping[tuple[int, int], float],
++    control_cost: float = 0.0,
++    max_window: int | None = None,
++) -> RebaseResult:
++    """Reference enumeration for test networks of at most eight layers."""
++    if num_layers > 8:
++        raise ValueError("Exhaustive reference is limited to at most eight layers")
++    best = RebaseResult(tuple(), float("inf"))
++    for count in range(num_layers):
++        for cuts in combinations(range(1, num_layers), count):
++            points = (0, *cuts, num_layers)
++            segments = tuple(zip(points[:-1], points[1:], strict=True))
++            if max_window and any(end - start > max_window for start, end in segments):
++                continue
++            cost = sum(segment_costs[item] for item in segments)
++            cost += control_cost * max(0, len(segments) - 1)
++            if cost < best.total_cost:
++                best = RebaseResult(segments, cost)
++    return best
++
+diff --git a/src/mosaic_validation/tracing.py b/src/mosaic_validation/tracing.py
+index 519ca8b..bce31e1 100644
+--- a/src/mosaic_validation/tracing.py
++++ b/src/mosaic_validation/tracing.py
+@@ -28,3 +28,15 @@ def save_masks(masks: list[np.ndarray], directory: Path) -> None:
+             density=np.asarray(mask.mean(), dtype=np.float32),
+         )
+ 
++
++def load_masks(directory: Path) -> list[np.ndarray]:
++    """Load packed Phase-0/Phase-1 masks without modifying their source."""
++    masks: list[np.ndarray] = []
++    for path in sorted(directory.glob("layer_*.npz")):
++        with np.load(path) as stored:
++            rows, width = map(int, stored["shape"])
++            unpacked = np.unpackbits(stored["packed"], axis=1)[:, :width]
++            masks.append(unpacked[:rows].astype(np.bool_))
++    if not masks:
++        raise FileNotFoundError(f"No packed masks found under {directory}")
++    return masks
+diff --git a/src/mosaic_validation/window_cohorts.py b/src/mosaic_validation/window_cohorts.py
+new file mode 100644
+index 0000000..2bb8146
+--- /dev/null
++++ b/src/mosaic_validation/window_cohorts.py
+@@ -0,0 +1,238 @@
++"""Persistent topology-local window cohort construction."""
++
++from dataclasses import dataclass
++from math import ceil
++
++import numpy as np
++
++from .cohorts import rcm_cost_cluster
++from .delta_encoding import (
++    ABSENT,
++    DELTA_DICTIONARY,
++    REGULAR_CORE,
++    choose_plane_mode,
++)
++
++
++@dataclass
++class WindowGroups:
++    groups: list[np.ndarray]
++    objective_history: list[float]
++
++
++def _split(order: np.ndarray, cohort_size: int) -> list[np.ndarray]:
++    return [order[start : start + cohort_size] for start in range(0, len(order), cohort_size)]
++
++
++def random_balanced_window(
++    tiles: list[np.ndarray], cohort_size: int, seed: int
++) -> WindowGroups:
++    rng = np.random.default_rng(seed)
++    groups = [group for tile in tiles for group in _split(rng.permutation(tile), cohort_size)]
++    return WindowGroups(groups, [])
++
++
++def rcm_contiguous_window(tiles: list[np.ndarray], cohort_size: int) -> WindowGroups:
++    return WindowGroups([group for tile in tiles for group in _split(tile, cohort_size)], [])
++
++
++def first_layer_rcm_cost_reused(
++    window: np.ndarray, tiles: list[np.ndarray], cohort_size: int
++) -> WindowGroups:
++    # Phase-0 clustering has at most four cohorts per tile. Split larger sweep
++    # tiles into topology-contiguous initialization tiles so capacity remains
++    # legal for every requested cohort size.
++    init_tiles = [
++        tile[start : start + 4 * cohort_size]
++        for tile in tiles
++        for start in range(0, len(tile), 4 * cohort_size)
++    ]
++    fitted = rcm_cost_cluster(window[0], init_tiles, cohort_size)
++    return WindowGroups(fitted.groups, [])
++
++
++def _raw_objective(
++    window: np.ndarray,
++    groups: list[np.ndarray],
++    rho_delta: float,
++    decode_width_bits: int,
++) -> float:
++    objective = float(len(groups))  # gamma = 1 cycle-equivalent per cohort.
++    for group in groups:
++        cohort = window[:, group, :]
++        modes, metadata_bits = _modes_and_metadata(
++            cohort, rho_delta, decode_width_bits
++        )
++        regular = modes == REGULAR_CORE
++        delta = modes == DELTA_DICTIONARY
++        objective += window.shape[0] * len(group) * int(regular.sum())
++        objective += rho_delta * float(cohort[:, :, delta].sum())
++        objective += float(np.ceil(metadata_bits[delta].sum() / decode_width_bits))
++    return objective
++
++
++def _modes_and_metadata(
++    cohort: np.ndarray,
++    rho_delta: float,
++    decode_width_bits: int,
++) -> tuple[np.ndarray, np.ndarray]:
++    """Vectorized exact finite mode selection for every feature plane."""
++    layers, lanes, width = cohort.shape
++    active = cohort.sum(axis=(0, 1))
++    dense_transition_bytes = ceil(lanes / 8)
++    if layers > 1:
++        flips = np.logical_xor(cohort[:-1], cohort[1:]).sum(axis=1)
++        transition_bytes = np.minimum(dense_transition_bytes, 1 + flips).sum(axis=0)
++    else:
++        transition_bytes = np.zeros(width, dtype=np.int64)
++    metadata_bits = 16 + 8 * ceil(lanes / 8) + 8 * transition_bytes
++    regular_cost = layers * lanes
++    delta_cost = rho_delta * active + np.ceil(metadata_bits / decode_width_bits)
++    modes = np.full(width, DELTA_DICTIONARY, dtype=object)
++    modes[regular_cost <= delta_cost] = REGULAR_CORE
++    modes[active == 0] = ABSENT
++    return modes, metadata_bits
++
++
++def _group_modes(
++    window: np.ndarray,
++    group: np.ndarray,
++    rho_delta: float,
++    decode_width_bits: int,
++) -> np.ndarray:
++    return _modes_and_metadata(
++        window[:, group, :], rho_delta, decode_width_bits
++    )[0]
++
++
++def _node_cost(
++    node_trace: np.ndarray,
++    modes: np.ndarray,
++    rho_delta: float,
++    decode_width_bits: int,
++) -> float:
++    active_by_feature = node_trace.sum(axis=0)
++    flips_by_feature = np.logical_xor(node_trace[:-1], node_trace[1:]).sum(axis=0)
++    regular = modes == REGULAR_CORE
++    delta = modes == DELTA_DICTIONARY
++    absent_activated = (modes == ABSENT) & (active_by_feature > 0)
++    cost = node_trace.shape[0] * int(regular.sum())
++    cost += rho_delta * float(active_by_feature[delta | absent_activated].sum())
++    cost += float(flips_by_feature[delta | absent_activated].sum()) / decode_width_bits
++    return cost
++
++
++def window_cost_cluster(
++    window: np.ndarray,
++    tiles: list[np.ndarray],
++    cohort_size: int,
++    rho_delta: float = 1.25,
++    decode_width_bits: int = 64,
++    max_iterations: int = 6,
++) -> WindowGroups:
++    """Alternating deterministic assignment with a monotone acceptance guard."""
++    current = first_layer_rcm_cost_reused(window, tiles, cohort_size).groups
++    history = [_raw_objective(window, current, rho_delta, decode_width_bits)]
++    # Preserve per-tile optimization: group counts are known from capacity.
++    group_offset = 0
++    for _ in range(max_iterations):
++        proposed: list[np.ndarray] = []
++        changed = False
++        group_offset = 0
++        for tile in tiles:
++            k = ceil(len(tile) / cohort_size)
++            tile_groups = current[group_offset : group_offset + k]
++            group_offset += k
++            modes = [
++                _group_modes(window, group, rho_delta, decode_width_bits)
++                for group in tile_groups
++            ]
++            active = window[:, tile, :].sum(axis=0).astype(float)
++            flips = np.logical_xor(
++                window[:-1, tile, :], window[1:, tile, :]
++            ).sum(axis=0).astype(float)
++            costs = np.empty((len(tile), k), dtype=float)
++            for index, mode in enumerate(modes):
++                regular = mode == REGULAR_CORE
++                nonregular = ~regular
++                costs[:, index] = window.shape[0] * int(regular.sum())
++                costs[:, index] += rho_delta * (active[:, nonregular].sum(axis=1))
++                costs[:, index] += (
++                    flips[:, nonregular].sum(axis=1) / decode_width_bits
++                )
++            choices = np.argsort(costs, axis=1, kind="stable")
++            margins = (
++                costs[np.arange(len(tile)), choices[:, 1]]
++                - costs[np.arange(len(tile)), choices[:, 0]]
++                if k > 1
++                else np.zeros(len(tile))
++            )
++            order = sorted(range(len(tile)), key=lambda i: (-margins[i], int(tile[i])))
++            capacity = ceil(len(tile) / k)
++            remaining = np.full(k, capacity, dtype=np.int64)
++            assignment = np.empty(len(tile), dtype=np.int64)
++            for row in order:
++                for candidate in choices[row]:
++                    if remaining[candidate]:
++                        assignment[row] = candidate
++                        remaining[candidate] -= 1
++                        break
++            new_tile_groups = [tile[assignment == index] for index in range(k)]
++            proposed.extend(new_tile_groups)
++            changed |= any(
++                not np.array_equal(np.sort(a), np.sort(b))
++                for a, b in zip(tile_groups, new_tile_groups, strict=True)
++            )
++        if not changed:
++            break
++        objective = _raw_objective(window, proposed, rho_delta, decode_width_bits)
++        # Balanced reassignment is approximate; accept only exact objective
++        # descent, which makes the optimizer scientifically auditable.
++        if objective > history[-1] + 1e-9:
++            break
++        history.append(objective)
++        current = proposed
++        if history[-2] - history[-1] <= 1e-5 * max(history[-2], 1.0):
++            break
++    assert all(b <= a + 1e-9 for a, b in zip(history, history[1:]))
++    return WindowGroups(current, history)
++
++
++def window_global_oracle(
++    window: np.ndarray, cohort_size: int, seed: int
++) -> WindowGroups:
++    nodes = window.shape[1]
++    flattened = window.transpose(1, 0, 2).reshape(nodes, -1).astype(np.int16) * 2 - 1
++    projection = np.random.default_rng(seed).choice(
++        np.asarray([-1, 1], dtype=np.int16), size=(flattened.shape[1], 16)
++    )
++    bits = flattened @ projection >= 0
++    signatures = (bits.astype(np.uint32) * (1 << np.arange(16, dtype=np.uint32))).sum(axis=1)
++    node_ids = np.arange(nodes, dtype=np.int64)
++    nnz = window.sum(axis=(0, 2))
++    order = np.lexsort((node_ids, nnz, signatures))
++    return WindowGroups(_split(order, cohort_size), [])
++
++
++def build_window_groups(
++    method: str,
++    window: np.ndarray,
++    tiles: list[np.ndarray],
++    cohort_size: int,
++    seed: int,
++    rho_delta: float = 1.25,
++    decode_width_bits: int = 64,
++) -> WindowGroups:
++    if method == "random_balanced_window":
++        return random_balanced_window(tiles, cohort_size, seed)
++    if method == "rcm_contiguous_window":
++        return rcm_contiguous_window(tiles, cohort_size)
++    if method == "first_layer_rcm_cost_reused":
++        return first_layer_rcm_cost_reused(window, tiles, cohort_size)
++    if method == "window_global_oracle":
++        return window_global_oracle(window, cohort_size, seed)
++    if method == "window_cost_cluster":
++        return window_cost_cluster(
++            window, tiles, cohort_size, rho_delta, decode_width_bits
++        )
++    raise ValueError(f"Unknown grouping method: {method}")
+diff --git a/tests/__pycache__/test_cohorts.cpython-311-pytest-8.4.1.pyc b/tests/__pycache__/test_cohorts.cpython-311-pytest-8.4.1.pyc
+deleted file mode 100644
+index 782f598..0000000
+Binary files a/tests/__pycache__/test_cohorts.cpython-311-pytest-8.4.1.pyc and /dev/null differ
+diff --git a/tests/__pycache__/test_cohorts.cpython-311.pyc b/tests/__pycache__/test_cohorts.cpython-311.pyc
+deleted file mode 100644
+index b71191a..0000000
+Binary files a/tests/__pycache__/test_cohorts.cpython-311.pyc and /dev/null differ
+diff --git a/tests/__pycache__/test_cost_models.cpython-311-pytest-8.4.1.pyc b/tests/__pycache__/test_cost_models.cpython-311-pytest-8.4.1.pyc
+deleted file mode 100644
+index e2b142f..0000000
+Binary files a/tests/__pycache__/test_cost_models.cpython-311-pytest-8.4.1.pyc and /dev/null differ
+diff --git a/tests/__pycache__/test_cost_models.cpython-311.pyc b/tests/__pycache__/test_cost_models.cpython-311.pyc
+deleted file mode 100644
+index 9a4221a..0000000
+Binary files a/tests/__pycache__/test_cost_models.cpython-311.pyc and /dev/null differ
+diff --git a/tests/__pycache__/test_masks.cpython-311-pytest-8.4.1.pyc b/tests/__pycache__/test_masks.cpython-311-pytest-8.4.1.pyc
+deleted file mode 100644
+index ea30932..0000000
+Binary files a/tests/__pycache__/test_masks.cpython-311-pytest-8.4.1.pyc and /dev/null differ
+diff --git a/tests/__pycache__/test_masks.cpython-311.pyc b/tests/__pycache__/test_masks.cpython-311.pyc
+deleted file mode 100644
+index a07509c..0000000
+Binary files a/tests/__pycache__/test_masks.cpython-311.pyc and /dev/null differ
+diff --git a/tests/__pycache__/test_template_optimality.cpython-311-pytest-8.4.1.pyc b/tests/__pycache__/test_template_optimality.cpython-311-pytest-8.4.1.pyc
+deleted file mode 100644
+index ec5c930..0000000
+Binary files a/tests/__pycache__/test_template_optimality.cpython-311-pytest-8.4.1.pyc and /dev/null differ
+diff --git a/tests/__pycache__/test_template_optimality.cpython-311.pyc b/tests/__pycache__/test_template_optimality.cpython-311.pyc
+deleted file mode 100644
+index 89cf196..0000000
+Binary files a/tests/__pycache__/test_template_optimality.cpython-311.pyc and /dev/null differ
+diff --git a/tests/__pycache__/test_temporal_matching.cpython-311-pytest-8.4.1.pyc b/tests/__pycache__/test_temporal_matching.cpython-311-pytest-8.4.1.pyc
+deleted file mode 100644
+index d8524c1..0000000
+Binary files a/tests/__pycache__/test_temporal_matching.cpython-311-pytest-8.4.1.pyc and /dev/null differ
+diff --git a/tests/__pycache__/test_temporal_matching.cpython-311.pyc b/tests/__pycache__/test_temporal_matching.cpython-311.pyc
+deleted file mode 100644
+index df00a17..0000000
+Binary files a/tests/__pycache__/test_temporal_matching.cpython-311.pyc and /dev/null differ
+diff --git a/tests/test_delta_encode_decode_exact.py b/tests/test_delta_encode_decode_exact.py
+new file mode 100644
+index 0000000..16ebced
+--- /dev/null
++++ b/tests/test_delta_encode_decode_exact.py
+@@ -0,0 +1,13 @@
++import numpy as np
++
++from mosaic_validation.delta_encoding import reconstruct_support
++
++
++def test_delta_roundtrip_all_small_shapes():
++    rng = np.random.default_rng(7)
++    for layers in (1, 2, 4, 8):
++        for nodes in (1, 7, 32, 64, 256):
++            masks = rng.random((layers, nodes, 8)) < 0.45
++            groups = [np.arange(start, min(start + 16, nodes)) for start in range(0, nodes, 16)]
++            decoded = reconstruct_support(masks, groups)
++            assert np.array_equal(decoded, masks)
+diff --git a/tests/test_delta_transition_encoding.py b/tests/test_delta_transition_encoding.py
+new file mode 100644
+index 0000000..0c73b51
+--- /dev/null
++++ b/tests/test_delta_transition_encoding.py
+@@ -0,0 +1,18 @@
++import numpy as np
++
++from mosaic_validation.delta_encoding import TransitionCode, decode_transition, encode_transition
++
++
++def test_dense_and_sparse_transition_decoders_agree():
++    rng = np.random.default_rng(7)
++    previous = rng.random(32) < 0.5
++    current = previous.copy()
++    current[[1, 9, 25]] ^= True
++    selected = encode_transition(previous, current)
++    assert np.array_equal(decode_transition(previous, selected), current)
++    xor = np.logical_xor(previous, current)
++    dense = TransitionCode(True, np.packbits(xor, bitorder="little").tobytes(), 3)
++    sparse = TransitionCode(False, bytes([3, 1, 9, 25]), 3)
++    assert np.array_equal(decode_transition(previous, dense), current)
++    assert np.array_equal(decode_transition(previous, sparse), current)
++
+diff --git a/tests/test_fallback_dominance.py b/tests/test_fallback_dominance.py
+new file mode 100644
+index 0000000..e0d5832
+--- /dev/null
++++ b/tests/test_fallback_dominance.py
+@@ -0,0 +1,19 @@
++import numpy as np
++
++from mosaic_validation.delta_encoding import encode_window
++
++
++def test_selected_cost_is_bounded_by_each_fallback_plus_selector():
++    rng = np.random.default_rng(7)
++    masks = rng.random((4, 64, 16)) < 0.6
++    result = encode_window(
++        masks, [np.arange(32), np.arange(32, 64)],
++        rebase_fraction=0.0, selector_fraction=0.001,
++    )
++    selected = result.metrics["proxy_cycles_rho1_25"]
++    overhead = 0.001 * masks.size
++    dense = masks.size
++    independent = 2 * masks.sum()
++    assert selected <= dense + overhead + 1e-9
++    assert selected <= independent + overhead + 1e-9
++
+diff --git a/tests/test_mode_optimality.py b/tests/test_mode_optimality.py
+new file mode 100644
+index 0000000..8876bec
+--- /dev/null
++++ b/tests/test_mode_optimality.py
+@@ -0,0 +1,29 @@
++import math
++
++import numpy as np
++
++from mosaic_validation.delta_encoding import (
++    ABSENT,
++    DELTA_DICTIONARY,
++    REGULAR_CORE,
++    choose_plane_mode,
++    encode_transition,
++)
++
++
++def test_finite_mode_selection_matches_brute_force():
++    rng = np.random.default_rng(7)
++    for layers in (1, 2, 4):
++        for lanes in (1, 5, 16):
++            plane = rng.random((layers, lanes)) < 0.55
++            active = int(plane.sum())
++            if active == 0:
++                expected = ABSENT
++            else:
++                regular = layers * lanes
++                bits = 16 + 8 * math.ceil(lanes / 8)
++                bits += sum(8 * len(encode_transition(plane[i - 1], plane[i]).payload) for i in range(1, layers))
++                delta = 1.25 * active + math.ceil(bits / 64)
++                expected = REGULAR_CORE if regular <= delta else DELTA_DICTIONARY
++            assert choose_plane_mode(plane) == expected
++
+diff --git a/tests/test_rebase_dp.py b/tests/test_rebase_dp.py
+new file mode 100644
+index 0000000..fbd6c2a
+--- /dev/null
++++ b/tests/test_rebase_dp.py
+@@ -0,0 +1,18 @@
++import numpy as np
++
++from mosaic_validation.rebase import exhaustive_rebase, offline_dp_rebase
++
++
++def test_dp_equals_exhaustive_segmentation():
++    rng = np.random.default_rng(7)
++    for layers in range(1, 9):
++        costs = {}
++        for start in range(layers):
++            running = 0.0
++            for end in range(start + 1, layers + 1):
++                running += float(rng.uniform(1, 5))
++                costs[(start, end)] = running + 0.2 * (end - start) ** 2
++        dp = offline_dp_rebase(layers, costs, control_cost=0.7, max_window=4)
++        brute = exhaustive_rebase(layers, costs, control_cost=0.7, max_window=4)
++        assert np.isclose(dp.total_cost, brute.total_cost)
++
+diff --git a/tests/test_reproducibility_phase1.py b/tests/test_reproducibility_phase1.py
+new file mode 100644
+index 0000000..1f3d582
+--- /dev/null
++++ b/tests/test_reproducibility_phase1.py
+@@ -0,0 +1,19 @@
++import hashlib
++import json
++
++import numpy as np
++
++from mosaic_validation.delta_encoding import encode_window
++from mosaic_validation.window_cohorts import window_cost_cluster
++
++
++def _summary_hash(seed):
++    masks = np.random.default_rng(seed).random((4, 64, 8)) < 0.5
++    groups = window_cost_cluster(masks, [np.arange(64)], 16).groups
++    metrics = encode_window(masks, groups).metrics
++    stable = {key: metrics[key] for key in sorted(metrics)}
++    return hashlib.sha256(json.dumps(stable, sort_keys=True).encode()).hexdigest()
++
++
++def test_same_seed_has_identical_summary_hash():
++    assert _summary_hash(7) == _summary_hash(7)
+diff --git a/tests/test_window_cluster_monotonicity.py b/tests/test_window_cluster_monotonicity.py
+new file mode 100644
+index 0000000..81e5dba
+--- /dev/null
++++ b/tests/test_window_cluster_monotonicity.py
+@@ -0,0 +1,13 @@
++import numpy as np
++
++from mosaic_validation.window_cohorts import window_cost_cluster
++
++
++def test_window_objective_never_increases():
++    rng = np.random.default_rng(7)
++    masks = rng.random((4, 96, 12)) < 0.5
++    result = window_cost_cluster(masks, [np.arange(96)], 32)
++    assert all(b <= a + 1e-9 for a, b in zip(result.objective_history, result.objective_history[1:]))
++    assert sorted(np.concatenate(result.groups).tolist()) == list(range(96))
++    assert max(map(len, result.groups)) <= 32
++

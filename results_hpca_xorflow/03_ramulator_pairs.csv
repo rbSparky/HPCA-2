@@ -1,0 +1,13 @@
+config_id,pair_start_layer,format,trace_sha256,requests,metadata_bytes,nodes,edges,dram_cycles,served_requests,all_requests_drained,tool_success,error,speedup_vs_beicsr
+ogbn_arxiv_deepres8_w128,6,beicsr,023f9ca8ff4c561d4f7166343a397033eb7f1031628fe108b068b425cf96ea6c,18861582,0,169343,2315598,6613084,18861582,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/rishabh/HPCA2/mosaic_delta_phase1/artifacts_hpca_xorflow/ramulator/xorflow_hbm_lrr085mq/beicsr.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 18861582 lines.
+",1.0
+ogbn_arxiv_deepres8_w128,6,xorflow,f7e86870bcedb4937572facae19c8a355979a5a9a1c44e2d2267069d9eca9f25,12759572,3960192,169343,2315598,4618386,12759572,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/rishabh/HPCA2/mosaic_delta_phase1/artifacts_hpca_xorflow/ramulator/xorflow_hbm_lrr085mq/xorflow.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 12759572 lines.
+",1.4319036996907577
+ogbn_arxiv_deepres8_w128,4,beicsr,0e5a3fa444d09dc9e3eaab36cd5f68c22ecc82c720e210aecf64277e4eedd007,18866438,0,169343,2315598,6613724,18866438,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/rishabh/HPCA2/mosaic_delta_phase1/artifacts_hpca_xorflow/ramulator/xorflow_hbm_h8z3lwgd/beicsr.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 18866438 lines.
+",1.0
+ogbn_arxiv_deepres8_w128,4,xorflow,7114b48345dcc574bde0283676278a657bef6dd2897675323443c4865e74aa59,14582382,4386816,169343,2315598,5240245,14582382,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/rishabh/HPCA2/mosaic_delta_phase1/artifacts_hpca_xorflow/ramulator/xorflow_hbm_h8z3lwgd/xorflow.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 14582382 lines.
+",1.2621020582052938

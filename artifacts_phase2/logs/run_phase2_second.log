@@ -1,0 +1,9 @@
+........................                                                 [100%]
+=============================== warnings summary ===============================
+../../miniconda/envs/taugat_pyg/lib/python3.11/site-packages/huggingface_hub/constants.py:244
+  /home/rishabh/miniconda/envs/taugat_pyg/lib/python3.11/site-packages/huggingface_hub/constants.py:244: DeprecationWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+24 passed, 1 warning in 6.38s
+{"decision": "ITERATE_ANCHOR_ENCODING", "wall": 368.7513332899998}

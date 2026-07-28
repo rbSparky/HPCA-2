@@ -1,0 +1,37 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/phase3b_cli.py", line 111, in <module>
+    if __name__=="__main__": main()
+                             ^^^^^^
+  File "/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/phase3b_cli.py", line 110, in main
+    ap=argparse.ArgumentParser(); ap.add_argument("--config",type=Path,default=Path("configs/phase3a_quick.yaml")); run(ap.parse_args().config)
+                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/phase3b_cli.py", line 80, in run
+    sl=trained[layer_id-1][:min(128,trained.shape[1])]; enc=encode_slice(sampled,0,width); exact &= bool(enc["exact"]); entropy.append(enc["exception_bits"]/max(enc["entropy_bits"],1)); cap_peak=max(cap_peak,enc["anchor"].nbytes+enc["support_bits"]//8)
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/xorflow.py", line 106, in encode_slice
+    anchor, history, codes = refine_anchor(sl)
+                             ^^^^^^^^^^^^^^^^^
+  File "/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/xorflow.py", line 43, in refine_anchor
+    trial_value, trial_codes = _anchor_objective(x, trial)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/xorflow.py", line 25, in _anchor_objective
+    codes = [encode_event_set(np.logical_xor(layer, anchor).reshape(-1)) for layer in window]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/xorflow.py", line 25, in <listcomp>
+    codes = [encode_event_set(np.logical_xor(layer, anchor).reshape(-1)) for layer in window]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/global_gap.py", line 102, in encode_event_set
+    candidates = candidate_event_bits(events, int(universe), blocks, allow_complement)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/global_gap.py", line 79, in candidate_event_bits
+    candidates[("BLOCK_FOR_GAPS", block, False)] = _block_for_bits(
+                                                   ^^^^^^^^^^^^^^^^
+  File "/home/rishabh/HPCA2/mosaic_delta_phase1/src/mosaic_validation/global_gap.py", line 55, in _block_for_bits
+    gaps = np.diff(values)
+           ^^^^^^^^^^^^^^^
+  File "/home/rishabh/.local/lib/python3.11/site-packages/numpy/lib/_function_base_impl.py", line 1529, in diff
+    a = op(a[slice1], a[slice2])
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

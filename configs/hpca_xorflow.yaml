@@ -1,0 +1,31 @@
+# Predeclared HPCA XORFLOW principal configuration.  No causal selector may
+# inspect a later layer mask; W=2 means layer l anchors only l+1.
+principal:
+  aggregation_engines: 8
+  combination_engines: 8
+  array: [32, 32]
+  dataflow: weight_stationary
+  feature_cache_bytes: 524288
+  feature_cache_associativity: 16
+  cache_line_bytes: 64
+  hbm_bandwidth_gb_s: 256
+  frequency_ghz: 1
+  topology_tile_rows: 128
+  feature_slice_width: 128
+  causal_window: 2
+  cohorts_per_tile: 4
+  rows_per_cohort: 32
+  support_cache_bytes: 16384
+  decoder_lanes: 32
+  decoder_lane_bits: 64
+  value_format: fp8_e4m3
+  weight_format: fp16
+  accumulator_format: fp32
+sensitivities:
+  feature_cache_bytes: [262144, 524288, 1048576]
+  hbm_bandwidth_gb_s: [128, 256, 512]
+  support_cache_bytes: [8192, 16384, 32768, 65536]
+  feature_slice_width: [64, 96, 128, 256]
+  decoder_lanes: [8, 16, 32]
+  topology_tile_rows: [64, 128, 256]
+  causal_window: [1, 2, 4, 8]

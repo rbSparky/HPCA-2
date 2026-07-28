@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-07-24T09:34:30.295862+00:00",
+  "python": "3.11.13",
+  "torch": "2.8.0+cu128",
+  "torch_cuda": "12.8",
+  "cuda_available": true,
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "wall_seconds": 1666.3664243579988,
+  "phase0_root": "/home/rishabh/HPCA2/mosaic_validation/results",
+  "scalesim_commit": "7fd972e7c650e81c77294c9433143a282235c5e7"
+}

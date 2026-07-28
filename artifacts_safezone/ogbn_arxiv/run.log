@@ -1,0 +1,5 @@
+/home/rishabh/miniconda/envs/taugat_pyg/lib/python3.11/site-packages/outdated/__init__.py:36: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import parse_version
+/home/rishabh/miniconda/envs/taugat_pyg/lib/python3.11/site-packages/torch_geometric/utils/sparse.py:277: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at /pytorch/aten/src/ATen/SparseCsrTensorImpl.cpp:53.)
+  adj = torch.sparse_csr_tensor(
+{'config_id': 'ogbn_arxiv_deepres8_w128', 'nodes': 169343, 'edges': 2315598, 'epochs': 220, 'best_epoch': 202, 'train_seconds': 60.634886282000025, 'fp32_test_accuracy': 0.6960681676864624, 'fp8_test_accuracy': 0.6960887312889099, 'accuracy_drop': -2.0563602447509766e-05, 'median_density': 0.46958230669410606}

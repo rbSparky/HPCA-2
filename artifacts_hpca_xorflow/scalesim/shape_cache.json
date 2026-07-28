@@ -1,0 +1,42 @@
+{
+  "5a198adf70186df120e64e63b3b8a7e938bed9f8a38b03a28a1ddd4323c785db": {
+    "cycles": 40943,
+    "cycles_with_prefetch": 56592,
+    "error": "",
+    "k": 128,
+    "m": 2465,
+    "n": 128,
+    "success": true,
+    "utilization": 96.32904281562172
+  },
+  "7d77358b22a5d1e0d959827c160bb3c75448456a399246ca80ae6bd6cf5df934": {
+    "cycles": 2015,
+    "cycles_with_prefetch": 4361,
+    "error": "",
+    "k": 128,
+    "m": 32,
+    "n": 128,
+    "success": true,
+    "utilization": 25.409429280397024
+  },
+  "aab415af2a7d84d0231c8d9f3a90f9a841412e06739f9148477589ef810bbb8a": {
+    "cycles": 340191,
+    "cycles_with_prefetch": 356080,
+    "error": "",
+    "k": 128,
+    "m": 21168,
+    "n": 128,
+    "success": true,
+    "utilization": 99.55818937008915
+  },
+  "ec0a2a5e82321e9ea8d10cc971229c639110d4574474a7e4d94a4d03d92f02e2": {
+    "cycles": 6927,
+    "cycles_with_prefetch": 13853,
+    "error": "",
+    "k": 128,
+    "m": 339,
+    "n": 128,
+    "success": true,
+    "utilization": 78.3022953659593
+  }
+}
