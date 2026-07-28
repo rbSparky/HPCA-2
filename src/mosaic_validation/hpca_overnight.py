@@ -160,14 +160,16 @@ class Ledger:
             # Prefer the latest matching job, while allowing a stage to have a
             # corrective rerun (the failed attempt remains in the evidence log).
             job = matching[-1] if matching else None
+            item_rows = [row for row in self.rows if row["item_id"] == queue_id]
             stage_rows = [row for row in self.rows if row["stage"] == stage]
-            latest_stage = stage_rows[-1]["status"] if stage_rows else ""
-            status = job["status"] if job else ({"SUCCEEDED": "COMPLETE", "FAILED": "BLOCKED"}.get(latest_stage, "PENDING"))
+            latest = (item_rows[-1]["status"] if item_rows else (stage_rows[-1]["status"] if stage_rows else ""))
+            default = "COMPLETE" if item.get("already_complete") else str(item.get("status", "PENDING"))
+            status = job["status"] if job else ({"SUCCEEDED": "COMPLETE", "FAILED": "BLOCKED", "SKIPPED": "SKIPPED"}.get(latest, default))
             if status == "SUCCEEDED":
                 status = "COMPLETE"
             elif status == "CANCELLED":
                 status = "CANCELLED"
-            elif status not in {"RUNNING", "QUEUED", "PENDING", "BLOCKED", "COMPLETE"}:
+            elif status not in {"RUNNING", "QUEUED", "PENDING", "PENDING_IMPLEMENTATION", "BLOCKED", "COMPLETE", "SKIPPED"}:
                 status = "QUEUED"
             resolved.append({"queue_id": queue_id, "stage": stage, "depends_on": str(item.get("depends_on", "none")), "estimated_minutes": str(item.get("estimated_minutes", "")), "status": status, "job_id": job["job_id"] if job else "-", "log": job["log"] if job else "-"})
         return resolved
