@@ -93,6 +93,8 @@ These controls show that the real learned masks contain structure beyond density
 
 ## Tool and reproducibility evidence
 
+The detailed hardware audit is [HPCA_HARDWARE_AUDIT.md](HPCA_HARDWARE_AUDIT.md), including SCALE-Sim fields, RTL synthesis/formal counts, and Ramulator request-drain checks.
+
 | Check | Result | Interpretation |
 |---|---|---|
 | Targeted regression tests | 11 passed | No failure in the admitted HPCA path |
