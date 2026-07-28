@@ -46,7 +46,9 @@ def _run_task(project: Path, ledger: Ledger, task: dict[str, Any], tasks: dict[s
     run_dir.mkdir(parents=True, exist_ok=True); log.parent.mkdir(parents=True, exist_ok=True)
     preflight = run_dir / "causal_preflight.csv"; host = run_dir / "host_model.csv"
     command = [sys.executable, "-m", "mosaic_validation.hpca_xorflow_cli", "--configs", str(task["config_id"]), "--max-pairs", str(task["max_pairs"]), "--slice-width", str(task["slice_width"]), "--feature-cache-bytes", str(task["cache_bytes"]), "--edge-order", str(task["edge_order"]), "--output", str(preflight)]
-    start = _iso(); ok, wall, reason = _run(command, project=project, log=log, timeout=max(4 * 3600, int(estimate * 180)))
+    start = _iso()
+    ledger.add(stage=stage, item_id=task_id, category=str(task.get("priority", "paper")), status="RUNNING", started_utc=start, artifact=_relative(project, preflight), log=_relative(project, log), command="causal cache simulation plus normalized host model", reason="admitted after dependency and deadline checks")
+    ok, wall, reason = _run(command, project=project, log=log, timeout=max(4 * 3600, int(estimate * 180)))
     if ok:
         host_command = [sys.executable, "-m", "mosaic_validation.hpca_host", "--input", str(preflight), "--output", str(host)]
         ok, host_wall, reason = _run(host_command, project=project, log=log, timeout=2 * 3600); wall += host_wall
