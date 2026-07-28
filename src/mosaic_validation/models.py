@@ -98,31 +98,41 @@ class DeepResV2(nn.Module):
 
 
 class SAGE8(nn.Module):
-    """Standard GraphSAGE stack with explicit post-ReLU support traces."""
+    """Residual normalized GraphSAGE stack with post-ReLU support traces.
+
+    The residual state is required for a meaningful eight-layer Arxiv transfer
+    point; a plain stack rapidly oversmooths before the support encoder is
+    evaluated.  This is an operator-training stabilization, never a
+    sparsity-driven choice.
+    """
     def __init__(self, in_channels: int, hidden: int, classes: int, layers: int, dropout: float):
         super().__init__(); self.dropout = dropout
         self.input = nn.Linear(in_channels, hidden)
         self.convs = nn.ModuleList(SAGEConv(hidden, hidden) for _ in range(layers))
+        self.norms = nn.ModuleList(nn.LayerNorm(hidden) for _ in range(layers))
         self.output = nn.Linear(hidden, classes)
     def forward(self, x, edge_index, trace=False):
         x = torch.relu(self.input(x)); traces=[]
-        for conv in self.convs:
-            x = torch.relu(conv(nn.functional.dropout(x, self.dropout, self.training), edge_index))
+        for norm, conv in zip(self.norms, self.convs, strict=True):
+            update = conv(nn.functional.dropout(x, self.dropout, self.training), edge_index)
+            x = torch.relu(norm(x + update))
             if trace: traces.append(x)
         logits=self.output(nn.functional.dropout(x,self.dropout,self.training)); return (logits,traces) if trace else logits
 
 
 class GIN8(nn.Module):
-    """GIN stack; traced tensors are the exact post-ReLU conv inputs."""
+    """Residual normalized GINConv variant with exact post-ReLU traces."""
     def __init__(self, in_channels: int, hidden: int, classes: int, layers: int, dropout: float):
         super().__init__(); self.dropout = dropout
         self.input = nn.Linear(in_channels, hidden)
         self.convs = nn.ModuleList(GINConv(nn.Sequential(nn.Linear(hidden, hidden), nn.ReLU(), nn.Linear(hidden, hidden))) for _ in range(layers))
+        self.norms = nn.ModuleList(nn.LayerNorm(hidden) for _ in range(layers))
         self.output = nn.Linear(hidden, classes)
     def forward(self, x, edge_index, trace=False):
         x = torch.relu(self.input(x)); traces=[]
-        for conv in self.convs:
-            x = torch.relu(conv(nn.functional.dropout(x,self.dropout,self.training), edge_index))
+        for norm, conv in zip(self.norms, self.convs, strict=True):
+            update = conv(nn.functional.dropout(x,self.dropout,self.training), edge_index)
+            x = torch.relu(norm(x + update))
             if trace: traces.append(x)
         logits=self.output(nn.functional.dropout(x,self.dropout,self.training)); return (logits,traces) if trace else logits
 

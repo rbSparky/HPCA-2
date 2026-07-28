@@ -133,8 +133,8 @@ def _deepres_fp8_forward(self, x, edge_index, trace=False):
 def _generic_stack_fp8_forward(self, x, edge_index, trace=False):
     """Quantized activation path for SAGE/GIN operator smoke and traces."""
     x = fake_quant_fp8(torch.relu(self.input(x))); traces = []
-    for conv in self.convs:
-        x = fake_quant_fp8(torch.relu(conv(x, edge_index)))
+    for norm, conv in zip(self.norms, self.convs, strict=True):
+        x = fake_quant_fp8(torch.relu(norm(x + conv(x, edge_index))))
         if trace: traces.append(x)
     logits = self.output(x)
     return (logits, traces) if trace else logits
