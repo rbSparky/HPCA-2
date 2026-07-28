@@ -11,6 +11,6 @@ def main() -> int:
         r=subprocess.run([a.binary,a.config,'-c','10000','-t',str(trace)],capture_output=True,text=True,timeout=120)
         ok=r.returncode==0; err=(r.stderr or '')[-1000:]
     except Exception as e: ok=False; r=None; err=str(e)
-    out.write_text(json.dumps({'tool':'DRAMsim3','memory_model':'DDR4_8Gb_x8_3200','roofline_only':False,'trace':str(trace),'submitted_lines':64,'tool_run_success':ok,'returncode':None if r is None else r.returncode,'error':err},indent=2)+'\n')
+    out.write_text(json.dumps({'tool':'DRAMsim3','memory_model':Path(a.config).stem,'roofline_only':False,'trace':str(trace),'submitted_lines':64,'tool_run_success':ok,'returncode':None if r is None else r.returncode,'error':err},indent=2)+'\n')
     return 0
 if __name__=='__main__': raise SystemExit(main())
