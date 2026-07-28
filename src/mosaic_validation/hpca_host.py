@@ -119,6 +119,14 @@ def main() -> None:
     parser.add_argument("--project", type=Path, default=Path.cwd())
     parser.add_argument("--input", type=Path, help="configuration-specific causal-preflight CSV")
     parser.add_argument("--output", type=Path, help="configuration-specific host-model CSV")
+    parser.add_argument("--support-cache-bytes", type=int, default=16 * 1024)
+    parser.add_argument("--dram-bytes-per-cycle", type=int, default=256)
+    parser.add_argument("--decoder-lanes", type=int, default=32,
+                        help="64-bit decoder lanes; principal is 32")
+    parser.add_argument("--encoder-lanes", type=int, default=32,
+                        help="64-bit encoder lanes; principal is 32")
+    parser.add_argument("--single-buffered", action="store_true",
+                        help="disable legal double-buffer overlap sensitivity")
     args = parser.parse_args()
     project = args.project.resolve()
     input_path = args.input or (project / "results_hpca_xorflow/01_causal_pair_preflight.csv")
@@ -127,7 +135,19 @@ def main() -> None:
         input_path = project / input_path
     if not output_path.is_absolute():
         output_path = project / output_path
-    result = write_host_results(project, input_path, output=output_path, artifact_dir=project / "artifacts_hpca_xorflow")
+    if args.support_cache_bytes <= 0 or args.dram_bytes_per_cycle <= 0:
+        raise ValueError("cache capacity and DRAM bytes/cycle must be positive")
+    if args.decoder_lanes <= 0 or args.encoder_lanes <= 0:
+        raise ValueError("encoder and decoder lane counts must be positive")
+    config = HostConfig(
+        support_cache_bytes=args.support_cache_bytes,
+        dram_bytes_per_cycle=args.dram_bytes_per_cycle,
+        decode_bits_per_cycle=args.decoder_lanes * 64,
+        encode_bits_per_cycle=args.encoder_lanes * 64,
+        double_buffered=not args.single_buffered,
+    )
+    result = write_host_results(project, input_path, output=output_path,
+                                artifact_dir=project / "artifacts_hpca_xorflow", config=config)
     print(result.to_string(index=False))
 
 

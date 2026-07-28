@@ -1,0 +1,76 @@
+# Fixed, resumable execution manifest for the remaining executable HPCA suite.
+# It is intentionally serial: the remote runner pins the single campaign to
+# GPU1, while each task writes isolated results under complete_suite/.  The
+# predeclared 2026-07-31 deadline leaves a 30-minute reporting margin.
+campaign_id: "paper_suite_20260728_v1"
+deadline_utc: "2026-07-31T23:59:00Z"
+deadline_margin_minutes: 30
+tasks:
+  - {task_id: regression_remote, stage: admission, estimated_minutes: 20, weight: 2, command: "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -m pytest -q"}
+
+  - {task_id: train_arxiv_deepres8_s7, stage: train, estimated_minutes: 30, weight: 3, command: "python scripts/train_hpca_workload.py --dataset ogbn-arxiv --config-id ogbn_arxiv_deepres8_w128_s7 --model-kind deepres --width 128 --layers 8 --max-epochs 160"}
+  - {task_id: train_arxiv_depth4, stage: train, estimated_minutes: 30, weight: 2, command: "python scripts/train_hpca_workload.py --dataset ogbn-arxiv --config-id ogbn_arxiv_deepres4_w128_s7 --model-kind deepres --width 128 --layers 4 --max-epochs 160"}
+  - {task_id: train_arxiv_depth16, stage: train, estimated_minutes: 90, weight: 3, command: "python scripts/train_hpca_workload.py --dataset ogbn-arxiv --config-id ogbn_arxiv_deepres16_w128_s7 --model-kind deepres --width 128 --layers 16 --max-epochs 160"}
+  - {task_id: train_arxiv_width64, stage: train, estimated_minutes: 30, weight: 2, command: "python scripts/train_hpca_workload.py --dataset ogbn-arxiv --config-id ogbn_arxiv_deepres8_w64_s7 --model-kind deepres --width 64 --layers 8 --max-epochs 160"}
+  - {task_id: train_arxiv_width256, stage: train, estimated_minutes: 60, weight: 3, command: "python scripts/train_hpca_workload.py --dataset ogbn-arxiv --config-id ogbn_arxiv_deepres8_w256_s7 --model-kind deepres --width 256 --layers 8 --max-epochs 160"}
+  - {task_id: train_arxiv_graphsage8, stage: train, estimated_minutes: 45, weight: 2, command: "python scripts/train_hpca_workload.py --dataset ogbn-arxiv --config-id ogbn_arxiv_graphsage8_w128_s7 --model-kind graphsage --width 128 --layers 8 --max-epochs 160"}
+  - {task_id: train_arxiv_gin8, stage: train, estimated_minutes: 45, weight: 2, command: "python scripts/train_hpca_workload.py --dataset ogbn-arxiv --config-id ogbn_arxiv_gin8_w128_s7 --model-kind gin --width 128 --layers 8 --max-epochs 160"}
+  - {task_id: train_citeseer_deepres8, stage: train, estimated_minutes: 15, weight: 1, command: "python scripts/train_hpca_workload.py --dataset CiteSeer --config-id citeseer_deepres8_w128_s7 --model-kind deepres --width 128 --layers 8 --max-epochs 160"}
+
+  - {task_id: primary_arxiv_s17, stage: primary, estimated_minutes: 25, weight: 3, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 primary_arxiv_s17"}
+  - {task_id: primary_arxiv_s27, stage: primary, estimated_minutes: 25, weight: 3, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s27 primary_arxiv_s27"}
+  - {task_id: primary_reddit, stage: primary, estimated_minutes: 90, weight: 4, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh reddit_deepres8_w128_s7_native primary_reddit"}
+  - {task_id: primary_yelp_borderline, stage: primary, estimated_minutes: 60, weight: 2, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh yelp_deepres8_w128_s7_balanced_fallback primary_yelp_borderline"}
+  - {task_id: primary_flickr, stage: primary, estimated_minutes: 45, weight: 2, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh flickr_deepres8_w128_s7 primary_flickr"}
+  - {task_id: boundary_cora, stage: boundary, estimated_minutes: 12, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh cora_gcnii16 boundary_cora"}
+  - {task_id: boundary_pubmed, stage: boundary, estimated_minutes: 18, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh pubmed_gcnii16 boundary_pubmed"}
+  - {task_id: boundary_chameleon, stage: boundary, estimated_minutes: 18, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh chameleon_gcnii16 boundary_chameleon"}
+
+  - {task_id: analyze_arxiv_s7, stage: model_sensitivity, estimated_minutes: 25, weight: 2, depends_on: [train_arxiv_deepres8_s7], command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s7 arxiv_s7"}
+  - {task_id: analyze_arxiv_depth4, stage: model_sensitivity, estimated_minutes: 20, weight: 1, depends_on: [train_arxiv_depth4], command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres4_w128_s7 arxiv_depth4"}
+  - {task_id: analyze_arxiv_depth16, stage: model_sensitivity, estimated_minutes: 45, weight: 2, depends_on: [train_arxiv_depth16], command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres16_w128_s7 arxiv_depth16"}
+  - {task_id: analyze_arxiv_width64, stage: model_sensitivity, estimated_minutes: 20, weight: 1, depends_on: [train_arxiv_width64], command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w64_s7 arxiv_width64"}
+  - {task_id: analyze_arxiv_width256, stage: model_sensitivity, estimated_minutes: 45, weight: 2, depends_on: [train_arxiv_width256], command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w256_s7 arxiv_width256"}
+  - {task_id: analyze_arxiv_graphsage8, stage: operators, estimated_minutes: 30, weight: 1, depends_on: [train_arxiv_graphsage8], command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_graphsage8_w128_s7 arxiv_graphsage8"}
+  - {task_id: analyze_arxiv_gin8, stage: operators, estimated_minutes: 30, weight: 1, depends_on: [train_arxiv_gin8], command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_gin8_w128_s7 arxiv_gin8"}
+  - {task_id: analyze_citeseer, stage: boundary, estimated_minutes: 15, weight: 1, depends_on: [train_citeseer_deepres8], command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh citeseer_deepres8_w128_s7 citeseer"}
+
+  - {task_id: sens_arxiv_cache256, stage: cache_sensitivity, estimated_minutes: 25, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 arxiv_cache256 128 262144"}
+  - {task_id: sens_arxiv_cache1m, stage: cache_sensitivity, estimated_minutes: 25, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 arxiv_cache1m 128 1048576"}
+  - {task_id: sens_arxiv_slice64, stage: slice_sensitivity, estimated_minutes: 25, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 arxiv_slice64 64"}
+  - {task_id: sens_arxiv_slice96, stage: slice_sensitivity, estimated_minutes: 25, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 arxiv_slice96 96"}
+  - {task_id: sens_arxiv_slice256, stage: slice_sensitivity, estimated_minutes: 25, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 arxiv_slice256 256"}
+  - {task_id: sens_arxiv_order_o1, stage: order_sensitivity, estimated_minutes: 25, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 arxiv_order_o1 128 524288 O1"}
+  - {task_id: sens_arxiv_tile64, stage: tile_sensitivity, estimated_minutes: 25, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 arxiv_tile64 128 524288 O0 64"}
+  - {task_id: sens_arxiv_tile256, stage: tile_sensitivity, estimated_minutes: 25, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 arxiv_tile256 128 524288 O0 256"}
+  - {task_id: sens_arxiv_support8k, stage: support_cache, estimated_minutes: 25, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 arxiv_support8k 128 524288 O0 128 8192"}
+  - {task_id: sens_arxiv_support32k, stage: support_cache, estimated_minutes: 25, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 arxiv_support32k 128 524288 O0 128 32768"}
+  - {task_id: sens_arxiv_support64k, stage: support_cache, estimated_minutes: 25, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 arxiv_support64k 128 524288 O0 128 65536"}
+  - {task_id: sens_arxiv_bw128, stage: bandwidth_sensitivity, estimated_minutes: 25, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 arxiv_bw128 128 524288 O0 128 16384 128"}
+  - {task_id: sens_arxiv_bw512, stage: bandwidth_sensitivity, estimated_minutes: 25, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 arxiv_bw512 128 524288 O0 128 16384 512"}
+  - {task_id: sens_arxiv_decoder8, stage: decoder_sensitivity, estimated_minutes: 25, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 arxiv_decoder8 128 524288 O0 128 16384 256 8"}
+  - {task_id: sens_arxiv_decoder16, stage: decoder_sensitivity, estimated_minutes: 25, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 arxiv_decoder16 128 524288 O0 128 16384 256 16"}
+  - {task_id: sens_arxiv_single_buffer, stage: buffering_ablation, estimated_minutes: 25, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 arxiv_single_buffer 128 524288 O0 128 16384 256 32 1"}
+
+  - {task_id: sens_reddit_cache256, stage: cache_sensitivity, estimated_minutes: 90, weight: 2, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh reddit_deepres8_w128_s7_native reddit_cache256 128 262144"}
+  - {task_id: sens_reddit_cache1m, stage: cache_sensitivity, estimated_minutes: 90, weight: 2, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh reddit_deepres8_w128_s7_native reddit_cache1m 128 1048576"}
+  - {task_id: sens_reddit_slice64, stage: slice_sensitivity, estimated_minutes: 90, weight: 2, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh reddit_deepres8_w128_s7_native reddit_slice64 64"}
+  - {task_id: sens_reddit_slice96, stage: slice_sensitivity, estimated_minutes: 90, weight: 2, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh reddit_deepres8_w128_s7_native reddit_slice96 96"}
+  - {task_id: sens_reddit_slice256, stage: slice_sensitivity, estimated_minutes: 90, weight: 2, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh reddit_deepres8_w128_s7_native reddit_slice256 256"}
+  - {task_id: sens_reddit_order_o1, stage: order_sensitivity, estimated_minutes: 90, weight: 2, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh reddit_deepres8_w128_s7_native reddit_order_o1 128 524288 O1"}
+  - {task_id: sens_reddit_tile64, stage: tile_sensitivity, estimated_minutes: 90, weight: 2, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh reddit_deepres8_w128_s7_native reddit_tile64 128 524288 O0 64"}
+  - {task_id: sens_reddit_support64k, stage: support_cache, estimated_minutes: 90, weight: 2, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh reddit_deepres8_w128_s7_native reddit_support64k 128 524288 O0 128 65536"}
+
+  - {task_id: sens_yelp_cache256, stage: cache_sensitivity, estimated_minutes: 60, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh yelp_deepres8_w128_s7_balanced_fallback yelp_cache256 128 262144"}
+  - {task_id: sens_yelp_cache1m, stage: cache_sensitivity, estimated_minutes: 60, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh yelp_deepres8_w128_s7_balanced_fallback yelp_cache1m 128 1048576"}
+  - {task_id: sens_yelp_slice64, stage: slice_sensitivity, estimated_minutes: 60, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh yelp_deepres8_w128_s7_balanced_fallback yelp_slice64 64"}
+  - {task_id: sens_yelp_order_o1, stage: order_sensitivity, estimated_minutes: 60, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh yelp_deepres8_w128_s7_balanced_fallback yelp_order_o1 128 524288 O1"}
+
+  - {task_id: sens_flickr_cache256, stage: cache_sensitivity, estimated_minutes: 45, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh flickr_deepres8_w128_s7 flickr_cache256 128 262144"}
+  - {task_id: sens_flickr_cache1m, stage: cache_sensitivity, estimated_minutes: 45, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh flickr_deepres8_w128_s7 flickr_cache1m 128 1048576"}
+  - {task_id: sens_flickr_slice64, stage: slice_sensitivity, estimated_minutes: 45, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh flickr_deepres8_w128_s7 flickr_slice64 64"}
+  - {task_id: sens_flickr_order_o1, stage: order_sensitivity, estimated_minutes: 45, weight: 1, command: "MOSAIC_PY=python bash scripts/run_hpca_case.sh flickr_deepres8_w128_s7 flickr_order_o1 128 524288 O1"}
+
+  - {task_id: ramulator_arxiv_s17_l4, stage: ramulator, estimated_minutes: 120, weight: 2, command: "MOSAIC_RAMULATOR_PY=/usr/bin/python3.12 python scripts/run_hpca_ramulator.py --config-id ogbn_arxiv_deepres8_w128_s17 --pair-start-layer 4 --artifact-dir artifacts_hpca_xorflow/complete_suite/paper_suite_20260728_v1/ramulator/arxiv_s17_l4 --results results_hpca_xorflow/complete_suite/paper_suite_20260728_v1/ramulator/arxiv_s17_l4.csv"}
+  - {task_id: ramulator_reddit_l4, stage: ramulator, estimated_minutes: 180, weight: 3, command: "MOSAIC_RAMULATOR_PY=/usr/bin/python3.12 python scripts/run_hpca_ramulator.py --config-id reddit_deepres8_w128_s7_native --pair-start-layer 4 --artifact-dir artifacts_hpca_xorflow/complete_suite/paper_suite_20260728_v1/ramulator/reddit_l4 --results results_hpca_xorflow/complete_suite/paper_suite_20260728_v1/ramulator/reddit_l4.csv"}
+  - {task_id: ramulator_yelp_l4, stage: ramulator, estimated_minutes: 180, weight: 2, command: "MOSAIC_RAMULATOR_PY=/usr/bin/python3.12 python scripts/run_hpca_ramulator.py --config-id yelp_deepres8_w128_s7_balanced_fallback --pair-start-layer 4 --artifact-dir artifacts_hpca_xorflow/complete_suite/paper_suite_20260728_v1/ramulator/yelp_l4 --results results_hpca_xorflow/complete_suite/paper_suite_20260728_v1/ramulator/yelp_l4.csv"}

@@ -37,21 +37,36 @@ def _unpack(path: Path) -> np.ndarray:
     return np.unpackbits(payload["packed"], axis=2)[:, :, :shape[2]].astype(bool)
 
 
+def _workload_dataset(config_id: str) -> tuple[str, str] | None:
+    """Return the loader name and display name for a trained HPCA artifact.
+
+    The preflight is representation/model agnostic once an exact support trace
+    exists.  Keeping this mapping in one place makes DeepRes, GraphSAGE, GIN,
+    depth, and width studies use the same physical-traffic pipeline.
+    """
+    lowered = config_id.lower()
+    for prefix, loader, display in (
+        ("ogbn_arxiv_", "ogbn-arxiv", "OGBN-Arxiv"),
+        ("reddit_", "Reddit", "Reddit"),
+        ("yelp_", "Yelp", "Yelp"),
+        ("flickr_", "Flickr", "Flickr"),
+        ("pubmed_", "PubMed", "PubMed"),
+        ("citeseer_", "CiteSeer", "CiteSeer"),
+        ("cora_", "Cora", "Cora"),
+        ("chameleon_", "chameleon", "Chameleon"),
+    ):
+        if lowered.startswith(prefix):
+            return loader, display
+    return None
+
+
 def _case(project: Path, config_id: str) -> tuple[np.ndarray, object, str]:
-    if config_id.startswith("ogbn_arxiv_deepres8_w128_s"):
-        trace = project / f"artifacts_hpca_xorflow/workloads/{config_id}/fp8_supports.npz"
-        from ogb.nodeproppred import PygNodePropPredDataset
-        import torch_geometric.transforms as transforms
-        original_load = torch.load
-        def trusted_load(*args, **kwargs):
-            kwargs.setdefault("weights_only", False)
-            return original_load(*args, **kwargs)
-        torch.load = trusted_load
-        try:
-            dataset = PygNodePropPredDataset(name="ogbn-arxiv", root=str(project / "data"), transform=transforms.ToUndirected())
-        finally:
-            torch.load = original_load
-        return _unpack(trace), dataset[0], "OGBN-Arxiv"
+    trace = project / f"artifacts_hpca_xorflow/workloads/{config_id}/fp8_supports.npz"
+    mapped = _workload_dataset(config_id)
+    if trace.exists() and mapped is not None:
+        loader, display = mapped
+        data = load_dataset(loader, project / "data")[0]
+        return _unpack(trace), data, display
     if config_id == "ogbn_arxiv_deepres8_w128":
         from ogb.nodeproppred import PygNodePropPredDataset
         import torch_geometric.transforms as transforms
