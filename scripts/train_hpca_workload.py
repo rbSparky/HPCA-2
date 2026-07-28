@@ -14,6 +14,7 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=7)
     parser.add_argument("--width", type=int, default=128)
     parser.add_argument("--layers", type=int, default=8)
+    parser.add_argument("--model-kind", choices=("deepres", "graphsage", "gin"), default="deepres")
     parser.add_argument("--max-epochs", type=int, default=160)
     parser.add_argument("--learning-rate", type=float, default=.005)
     parser.add_argument("--dropout", type=float, default=.20)
@@ -25,7 +26,7 @@ def main() -> None:
     parser.add_argument("--multi-label-pos-weight", action="store_true", help="fallback: train-split BCE class balancing for multi-label data")
     parser.add_argument("--force-cpu", action="store_true")
     args = parser.parse_args()
-    config = WorkloadConfig(dataset=args.dataset, config_id=args.config_id, seed=args.seed, width=args.width, layers=args.layers, max_epochs=args.max_epochs, learning_rate=args.learning_rate, dropout=args.dropout, residual_scale=args.residual_scale, sampled_batches_per_epoch=args.sampled_batches_per_epoch, sampled_neighbors=args.sampled_neighbors, sampled_batch_size=args.sampled_batch_size, csr_checkpoint_training=args.csr_checkpoint_training, multi_label_pos_weight=args.multi_label_pos_weight)
+    config = WorkloadConfig(dataset=args.dataset, config_id=args.config_id, seed=args.seed, width=args.width, layers=args.layers, max_epochs=args.max_epochs, learning_rate=args.learning_rate, dropout=args.dropout, residual_scale=args.residual_scale, sampled_batches_per_epoch=args.sampled_batches_per_epoch, sampled_neighbors=args.sampled_neighbors, sampled_batch_size=args.sampled_batch_size, csr_checkpoint_training=args.csr_checkpoint_training, multi_label_pos_weight=args.multi_label_pos_weight, model_kind=args.model_kind)
     print(json.dumps(train_and_trace(Path.cwd(), config, force_cpu=args.force_cpu), indent=2, sort_keys=True))
 
 

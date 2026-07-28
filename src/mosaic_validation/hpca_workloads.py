@@ -11,7 +11,7 @@ import torch
 
 from .datasets import load_dataset
 from .int8_validation import classification_accuracy, make_int8_model
-from .models import build_deepres_v2
+from .models import build_deepres_v2, build_model
 from .hpca_sparse import IncomingCsrSampler, deepres_csr_forward, normalized_csr_adjacency
 
 
@@ -34,6 +34,7 @@ class WorkloadConfig:
     sampled_batch_size: int = 128
     csr_checkpoint_training: bool = False
     multi_label_pos_weight: bool = False
+    model_kind: str = "deepres"
 
 
 def _seed(value: int) -> None:
@@ -84,7 +85,10 @@ def train_and_trace(project: Path, config: WorkloadConfig, *, force_cpu: bool = 
     data, features, classes = load_dataset(config.dataset, project / "data")
     multi_label = data.y.ndim != 1
     device = torch.device("cpu" if force_cpu or not torch.cuda.is_available() else "cuda")
-    model = build_deepres_v2(features, config.width, classes, config.layers, config.dropout, config.residual_scale).to(device)
+    if config.model_kind == "deepres":
+        model = build_deepres_v2(features, config.width, classes, config.layers, config.dropout, config.residual_scale).to(device)
+    else:
+        model = build_model(config.model_kind, features, config.width, classes, config.layers, config.dropout).to(device)
     # Full edge-index message passing creates an edge-sized intermediate on
     # Reddit.  The CSR path is mathematically the same normalized all-neighbor
     # operator and remains exact at inference; it is selected by size only.

@@ -2,7 +2,7 @@
 
 import torch
 from torch import nn
-from torch_geometric.nn import GCN2Conv, GCNConv
+from torch_geometric.nn import GCN2Conv, GCNConv, SAGEConv, GINConv
 
 
 class GCNII(nn.Module):
@@ -97,8 +97,38 @@ class DeepResV2(nn.Module):
         return (logits, traces) if trace else logits
 
 
+class SAGE8(nn.Module):
+    """Standard GraphSAGE stack with explicit post-ReLU support traces."""
+    def __init__(self, in_channels: int, hidden: int, classes: int, layers: int, dropout: float):
+        super().__init__(); self.dropout = dropout
+        self.input = nn.Linear(in_channels, hidden)
+        self.convs = nn.ModuleList(SAGEConv(hidden, hidden) for _ in range(layers))
+        self.output = nn.Linear(hidden, classes)
+    def forward(self, x, edge_index, trace=False):
+        x = torch.relu(self.input(x)); traces=[]
+        for conv in self.convs:
+            x = torch.relu(conv(nn.functional.dropout(x, self.dropout, self.training), edge_index))
+            if trace: traces.append(x)
+        logits=self.output(nn.functional.dropout(x,self.dropout,self.training)); return (logits,traces) if trace else logits
+
+
+class GIN8(nn.Module):
+    """GIN stack; traced tensors are the exact post-ReLU conv inputs."""
+    def __init__(self, in_channels: int, hidden: int, classes: int, layers: int, dropout: float):
+        super().__init__(); self.dropout = dropout
+        self.input = nn.Linear(in_channels, hidden)
+        self.convs = nn.ModuleList(GINConv(nn.Sequential(nn.Linear(hidden, hidden), nn.ReLU(), nn.Linear(hidden, hidden))) for _ in range(layers))
+        self.output = nn.Linear(hidden, classes)
+    def forward(self, x, edge_index, trace=False):
+        x = torch.relu(self.input(x)); traces=[]
+        for conv in self.convs:
+            x = torch.relu(conv(nn.functional.dropout(x,self.dropout,self.training), edge_index))
+            if trace: traces.append(x)
+        logits=self.output(nn.functional.dropout(x,self.dropout,self.training)); return (logits,traces) if trace else logits
+
+
 def build_model(kind: str, features: int, hidden: int, classes: int, layers: int, dropout: float):
-    cls = GCNII if kind == "gcnii" else ResidualGCN
+    cls = {"gcnii": GCNII, "graphsage": SAGE8, "gin": GIN8}.get(kind, ResidualGCN)
     return cls(features, hidden, classes, layers, dropout)
 
 
