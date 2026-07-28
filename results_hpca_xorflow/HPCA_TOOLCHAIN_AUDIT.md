@@ -13,12 +13,25 @@ full-chip measured hardware performance.
 | CACTI | source checkout available; numeric run pending | `tools/vendor/cacti/` |
 | Verilator | installed and lint passed | Verilator 5.020; `artifacts_safezone/decoder/verilator_lint.log` |
 | Yosys | installed; synthesis/formal passed | Yosys 0.33; lane 1,663 cells/path 33, bank 53,312 cells/path 35 |
-| OpenROAD | not installed | no executable found; no fabricated PPA numbers |
+| OpenROAD/ORFS | verified in Docker | `openroad/orfs:latest`, version `26Q3-771-g7cfb2105c9`; Nangate45 GCD RTL-to-GDS artifacts present |
 
 DRAMsim3 is used as an independent timing cross-check with its available
 DDR4 configuration; this is not HBM2 timing. CACTI/OpenROAD numbers are not
 reported until the tools are actually callable. The remaining PPA evidence is
 therefore logic synthesis/formal plus the exact limitation record above.
+
+OpenROAD is intentionally container-only. The verified invocation is:
+
+```bash
+cd ~/src/OpenROAD-flow-scripts/flow
+util/docker_shell openroad -version
+```
+
+The completed reference flow is under
+`~/src/OpenROAD-flow-scripts/flow/results/nangate45/gcd/base/` and contains
+`6_final.gds`, `6_final.def`, `6_final.odb`, and `6_final.v`. This establishes
+that the ORFS runtime is callable; it is not yet a routed XORFLOW decoder,
+which remains a bounded next step.
 
 The post-install RTL command was:
 
