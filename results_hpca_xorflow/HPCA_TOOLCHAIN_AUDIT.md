@@ -87,9 +87,21 @@ adds only one cycle of latency. The fully routed Nangate45 result is decisive:
 - modeled routed power `15.5 mW` at the flow's 1.1 V corner.
 
 This establishes that the prior 1 GHz miss is readily repairable through a
-throughput-preserving pipeline boundary. The variant remains an engineering
-prototype until its cycle-latency contract is added to the decoder's full
-software/RTL co-simulation suite.
+throughput-preserving pipeline boundary. Its cycle-latency contract is now
+checked by `scripts/run_xorflow_decoder_cosim.sh`: Verilator runs 9,999 seeded
+software-reference transactions and reports bit-exact outputs at one added
+cycle of latency while accepting one 64-bit word per cycle. The check is a
+pytest gate in `tests/test_xorflow_rtl_cosim.py`.
+
+The 32-lane bank is now represented as `xorflow_decoder_bank_pipelined`, which
+instantiates independently placeable lane macros. The 2,048-bit decoder stream
+is an internal HBM-buffer/SRAM interface, not a package-pin interface. The
+integration contract and a 4-cluster × 8-lane floorplanning plan are documented
+in `docs/xorflow_hierarchical_integration.md`; both lane and logical bank
+levels are synthesized by `scripts/synth_pipelined_decoder.sh`. A full flat
+bank route is deliberately not used as a PPA result because its 8,577 exposed
+top-level pins are physically artificial. Physical bank closure is therefore a
+hierarchical macro-and-SRAM integration task, not a decoder timing blocker.
 
 CACTI support-cache sweep (45 nm model) also passes through the Docker
 wrapper: 16 KiB = 0.969 ns / 0.1915 nJ, 32 KiB = 1.010 ns / 0.2069 nJ, and

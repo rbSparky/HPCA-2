@@ -1,0 +1,841 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Running command `
+    read_verilog -sv /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv;
+    hierarchy -check -top xorflow_decoder_lane_pipelined;
+    synth -noabc -flatten -top xorflow_decoder_lane_pipelined;
+    stat;
+  ' --
+
+1. Executing Verilog-2005 frontend: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv
+Parsing SystemVerilog input from `/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv' to AST representation.
+Generating RTLIL representation for module `\xorflow_decoder_lane_pipelined'.
+Warning: Replacing memory \s2_q with list of registers. See /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:26
+/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:30: Warning: Range [69:56] select out of bounds on signal `\word_q': Setting 6 MSB bits to undef.
+/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:30: Warning: Range select [83:70] out of bounds on signal `\word_q': Setting all 14 result bits to undef.
+/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:30: Warning: Range select [97:84] out of bounds on signal `\word_q': Setting all 14 result bits to undef.
+/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:30: Warning: Range select [111:98] out of bounds on signal `\word_q': Setting all 14 result bits to undef.
+Generating RTLIL representation for module `\xorflow_decoder_bank_pipelined'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \xorflow_decoder_lane_pipelined
+
+2.2. Analyzing design hierarchy..
+Top module:  \xorflow_decoder_lane_pipelined
+Removing unused module `\xorflow_decoder_bank_pipelined'.
+Removed 1 unused modules.
+
+3. Executing SYNTH pass.
+
+3.1. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1.1. Analyzing design hierarchy..
+Top module:  \xorflow_decoder_lane_pipelined
+
+3.1.2. Analyzing design hierarchy..
+Top module:  \xorflow_decoder_lane_pipelined
+Removed 0 unused modules.
+
+3.2. Executing PROC pass (convert processes to netlists).
+
+3.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 16 switch rules as full_case in process $proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3 in module xorflow_decoder_lane_pipelined.
+Removed a total of 0 dead cases.
+
+3.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 1 redundant assignment.
+Promoted 54 assignments to connections.
+
+3.2.4. Executing PROC_INIT pass (extract init attributes).
+
+3.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~16 debug messages>
+
+3.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+Creating decoders for process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+     1/8: $0\event_ids[111:0] [111:98]
+     2/8: $0\event_ids[111:0] [97:84]
+     3/8: $0\event_ids[111:0] [83:70]
+     4/8: $0\event_ids[111:0] [69:56]
+     5/8: $0\event_ids[111:0] [55:42]
+     6/8: $0\event_ids[111:0] [41:28]
+     7/8: $0\event_ids[111:0] [27:14]
+     8/8: $0\event_ids[111:0] [13:0]
+
+3.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s0[0]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s0[1]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s0[2]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s0[3]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s0[4]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s0[5]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s0[6]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s0[7]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s1[0]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s1[1]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s1[2]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s1[3]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s1[4]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s1[5]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s1[6]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s1[7]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s2[0]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s2[1]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s2[2]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s2[3]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s2[4]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s2[5]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s2[6]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s2[7]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s3[0]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s3[1]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s3[2]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s3[3]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s3[4]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s3[5]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s3[6]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+No latch inferred for signal `\xorflow_decoder_lane_pipelined.\s3[7]' from process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+
+3.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\xorflow_decoder_lane_pipelined.\dense_mask' using process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+  created $dff cell `$procdff$168' with positive edge clock.
+Creating register for signal `\xorflow_decoder_lane_pipelined.\event_ids' using process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+  created $dff cell `$procdff$169' with positive edge clock.
+Creating register for signal `\xorflow_decoder_lane_pipelined.\event_valid' using process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+  created $dff cell `$procdff$170' with positive edge clock.
+Creating register for signal `\xorflow_decoder_lane_pipelined.\word_q' using process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+  created $dff cell `$procdff$171' with positive edge clock.
+Creating register for signal `\xorflow_decoder_lane_pipelined.\mode_q' using process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+  created $dff cell `$procdff$172' with positive edge clock.
+Creating register for signal `\xorflow_decoder_lane_pipelined.\base_q' using process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+  created $dff cell `$procdff$173' with positive edge clock.
+Creating register for signal `\xorflow_decoder_lane_pipelined.\count_q' using process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+  created $dff cell `$procdff$174' with positive edge clock.
+Creating register for signal `\xorflow_decoder_lane_pipelined.\k' using process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+  created $dff cell `$procdff$175' with positive edge clock.
+Creating register for signal `\xorflow_decoder_lane_pipelined.\s2_q[0]' using process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+  created $dff cell `$procdff$176' with positive edge clock.
+Creating register for signal `\xorflow_decoder_lane_pipelined.\s2_q[1]' using process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+  created $dff cell `$procdff$177' with positive edge clock.
+Creating register for signal `\xorflow_decoder_lane_pipelined.\s2_q[2]' using process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+  created $dff cell `$procdff$178' with positive edge clock.
+Creating register for signal `\xorflow_decoder_lane_pipelined.\s2_q[3]' using process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+  created $dff cell `$procdff$179' with positive edge clock.
+Creating register for signal `\xorflow_decoder_lane_pipelined.\s2_q[4]' using process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+  created $dff cell `$procdff$180' with positive edge clock.
+Creating register for signal `\xorflow_decoder_lane_pipelined.\s2_q[5]' using process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+  created $dff cell `$procdff$181' with positive edge clock.
+Creating register for signal `\xorflow_decoder_lane_pipelined.\s2_q[6]' using process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+  created $dff cell `$procdff$182' with positive edge clock.
+Creating register for signal `\xorflow_decoder_lane_pipelined.\s2_q[7]' using process `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+  created $dff cell `$procdff$183' with positive edge clock.
+
+3.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:0$102'.
+Found and cleaned up 16 empty switches in `\xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+Removing empty process `xorflow_decoder_lane_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:25$3'.
+Cleaned up 16 empty switches.
+
+3.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane_pipelined.
+<suppressed ~29 debug messages>
+
+3.3. Executing FLATTEN pass (flatten design).
+
+3.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane_pipelined.
+
+3.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane_pipelined..
+Removed 13 unused cells and 136 unused wires.
+<suppressed ~15 debug messages>
+
+3.6. Executing CHECK pass (checking for obvious problems).
+Checking module xorflow_decoder_lane_pipelined...
+Found and reported 0 problems.
+
+3.7. Executing OPT pass (performing simple optimizations).
+
+3.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane_pipelined.
+
+3.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\xorflow_decoder_lane_pipelined'.
+<suppressed ~78 debug messages>
+Removed a total of 26 cells.
+
+3.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \xorflow_decoder_lane_pipelined..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~9 debug messages>
+
+3.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \xorflow_decoder_lane_pipelined.
+Performed a total of 0 changes.
+
+3.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\xorflow_decoder_lane_pipelined'.
+Removed a total of 0 cells.
+
+3.7.6. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 8 on $procdff$176 ($dff) from module xorflow_decoder_lane_pipelined.
+Setting constant 0-bit at position 9 on $procdff$176 ($dff) from module xorflow_decoder_lane_pipelined.
+Setting constant 0-bit at position 10 on $procdff$176 ($dff) from module xorflow_decoder_lane_pipelined.
+Setting constant 0-bit at position 11 on $procdff$176 ($dff) from module xorflow_decoder_lane_pipelined.
+Setting constant 0-bit at position 12 on $procdff$176 ($dff) from module xorflow_decoder_lane_pipelined.
+Setting constant 0-bit at position 13 on $procdff$176 ($dff) from module xorflow_decoder_lane_pipelined.
+
+3.7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane_pipelined..
+Removed 0 unused cells and 26 unused wires.
+<suppressed ~1 debug messages>
+
+3.7.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane_pipelined.
+
+3.7.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.7.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \xorflow_decoder_lane_pipelined..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~9 debug messages>
+
+3.7.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \xorflow_decoder_lane_pipelined.
+Performed a total of 0 changes.
+
+3.7.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\xorflow_decoder_lane_pipelined'.
+Removed a total of 0 cells.
+
+3.7.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.7.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane_pipelined..
+
+3.7.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane_pipelined.
+
+3.7.16. Finished OPT passes. (There is nothing left to do.)
+
+3.8. Executing FSM pass (extract and optimize FSM).
+
+3.8.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+3.8.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+3.8.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+3.8.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane_pipelined..
+
+3.8.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+3.8.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+3.8.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+3.8.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+3.9. Executing OPT pass (performing simple optimizations).
+
+3.9.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane_pipelined.
+
+3.9.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\xorflow_decoder_lane_pipelined'.
+Removed a total of 0 cells.
+
+3.9.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \xorflow_decoder_lane_pipelined..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~9 debug messages>
+
+3.9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \xorflow_decoder_lane_pipelined.
+Performed a total of 0 changes.
+
+3.9.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\xorflow_decoder_lane_pipelined'.
+Removed a total of 0 cells.
+
+3.9.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$169 ($dff) from module xorflow_decoder_lane_pipelined (D = { $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$93_Y $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$81_Y $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$69_Y $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$57_Y }, Q = \event_ids [111:56], rval = 56'00000000000000000000000000000000000000000000000000000000).
+Adding SRST signal on $procdff$168 ($dff) from module xorflow_decoder_lane_pipelined (D = \word_q, Q = \dense_mask, rval = 64'0000000000000000000000000000000000000000000000000000000000000000).
+
+3.9.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane_pipelined..
+Removed 5 unused cells and 1 unused wires.
+<suppressed ~6 debug messages>
+
+3.9.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane_pipelined.
+
+3.9.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.9.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \xorflow_decoder_lane_pipelined..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+3.9.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \xorflow_decoder_lane_pipelined.
+Performed a total of 0 changes.
+
+3.9.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\xorflow_decoder_lane_pipelined'.
+Removed a total of 0 cells.
+
+3.9.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.9.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane_pipelined..
+
+3.9.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane_pipelined.
+
+3.9.16. Finished OPT passes. (There is nothing left to do.)
+
+3.10. Executing WREDUCE pass (reducing word size of cells).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$9 ($add).
+Removed top 31 bits (of 32) from port A of cell xorflow_decoder_lane_pipelined.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$12 ($lt).
+Removed top 1 bits (of 2) from port B of cell xorflow_decoder_lane_pipelined.$eq$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:30$18 ($eq).
+Removed top 31 bits (of 32) from port A of cell xorflow_decoder_lane_pipelined.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$24 ($lt).
+Removed top 30 bits (of 32) from port A of cell xorflow_decoder_lane_pipelined.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$36 ($lt).
+Removed top 30 bits (of 32) from port A of cell xorflow_decoder_lane_pipelined.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$48 ($lt).
+Removed top 29 bits (of 32) from port A of cell xorflow_decoder_lane_pipelined.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$63 ($lt).
+Removed top 29 bits (of 32) from port A of cell xorflow_decoder_lane_pipelined.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$75 ($lt).
+Removed top 29 bits (of 32) from port A of cell xorflow_decoder_lane_pipelined.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$87 ($lt).
+Removed top 29 bits (of 32) from port A of cell xorflow_decoder_lane_pipelined.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$99 ($lt).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$103 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$103 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$103 ($add).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$104 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$104 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$104 ($add).
+Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$105 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$105 ($add).
+Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$105 ($add).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$106 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$106 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$106 ($add).
+Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$107 ($add).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$107 ($add).
+Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$107 ($add).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$108 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$108 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$108 ($add).
+Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$109 ($add).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$109 ($add).
+Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$109 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$110 ($add).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$111 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$111 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$111 ($add).
+Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$112 ($add).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$112 ($add).
+Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$112 ($add).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$114 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$114 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$114 ($add).
+Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$115 ($add).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$115 ($add).
+Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$115 ($add).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$117 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$117 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$117 ($add).
+Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$118 ($add).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$118 ($add).
+Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$118 ($add).
+Removed top 5 bits (of 14) from FF cell xorflow_decoder_lane_pipelined.$procdff$177 ($dff).
+Removed top 4 bits (of 14) from FF cell xorflow_decoder_lane_pipelined.$procdff$178 ($dff).
+Removed top 4 bits (of 14) from FF cell xorflow_decoder_lane_pipelined.$procdff$179 ($dff).
+Removed top 4 bits (of 14) from FF cell xorflow_decoder_lane_pipelined.$procdff$180 ($dff).
+Removed top 4 bits (of 14) from FF cell xorflow_decoder_lane_pipelined.$procdff$181 ($dff).
+Removed top 4 bits (of 14) from FF cell xorflow_decoder_lane_pipelined.$procdff$182 ($dff).
+Removed top 4 bits (of 14) from FF cell xorflow_decoder_lane_pipelined.$procdff$183 ($dff).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$21 ($add).
+Removed top 4 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$33 ($add).
+Removed top 4 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$45 ($add).
+Removed top 4 bits (of 14) from port A of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$110 ($add).
+Removed top 3 bits (of 14) from port Y of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$110 ($add).
+Removed top 4 bits (of 14) from port A of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$113 ($add).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$113 ($add).
+Removed top 3 bits (of 14) from port Y of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$113 ($add).
+Removed top 4 bits (of 14) from port A of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$116 ($add).
+Removed top 4 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$116 ($add).
+Removed top 3 bits (of 14) from port Y of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$116 ($add).
+Removed top 4 bits (of 14) from port A of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$119 ($add).
+Removed top 4 bits (of 14) from port B of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$119 ($add).
+Removed top 3 bits (of 14) from port Y of cell xorflow_decoder_lane_pipelined.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$119 ($add).
+Removed top 56 bits (of 112) from wire xorflow_decoder_lane_pipelined.$0\event_ids[111:0].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane_pipelined.s0[0].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane_pipelined.s0[1].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane_pipelined.s0[2].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane_pipelined.s0[3].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane_pipelined.s0[4].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane_pipelined.s0[5].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane_pipelined.s0[6].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane_pipelined.s0[7].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane_pipelined.s1[0].
+Removed top 5 bits (of 14) from wire xorflow_decoder_lane_pipelined.s1[1].
+Removed top 5 bits (of 14) from wire xorflow_decoder_lane_pipelined.s1[2].
+Removed top 5 bits (of 14) from wire xorflow_decoder_lane_pipelined.s1[3].
+Removed top 5 bits (of 14) from wire xorflow_decoder_lane_pipelined.s1[5].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane_pipelined.s2[0].
+
+3.11. Executing PEEPOPT pass (run peephole optimizers).
+
+3.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane_pipelined..
+Removed 0 unused cells and 15 unused wires.
+<suppressed ~1 debug messages>
+
+3.13. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module xorflow_decoder_lane_pipelined:
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$103 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$104 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$106 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$108 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$111 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$114 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$117 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$105 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$107 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$109 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$112 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$115 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$118 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$110 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$113 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$116 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$119 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$21 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$33 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$45 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$57 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$69 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$81 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$9 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$93 ($add).
+  merging $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$117 into $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$118.
+  merging $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$114 into $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$115.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$81.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$69.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$57.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$45.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$33.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$21.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$119.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$116.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$113.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$110.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$112.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$109.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$107.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$105.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$9.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$93.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$111.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$108.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$106.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$104.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$103.
+  creating $macc cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$115: $auto$alumacc.cc:365:replace_macc$203
+  creating $macc cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$118: $auto$alumacc.cc:365:replace_macc$204
+  creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$12 ($lt): new $alu
+  creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$24 ($lt): new $alu
+  creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$36 ($lt): new $alu
+  creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$48 ($lt): new $alu
+  creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$63 ($lt): new $alu
+  creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$75 ($lt): new $alu
+  creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$87 ($lt): new $alu
+  creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$99 ($lt): new $alu
+  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$99: $auto$alumacc.cc:485:replace_alu$213
+  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$87: $auto$alumacc.cc:485:replace_alu$218
+  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$75: $auto$alumacc.cc:485:replace_alu$223
+  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$63: $auto$alumacc.cc:485:replace_alu$228
+  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$48: $auto$alumacc.cc:485:replace_alu$233
+  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$36: $auto$alumacc.cc:485:replace_alu$238
+  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$24: $auto$alumacc.cc:485:replace_alu$243
+  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:33$12: $auto$alumacc.cc:485:replace_alu$248
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$103: $auto$alumacc.cc:485:replace_alu$253
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$104: $auto$alumacc.cc:485:replace_alu$256
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$106: $auto$alumacc.cc:485:replace_alu$259
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$108: $auto$alumacc.cc:485:replace_alu$262
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20$111: $auto$alumacc.cc:485:replace_alu$265
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$93: $auto$alumacc.cc:485:replace_alu$268
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$9: $auto$alumacc.cc:485:replace_alu$271
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$105: $auto$alumacc.cc:485:replace_alu$274
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$107: $auto$alumacc.cc:485:replace_alu$277
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$109: $auto$alumacc.cc:485:replace_alu$280
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21$112: $auto$alumacc.cc:485:replace_alu$283
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$110: $auto$alumacc.cc:485:replace_alu$286
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$113: $auto$alumacc.cc:485:replace_alu$289
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$116: $auto$alumacc.cc:485:replace_alu$292
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22$119: $auto$alumacc.cc:485:replace_alu$295
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$21: $auto$alumacc.cc:485:replace_alu$298
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$33: $auto$alumacc.cc:485:replace_alu$301
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$45: $auto$alumacc.cc:485:replace_alu$304
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$57: $auto$alumacc.cc:485:replace_alu$307
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$69: $auto$alumacc.cc:485:replace_alu$310
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:31$81: $auto$alumacc.cc:485:replace_alu$313
+  created 29 $alu and 2 $macc cells.
+
+3.14. Executing SHARE pass (SAT-based resource sharing).
+
+3.15. Executing OPT pass (performing simple optimizations).
+
+3.15.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane_pipelined.
+
+3.15.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\xorflow_decoder_lane_pipelined'.
+Removed a total of 0 cells.
+
+3.15.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \xorflow_decoder_lane_pipelined..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+3.15.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \xorflow_decoder_lane_pipelined.
+Performed a total of 0 changes.
+
+3.15.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\xorflow_decoder_lane_pipelined'.
+Removed a total of 0 cells.
+
+3.15.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.15.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane_pipelined..
+Removed 2 unused cells and 8 unused wires.
+<suppressed ~3 debug messages>
+
+3.15.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane_pipelined.
+
+3.15.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.15.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \xorflow_decoder_lane_pipelined..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+3.15.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \xorflow_decoder_lane_pipelined.
+Performed a total of 0 changes.
+
+3.15.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\xorflow_decoder_lane_pipelined'.
+Removed a total of 0 cells.
+
+3.15.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.15.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane_pipelined..
+
+3.15.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane_pipelined.
+
+3.15.16. Finished OPT passes. (There is nothing left to do.)
+
+3.16. Executing MEMORY pass.
+
+3.16.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+3.16.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+3.16.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+3.16.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+3.16.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+3.16.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane_pipelined..
+
+3.16.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+3.16.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+3.16.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane_pipelined..
+
+3.16.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+3.17. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane_pipelined..
+
+3.18. Executing OPT pass (performing simple optimizations).
+
+3.18.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane_pipelined.
+<suppressed ~18 debug messages>
+
+3.18.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\xorflow_decoder_lane_pipelined'.
+<suppressed ~12 debug messages>
+Removed a total of 4 cells.
+
+3.18.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.18.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane_pipelined..
+Removed 3 unused cells and 7 unused wires.
+<suppressed ~4 debug messages>
+
+3.18.5. Finished fast OPT passes.
+
+3.19. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+3.20. Executing OPT pass (performing simple optimizations).
+
+3.20.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane_pipelined.
+
+3.20.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\xorflow_decoder_lane_pipelined'.
+Removed a total of 0 cells.
+
+3.20.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \xorflow_decoder_lane_pipelined..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+3.20.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \xorflow_decoder_lane_pipelined.
+Performed a total of 0 changes.
+
+3.20.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\xorflow_decoder_lane_pipelined'.
+Removed a total of 0 cells.
+
+3.20.6. Executing OPT_SHARE pass.
+
+3.20.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.20.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane_pipelined..
+
+3.20.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane_pipelined.
+
+3.20.10. Finished OPT passes. (There is nothing left to do.)
+
+3.21. Executing TECHMAP pass (map to technology primitives).
+
+3.21.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+3.21.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $logic_not.
+Using template $paramod$4ccbe221165818e15f326ddee3d1183c7924e12f\_90_alu for cells of type $alu.
+Using template $paramod$9befa12646ab1d64090f7cfa4f3c72972b2004e7\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $eq.
+Using template $paramod$bf2e0d75ecaff62813f871a5142c7021af38bf5c\_90_alu for cells of type $alu.
+Using template $paramod$32a7b7b86c07519b7537abc18e96f0331f97914d\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $sdff.
+Using template $paramod$7af24cf7f572852703f08ef7a936c59efa2c57af\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $dff.
+Using template $paramod$3ea884b3fc54c26d33846837c3c8815dcf82fb58\_90_alu for cells of type $alu.
+Using template $paramod$091610cd349a68bd5539cffd7126f0d76e9bca00\_90_alu for cells of type $alu.
+Using template $paramod$f85408ed1aa3d09e465edae8a7bf590332ae9f7b\_90_alu for cells of type $alu.
+Using template $paramod$4a415917893dee803fd6bb4224141297e1541efe\_90_alu for cells of type $alu.
+Using template $paramod$d1615bf4e5e328245ffd1550e5fe105901cda77b\_90_alu for cells of type $alu.
+Using template $paramod$5de5fbe7c1e0726c07e3a4cebe563a6a1315b736\_90_alu for cells of type $alu.
+Using template $paramod$1a3a0c35c4a4896fbfd612699525c057298e72d2\_90_alu for cells of type $alu.
+Using template $paramod$79fc7abbb3333dbd5736999d565fd903198fb1eb\_90_alu for cells of type $alu.
+Using extmapper maccmap for cells of type $macc.
+  add \in_word [55:48] (8 bits, unsigned)
+  add \s1[4] [8:0] (9 bits, unsigned)
+  add \in_word [47:40] (8 bits, unsigned)
+Using template $paramod$33acca59acb78d0be1d2963f30b104550f2b2c75\_90_alu for cells of type $alu.
+Using template $paramod$f31f04e77f067a6da635d02c4a81c0a799bf18a4\_90_alu for cells of type $alu.
+  add \in_word [63:56] (8 bits, unsigned)
+  add \s1[5] (9 bits, unsigned)
+  add \in_word [55:48] (8 bits, unsigned)
+Using template $paramod$b9c2f5fdca7a2fb3c384c319f77e69dd0092810e\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $mux.
+Using template $paramod$adbaf76fa5a3091a329503792521395f8ff4d1a4\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000001001 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000001010 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000001110 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000100 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000011 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000001011 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000010 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001001 for cells of type $fa.
+Using template $paramod$484d51534650924b7ed4c69e46eed3a56904771f\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000001 for cells of type $lcu.
+Using extmapper simplemap for cells of type $or.
+No more expansions possible.
+<suppressed ~2650 debug messages>
+
+3.22. Executing OPT pass (performing simple optimizations).
+
+3.22.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xorflow_decoder_lane_pipelined.
+<suppressed ~1003 debug messages>
+
+3.22.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\xorflow_decoder_lane_pipelined'.
+<suppressed ~327 debug messages>
+Removed a total of 109 cells.
+
+3.22.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.22.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \xorflow_decoder_lane_pipelined..
+Removed 203 unused cells and 973 unused wires.
+<suppressed ~204 debug messages>
+
+3.22.5. Finished fast OPT passes.
+
+3.23. Executing HIERARCHY pass (managing design hierarchy).
+
+3.23.1. Analyzing design hierarchy..
+Top module:  \xorflow_decoder_lane_pipelined
+
+3.23.2. Analyzing design hierarchy..
+Top module:  \xorflow_decoder_lane_pipelined
+Removed 0 unused modules.
+
+3.24. Printing statistics.
+
+=== xorflow_decoder_lane_pipelined ===
+
+   Number of wires:                710
+   Number of wire bits:           2523
+   Number of public wires:          52
+   Number of public wire bits:     833
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1960
+     $_AND_                        708
+     $_DFF_P_                      217
+     $_MUX_                        112
+     $_NOT_                         15
+     $_OR_                         326
+     $_SDFF_PP0_                   120
+     $_XOR_                        462
+
+3.25. Executing CHECK pass (checking for obvious problems).
+Checking module xorflow_decoder_lane_pipelined...
+Found and reported 0 problems.
+
+4. Printing statistics.
+
+=== xorflow_decoder_lane_pipelined ===
+
+   Number of wires:                710
+   Number of wire bits:           2523
+   Number of public wires:          52
+   Number of public wire bits:     833
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1960
+     $_AND_                        708
+     $_DFF_P_                      217
+     $_MUX_                        112
+     $_NOT_                         15
+     $_OR_                         326
+     $_SDFF_PP0_                   120
+     $_XOR_                        462
+
+Warnings: 5 unique messages, 5 total
+End of script. Logfile hash: 66305a2a38, CPU: user 0.96s system 0.04s, MEM: 31.42 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 24% 31x opt_expr (0 sec), 23% 1x techmap (0 sec), ...

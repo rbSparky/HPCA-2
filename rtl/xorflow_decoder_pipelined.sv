@@ -34,3 +34,27 @@ module xorflow_decoder_lane_pipelined (
     end
   end
 endmodule
+
+// Hierarchical composition used by the accelerator integration: each physical
+// lane is a separately placed decoder macro. The 2,048-bit stream is an
+// internal HBM-buffer interface, not a package-level pin interface.
+module xorflow_decoder_bank_pipelined (
+    input wire clk,
+    input wire [2047:0] in_words,
+    input wire [63:0] modes,
+    input wire [447:0] base_ids,
+    input wire [127:0] event_counts,
+    output wire [2047:0] dense_masks,
+    output wire [3583:0] event_ids,
+    output wire [255:0] event_valid
+);
+  genvar lane;
+  generate for (lane=0; lane<32; lane=lane+1) begin: lanes
+    xorflow_decoder_lane_pipelined decoder (
+      .clk(clk), .in_word(in_words[lane*64 +: 64]), .mode(modes[lane*2 +: 2]),
+      .base_id(base_ids[lane*14 +: 14]), .input_event_count(event_counts[lane*4 +: 4]),
+      .dense_mask(dense_masks[lane*64 +: 64]), .event_ids(event_ids[lane*112 +: 112]),
+      .event_valid(event_valid[lane*8 +: 8])
+    );
+  end endgenerate
+endmodule
