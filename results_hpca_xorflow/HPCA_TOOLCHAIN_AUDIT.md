@@ -103,6 +103,11 @@ bank route is deliberately not used as a PPA result because its 8,577 exposed
 top-level pins are physically artificial. Physical bank closure is therefore a
 hierarchical macro-and-SRAM integration task, not a decoder timing blocker.
 
+Final regression verification used the recorded project interpreter:
+`PYTHONPATH=src PYTEST_DISABLE_PLUGIN_AUTOLOAD /home/rishabh/miniconda/envs/taugat_pyg/bin/python -m pytest -q`.
+It completed with `92 passed` (two third-party-library warnings). This includes
+the pipelined RTL/software co-simulation gate.
+
 CACTI support-cache sweep (45 nm model) also passes through the Docker
 wrapper: 16 KiB = 0.969 ns / 0.1915 nJ, 32 KiB = 1.010 ns / 0.2069 nJ, and
 64 KiB = 1.126 ns / 0.2377 nJ access/cycle-energy points. These are modeled
