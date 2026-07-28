@@ -1,0 +1,41 @@
+# Admitted overnight tranche for the HPCA XORFLOW evidence suite.  This file is
+# intentionally declarative: the dashboard denominator is derived only from
+# these weights, never from jobs that happened to be launched.
+deadline_utc: "2026-07-31T23:59:00Z"
+workspace_limit_gib: 50
+gpu_id: 1
+tranche_hours: 8
+progress_weights:
+  smoke: 20
+  quality: 15
+  primary: 25
+  controls: 15
+  tools: 15
+  report: 10
+workloads:
+  - config_id: ogbn_arxiv_deepres8_w128_s17
+    dataset: OGBN-Arxiv
+    role: hard_principal
+    metric: accuracy
+    floor: 0.68
+  - config_id: ogbn_arxiv_deepres8_w128_s27
+    dataset: OGBN-Arxiv
+    role: hard_principal
+    metric: accuracy
+    floor: 0.68
+  - config_id: reddit_deepres8_w128_s7_native
+    dataset: Reddit
+    role: hard_principal
+    metric: accuracy
+    floor: 0.90
+  - config_id: yelp_deepres8_w128_s7_balanced_fallback
+    dataset: Yelp
+    role: supplementary
+    metric: micro_f1
+    floor: 0.45
+    borderline_margin: 0.02
+  - config_id: flickr_deepres8_w128_s7
+    dataset: Flickr
+    role: transfer
+    metric: accuracy
+    floor: 0.45

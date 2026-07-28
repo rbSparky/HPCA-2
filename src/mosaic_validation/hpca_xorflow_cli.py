@@ -74,8 +74,8 @@ def _case(project: Path, config_id: str) -> tuple[np.ndarray, object, str]:
         trace = project / "artifacts_hpca_xorflow/workloads/reddit_deepres8_w128_s7_native/fp8_supports.npz"
         data = load_dataset("Reddit", project / "data")[0]
         return _unpack(trace), data, "Reddit"
-    if config_id == "yelp_deepres8_w128_s7":
-        trace = project / "artifacts_hpca_xorflow/workloads/yelp_deepres8_w128_s7/fp8_supports.npz"
+    if config_id.startswith("yelp_deepres8_w128_s7"):
+        trace = project / f"artifacts_hpca_xorflow/workloads/{config_id}/fp8_supports.npz"
         data = load_dataset("Yelp", project / "data")[0]
         return _unpack(trace), data, "Yelp"
     if config_id == "flickr_deepres8_w128_s7":
