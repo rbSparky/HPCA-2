@@ -161,8 +161,9 @@ class Ledger:
             # corrective rerun (the failed attempt remains in the evidence log).
             job = matching[-1] if matching else None
             item_rows = [row for row in self.rows if row["item_id"] == queue_id]
-            stage_rows = [row for row in self.rows if row["stage"] == stage]
-            latest = (item_rows[-1]["status"] if item_rows else (stage_rows[-1]["status"] if stage_rows else ""))
+            # Queue state is per item.  A completed sibling must never make a
+            # later sensitivity or temporal item appear complete.
+            latest = item_rows[-1]["status"] if item_rows else ""
             default = "COMPLETE" if item.get("already_complete") else str(item.get("status", "PENDING"))
             status = job["status"] if job else ({"SUCCEEDED": "COMPLETE", "FAILED": "BLOCKED", "SKIPPED": "SKIPPED"}.get(latest, default))
             if status == "SUCCEEDED":
