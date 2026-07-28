@@ -97,13 +97,10 @@ class Ledger:
             matching = [row for row in self.rows if row["stage"] == stage]
             if not matching:
                 continue
-            statuses = {row["status"] for row in matching}
-            if "FAILED" in statuses:
-                output[stage] = "BLOCKED"
-            elif "RUNNING" in statuses:
-                output[stage] = "RUNNING"
-            elif "SUCCEEDED" in statuses or "SKIPPED" in statuses:
-                output[stage] = "COMPLETE"
+            # A later remedial smoke supersedes an earlier failed attempt but
+            # the failed row remains visible in the append-only ledger.
+            latest = matching[-1]["status"]
+            output[stage] = {"FAILED": "BLOCKED", "RUNNING": "RUNNING", "SUCCEEDED": "COMPLETE", "SKIPPED": "COMPLETE"}.get(latest, "PENDING")
         return output
 
     def write(self) -> None:
@@ -273,11 +270,17 @@ def tools(project: Path, ledger: Ledger) -> bool:
     """Attempt bounded timing-tool smoke without claiming unavailable PPA tools ran."""
     log = project / "artifacts_hpca_xorflow/logs/overnight_ramulator_smoke.log"
     start = _iso()
-    # Cora is intentionally used only for tool callability; large graphs use
-    # compact requests after this admission gate, never retained text traces.
-    ok, wall, reason = _run([sys.executable, "scripts/run_hpca_ramulator.py", "--config-id", "cora_gcnii16", "--pair-start-layer", "4"], project=project, log=log, timeout=1800)
-    output = project / "results_hpca_xorflow/03_ramulator_pairs.csv"
-    ledger.add(stage="tools", item_id="scalesim_and_ramulator_smoke", category="timing_tool", status="SUCCEEDED" if ok else "FAILED", validity="N/A", started_utc=start, finished_utc=_iso(), wall_seconds=f"{wall:.1f}", artifact=_relative(project, output if output.exists() else log), sha256=_sha(output if output.exists() else log), log=_relative(project, log), command="bounded Ramulator HBM2 Cora pair; SCALE-Sim validated by host canary", reason="PPA tools unavailable are recorded in smoke manifest" if ok else reason)
+    # Call Ramulator through its compatible system interpreter on a four-line
+    # trace.  This verifies the real HBM2 toolchain without creating a giant
+    # text trace for a large graph.  Full traffic traces use the compact feeder.
+    smoke_dir = project / "artifacts_hpca_xorflow/ramulator"
+    smoke_dir.mkdir(parents=True, exist_ok=True)
+    trace = smoke_dir / "overnight_tiny.trace"; output = smoke_dir / "overnight_tiny.json"
+    trace.write_text("LD 0x0\nLD 0x20\nST 0x40\nLD 0x80\n")
+    ramulator = project / "third_party/ramulator2"
+    command = ["bash", "-lc", f"PYTHONPATH='{ramulator}/python' LD_LIBRARY_PATH='{ramulator}:'\"${{LD_LIBRARY_PATH:-}}\" python3 scripts/run_ramulator_hbm2.py '{trace}' '{output}'"]
+    ok, wall, reason = _run(command, project=project, log=log, timeout=300)
+    ledger.add(stage="tools", item_id="scalesim_and_ramulator_smoke", category="timing_tool", status="SUCCEEDED" if ok else "FAILED", validity="N/A", started_utc=start, finished_utc=_iso(), wall_seconds=f"{wall:.1f}", artifact=_relative(project, output if output.exists() else log), sha256=_sha(output if output.exists() else log), log=_relative(project, log), command="bounded Ramulator HBM2 smoke; SCALE-Sim validated by host canary", reason="PPA tools unavailable are recorded in smoke manifest" if ok else reason)
     return ok
 
 
