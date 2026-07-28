@@ -121,8 +121,11 @@ def _sources(edge_index: np.ndarray, order: str, source_tile_size: int = 512) ->
 
 def _pair_starts(mask_count: int, limit: int | None) -> list[int]:
     # Supports are numbered from one in paper tables; the hidden-layer index is
-    # zero based.  Begin at hidden layer four and form non-overlapping pairs.
-    result = list(range(3, mask_count - 1, 2))
+    # zero based.  The principal eight-layer setting begins at hidden layer
+    # four.  A four-layer depth ablation has no legal post-layer-four pair, so
+    # use its earliest non-overlapping pairs as an explicitly short-depth
+    # diagnostic rather than emitting an empty CSV that the host cannot audit.
+    result = list(range(3, mask_count - 1, 2)) if mask_count >= 5 else list(range(0, mask_count - 1, 2))
     return result if limit is None else result[:limit]
 
 

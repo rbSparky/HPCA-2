@@ -1,6 +1,10 @@
 import numpy as np
 
 from mosaic_validation.hpca_xorflow_cli import _output_writeback_traffic, _pair_starts, _sources, build_pair_format_plan
+
+
+def test_short_depth_pair_starts_are_a_nonempty_diagnostic() -> None:
+    assert _pair_starts(4, None) == [0, 2]
 from mosaic_validation.memory_subsystem import build_mixed_sliced_layout, validate_nonoverlap
 
 
