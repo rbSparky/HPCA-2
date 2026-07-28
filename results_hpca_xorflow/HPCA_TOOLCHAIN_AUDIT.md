@@ -48,3 +48,30 @@ The default configuration and an unrelated-directory wrapper invocation both
 pass. The default smoke reports access time 1.47098 ns, cycle time 1.86851 ns,
 dynamic read energy 0.303592 nJ, and data/tag area 1.78124/0.108777 mm².
 These are CACTI model outputs, not measured silicon.
+
+## Actual XORFLOW RTL route
+
+The 32-lane bank synthesized successfully (71,359 instances, approximately
+100,599 um²), but its unwrapped top-level interface has 8,577 pins and the
+Nangate45 perimeter cannot place that many pins. This is recorded as a
+physical-integration constraint, not hidden.
+
+The physically legal single-lane XORFLOW top was then routed through the full
+ORFS Nangate45 flow. Final artifacts are under
+`artifacts_safezone/openroad/xorflow_decoder_lane/`:
+
+- synthesis: 2,373 initial instances; final routed design area 4,150 um²;
+- detailed route DRC: 0 violations after routing optimization;
+- final GDS/DEF/ODB/SPEF/Verilog: present;
+- extracted final power report: 25.7 mW at the flow's 1.1 V corner;
+- final routed timing at a 1.0 ns constraint: WNS −0.17 ns, TNS −2.56 ns.
+
+Thus the lane is routable and electrically clean, but this unmodified
+three-stage combinational prefix lane does not close a 1 GHz timing target;
+its measured route requires roughly 1.17 ns or slower. The bank remains a
+logic-synthesis/formal result until a hierarchical physical top is defined.
+
+CACTI support-cache sweep (45 nm model) also passes through the Docker
+wrapper: 16 KiB = 0.969 ns / 0.1915 nJ, 32 KiB = 1.010 ns / 0.2069 nJ, and
+64 KiB = 1.126 ns / 0.2377 nJ access/cycle-energy points. These are modeled
+SRAM estimates, not silicon measurements.

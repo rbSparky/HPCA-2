@@ -1,0 +1,9 @@
+export DESIGN_NAME = xorflow_decoder_lane_top
+export PLATFORM = nangate45
+export VERILOG_FILES = $(DESIGN_HOME)/src/xorflow_decoder/xorflow_decoder.sv $(DESIGN_HOME)/src/xorflow_decoder_lane/xorflow_decoder_lane_top.v
+export SDC_FILE = $(DESIGN_HOME)/$(PLATFORM)/xorflow_decoder_lane/constraint.sdc
+export ABC_AREA = 1
+export CORE_UTILIZATION ?= 35
+export PLACE_DENSITY_LB_ADDON = 0.20
+export TNS_END_PERCENT = 100
+export SYNTH_REPEATABLE_BUILD ?= 1

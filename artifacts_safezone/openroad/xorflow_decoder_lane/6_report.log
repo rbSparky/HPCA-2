@@ -1,0 +1,70 @@
+OpenROAD 26Q3-771-g7cfb2105c9 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 8 thread(s).
+read_liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+read_db /work/results/nangate45/xorflow_decoder_lane_top/base/6_1_fill.odb
+read_sdc /work/results/nangate45/xorflow_decoder_lane_top/base/6_1_fill.sdc
+source /OpenROAD-flow-scripts/flow/platforms/nangate45/setRC.tcl
+write_db /work/results/nangate45/xorflow_decoder_lane_top/base/6_final.odb
+write_sdc -no_timestamp /work/results/nangate45/xorflow_decoder_lane_top/base/6_final.sdc
+Deleted 0 routing obstructions
+[INFO RCX-0431] Defined process_corner X with ext_model_index 0
+[INFO RCX-0029] Defined extraction corner X
+[WARNING RCX-0514] The ext_model_file option is deprecated. Use set_extraction_rules_file command instead.
+[INFO RCX-0435] Reading extraction model file /OpenROAD-flow-scripts/flow/platforms/nangate45/rcx_patterns.rules ...
+[INFO RCX-0436] RC segment generation xorflow_decoder_lane_top (max_merge_res 50.0) ...
+[INFO RCX-0040] Final 8173 rc segments
+[INFO RCX-0439] Coupling Cap extraction xorflow_decoder_lane_top ...
+[INFO RCX-0440] Coupling threshhold is 0.1000 fF, coupling capacitance less than 0.1000 fF will be grounded.
+[INFO RCX-0442] 49% of 14380 wires extracted
+[INFO RCX-0442] 100% of 14380 wires extracted
+[INFO RCX-0045] Extract 3476 nets, 11465 rsegs, 11465 caps, 20605 ccs
+[INFO RCX-0443] 3476 nets finished
+[INFO PSM-0040] All shapes on net VDD are connected.
+########## IR report #################
+Net              : VDD
+Corner           : default
+Total power      : 2.57e-02 W
+Supply voltage   : 1.10e+00 V
+Worstcase voltage: 1.06e+00 V
+Average voltage  : 1.08e+00 V
+Average IR drop  : 1.52e-02 V
+Worstcase IR drop: 3.58e-02 V
+Percentage drop  : 3.25 %
+######################################
+[INFO PSM-0040] All shapes on net VSS are connected.
+########## IR report #################
+Net              : VSS
+Corner           : default
+Total power      : 2.57e-02 W
+Supply voltage   : 0.00e+00 V
+Worstcase voltage: 6.12e-02 V
+Average voltage  : 1.60e-02 V
+Average IR drop  : 1.60e-02 V
+Worstcase IR drop: 6.12e-02 V
+Percentage drop  : 5.56 %
+######################################
+Cell type report:                       Count       Area
+  Fill cell                              3297    5038.31
+  Tap cell                                136      36.18
+  Clock buffer                             17      22.61
+  Timing Repair Buffer                    676     633.35
+  Inverter                                572     329.84
+  Clock inverter                           15      21.01
+  Sequential cell                         184     832.05
+  Multi-Input combinational cell         1511    2275.36
+  Total                                  6408    9188.70
+Report metrics stage 6, finish...
+
+==========================================================================
+finish report_design_area
+--------------------------------------------------------------------------
+Design area 4150 um^2 45% utilization.
+[WARNING GUI-0076] QStandardPaths: wrong permissions on runtime directory /tmp/xdg-run, 0755 instead of 0700
+[WARNING GUI-0066] Heat map "IR Drop" has not been populated with data.
+[WARNING GUI-0066] Heat map "Routing Congestion" has not been populated with data.
+Elapsed time: 0:05.96[h:]min:sec. CPU time: user 6.28 sys 0.96 (121%). Peak memory: 288704KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+6_report                                  5            281                  N/A
