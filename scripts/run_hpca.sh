@@ -9,10 +9,10 @@ STAGE="all"
 if [[ "${1:-}" == "--full" ]]; then MODE="full"; shift; fi
 if [[ "${1:-}" == "--quick" ]]; then MODE="quick"; shift; fi
 if [[ "${1:-}" == "--stage" ]]; then STAGE="${2:?stage required}"; shift 2; fi
-if [[ $# -ne 0 ]]; then echo "usage: $0 [--quick|--full] [--stage prepare|train|trace|encode|simulate|rtl|report|reproduce|all]" >&2; exit 2; fi
+if [[ $# -ne 0 ]]; then echo "usage: $0 [--quick|--full] [--stage prepare|train|trace|encode|simulate|rtl|report|reproduce|overnight|all]" >&2; exit 2; fi
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-PYTHON_BIN="${MOSAIC_PY:-/home/rishabh/miniconda/envs/taugat_pyg/bin/python}"
+PYTHON_BIN="${MOSAIC_PY:-python3}"
 export PYTHONPATH="$ROOT/src${PYTHONPATH:+:$PYTHONPATH}"
 cd "$ROOT"
 mkdir -p artifacts_hpca_xorflow/logs results_hpca_xorflow
@@ -48,4 +48,9 @@ if [[ "$STAGE" == "rtl" ]]; then
 fi
 if [[ "$STAGE" == "report" || "$STAGE" == "reproduce" ]]; then
   run "$PYTHON_BIN" -m pytest -q
+fi
+if [[ "$STAGE" == "overnight" ]]; then
+  # Dependency-aware GPU-1 admission/tranche controller.  This command does
+  # not train a missing model or turn a borderline metric into a hard gate.
+  run "$PYTHON_BIN" -m mosaic_validation.hpca_overnight --stage overnight
 fi
