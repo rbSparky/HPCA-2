@@ -1,0 +1,62 @@
+
+21. Printing statistics.
+
+=== xorflow_decoder_lane_pipelined ===
+
+        +----------------------------Count including submodules.
+        |        +-------------------Area including submodules.
+        |        |        +----------Local count, excluding submodules.
+        |        |        |        +-Local area, excluding submodules.
+        |        |        |        | 
+     3257        -     3257        - wires
+     3518        -     3518        - wire bits
+      310        -      310        - public wires
+      571        -      571        - public wire bits
+        8        -        8        - ports
+      269        -      269        - port bits
+        -        -        -        - memories
+        -        -        -        - memory bits
+        -        -        -        - processes
+     2848 4.24E+03     2848 4.24E+03 cells
+       23   24.472       23   24.472   AND2_X1
+        1    2.394        1    2.394   AND2_X4
+        2     2.66        2     2.66   AND3_X1
+       93   98.952       93   98.952   AOI21_X1
+        3    5.586        3    5.586   AOI21_X2
+        6     7.98        6     7.98   AOI22_X1
+       61   48.678       61   48.678   BUF_X1
+       35    37.24       35    37.24   BUF_X2
+       19   35.378       19   35.378   BUF_X4
+        2    6.916        2    6.916   BUF_X8
+       15    15.96       15    15.96   CLKBUF_X2
+      337 1.52E+03      337 1.52E+03   DFF_X1
+       39  165.984       39  165.984   FA_X1
+      209   555.94      209   555.94   HA_X1
+      663  352.716      663  352.716   INV_X1
+        5     3.99        5     3.99   INV_X2
+        2     2.66        2     2.66   INV_X4
+      525   418.95      525   418.95   NAND2_X1
+       29    38.57       29    38.57   NAND2_X2
+        3    7.182        3    7.182   NAND2_X4
+      197  209.608      197  209.608   NAND3_X1
+       24    31.92       24    31.92   NAND4_X1
+      149  118.902      149  118.902   NOR2_X1
+       30     39.9       30     39.9   NOR2_X2
+        4    9.576        4    9.576   NOR2_X4
+        8    8.512        8    8.512   NOR3_X1
+        6     7.98        6     7.98   NOR4_X1
+      207  220.248      207  220.248   OAI21_X1
+        9   16.758        9   16.758   OAI21_X2
+        1    3.458        1    3.458   OAI21_X4
+        4    6.384        4    6.384   OAI221_X1
+       12    15.96       12    15.96   OAI22_X1
+        1    2.394        1    2.394   OAI22_X2
+        2    2.128        2    2.128   OR2_X1
+        4     5.32        4     5.32   OR2_X2
+       95   151.62       95   151.62   XNOR2_X1
+        1     2.66        1     2.66   XNOR2_X2
+       22   35.112       22   35.112   XOR2_X1
+
+   Chip area for module '\xorflow_decoder_lane_pipelined': 4244.562000
+     of which used for sequential elements: 1523.914000 (35.90%)
+

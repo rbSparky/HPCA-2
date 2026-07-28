@@ -71,6 +71,26 @@ three-stage combinational prefix lane does not close a 1 GHz timing target;
 its measured route requires roughly 1.17 ns or slower. The bank remains a
 logic-synthesis/formal result until a hierarchical physical top is defined.
 
+### Timing-closure remediation experiment
+
+The routed critical path is exactly the gap prefix (`gap_s1` → `gap_s2` →
+`gap_s3`) plus final base-ID add, rather than a decode-format or memory-system
+limit. An experimental register boundary after `gap_s2` was implemented in
+`rtl/xorflow_decoder_pipelined.sv`. It accepts one input word every cycle and
+adds only one cycle of latency. The fully routed Nangate45 result is decisive:
+
+- final WNS `+0.31 ns`, TNS `0.00 ns` at the same 1.0 ns target;
+- reported minimum period `0.69 ns` (1.459 GHz);
+- detailed-route DRC `0`; final route artifacts under
+  `artifacts_safezone/openroad/xorflow_decoder_pipelined/`;
+- routed area `4,590 um²`, versus `4,150 um²` for the unpipelined lane;
+- modeled routed power `15.5 mW` at the flow's 1.1 V corner.
+
+This establishes that the prior 1 GHz miss is readily repairable through a
+throughput-preserving pipeline boundary. The variant remains an engineering
+prototype until its cycle-latency contract is added to the decoder's full
+software/RTL co-simulation suite.
+
 CACTI support-cache sweep (45 nm model) also passes through the Docker
 wrapper: 16 KiB = 0.969 ns / 0.1915 nJ, 32 KiB = 1.010 ns / 0.2069 nJ, and
 64 KiB = 1.126 ns / 0.2377 nJ access/cycle-energy points. These are modeled

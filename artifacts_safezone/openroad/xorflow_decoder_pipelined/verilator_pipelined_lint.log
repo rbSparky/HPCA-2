@@ -1,0 +1,29 @@
+%Warning-DECLFILENAME: rtl/xorflow_decoder_pipelined.sv:3:8: Filename 'xorflow_decoder_pipelined' does not match MODULE name: 'xorflow_decoder_lane_pipelined'
+    3 | module xorflow_decoder_lane_pipelined (
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                       ... For warning description see https://verilator.org/warn/DECLFILENAME?v=5.020
+                       ... Use "/* verilator lint_off DECLFILENAME */" and lint_on around source to disable this message.
+%Warning-GENUNNAMED: rtl/xorflow_decoder_pipelined.sv:20:28: Unnamed generate block 'genblk1' (IEEE 1800-2017 27.6)
+                                                           : ... Suggest assign a label with 'begin : gen_<label_name>'
+   20 |     if (i>=1) assign s1[i] = s0[i]+s0[i-1]; else assign s1[i]=s0[i];
+      |                            ^
+%Warning-GENUNNAMED: rtl/xorflow_decoder_pipelined.sv:20:62: Unnamed generate block 'genblk1' (IEEE 1800-2017 27.6)
+                                                           : ... Suggest assign a label with 'begin : gen_<label_name>'
+   20 |     if (i>=1) assign s1[i] = s0[i]+s0[i-1]; else assign s1[i]=s0[i];
+      |                                                              ^
+%Warning-GENUNNAMED: rtl/xorflow_decoder_pipelined.sv:21:28: Unnamed generate block 'genblk2' (IEEE 1800-2017 27.6)
+                                                           : ... Suggest assign a label with 'begin : gen_<label_name>'
+   21 |     if (i>=2) assign s2[i] = s1[i]+s1[i-2]; else assign s2[i]=s1[i];
+      |                            ^
+%Warning-GENUNNAMED: rtl/xorflow_decoder_pipelined.sv:21:62: Unnamed generate block 'genblk2' (IEEE 1800-2017 27.6)
+                                                           : ... Suggest assign a label with 'begin : gen_<label_name>'
+   21 |     if (i>=2) assign s2[i] = s1[i]+s1[i-2]; else assign s2[i]=s1[i];
+      |                                                              ^
+%Warning-GENUNNAMED: rtl/xorflow_decoder_pipelined.sv:22:28: Unnamed generate block 'genblk3' (IEEE 1800-2017 27.6)
+                                                           : ... Suggest assign a label with 'begin : gen_<label_name>'
+   22 |     if (i>=4) assign s3[i] = s2_q[i]+s2_q[i-4]; else assign s3[i]=s2_q[i];
+      |                            ^
+%Warning-GENUNNAMED: rtl/xorflow_decoder_pipelined.sv:22:66: Unnamed generate block 'genblk3' (IEEE 1800-2017 27.6)
+                                                           : ... Suggest assign a label with 'begin : gen_<label_name>'
+   22 |     if (i>=4) assign s3[i] = s2_q[i]+s2_q[i-4]; else assign s3[i]=s2_q[i];
+      |                                                                  ^
