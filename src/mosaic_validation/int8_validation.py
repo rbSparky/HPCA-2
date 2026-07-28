@@ -130,6 +130,16 @@ def _deepres_fp8_forward(self, x, edge_index, trace=False):
     return (logits, traces) if trace else logits
 
 
+def _generic_stack_fp8_forward(self, x, edge_index, trace=False):
+    """Quantized activation path for SAGE/GIN operator smoke and traces."""
+    x = fake_quant_fp8(torch.relu(self.input(x))); traces = []
+    for conv in self.convs:
+        x = fake_quant_fp8(torch.relu(conv(x, edge_index)))
+        if trace: traces.append(x)
+    logits = self.output(x)
+    return (logits, traces) if trace else logits
+
+
 def make_int8_model(model: nn.Module, quantize_model_weights: bool = False,
                     value_format: str = "uint8", weight_format: str = "fp32") -> nn.Module:
     """Create a support-preserving INT8-activation inference model.
@@ -152,6 +162,8 @@ def make_int8_model(model: nn.Module, quantize_model_weights: bool = False,
     elif isinstance(result, DeepResV2):
         forward = _deepres_fp8_forward if value_format == "fp8" else _deepres_int8_forward
         result.forward = types.MethodType(forward, result)
+    elif type(result).__name__ in {"SAGE8", "GIN8"}:
+        result.forward = types.MethodType(_generic_stack_fp8_forward, result)
     else:
         raise TypeError(f"unsupported INT8 model: {type(result).__name__}")
     return result
