@@ -1,0 +1,11 @@
+/home/Rishabh@MLL-5090/envs/gpu-test/bin/python -m mosaic_validation.scalesim_smoke_runner -c /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/scalesim/b8ba3dd9e960b582/scale.cfg -t /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/scalesim/b8ba3dd9e960b582/topology.csv -l /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/third_party/SCALE-Sim/layouts/conv_nets/test.csv -p /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/scalesim/b8ba3dd9e960b582/reports
+
+STDOUT
+
+STDERR
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/src/mosaic_validation/scalesim_smoke_runner.py", line 5, in <module>
+    from scalesim.scale_sim import scalesim
+ModuleNotFoundError: No module named 'scalesim'

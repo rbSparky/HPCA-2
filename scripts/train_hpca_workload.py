@@ -22,9 +22,10 @@ def main() -> None:
     parser.add_argument("--sampled-neighbors", type=int, default=2)
     parser.add_argument("--sampled-batch-size", type=int, default=128)
     parser.add_argument("--csr-checkpoint-training", action="store_true")
+    parser.add_argument("--multi-label-pos-weight", action="store_true", help="fallback: train-split BCE class balancing for multi-label data")
     parser.add_argument("--force-cpu", action="store_true")
     args = parser.parse_args()
-    config = WorkloadConfig(dataset=args.dataset, config_id=args.config_id, seed=args.seed, width=args.width, layers=args.layers, max_epochs=args.max_epochs, learning_rate=args.learning_rate, dropout=args.dropout, residual_scale=args.residual_scale, sampled_batches_per_epoch=args.sampled_batches_per_epoch, sampled_neighbors=args.sampled_neighbors, sampled_batch_size=args.sampled_batch_size, csr_checkpoint_training=args.csr_checkpoint_training)
+    config = WorkloadConfig(dataset=args.dataset, config_id=args.config_id, seed=args.seed, width=args.width, layers=args.layers, max_epochs=args.max_epochs, learning_rate=args.learning_rate, dropout=args.dropout, residual_scale=args.residual_scale, sampled_batches_per_epoch=args.sampled_batches_per_epoch, sampled_neighbors=args.sampled_neighbors, sampled_batch_size=args.sampled_batch_size, csr_checkpoint_training=args.csr_checkpoint_training, multi_label_pos_weight=args.multi_label_pos_weight)
     print(json.dumps(train_and_trace(Path.cwd(), config, force_cpu=args.force_cpu), indent=2, sort_keys=True))
 
 

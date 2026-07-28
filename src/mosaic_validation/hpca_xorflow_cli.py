@@ -38,6 +38,20 @@ def _unpack(path: Path) -> np.ndarray:
 
 
 def _case(project: Path, config_id: str) -> tuple[np.ndarray, object, str]:
+    if config_id.startswith("ogbn_arxiv_deepres8_w128_s"):
+        trace = project / f"artifacts_hpca_xorflow/workloads/{config_id}/fp8_supports.npz"
+        from ogb.nodeproppred import PygNodePropPredDataset
+        import torch_geometric.transforms as transforms
+        original_load = torch.load
+        def trusted_load(*args, **kwargs):
+            kwargs.setdefault("weights_only", False)
+            return original_load(*args, **kwargs)
+        torch.load = trusted_load
+        try:
+            dataset = PygNodePropPredDataset(name="ogbn-arxiv", root=str(project / "data"), transform=transforms.ToUndirected())
+        finally:
+            torch.load = original_load
+        return _unpack(trace), dataset[0], "OGBN-Arxiv"
     if config_id == "ogbn_arxiv_deepres8_w128":
         from ogb.nodeproppred import PygNodePropPredDataset
         import torch_geometric.transforms as transforms
@@ -56,6 +70,18 @@ def _case(project: Path, config_id: str) -> tuple[np.ndarray, object, str]:
         finally:
             torch.load = original_load
         return _unpack(project / "artifacts_safezone/ogbn_arxiv/supports.npz"), dataset[0], "OGBN-Arxiv"
+    if config_id == "reddit_deepres8_w128_s7_native":
+        trace = project / "artifacts_hpca_xorflow/workloads/reddit_deepres8_w128_s7_native/fp8_supports.npz"
+        data = load_dataset("Reddit", project / "data")[0]
+        return _unpack(trace), data, "Reddit"
+    if config_id == "yelp_deepres8_w128_s7":
+        trace = project / "artifacts_hpca_xorflow/workloads/yelp_deepres8_w128_s7/fp8_supports.npz"
+        data = load_dataset("Yelp", project / "data")[0]
+        return _unpack(trace), data, "Yelp"
+    if config_id == "flickr_deepres8_w128_s7":
+        trace = project / "artifacts_hpca_xorflow/workloads/flickr_deepres8_w128_s7/fp8_supports.npz"
+        data = load_dataset("Flickr", project / "data")[0]
+        return _unpack(trace), data, "Flickr"
     path = project / f"artifacts_final8/masks/{config_id}_fp8_supports.npz"
     if "pubmed" in config_id:
         data = load_dataset("PubMed", project / "data")[0]
@@ -144,7 +170,17 @@ def build_pair_format_plan(pair: np.ndarray, tiles: list[np.ndarray], slice_widt
     }
 
 
-def run(project: Path, config_ids: list[str], *, slice_width: int, tile_rows: int, cache_bytes: int, max_pairs: int | None, edge_order: str) -> pd.DataFrame:
+def run(
+    project: Path,
+    config_ids: list[str],
+    *,
+    slice_width: int,
+    tile_rows: int,
+    cache_bytes: int,
+    max_pairs: int | None,
+    edge_order: str,
+    output_path: Path | None = None,
+) -> pd.DataFrame:
     results = project / "results_hpca_xorflow"
     artifacts = project / "artifacts_hpca_xorflow"
     results.mkdir(exist_ok=True)
@@ -275,12 +311,20 @@ def run(project: Path, config_ids: list[str], *, slice_width: int, tile_rows: in
             rows.append(row)
             logger.info(json.dumps({"event": "pair_complete", **row}, sort_keys=True))
     frame = pd.DataFrame(rows)
-    frame.to_csv(results / "01_causal_pair_preflight.csv", index=False)
+    # A large-workload job must never overwrite another configuration's
+    # evidence.  The legacy aggregate filename remains the explicit default
+    # for compact quick runs only.
+    target = output_path or (results / "01_causal_pair_preflight.csv")
+    if not target.is_absolute():
+        target = project / target
+    target.parent.mkdir(parents=True, exist_ok=True)
+    frame.to_csv(target, index=False)
     manifest = {
         "command": "causal_pair_preflight",
         "wall_seconds": time.monotonic() - started,
         "rows": len(frame),
-        "sha256": hashlib.sha256((results / "01_causal_pair_preflight.csv").read_bytes()).hexdigest(),
+        "output": str(target.relative_to(project)),
+        "sha256": hashlib.sha256(target.read_bytes()).hexdigest(),
     }
     (artifacts / "causal_preflight_manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
     return frame
@@ -295,8 +339,9 @@ def main() -> None:
     parser.add_argument("--feature-cache-bytes", type=int, default=512 * 1024)
     parser.add_argument("--max-pairs", type=int, default=None)
     parser.add_argument("--edge-order", choices=("O0", "O1"), default="O0")
+    parser.add_argument("--output", type=Path, help="configuration-specific CSV path; avoids overwriting another run")
     args = parser.parse_args()
-    output = run(args.project.resolve(), args.configs, slice_width=args.slice_width, tile_rows=args.tile_rows, cache_bytes=args.feature_cache_bytes, max_pairs=args.max_pairs, edge_order=args.edge_order)
+    output = run(args.project.resolve(), args.configs, slice_width=args.slice_width, tile_rows=args.tile_rows, cache_bytes=args.feature_cache_bytes, max_pairs=args.max_pairs, edge_order=args.edge_order, output_path=args.output)
     print(output.to_string(index=False))
 
 

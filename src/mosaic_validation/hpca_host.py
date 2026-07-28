@@ -117,9 +117,17 @@ def write_host_results(project: Path, preflight_path: Path, *, output: Path, art
 def main() -> None:
     parser = argparse.ArgumentParser(description="Model the common XORFLOW host from causal preflight data.")
     parser.add_argument("--project", type=Path, default=Path.cwd())
+    parser.add_argument("--input", type=Path, help="configuration-specific causal-preflight CSV")
+    parser.add_argument("--output", type=Path, help="configuration-specific host-model CSV")
     args = parser.parse_args()
     project = args.project.resolve()
-    result = write_host_results(project, project / "results_hpca_xorflow/01_causal_pair_preflight.csv", output=project / "results_hpca_xorflow/02_host_model.csv", artifact_dir=project / "artifacts_hpca_xorflow")
+    input_path = args.input or (project / "results_hpca_xorflow/01_causal_pair_preflight.csv")
+    output_path = args.output or (project / "results_hpca_xorflow/02_host_model.csv")
+    if not input_path.is_absolute():
+        input_path = project / input_path
+    if not output_path.is_absolute():
+        output_path = project / output_path
+    result = write_host_results(project, input_path, output=output_path, artifact_dir=project / "artifacts_hpca_xorflow")
     print(result.to_string(index=False))
 
 
