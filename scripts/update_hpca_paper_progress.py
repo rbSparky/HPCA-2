@@ -55,6 +55,19 @@ def render(project: Path, config_path: Path) -> tuple[Path, Path]:
         "**Compute policy:** GPU1-only cluster queue; local machine handles validation, PPA, energy, and reports.",
         "**Interpretation:** an existing path is not itself completion; each task is marked complete only after its stated scientific check and artifacts are reviewed.",
         "",
+        "## Active campaign queue",
+        "",
+        "| Campaign | Job ID | Owner | Status | Dashboard |",
+        "|---|---|---|---|---|",
+    ]
+    for campaign in config.get("active_campaigns", []):
+        lines.append(
+            f"| {campaign['id']} | {campaign['job_id']} | {campaign['owner']} | {campaign['status']} | `{campaign['dashboard']}` |"
+        )
+    lines += [
+        "",
+        "## Evidence tasks",
+        "",
         "| ID | Block | Status | Owner | Weight | Evidence | Description |",
         "|---|---|---|---|---:|---|---|",
     ]

@@ -1,5 +1,11 @@
 deadline_ist: "2026-07-31T23:59:00+05:30"
 title: "XORFLOW paper-ready suite"
+active_campaigns:
+  - id: "paper_suite_baseline_smoke_20260729_v1"
+    job_id: "20260729T085455Z_21750"
+    owner: "GPU1"
+    status: "QUEUED/RUNNING — query tools/remote_xorflow.sh list"
+    dashboard: "results_hpca_xorflow/complete_suite/paper_suite_baseline_smoke_20260729_v1/CAMPAIGN.md"
 tasks:
   - {id: E0, block: Existing evidence, weight: 4, status: complete, owner: local, description: "Import and preserve completed causal Arxiv/Reddit/Yelp/Flickr evidence.", evidence: "results_hpca_xorflow/complete_suite/PAPER_SUITE_HOST_RESULTS.md"}
   - {id: E1, block: Existing evidence, weight: 2, status: complete, owner: local, description: "Verify local CUDA/RTL/CACTI/DRAMsim3/OpenROAD toolchain smoke evidence.", evidence: "results_hpca_xorflow/complete_suite/local_toolchain_20260728T221500Z/toolchain_status.csv"}
