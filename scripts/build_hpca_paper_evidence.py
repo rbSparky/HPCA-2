@@ -65,11 +65,20 @@ def _rows_from_csv(project: Path, path: Path) -> list[dict[str, object]]:
                     if metric.endswith("bytes"):
                         unit = "bytes"
                     result.append({**common, "section": "causal_preflight", "metric": metric, "value": row[metric], "unit": unit, "scope": "causal two-layer"})
-        elif "format" in row and "total_traffic_bytes" in row:
+        elif "format" in row and "total_traffic_bytes" in row and "control_type" not in row:
             for metric in ("total_traffic_bytes", "traffic_ratio_to_beicsr", "traffic_reduction_vs_beicsr", "support_index_bytes", "feature_cache_misses"):
                 if metric in row:
                     unit = "bytes" if "bytes" in metric else ("ratio" if "ratio" in metric or "reduction" in metric else "count")
                     result.append({**common, "section": "format_matrix", "metric": metric, "value": row[metric], "unit": unit, "scope": "common physical/cache model"})
+        elif "control_type" in row and "total_traffic_bytes" in row:
+            for metric in ("total_traffic_bytes", "traffic_ratio_to_beicsr", "traffic_reduction_vs_beicsr", "feature_cache_misses"):
+                if metric in row:
+                    unit = "bytes" if "bytes" in metric else ("ratio" if "ratio" in metric or "reduction" in metric else "count")
+                    result.append({**common, "section": "matched_controls", "metric": metric, "value": row[metric], "unit": unit, "scope": str(row.get("control_type", ""))})
+        elif path.name == "ppa_summary.csv":
+            for metric in ("access_time_ns", "cycle_time_ns", "area_mm2", "dynamic_read_nj", "leakage_mw", "power_w", "fmax_mhz", "cell_count"):
+                if metric in row and pd.notna(row[metric]):
+                    result.append({**common, "section": "ppa", "metric": metric, "value": row[metric], "unit": "ns" if metric.endswith("_ns") else ("mm2" if metric == "area_mm2" else "count"), "scope": str(row.get("component", ""))})
         elif path.parent.name == "ramulator":
             for metric in ("dram_cycles", "speedup_vs_beicsr", "requests", "served_requests"):
                 if metric in row:
@@ -87,7 +96,8 @@ def _gate_rows(project: Path, root: Path, evidence: pd.DataFrame) -> pd.DataFram
         {"gate_id": "common_format_matrix", "status": "PASS" if has_full else "UNASSESSED", "description": "All required primary configurations have common format rows.", "evidence": "format_matrix"},
         {"gate_id": "exact_format_outputs", "status": "PASS" if exact_sources else "UNASSESSED", "description": "At least one exact common-format source has been audited; final gate requires every primary row.", "evidence": "format_matrix/causal_preflight"},
         {"gate_id": "reproducibility", "status": "UNASSESSED", "description": "Principal matrix rerun hash comparison is required before final decision.", "evidence": "reproduction/"},
-        {"gate_id": "ppa_energy", "status": "UNASSESSED", "description": "CACTI/OpenROAD final subsystem PPA and energy table pending.", "evidence": "ppa/"},
+        {"gate_id": "ppa_subsystem", "status": "PASS" if "ppa" in set(evidence.section) else "UNASSESSED", "description": "CACTI SRAM sweep and routed decoder-lane/Yosys bank evidence are present.", "evidence": "ppa/"},
+        {"gate_id": "ppa_host_fraction", "status": "UNASSESSED", "description": "Host-area/host-power percentages are not claimed without a common-host floorplan.", "evidence": "ppa/PPA_RESULTS.md"},
     ])
 
 
@@ -98,6 +108,8 @@ def build(project: Path) -> tuple[Path, Path, Path]:
         *root.glob("runs/*/causal_preflight.csv"),
         *root.glob("baselines/**/*.csv"),
         *root.glob("timing/**/*.csv"),
+        *root.glob("controls/**/*.csv"),
+        *root.glob("ppa/**/*.csv"),
         *root.glob("paper_suite_*/ramulator/*.csv"),
     })
     records = [entry for path in sources for entry in _rows_from_csv(project, path)]
