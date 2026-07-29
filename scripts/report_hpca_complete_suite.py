@@ -21,7 +21,12 @@ def run(project: Path) -> pd.DataFrame:
     # live under ``runs/``; keeping the latter outside campaign directories
     # makes reruns replace only the intended case and keeps one reviewer-facing
     # table across primary, remediation, and sensitivity campaigns.
-    hosts = sorted(root.glob("runs/*/host_model.csv"))
+    # Keep compatibility with the original per-campaign layout used by small
+    # artifact tests, while preferring the current shared ``runs/`` root.
+    hosts = sorted({
+        *root.glob("runs/*/host_model.csv"),
+        *root.glob("paper_suite_*/runs/*/host_model.csv"),
+    })
     records: list[dict[str, object]] = []
     for path in hosts:
         frame = pd.read_csv(path)
@@ -32,13 +37,15 @@ def run(project: Path) -> pd.DataFrame:
         quality = json.loads(record_path.read_text()) if record_path.exists() else {}
         preflight_path = path.parent / "causal_preflight.csv"
         preflight = pd.read_csv(preflight_path) if preflight_path.exists() else pd.DataFrame()
+        traffic = preflight.get("traffic_reduction", frame.get("traffic_reduction", pd.Series(dtype=float)))
+        support_ratio = preflight.get("support_ratio_to_beicsr", frame.get("support_ratio_to_beicsr", pd.Series(dtype=float)))
         records.append({
             "config_id": config_id,
             "run_id": path.parent.name,
             "pairs": len(frame),
             "host_speedup_geomean": _geomean(frame["host_speedup"]),
-            "traffic_reduction_mean": float(preflight.get("traffic_reduction", pd.Series(dtype=float)).mean()),
-            "support_ratio_mean": float(preflight.get("support_ratio_to_beicsr", pd.Series(dtype=float)).mean()),
+            "traffic_reduction_mean": float(traffic.mean()),
+            "support_ratio_mean": float(support_ratio.mean()),
             "serialized_speedup_geomean": _geomean(preflight.get("serialized_speedup", pd.Series(dtype=float))),
             "support_cache_fits": bool(frame["support_cache_fits"].all()),
             "fp32_test_accuracy": quality.get("fp32_test_accuracy"),
