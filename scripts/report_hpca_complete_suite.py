@@ -16,7 +16,12 @@ def _geomean(values: pd.Series) -> float:
 
 def run(project: Path) -> pd.DataFrame:
     root = project / "results_hpca_xorflow/complete_suite"
-    hosts = sorted(root.glob("paper_suite_*/runs/*/host_model.csv"))
+    # Isolated cases are deliberately written to one stable result root.  The
+    # campaign ledgers live under ``paper_suite_*`` while their case outputs
+    # live under ``runs/``; keeping the latter outside campaign directories
+    # makes reruns replace only the intended case and keeps one reviewer-facing
+    # table across primary, remediation, and sensitivity campaigns.
+    hosts = sorted(root.glob("runs/*/host_model.csv"))
     records: list[dict[str, object]] = []
     for path in hosts:
         frame = pd.read_csv(path)
@@ -25,13 +30,16 @@ def run(project: Path) -> pd.DataFrame:
         config_id = str(frame.iloc[0]["config_id"])
         record_path = project / "artifacts_hpca_xorflow/workloads" / config_id / "record.json"
         quality = json.loads(record_path.read_text()) if record_path.exists() else {}
+        preflight_path = path.parent / "causal_preflight.csv"
+        preflight = pd.read_csv(preflight_path) if preflight_path.exists() else pd.DataFrame()
         records.append({
             "config_id": config_id,
             "run_id": path.parent.name,
             "pairs": len(frame),
             "host_speedup_geomean": _geomean(frame["host_speedup"]),
-            "traffic_reduction_mean": float(frame.get("traffic_reduction", pd.Series(dtype=float)).mean()),
-            "support_ratio_mean": float(frame.get("support_ratio_to_beicsr", pd.Series(dtype=float)).mean()),
+            "traffic_reduction_mean": float(preflight.get("traffic_reduction", pd.Series(dtype=float)).mean()),
+            "support_ratio_mean": float(preflight.get("support_ratio_to_beicsr", pd.Series(dtype=float)).mean()),
+            "serialized_speedup_geomean": _geomean(preflight.get("serialized_speedup", pd.Series(dtype=float))),
             "support_cache_fits": bool(frame["support_cache_fits"].all()),
             "fp32_test_accuracy": quality.get("fp32_test_accuracy"),
             "fp8_fp16_test_accuracy": quality.get("fp8_fp16_test_accuracy"),
@@ -46,15 +54,15 @@ def run(project: Path) -> pd.DataFrame:
         "",
         "All values below are modeled aggregation+combination host estimates, not measured end-to-end accelerator speedups.",
         "",
-        "| Configuration | Run | Pairs | Host speedup (geomean) | Mean traffic reduction | Mean support ratio | FP8 quality |",
-        "|---|---|---:|---:|---:|---:|---:|",
+        "| Configuration | Run | Pairs | Host speedup (geomean) | Serialized-memory speedup | Mean traffic reduction | Mean support ratio | FP8 quality |",
+        "|---|---|---:|---:|---:|---:|---:|---:|",
     ]
     for row in records:
         quality = row["fp8_fp16_test_accuracy"]
         quality_text = "" if quality is None else f"{float(quality):.4f}"
         lines.append(
             f"| {row['config_id']} | {row['run_id']} | {row['pairs']} | "
-            f"{float(row['host_speedup_geomean']):.3f}× | {float(row['traffic_reduction_mean']):.1%} | "
+            f"{float(row['host_speedup_geomean']):.3f}× | {float(row['serialized_speedup_geomean']):.3f}× | {float(row['traffic_reduction_mean']):.1%} | "
             f"{float(row['support_ratio_mean']):.3f} | {quality_text} |"
         )
     lines += ["", f"Machine-readable table: `{output_path.name}`."]
