@@ -26,6 +26,11 @@ active_campaigns:
     owner: "GPU1"
     status: "QUEUED — full Ramulator2 Arxiv/Reddit and supplementary Yelp pairs"
     dashboard: "results_hpca_xorflow/complete_suite/paper_suite_timing_20260729_v1/CAMPAIGN.md"
+  - id: "paper_suite_sensitivity_20260729_v1"
+    job_id: "20260729T101719Z_1300"
+    owner: "GPU1"
+    status: "QUEUED — cache, slice-width, and edge-order robustness"
+    dashboard: "results_hpca_xorflow/complete_suite/paper_suite_sensitivity_20260729_v1/CAMPAIGN.md"
 tasks:
   - {id: E0, block: Existing evidence, weight: 4, status: complete, owner: local, description: "Import and preserve completed causal Arxiv/Reddit/Yelp/Flickr evidence.", evidence: "results_hpca_xorflow/complete_suite/PAPER_SUITE_HOST_RESULTS.md"}
   - {id: E1, block: Existing evidence, weight: 2, status: complete, owner: local, description: "Verify local CUDA/RTL/CACTI/DRAMsim3/OpenROAD toolchain smoke evidence.", evidence: "results_hpca_xorflow/complete_suite/local_toolchain_20260728T221500Z/toolchain_status.csv"}
@@ -41,5 +46,5 @@ tasks:
   - {id: E2, block: Timing, weight: 5, status: in_progress, owner: GPU1, description: "Full Ramulator2 B3-best vs causal X1 primary-pair timing matrix is queued after controls.", evidence: "results_hpca_xorflow/complete_suite/timing/ramulator/"}
   - {id: E3, block: Timing, weight: 2, status: pending, owner: GPU1, description: "Run and parse bounded DRAMsim3 cross-checks for Arxiv/Reddit/Yelp.", evidence: "results_hpca_xorflow/complete_suite/timing/dramsim3/"}
   - {id: E4, block: PPA/energy, weight: 5, status: in_progress, owner: local, description: "CACTI sweep, Yosys lane/bank synthesis, and verified ORFS decoder-lane route are complete; fresh hierarchical route and host-percentage accounting remain explicitly tracked.", evidence: "results_hpca_xorflow/complete_suite/ppa/20260729T_local_ppa_v3/"}
-  - {id: F1, block: Robustness, weight: 5, status: pending, owner: GPU1, description: "Complete one-factor cache/bandwidth/slice/decoder/tile/order sensitivity tables.", evidence: "results_hpca_xorflow/complete_suite/sensitivity/"}
+  - {id: F1, block: Robustness, weight: 5, status: in_progress, owner: GPU1, description: "Cache, slice-width, and edge-order robustness is queued; bandwidth/decoder/tile factors remain explicitly listed for follow-up.", evidence: "results_hpca_xorflow/complete_suite/sensitivity/"}
   - {id: G1, block: Report/reproduce, weight: 4, status: in_progress, owner: local, description: "Canonical evidence is refreshed with primary matrices and PPA; control/sensitivity/reproduction hashes remain.", evidence: "results_hpca_xorflow/complete_suite/HPCA_PAPER_EVIDENCE.md"}
