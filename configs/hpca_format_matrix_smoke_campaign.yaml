@@ -1,0 +1,15 @@
+campaign_id: "paper_suite_format_matrix_smoke_20260729_v1"
+deadline_utc: "2026-07-31T18:29:00Z"
+deadline_margin_minutes: 30
+tasks:
+  - task_id: full_format_matrix_arxiv_l4
+    stage: format_matrix_smoke
+    estimated_minutes: 45
+    weight: 3
+    command: "PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs ogbn_arxiv_deepres8_w128_s17 --max-pairs 1 --output results_hpca_xorflow/complete_suite/baselines/format_matrix_smoke_arxiv_l4/format_matrix.csv"
+  - task_id: audit_full_format_matrix_arxiv_l4
+    stage: format_matrix_smoke
+    estimated_minutes: 5
+    weight: 1
+    depends_on: [full_format_matrix_arxiv_l4]
+    command: "python scripts/verify_hpca_format_matrix.py --input results_hpca_xorflow/complete_suite/baselines/format_matrix_smoke_arxiv_l4/format_matrix.csv --output results_hpca_xorflow/complete_suite/baselines/format_matrix_smoke_arxiv_l4/audit.json"

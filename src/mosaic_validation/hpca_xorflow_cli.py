@@ -20,7 +20,7 @@ import numpy as np
 import pandas as pd
 import torch
 
-from .causal_xorflow import select_causal_pair
+from .causal_xorflow import beicsr_pair_support_bits, encode_causal_pair
 from .datasets import load_dataset
 from .graph_order import symmetrized_edges_and_rcm, tiles_from_order
 from .memory_subsystem import (
@@ -153,8 +153,21 @@ def _output_writeback_traffic(layouts) -> int:
     return touched * 2 * 64  # read-for-ownership, then dirty eviction
 
 
-def build_pair_format_plan(pair: np.ndarray, tiles: list[np.ndarray], slice_width: int) -> dict:
-    """Choose exact causal XORFLOW or BEICSR per tile/slice for one pair."""
+def build_pair_format_plan(
+    pair: np.ndarray,
+    tiles: list[np.ndarray],
+    slice_width: int,
+    *,
+    dictionary_mode: str = "auto",
+    allow_fallback: bool = True,
+) -> dict:
+    """Choose causal XORFLOW or BEICSR per tile/slice with exact selectors.
+
+    ``dictionary_mode='a0'`` creates the spatial-dictionary ablation;
+    ``'auto'`` selects the smaller legal A0/A2 dictionary.  When fallback is
+    disabled, every tile/slice deliberately uses XORFLOW and is therefore a
+    diagnostic, not the deployable principal configuration.
+    """
     n, features = pair.shape[1:]
     slices = math.ceil(features / slice_width)
     formats = np.full((n, slices), "BEICSR", dtype=object)
@@ -165,19 +178,20 @@ def build_pair_format_plan(pair: np.ndarray, tiles: list[np.ndarray], slice_widt
         local_pair = pair[:, tile, :]
         for sid in range(slices):
             lo, hi = sid * slice_width, min(features, (sid + 1) * slice_width)
-            selected = select_causal_pair(local_pair[:, :, lo:hi])
-            beicsr_support_bits += selected.independent_support_bits
-            if selected.representation == "XORFLOW_CAUSAL":
-                assert selected.pair is not None
+            encoded = encode_causal_pair(local_pair[:, :, lo:hi], dictionary_mode=dictionary_mode)
+            independent_bits = beicsr_pair_support_bits(local_pair[:, :, lo:hi])
+            beicsr_support_bits += independent_bits
+            use_xorflow = not allow_fallback or encoded.encoded_support_bits < independent_bits
+            if use_xorflow:
                 formats[tile, sid] = "XORFLOW"
                 selected_tiles += 1
-                xor_support_bits += selected.pair.encoded_support_bits
-                xor_metadata += math.ceil(selected.pair.encoded_support_bits / 8 / 64) * 64
-                selector_bits += selected.pair.selector_bits
-                decode_cycles += math.ceil(selected.pair.encoded_support_bits / 2048)
-                variants[selected.pair.anchor_variant] = variants.get(selected.pair.anchor_variant, 0) + 1
+                xor_support_bits += encoded.encoded_support_bits
+                xor_metadata += math.ceil(encoded.encoded_support_bits / 8 / 64) * 64
+                selector_bits += encoded.selector_bits
+                decode_cycles += math.ceil(encoded.encoded_support_bits / 2048)
+                variants[encoded.anchor_variant] = variants.get(encoded.anchor_variant, 0) + 1
             else:
-                xor_support_bits += selected.independent_support_bits + 1
+                xor_support_bits += independent_bits + 1
                 fallback_selector_bits += 1
     xor_metadata += math.ceil(fallback_selector_bits / 8 / 64) * 64 if fallback_selector_bits else 0
     return {

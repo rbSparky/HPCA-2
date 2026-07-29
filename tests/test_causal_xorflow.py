@@ -4,6 +4,7 @@ from mosaic_validation.causal_xorflow import (
     beicsr_pair_support_bits,
     causal_pair_statistics,
     encode_causal_pair,
+    encode_offline_majority_pair,
     select_causal_pair,
 )
 
@@ -37,3 +38,17 @@ def test_causal_statistics_are_exact_and_deterministic():
     second = causal_pair_statistics(x)
     assert first == second
     assert first["exact_decode_pass"]
+
+
+def test_independent_anchor_and_offline_majority_oracle_round_trip_exactly():
+    layers = np.array([
+        [[1, 0, 1, 0], [0, 1, 1, 0]],
+        [[1, 1, 0, 0], [0, 1, 1, 1]],
+    ], dtype=bool)
+    a0 = encode_causal_pair(layers, dictionary_mode="a0")
+    oracle = encode_offline_majority_pair(layers, dictionary_mode="a2")
+    assert a0.anchor_variant == "A0_INDEPENDENT_ROWS"
+    assert np.array_equal(a0.decode_anchor_layer(), layers[0])
+    assert np.array_equal(a0.decode_exception_layer(), layers[1])
+    assert np.array_equal(oracle.decode_layer(0), layers[0])
+    assert np.array_equal(oracle.decode_layer(1), layers[1])

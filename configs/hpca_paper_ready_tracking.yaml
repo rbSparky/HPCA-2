@@ -4,13 +4,13 @@ active_campaigns:
   - id: "paper_suite_baseline_smoke_20260729_v1"
     job_id: "20260729T085455Z_21750"
     owner: "GPU1"
-    status: "QUEUED/RUNNING — query tools/remote_xorflow.sh list"
+    status: "COMPLETE — all four tasks and fail-closed audit passed"
     dashboard: "results_hpca_xorflow/complete_suite/paper_suite_baseline_smoke_20260729_v1/CAMPAIGN.md"
 tasks:
   - {id: E0, block: Existing evidence, weight: 4, status: complete, owner: local, description: "Import and preserve completed causal Arxiv/Reddit/Yelp/Flickr evidence.", evidence: "results_hpca_xorflow/complete_suite/PAPER_SUITE_HOST_RESULTS.md"}
   - {id: E1, block: Existing evidence, weight: 2, status: complete, owner: local, description: "Verify local CUDA/RTL/CACTI/DRAMsim3/OpenROAD toolchain smoke evidence.", evidence: "results_hpca_xorflow/complete_suite/local_toolchain_20260728T221500Z/toolchain_status.csv"}
   - {id: A1, block: Common harness, weight: 8, status: complete, owner: local, description: "Exact common B0–B4 baseline layouts, metadata streams, and LRU invariants implemented and unit-tested.", evidence: "src/mosaic_validation/hpca_baselines.py"}
-  - {id: A2, block: Common harness, weight: 4, status: pending, owner: GPU1, description: "Run the Arxiv baseline smoke (B0–B4/X0/X1/oracles) after exactness audit.", evidence: "results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/"}
+  - {id: A2, block: Common harness, weight: 4, status: complete, owner: GPU1, description: "Arxiv B0–B4 plus causal X1 common-format smoke passed exactness, SCALE-Sim host, and fail-closed audit; A0/oracles remain in the full matrix.", evidence: "results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/audit.json"}
   - {id: B1, block: Trace closure, weight: 5, status: pending, owner: GPU1, description: "Attempt the one permitted Yelp validation-only recovery; classify it without changing hard gates.", evidence: "artifacts_hpca_xorflow/workloads/yelp_*/*"}
   - {id: B2, block: Trace closure, weight: 3, status: pending, owner: GPU1, description: "Audit all principal FP8 traces/checkpoint hashes and quantized-quality contracts.", evidence: "results_hpca_xorflow/complete_suite/quality/"}
   - {id: C1, block: Baselines, weight: 12, status: pending, owner: GPU1, description: "Run full B0–B4/X0–X2/O0–O1 matrix on Arxiv seeds 7/17/27.", evidence: "results_hpca_xorflow/complete_suite/baselines/arxiv/"}

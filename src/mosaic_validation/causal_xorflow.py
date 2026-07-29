@@ -14,6 +14,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import math
+from typing import Literal
 
 import numpy as np
 
@@ -89,6 +90,29 @@ class CausalSelection:
         return self.independent_support_bits
 
 
+@dataclass(frozen=True)
+class OfflineMajorityPairEncoding:
+    """Non-deployable two-layer upper bound using a future-aware majority.
+
+    The anchor is stored once and each layer has its own independently
+    decodable exception stream.  This class is intentionally separate from
+    :class:`CausalPairEncoding`: callers must label it as an oracle rather
+    than accidentally using it as the principal hardware representation.
+    """
+
+    anchor: np.ndarray
+    spatial_dictionary: CausalSpatialDictionary
+    exceptions: tuple[HardwareEventCode, HardwareEventCode]
+    selector_bits: int
+
+    @property
+    def encoded_support_bits(self) -> int:
+        return int(self.spatial_dictionary.bits + sum(code.encoded_bits for code in self.exceptions) + self.selector_bits)
+
+    def decode_layer(self, layer_index: int) -> np.ndarray:
+        return self.anchor ^ self.exceptions[layer_index].decode().reshape(self.anchor.shape)
+
+
 def _validate_pair(layers: np.ndarray) -> np.ndarray:
     value = np.asarray(layers, dtype=bool)
     if value.ndim != 3 or value.shape[0] != 2:
@@ -96,7 +120,12 @@ def _validate_pair(layers: np.ndarray) -> np.ndarray:
     return value
 
 
-def build_causal_spatial_dictionary(anchor: np.ndarray, *, cohort_size: int) -> CausalSpatialDictionary:
+def build_causal_spatial_dictionary(
+    anchor: np.ndarray,
+    *,
+    cohort_size: int,
+    mode: Literal["auto", "a0", "a2"] = "auto",
+) -> CausalSpatialDictionary:
     """Choose hardware-simple independent rows or fixed cohort prototypes.
 
     Unlike the offline A1 clustering experiment, this builder has bounded,
@@ -119,7 +148,9 @@ def build_causal_spatial_dictionary(anchor: np.ndarray, *, cohort_size: int) -> 
         cohort_bits += int(dictionary["prototypes"].size) + residual_bits + 16
         prototypes.append(dictionary["prototypes"][0].copy())
         residual_sets.append(residuals)
-    if cohort_bits < independent:
+    if mode not in {"auto", "a0", "a2"}:
+        raise ValueError(f"unsupported causal dictionary mode {mode}")
+    if mode == "a2" or (mode == "auto" and cohort_bits < independent):
         return CausalSpatialDictionary(
             variant="A2_CAUSAL_COHORT", rows=len(rows), features=rows.shape[1], bits=int(cohort_bits),
             cohort_prototypes=tuple(prototypes), cohort_residuals=tuple(residual_sets),
@@ -135,6 +166,7 @@ def encode_causal_pair(
     *,
     cohort_size: int = 32,
     selector_bits: int = 8,
+    dictionary_mode: Literal["auto", "a0", "a2"] = "auto",
 ) -> CausalPairEncoding:
     """Encode a causal two-layer support segment exactly.
 
@@ -146,7 +178,7 @@ def encode_causal_pair(
     anchor = value[0].copy()
     delta = np.logical_xor(value[1], anchor).reshape(-1)
     event = encode_hardware_event_set(delta)
-    dictionary = build_causal_spatial_dictionary(anchor, cohort_size=cohort_size)
+    dictionary = build_causal_spatial_dictionary(anchor, cohort_size=cohort_size, mode=dictionary_mode)
     return CausalPairEncoding(
         anchor=anchor,
         exception=event,
@@ -182,6 +214,36 @@ def select_causal_pair(layers: np.ndarray, *, cohort_size: int = 32) -> CausalSe
     if pair.encoded_support_bits < independent:
         return CausalSelection("XORFLOW_CAUSAL", pair, independent)
     return CausalSelection("BEICSR_INDEPENDENT", None, independent)
+
+
+def encode_offline_majority_pair(
+    layers: np.ndarray,
+    *,
+    cohort_size: int = 32,
+    selector_bits: int = 8,
+    dictionary_mode: Literal["auto", "a0", "a2"] = "auto",
+) -> OfflineMajorityPairEncoding:
+    """Encode a two-layer future-majority oracle exactly.
+
+    This uses both masks to form the anchor, and is consequently illegal for a
+    deployment that must choose the representation after layer ``l`` alone.
+    It is retained only to quantify the opportunity cost of causal anchoring.
+    Ties are zero, matching the predeclared majority-anchor convention.
+    """
+    value = _validate_pair(layers)
+    anchor = value.sum(axis=0, dtype=np.int8) > 1
+    dictionary = build_causal_spatial_dictionary(anchor, cohort_size=cohort_size, mode=dictionary_mode)
+    exceptions = tuple(
+        encode_hardware_event_set(np.logical_xor(layer, anchor).reshape(-1))
+        for layer in value
+    )
+    result = OfflineMajorityPairEncoding(
+        anchor=anchor, spatial_dictionary=dictionary,
+        exceptions=(exceptions[0], exceptions[1]), selector_bits=selector_bits,
+    )
+    if not all(np.array_equal(result.decode_layer(index), value[index]) for index in range(2)):
+        raise AssertionError("offline-majority encoder failed exact round trip")
+    return result
 
 
 def causal_pair_statistics(layers: np.ndarray, *, cohort_size: int = 32) -> dict[str, float | int | str | bool]:

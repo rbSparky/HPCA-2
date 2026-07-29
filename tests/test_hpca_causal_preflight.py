@@ -36,3 +36,12 @@ def test_pair_plan_has_selector_and_never_selects_an_illegal_format():
     plan = build_pair_format_plan(pair, [np.arange(4)], 8)
     assert plan["formats"].shape == (4, 1)
     assert plan["xor_support_bits"] > 0 and plan["beicsr_support_bits"] > 0
+
+
+def test_pair_plan_exposes_independent_anchor_and_forced_diagnostic_modes():
+    pair = np.random.default_rng(19).random((2, 4, 8)) > .5
+    a0 = build_pair_format_plan(pair, [np.arange(4)], 8, dictionary_mode="a0")
+    forced = build_pair_format_plan(pair, [np.arange(4)], 8, allow_fallback=False)
+    assert "A0_INDEPENDENT_ROWS" in a0["variants"] or a0["selected_tiles"] == 0
+    assert forced["selected_tiles"] == 1
+    assert forced["formats"][0, 0] == "XORFLOW"
