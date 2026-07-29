@@ -25,9 +25,8 @@ def _external_metadata_output_bytes(item) -> int:
     return 2 * (item.row_pointer_stream_bytes + item.selector_bytes)
 
 
-def run(
-    project: Path,
-    config_ids: list[str],
+def run_cases(
+    cases: list[tuple[str, np.ndarray, object, str]],
     *,
     slice_width: int,
     cache_bytes: int,
@@ -41,8 +40,7 @@ def run(
     rather than cancelled, because final host tables need total traffic too.
     """
     rows: list[dict[str, object]] = []
-    for config_id in config_ids:
-        masks, data, dataset_name = _case(project, config_id)
+    for config_id, masks, data, dataset_name in cases:
         edge_index = data.edge_index.cpu().numpy()
         _, node_order = symmetrized_edges_and_rcm(data.edge_index, data.num_nodes)
         sources = _sources(edge_index, edge_order)
@@ -97,6 +95,25 @@ def run(
         best = frame.groupby(["config_id", "pair_start_layer"])["total_traffic_bytes"].transform("min")
         frame["traffic_ratio_to_independent_best"] = frame["total_traffic_bytes"] / best
     return frame
+
+
+def run(
+    project: Path,
+    config_ids: list[str],
+    *,
+    slice_width: int,
+    cache_bytes: int,
+    max_pairs: int | None,
+    edge_order: str,
+) -> pd.DataFrame:
+    """Load named traces then evaluate B0--B4 under the common host."""
+    return run_cases(
+        [(config_id, *_case(project, config_id)) for config_id in config_ids],
+        slice_width=slice_width,
+        cache_bytes=cache_bytes,
+        max_pairs=max_pairs,
+        edge_order=edge_order,
+    )
 
 
 def main() -> None:

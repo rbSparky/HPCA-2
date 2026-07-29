@@ -17,7 +17,7 @@ import pandas as pd
 
 from .causal_xorflow import beicsr_pair_support_bits, encode_offline_majority_pair
 from .graph_order import symmetrized_edges_and_rcm, tiles_from_order
-from .hpca_baseline_matrix import _external_metadata_output_bytes, run as run_baselines
+from .hpca_baseline_matrix import _external_metadata_output_bytes, run_cases as run_baseline_cases
 from .hpca_xorflow_cli import _case, _output_writeback_traffic, _pair_starts, _physical_traffic, _sources, build_pair_format_plan
 from .memory_subsystem import build_mixed_sliced_layout, validate_nonoverlap
 
@@ -140,9 +140,8 @@ def _causal_row(
     }
 
 
-def run(
-    project: Path,
-    config_ids: list[str],
+def run_cases(
+    cases: list[tuple[str, np.ndarray, object, str]],
     *,
     slice_width: int = 128,
     tile_rows: int = 128,
@@ -151,13 +150,12 @@ def run(
     edge_order: str = "O0",
 ) -> pd.DataFrame:
     """Evaluate all physical-format rows under identical host inputs."""
-    baseline = run_baselines(
-        project, config_ids, slice_width=slice_width, cache_bytes=cache_bytes,
+    baseline = run_baseline_cases(
+        cases, slice_width=slice_width, cache_bytes=cache_bytes,
         max_pairs=max_pairs, edge_order=edge_order,
     )
     rows = baseline.to_dict("records")
-    for config_id in config_ids:
-        masks, data, dataset = _case(project, config_id)
+    for config_id, masks, data, dataset in cases:
         edge_index = data.edge_index.cpu().numpy()
         _, order = symmetrized_edges_and_rcm(data.edge_index, data.num_nodes)
         tiles = tiles_from_order(order, tile_rows)
@@ -186,6 +184,27 @@ def run(
         frame["traffic_reduction_vs_beicsr"] = 1 - frame.traffic_ratio_to_beicsr
         frame.drop(columns="beicsr_bytes", inplace=True)
     return frame
+
+
+def run(
+    project: Path,
+    config_ids: list[str],
+    *,
+    slice_width: int = 128,
+    tile_rows: int = 128,
+    cache_bytes: int = 512 * 1024,
+    max_pairs: int | None = 2,
+    edge_order: str = "O0",
+) -> pd.DataFrame:
+    """Load named traces and evaluate the complete same-host format matrix."""
+    return run_cases(
+        [(config_id, *_case(project, config_id)) for config_id in config_ids],
+        slice_width=slice_width,
+        tile_rows=tile_rows,
+        cache_bytes=cache_bytes,
+        max_pairs=max_pairs,
+        edge_order=edge_order,
+    )
 
 
 def main() -> None:

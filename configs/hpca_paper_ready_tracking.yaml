@@ -12,9 +12,9 @@ active_campaigns:
     status: "COMPLETE — 10-format matrix and fail-closed audit passed"
     dashboard: "results_hpca_xorflow/complete_suite/paper_suite_format_matrix_smoke_20260729_v1/CAMPAIGN.md"
   - id: "paper_suite_primary_format_20260729_v1"
-    job_id: "PENDING_SUBMISSION"
+    job_id: "20260729T090637Z_24542"
     owner: "GPU1"
-    status: "QUEUED AFTER SOURCE/TEST GATE — Arxiv, Reddit, and validity-tagged Yelp"
+    status: "QUEUED/RUNNING — Arxiv, Reddit, and validity-tagged Yelp"
     dashboard: "results_hpca_xorflow/complete_suite/paper_suite_primary_format_20260729_v1/CAMPAIGN.md"
 tasks:
   - {id: E0, block: Existing evidence, weight: 4, status: complete, owner: local, description: "Import and preserve completed causal Arxiv/Reddit/Yelp/Flickr evidence.", evidence: "results_hpca_xorflow/complete_suite/PAPER_SUITE_HOST_RESULTS.md"}
