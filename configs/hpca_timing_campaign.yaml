@@ -1,0 +1,32 @@
+# Full HBM2 Ramulator2 causal-vs-BEICSR primary pairs. Runs after the queued
+# controls because the GPU1 wrapper serializes all jobs safely.
+campaign_id: "paper_suite_timing_20260729_v1"
+deadline_utc: "2026-07-31T18:29:00Z"
+deadline_margin_minutes: 45
+tasks:
+  - task_id: ramulator_arxiv_s17_pair4
+    stage: ramulator
+    estimated_minutes: 120
+    weight: 3
+    command: "MOSAIC_RAMULATOR_PY=/usr/bin/python3.12 python scripts/run_hpca_ramulator.py --config-id ogbn_arxiv_deepres8_w128_s17 --pair-start-layer 4 --keep-trace --artifact-dir artifacts_hpca_xorflow/complete_suite/timing/ramulator/arxiv_s17_l4 --results results_hpca_xorflow/complete_suite/timing/ramulator/arxiv_s17_l4.csv"
+  - task_id: ramulator_arxiv_s27_pair4
+    stage: ramulator
+    estimated_minutes: 120
+    weight: 3
+    command: "MOSAIC_RAMULATOR_PY=/usr/bin/python3.12 python scripts/run_hpca_ramulator.py --config-id ogbn_arxiv_deepres8_w128_s27 --pair-start-layer 4 --keep-trace --artifact-dir artifacts_hpca_xorflow/complete_suite/timing/ramulator/arxiv_s27_l4 --results results_hpca_xorflow/complete_suite/timing/ramulator/arxiv_s27_l4.csv"
+  - task_id: ramulator_reddit_pair4
+    stage: ramulator
+    estimated_minutes: 180
+    weight: 4
+    command: "MOSAIC_RAMULATOR_PY=/usr/bin/python3.12 python scripts/run_hpca_ramulator.py --config-id reddit_deepres8_w128_s7_native --pair-start-layer 4 --keep-trace --artifact-dir artifacts_hpca_xorflow/complete_suite/timing/ramulator/reddit_l4 --results results_hpca_xorflow/complete_suite/timing/ramulator/reddit_l4.csv"
+  - task_id: ramulator_yelp_supplementary_pair4
+    stage: ramulator
+    estimated_minutes: 120
+    weight: 2
+    command: "MOSAIC_RAMULATOR_PY=/usr/bin/python3.12 python scripts/run_hpca_ramulator.py --config-id yelp_deepres8_w128_s7_balanced_fallback --pair-start-layer 4 --keep-trace --artifact-dir artifacts_hpca_xorflow/complete_suite/timing/ramulator/yelp_borderline_l4 --results results_hpca_xorflow/complete_suite/timing/ramulator/yelp_borderline_l4.csv"
+  - task_id: canonical_evidence_refresh_timing
+    stage: report
+    estimated_minutes: 10
+    weight: 1
+    depends_on: [ramulator_arxiv_s17_pair4, ramulator_arxiv_s27_pair4, ramulator_reddit_pair4, ramulator_yelp_supplementary_pair4]
+    command: "PYTHONPATH=src:. python scripts/build_hpca_paper_evidence.py"
