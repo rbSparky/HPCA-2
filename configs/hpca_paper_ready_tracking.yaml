@@ -6,6 +6,16 @@ active_campaigns:
     owner: "GPU1"
     status: "COMPLETE — all four tasks and fail-closed audit passed"
     dashboard: "results_hpca_xorflow/complete_suite/paper_suite_baseline_smoke_20260729_v1/CAMPAIGN.md"
+  - id: "paper_suite_format_matrix_smoke_20260729_v1"
+    job_id: "20260729T090222Z_22860"
+    owner: "GPU1"
+    status: "COMPLETE — 10-format matrix and fail-closed audit passed"
+    dashboard: "results_hpca_xorflow/complete_suite/paper_suite_format_matrix_smoke_20260729_v1/CAMPAIGN.md"
+  - id: "paper_suite_primary_format_20260729_v1"
+    job_id: "PENDING_SUBMISSION"
+    owner: "GPU1"
+    status: "QUEUED AFTER SOURCE/TEST GATE — Arxiv, Reddit, and validity-tagged Yelp"
+    dashboard: "results_hpca_xorflow/complete_suite/paper_suite_primary_format_20260729_v1/CAMPAIGN.md"
 tasks:
   - {id: E0, block: Existing evidence, weight: 4, status: complete, owner: local, description: "Import and preserve completed causal Arxiv/Reddit/Yelp/Flickr evidence.", evidence: "results_hpca_xorflow/complete_suite/PAPER_SUITE_HOST_RESULTS.md"}
   - {id: E1, block: Existing evidence, weight: 2, status: complete, owner: local, description: "Verify local CUDA/RTL/CACTI/DRAMsim3/OpenROAD toolchain smoke evidence.", evidence: "results_hpca_xorflow/complete_suite/local_toolchain_20260728T221500Z/toolchain_status.csv"}
