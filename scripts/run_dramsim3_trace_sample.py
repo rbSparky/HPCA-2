@@ -8,6 +8,7 @@ the exact full-trace Ramulator result or retaining multi-gigabyte text traces.
 from __future__ import annotations
 
 import argparse
+import os
 import hashlib
 import json
 import subprocess
@@ -39,9 +40,20 @@ def main() -> int:
             if sampled_lines >= args.max_lines:
                 break
     try:
+        # DRAMsim3's default CMake build leaves ``libdramsim3.so`` at the
+        # repository root while ``dramsim3main`` lives in ``build/``.  Do not
+        # rely on a host-wide ldconfig entry: this runner must remain portable
+        # to the pinned, repository-local tool build used by the artifact.
+        binary = args.binary.resolve()
+        dramsim_root = binary.parent.parent
+        env = os.environ.copy()
+        library_path = str(dramsim_root)
+        if env.get("LD_LIBRARY_PATH"):
+            library_path += os.pathsep + env["LD_LIBRARY_PATH"]
+        env["LD_LIBRARY_PATH"] = library_path
         result = subprocess.run(
-            [str(args.binary), str(args.config), "-c", "10000000", "-t", str(sample)],
-            text=True, capture_output=True, timeout=900,
+            [str(binary), str(args.config.resolve()), "-c", "10000000", "-t", str(sample.resolve())],
+            text=True, capture_output=True, timeout=900, env=env,
         )
         success = result.returncode == 0
         error = result.stderr[-1000:]
