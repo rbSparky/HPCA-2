@@ -1,0 +1,19 @@
+deadline_ist: "2026-07-31T23:59:00+05:30"
+title: "XORFLOW paper-ready suite"
+tasks:
+  - {id: E0, block: Existing evidence, weight: 4, status: complete, owner: local, description: "Import and preserve completed causal Arxiv/Reddit/Yelp/Flickr evidence.", evidence: "results_hpca_xorflow/complete_suite/PAPER_SUITE_HOST_RESULTS.md"}
+  - {id: E1, block: Existing evidence, weight: 2, status: complete, owner: local, description: "Verify local CUDA/RTL/CACTI/DRAMsim3/OpenROAD toolchain smoke evidence.", evidence: "results_hpca_xorflow/complete_suite/local_toolchain_20260728T221500Z/toolchain_status.csv"}
+  - {id: A1, block: Common harness, weight: 8, status: complete, owner: local, description: "Exact common B0–B4 baseline layouts, metadata streams, and LRU invariants implemented and unit-tested.", evidence: "src/mosaic_validation/hpca_baselines.py"}
+  - {id: A2, block: Common harness, weight: 4, status: pending, owner: GPU1, description: "Run the Arxiv baseline smoke (B0–B4/X0/X1/oracles) after exactness audit.", evidence: "results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/"}
+  - {id: B1, block: Trace closure, weight: 5, status: pending, owner: GPU1, description: "Attempt the one permitted Yelp validation-only recovery; classify it without changing hard gates.", evidence: "artifacts_hpca_xorflow/workloads/yelp_*/*"}
+  - {id: B2, block: Trace closure, weight: 3, status: pending, owner: GPU1, description: "Audit all principal FP8 traces/checkpoint hashes and quantized-quality contracts.", evidence: "results_hpca_xorflow/complete_suite/quality/"}
+  - {id: C1, block: Baselines, weight: 12, status: pending, owner: GPU1, description: "Run full B0–B4/X0–X2/O0–O1 matrix on Arxiv seeds 7/17/27.", evidence: "results_hpca_xorflow/complete_suite/baselines/arxiv/"}
+  - {id: C2, block: Baselines, weight: 12, status: pending, owner: GPU1, description: "Run full B0–B4/X0–X2/O0–O1 matrix on Reddit.", evidence: "results_hpca_xorflow/complete_suite/baselines/reddit/"}
+  - {id: C3, block: Baselines, weight: 5, status: pending, owner: GPU1, description: "Run full matrix on Yelp (validity-tagged), plus transfer/boundary compact rows.", evidence: "results_hpca_xorflow/complete_suite/baselines/transfer_boundary/"}
+  - {id: D1, block: Controls, weight: 7, status: pending, owner: GPU1, description: "Run trained/density-null/node-null/temporal-null/random-init traffic controls.", evidence: "results_hpca_xorflow/complete_suite/controls/"}
+  - {id: D2, block: Ablations, weight: 7, status: pending, owner: GPU1, description: "Run causal, spatial, support-cache, selector, decoder, writeback, W, and precision ablations.", evidence: "results_hpca_xorflow/complete_suite/ablations/"}
+  - {id: E2, block: Timing, weight: 5, status: pending, owner: GPU1, description: "Run full Ramulator2 B3-best vs causal X1 primary-pair timing matrix.", evidence: "results_hpca_xorflow/complete_suite/timing/ramulator/"}
+  - {id: E3, block: Timing, weight: 2, status: pending, owner: GPU1, description: "Run and parse bounded DRAMsim3 cross-checks for Arxiv/Reddit/Yelp.", evidence: "results_hpca_xorflow/complete_suite/timing/dramsim3/"}
+  - {id: E4, block: PPA/energy, weight: 5, status: pending, owner: local, description: "Run CACTI SRAM sweep plus hierarchical decoder/controller RTL/OpenROAD PPA.", evidence: "results_hpca_xorflow/complete_suite/ppa/"}
+  - {id: F1, block: Robustness, weight: 5, status: pending, owner: GPU1, description: "Complete one-factor cache/bandwidth/slice/decoder/tile/order sensitivity tables.", evidence: "results_hpca_xorflow/complete_suite/sensitivity/"}
+  - {id: G1, block: Report/reproduce, weight: 4, status: pending, owner: local, description: "Generate canonical evidence, gates, figures, and primary rerun hash comparison.", evidence: "results_hpca_xorflow/complete_suite/HPCA_PAPER_EVIDENCE.md"}

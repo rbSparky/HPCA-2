@@ -66,7 +66,20 @@ class SliceLayout:
         return int(self.capacities[index]) if self.capacities is not None else self.capacity_bytes
 
 
-def _format_support_bytes(slice_features: int, format_name: str) -> int:
+def _format_support_bytes(
+    slice_features: int,
+    format_name: str,
+    *,
+    active_count: int | None = None,
+    full_feature_width: int | None = None,
+) -> int:
+    """Return exact support/index bytes for one physical row-slice.
+
+    ``active_count`` is deliberately explicit: bitmap formats depend only on
+    the slice universe whereas CSR formats depend on the encoded set size.
+    This single accounting function is shared by every baseline so a format
+    cannot receive free indices or an unmodelled selector.
+    """
     if format_name == "BEICSR":
         return math.ceil(slice_features / 8)
     if format_name == "XORFLOW":
@@ -74,7 +87,19 @@ def _format_support_bytes(slice_features: int, format_name: str) -> int:
         return 0
     if format_name == "DENSE":
         return 0
+    if format_name == "CSR32":
+        return 4 * int(active_count or 0)
+    if format_name == "CSR_PACKED":
+        if full_feature_width is None or full_feature_width <= 1:
+            raise ValueError("CSR_PACKED requires full_feature_width > 1")
+        index_bits = math.ceil(math.log2(full_feature_width))
+        return math.ceil(index_bits * int(active_count or 0) / 8)
     raise ValueError(f"unknown physical format: {format_name}")
+
+
+def _value_count(slice_features: int, active_count: int, format_name: str) -> int:
+    """Return stored values for a legal row-slice format."""
+    return slice_features if format_name == "DENSE" else int(active_count)
 
 
 def build_sliced_layout(
@@ -102,9 +127,12 @@ def build_sliced_layout(
         raise ValueError("slice_width must be positive")
     slices = math.ceil(features / slice_width)
     maximum_feature_count = min(slice_width, features)
-    max_support = _format_support_bytes(maximum_feature_count, format_name)
+    max_support = _format_support_bytes(
+        maximum_feature_count, format_name,
+        active_count=maximum_feature_count, full_feature_width=features,
+    )
     minimum_capacity = align64(
-        descriptor_bytes + max_support + maximum_feature_count * value_bytes
+        descriptor_bytes + max_support + _value_count(maximum_feature_count, maximum_feature_count, format_name) * value_bytes
     )
     capacity = int(reserve_bytes) if reserve_bytes is not None else minimum_capacity
     if capacity < minimum_capacity or capacity % LINE_BYTES:
@@ -125,9 +153,16 @@ def build_sliced_layout(
     useful = np.empty(rows * slices, dtype=np.int64)
     for sid in range(slices):
         lo, hi = sid * slice_width, min(features, (sid + 1) * slice_width)
-        support_bytes = _format_support_bytes(hi - lo, format_name)
         active = support[:, lo:hi].sum(axis=1, dtype=np.int64)
-        useful[sid::slices] = descriptor_bytes + support_bytes + active * value_bytes
+        support_bytes = np.asarray([
+            _format_support_bytes(
+                hi - lo, format_name, active_count=int(count), full_feature_width=features,
+            ) for count in active
+        ], dtype=np.int64)
+        stored_values = np.asarray([
+            _value_count(hi - lo, int(count), format_name) for count in active
+        ], dtype=np.int64)
+        useful[sid::slices] = descriptor_bytes + support_bytes + stored_values * value_bytes
     return SliceLayout(
         starts=starts,
         useful_bytes=useful,
@@ -136,7 +171,7 @@ def build_sliced_layout(
         feature_width=features,
         value_bytes=value_bytes,
         descriptor_bytes=descriptor_bytes,
-        support_bytes_per_slice=_format_support_bytes(maximum_feature_count, format_name),
+        support_bytes_per_slice=max_support,
         format_name=format_name,
     )
 
@@ -178,11 +213,18 @@ def build_mixed_sliced_layout(
             index = int(node) * slices + sid
             lo, hi = sid * slice_width, min(features, (sid + 1) * slice_width)
             fmt = str(choice[int(node), sid])
-            support_bytes = _format_support_bytes(hi - lo, fmt)
-            cap = align64(descriptor_bytes + support_bytes + (hi - lo) * value_bytes)
+            active = int(support[int(node), lo:hi].sum())
+            support_bytes = _format_support_bytes(
+                hi - lo, fmt, active_count=active, full_feature_width=features,
+            )
+            cap = align64(
+                descriptor_bytes
+                + _format_support_bytes(hi - lo, fmt, active_count=hi - lo, full_feature_width=features)
+                + _value_count(hi - lo, hi - lo, fmt) * value_bytes
+            )
             starts[index] = cursor
             capacities[index] = cap
-            useful[index] = descriptor_bytes + support_bytes + int(support[int(node), lo:hi].sum()) * value_bytes
+            useful[index] = descriptor_bytes + support_bytes + _value_count(hi - lo, active, fmt) * value_bytes
             cursor += cap
     return SliceLayout(
         starts=starts, useful_bytes=useful, capacity_bytes=int(capacities.max()),
