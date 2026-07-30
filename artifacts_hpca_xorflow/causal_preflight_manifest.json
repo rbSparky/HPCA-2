@@ -1,6 +1,7 @@
 {
   "command": "causal_pair_preflight",
-  "rows": 26,
-  "sha256": "33cccafbf6bb6c5b79b1f315ab600092286a44a030090c83e73c13b299f69b22",
-  "wall_seconds": 87.53734838399942
+  "output": "results_hpca_xorflow/complete_suite/runs/abl_reddit_slice256/causal_preflight.csv",
+  "rows": 2,
+  "sha256": "5b6054869d349584f62097a81e78c3aaff44fe016275b8e4f2ad0e45e8ab240b",
+  "wall_seconds": 119.90455991774797
 }

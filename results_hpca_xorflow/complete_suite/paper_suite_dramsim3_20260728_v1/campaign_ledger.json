@@ -1,0 +1,57 @@
+{
+  "generated_utc": "2026-07-29T00:08:26Z",
+  "rows": [
+    {
+      "task_id": "ramulator_arxiv_keep_trace",
+      "stage": "ramulator",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "150",
+      "started_utc": "2026-07-29T00:06:20Z",
+      "finished_utc": "2026-07-29T00:08:26Z",
+      "wall_seconds": "125.9",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_dramsim3_20260728_v1/ramulator_arxiv_keep_trace.log",
+      "command": "MOSAIC_RAMULATOR_PY=/usr/bin/python3.12 python scripts/run_hpca_ramulator.py --config-id ogbn_arxiv_deepres8_w128_s17 --pair-start-layer 4 --keep-trace --artifact-dir artifacts_hpca_xorflow/complete_suite/paper_suite_dramsim3_20260728_v1/ramulator/arxiv_l4 --results results_hpca_xorflow/complete_suite/paper_suite_dramsim3_20260728_v1/ramulator/arxiv_l4.csv",
+      "reason": ""
+    },
+    {
+      "task_id": "dramsim3_arxiv_beicsr_sample",
+      "stage": "dramsim3",
+      "status": "SUCCEEDED",
+      "depends_on": "ramulator_arxiv_keep_trace",
+      "estimated_minutes": "20",
+      "started_utc": "2026-07-29T00:08:26Z",
+      "finished_utc": "2026-07-29T00:08:26Z",
+      "wall_seconds": "0.1",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_dramsim3_20260728_v1/dramsim3_arxiv_beicsr_sample.log",
+      "command": "python scripts/run_dramsim3_trace_sample.py --trace artifacts_hpca_xorflow/complete_suite/paper_suite_dramsim3_20260728_v1/ramulator/arxiv_l4/ogbn_arxiv_deepres8_w128_s17_l4_beicsr.trace --output results_hpca_xorflow/complete_suite/paper_suite_dramsim3_20260728_v1/dramsim3/arxiv_l4_beicsr.json",
+      "reason": ""
+    },
+    {
+      "task_id": "dramsim3_arxiv_xorflow_sample",
+      "stage": "dramsim3",
+      "status": "SUCCEEDED",
+      "depends_on": "ramulator_arxiv_keep_trace",
+      "estimated_minutes": "20",
+      "started_utc": "2026-07-29T00:08:26Z",
+      "finished_utc": "2026-07-29T00:08:26Z",
+      "wall_seconds": "0.1",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_dramsim3_20260728_v1/dramsim3_arxiv_xorflow_sample.log",
+      "command": "python scripts/run_dramsim3_trace_sample.py --trace artifacts_hpca_xorflow/complete_suite/paper_suite_dramsim3_20260728_v1/ramulator/arxiv_l4/ogbn_arxiv_deepres8_w128_s17_l4_xorflow.trace --output results_hpca_xorflow/complete_suite/paper_suite_dramsim3_20260728_v1/dramsim3/arxiv_l4_xorflow.json",
+      "reason": ""
+    },
+    {
+      "task_id": "consolidated_report_dramsim3",
+      "stage": "report",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "5",
+      "started_utc": "2026-07-29T00:08:26Z",
+      "finished_utc": "2026-07-29T00:08:26Z",
+      "wall_seconds": "0.2",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_dramsim3_20260728_v1/consolidated_report_dramsim3.log",
+      "command": "PYTHONPATH=src python scripts/report_hpca_complete_suite.py",
+      "reason": ""
+    }
+  ]
+}

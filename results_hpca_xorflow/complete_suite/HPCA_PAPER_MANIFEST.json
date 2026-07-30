@@ -1,0 +1,515 @@
+{
+  "evidence_rows": 1850,
+  "gates": [
+    {
+      "description": "All required primary configurations have common format rows.",
+      "evidence": "format_matrix",
+      "gate_id": "common_format_matrix",
+      "status": "PASS"
+    },
+    {
+      "description": "At least one exact common-format source has been audited; final gate requires every primary row.",
+      "evidence": "format_matrix/causal_preflight",
+      "gate_id": "exact_format_outputs",
+      "status": "PASS"
+    },
+    {
+      "description": "Principal matrix rerun hash comparison is required before final decision.",
+      "evidence": "reproduction/",
+      "gate_id": "reproducibility",
+      "status": "UNASSESSED"
+    },
+    {
+      "description": "CACTI SRAM sweep and routed decoder-lane/Yosys bank evidence are present.",
+      "evidence": "ppa/",
+      "gate_id": "ppa_subsystem",
+      "status": "PASS"
+    },
+    {
+      "description": "Host-area/host-power percentages are not claimed without a common-host floorplan.",
+      "evidence": "ppa/PPA_RESULTS.md",
+      "gate_id": "ppa_host_fraction",
+      "status": "UNASSESSED"
+    }
+  ],
+  "generated_utc": "2026-07-30T07:47:18.880323+00:00",
+  "git_commit": "f8ec4cc4acc1f29efe6eb9e54b2510bacc648a63",
+  "source_files": [
+    {
+      "path": "results_hpca_xorflow/complete_suite/baselines/arxiv/format_matrix.csv",
+      "sha256": "cd9f4f1040829b1a184a1e5a3609f313c831c0da092531efe2d17887dab5e1b7"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/baselines/format_matrix_smoke_arxiv_l4/format_matrix.csv",
+      "sha256": "d3ff6e40dca74dd9bc022c85d01f8921a3f2c182bad998b9464c1ac24981ba9d"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/baselines/reddit/format_matrix.csv",
+      "sha256": "10c6aac81b660b01bf2f1c7047cb111dba501a9b9888d3e94972b35f4268bc82"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/baseline_matrix.csv",
+      "sha256": "7102f8f41da6c17214f4d48df4d9cc99e95d8a88a0dd88a07939f555731985ac"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/causal_x1.csv",
+      "sha256": "7543f8509368b658db440ad519628aac3c2c9947479401cf428bcaa3ac3a6a3e"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/causal_x1_host.csv",
+      "sha256": "2de2a4a66b42787ba34dc2e78c6406cbe547f1b38adae8cf2183958f507d33be"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/baselines/yelp_borderline/format_matrix.csv",
+      "sha256": "46e605a650c7b29e3b16774d757fb4465eba8335bcb6dab738e31ac3daded94e"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/controls/arxiv_s17/control_audit.csv",
+      "sha256": "aeb2690366216f9a975325f01eacda63e17c6412807e4fe0f8fe54dd5045d530"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/controls/arxiv_s17/format_controls.csv",
+      "sha256": "78ac5e29a3fdd53b5587716605bcec7752c2558f035983d2b6d56d063c029170"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/paper_suite_20260728_v1/ramulator/arxiv_s17_l4.csv",
+      "sha256": "a147a8dadedd56672d3a4ca1932d0446ee43d7b86a296a09f13f29945734bb13"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/paper_suite_20260728_v1/ramulator/reddit_l4.csv",
+      "sha256": "99d90e0bd33afc88e2238c550a516873e7edc3197b84ec045e1f9b272d5834c0"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/paper_suite_20260728_v1/ramulator/yelp_l4.csv",
+      "sha256": "93a4702fc2df5d32862b5839fc6dc6a8c1a61b17463853ec35df8a5749831648"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/paper_suite_dramsim3_20260728_v1/ramulator/arxiv_l4.csv",
+      "sha256": "87469fcddab0b48eb3ceb559138f8ce9c29430d9f6aabfdf86c1d90494890db4"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/ppa/20260729T_local_ppa_reroute/ppa_summary.csv",
+      "sha256": "f7ea7e3b7278a830154183b543bb74835a48b1d5f76018469a29bcb1f0f62126"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/ppa/20260729T_local_ppa_v1/ppa_summary.csv",
+      "sha256": "c0a6419eda80667795ee6ed8fa9563b5f2938b4d22b40ddf6c583dd3cd489c72"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/ppa/20260729T_local_ppa_v2/ppa_summary.csv",
+      "sha256": "65ab55249b52d031be22995a064442dc6fd48ea6b1c514e8f1c777ff632227c7"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/ppa/20260729T_local_ppa_v3/ppa_summary.csv",
+      "sha256": "1fa05b6b411a4165637fc0689d647bb5bb7a765eee66b1a2ddf860c9709c18ec"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/ppa/zzppa/ppa_summary.csv",
+      "sha256": "6e686629e96eabcf742bbf0a018d68bcfe128e2f9031b5a26f8578fbde1bc994"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_bw128/causal_preflight.csv",
+      "sha256": "6a85a236cd9d9f015aa76b1797f2b294542b86241669586bf0dcef4808ab5374"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_bw128/host_model.csv",
+      "sha256": "d15c3660c114298f6c51598e168acd667f421fb2e4d54dd6fa5004b8eed57569"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_bw512/causal_preflight.csv",
+      "sha256": "6a85a236cd9d9f015aa76b1797f2b294542b86241669586bf0dcef4808ab5374"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_bw512/host_model.csv",
+      "sha256": "194f86f87a9627434fa6aa73355975dd7deb60bc88a0edf293ffc882e99570d5"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_cache1m/causal_preflight.csv",
+      "sha256": "2414fe095069c3425a817325b656df227a46b46e6434b90137825b58099237eb"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_cache1m/host_model.csv",
+      "sha256": "a4e9ade4524a1d3e3c1173e51410dccd3d5561288a7fe11a424fd0e944cfd077"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_cache256/causal_preflight.csv",
+      "sha256": "4055019293ea6dd3d814350b1dbf73423b4a8cad910cdc8046160a2a3b6618ac"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_cache256/host_model.csv",
+      "sha256": "0028858569330f815cfc9809f3647640a3bd0c6055215f6bcca2d0f74db6a7e6"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_decoder16/causal_preflight.csv",
+      "sha256": "6a85a236cd9d9f015aa76b1797f2b294542b86241669586bf0dcef4808ab5374"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_decoder16/host_model.csv",
+      "sha256": "17b1ba6f44bd34e8dacdebdbf99d835b75143730555c90fc10b01747789b370f"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_decoder8/causal_preflight.csv",
+      "sha256": "6a85a236cd9d9f015aa76b1797f2b294542b86241669586bf0dcef4808ab5374"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_decoder8/host_model.csv",
+      "sha256": "519036e258cb7ebef8a94c56a81636d306dc982984f814e1c3b4b2cd1688888e"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_depth16/causal_preflight.csv",
+      "sha256": "b0678ca15cf07d232d30b49495f60c9ab16cec951c6500e75af6761ac8b62278"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_depth16/host_model.csv",
+      "sha256": "5cdfb9e8a36419d367569641e7a831193bcd591f58ced5a796ce283a37429007"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_depth4/causal_preflight.csv",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_depth4_repaired/causal_preflight.csv",
+      "sha256": "5ae693bbaad981c65049b89f404686ee96d3c6c2962330b92b97f16e95a73bf0"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_depth4_repaired/host_model.csv",
+      "sha256": "27a4813c7d743618cbe4384197641c5690c7ebe8573a89ef82c69baa60be4b52"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_gin8/causal_preflight.csv",
+      "sha256": "21ed454013dbd1f7492a9aae24697e71abe280363ebbb205d61549c90c5a323e"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_gin8/host_model.csv",
+      "sha256": "7d68992fc3cf3fb5c74770dcd26505aa5b085ab130665d990020de24ecd7ab08"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_gin8_residual/causal_preflight.csv",
+      "sha256": "02e0f0d28f53df0104c97f6a2f49bac847730a344df5e5c7c4fe340cf6fd43f8"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_gin8_residual/host_model.csv",
+      "sha256": "bf1e4ac7e92385ff3bb968b6afaa0f63959a39e3878c5c7e2c91afeebeedfa9a"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_graphsage8/causal_preflight.csv",
+      "sha256": "547695a6ba918f08d219c81daa3cb427e971935bea4815a61b16c1f8b9b42314"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_graphsage8/host_model.csv",
+      "sha256": "bc158d635746f442b79324a4d94f75124af08fd6468bd53375556a26374e6281"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_graphsage8_residual/causal_preflight.csv",
+      "sha256": "823d127428e02d58b5aeeac607d779f1fb87065042d4fae861d5c162e132c796"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_graphsage8_residual/host_model.csv",
+      "sha256": "e514fefb54d108b89adb2b0d485293f0aaed89eac53cb31ce38a01c241a3060d"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_order_o1/causal_preflight.csv",
+      "sha256": "3014bb40ca8b6c2239f22146ed351eaf9142a69cdf058cade771908fd62f8715"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_order_o1/host_model.csv",
+      "sha256": "5b69706005db3ae5e944ae10fe6361824f567a30c87bd02bb4d2b05a5e35f2bd"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_s7/causal_preflight.csv",
+      "sha256": "ea4d7c16d760fe980b380b5bbed25629c58a61ce3fad34be74d6898e9d2fb119"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_s7/host_model.csv",
+      "sha256": "f823678fb478bbac4a159d0d80fadbd091126603e44d0f8e215610d030897d26"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_single_buffer/causal_preflight.csv",
+      "sha256": "6a85a236cd9d9f015aa76b1797f2b294542b86241669586bf0dcef4808ab5374"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_single_buffer/host_model.csv",
+      "sha256": "96ee230c50a2391425762f01b093ff368b28b8c3edd79f9be3c7fa32a3f75f42"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_slice256/causal_preflight.csv",
+      "sha256": "ff14b574bb268d68cc8ecf84abb7ec070303d84a12434e42a5fab16dfef7da6d"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_slice256/host_model.csv",
+      "sha256": "a343c8415481557320721a3abbee88bf1ae575f744094303586b5b2febf6bb3a"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_slice64/causal_preflight.csv",
+      "sha256": "51e693a89739f9049b79c129bba380189d0f8780064088096d22b1f645a09fc9"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_slice64/host_model.csv",
+      "sha256": "c85d560d1e84d33610933d076924a6c37fe2f3ff3543ca6ef602edfd248daf8c"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_slice96/causal_preflight.csv",
+      "sha256": "0a711950773a4292009eb60e7f508388ca5222ab576c192fba6a8737dcea31ee"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_slice96/host_model.csv",
+      "sha256": "4a15d8d361abbe4e375632796e3967f1eedca8b1cf18a0f1b9c51252572ffe47"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_support32k/causal_preflight.csv",
+      "sha256": "6a85a236cd9d9f015aa76b1797f2b294542b86241669586bf0dcef4808ab5374"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_support32k/host_model.csv",
+      "sha256": "15fe9bde05a71005212db3eb6d66b1f0fa4c66e33e5dae659ff424f7e3698197"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_support64k/causal_preflight.csv",
+      "sha256": "6a85a236cd9d9f015aa76b1797f2b294542b86241669586bf0dcef4808ab5374"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_support64k/host_model.csv",
+      "sha256": "15fe9bde05a71005212db3eb6d66b1f0fa4c66e33e5dae659ff424f7e3698197"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_support8k/causal_preflight.csv",
+      "sha256": "6a85a236cd9d9f015aa76b1797f2b294542b86241669586bf0dcef4808ab5374"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_support8k/host_model.csv",
+      "sha256": "15fe9bde05a71005212db3eb6d66b1f0fa4c66e33e5dae659ff424f7e3698197"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_tile256/causal_preflight.csv",
+      "sha256": "cc9d702a5f2306e0a3535aab616b0e786fde5dd10f4c1fd84b6c861c5de67298"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_tile256/host_model.csv",
+      "sha256": "b4a8b49c1e648c6be370e0f235b558df5d0978f2682e144169ed4e78ce3ad388"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_tile64/causal_preflight.csv",
+      "sha256": "fa835c16d3878345d7de5cb7f05bfc8b3beb95e02ff090017ec4501e98d5189a"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_tile64/host_model.csv",
+      "sha256": "f082554fc0eac5dad849441e3656c5918b7eed982c18593e3d9f6e6c0a2e4b54"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_width256/causal_preflight.csv",
+      "sha256": "b43ac9f145859ae85766075357ded21a8e91f1ea977821bf0ad0a4b500f20ffb"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_width256/host_model.csv",
+      "sha256": "e0d518f12042d37fa315df3128f6c89a04e0545c15bbfd56700db8e9be98233b"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_width64/causal_preflight.csv",
+      "sha256": "ed14493dfb5c8f35c23cc7a44dcd870df1eb73e852a7ada312450b9c606f76df"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/arxiv_width64/host_model.csv",
+      "sha256": "6f4a2795a34dffc6ba78e3ad4a0fba934a90e0d5033277a9c5d28df3749fbc28"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/boundary_chameleon/causal_preflight.csv",
+      "sha256": "db3b9122c4f1a10276642f00386390f7c65ce350ccc0df62ec875b940955009d"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/boundary_chameleon/host_model.csv",
+      "sha256": "f0caad8776c746fb5e4a0aed09ccae5f724e3fefd102d05d5f10ee403a1f5537"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/boundary_cora/causal_preflight.csv",
+      "sha256": "c7f719f259d7b27a051779553aa6f487e9726022ba9617d1dd502dc82b1d45ef"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/boundary_cora/host_model.csv",
+      "sha256": "2d452885e4321ab7e61c67c64000e0cf251a75ae01428113de89b85df90a119e"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/boundary_pubmed/causal_preflight.csv",
+      "sha256": "df03509cff47a0f21bcb21568ed4d278650045881b41e3e92d547443a467c28e"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/boundary_pubmed/host_model.csv",
+      "sha256": "4a69b756f07c34a2d4d70499faefd3ae9fddfbe26502fae8061d48a6959d79fc"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/citeseer/causal_preflight.csv",
+      "sha256": "dc7d67f12851e908349986ac62acfb4b3cc97a71cfacf85db64d8d24de10bbff"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/citeseer/host_model.csv",
+      "sha256": "b09f330b889936e11e57d9ef36675c8e6d94f572095d3dd7c02450853477cc73"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/flickr_cache1m/causal_preflight.csv",
+      "sha256": "6ae871aae739597fa739e097adfa7cc6b88cbf33dc0595c8e7a034f22ee15173"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/flickr_cache1m/host_model.csv",
+      "sha256": "b1f3c2c4e32fcb0d3d88ebc936654ff94c994c9c0e8af9c618e758c83b67b06d"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/flickr_cache256/causal_preflight.csv",
+      "sha256": "8bcabe4815b3a3c05cd1503b973118c4b652c4c598dc32ef2ee35ba57b663344"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/flickr_cache256/host_model.csv",
+      "sha256": "2ea6ca3e0f80c5a30c6198a798e5bd129f6a5cb13f324595a77a2e4e7cfea17f"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/flickr_order_o1/causal_preflight.csv",
+      "sha256": "beb64b5bfc323ca73d4fa851dd72c2cf2bdc97961a0dd4505d7b627aa916fc14"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/flickr_order_o1/host_model.csv",
+      "sha256": "5a9de3c39cf80da756f0b75eddb6901bd65925e494dcd395055a0423b73bcb82"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/flickr_slice64/causal_preflight.csv",
+      "sha256": "a91ea89942575690488b916b27d8fcd799ea7739901c99786e87e76394ff199b"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/flickr_slice64/host_model.csv",
+      "sha256": "3d23b472680c96148866bbc48918ca011994684ec4ff6970ed17dd2ef20567be"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/primary_arxiv_s17/causal_preflight.csv",
+      "sha256": "6a85a236cd9d9f015aa76b1797f2b294542b86241669586bf0dcef4808ab5374"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/primary_arxiv_s17/host_model.csv",
+      "sha256": "15fe9bde05a71005212db3eb6d66b1f0fa4c66e33e5dae659ff424f7e3698197"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/primary_arxiv_s27/causal_preflight.csv",
+      "sha256": "5355807721c464cc67923505794fce4288717477383ab89627d27f2bb88c0726"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/primary_arxiv_s27/host_model.csv",
+      "sha256": "af29586f5004d9116b6177cfab0531b17ce74e0eded5bbb7677e351ec767ca51"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/primary_flickr/causal_preflight.csv",
+      "sha256": "7155f272a2f40e3c70db80aa8e7ad3c92aa1c2ec95f4a5536beeb30891d30e8c"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/primary_flickr/host_model.csv",
+      "sha256": "b842c3064112baedbba84c06088f73379033a3816e3d7dd4f64ede270c25639d"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/primary_reddit/causal_preflight.csv",
+      "sha256": "75ebf0d244b708ecbc6a34e9b93ac37e314113917533f2ca4a22b117ff8c3305"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/primary_reddit/host_model.csv",
+      "sha256": "88b52c18555945f283c306bd326e499696d0a2283ab941f2e2145adea84c6e99"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/primary_yelp_borderline/causal_preflight.csv",
+      "sha256": "6e6aa9f1b9f1fc12747ecd505484950fd427e0864ef89490fbb17bf536e9a111"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/primary_yelp_borderline/host_model.csv",
+      "sha256": "d010d6d5bcafb83ef4ace2fce46ef966046db42643531c50d697234896dfea63"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/reddit_cache1m/causal_preflight.csv",
+      "sha256": "9b0931fe5437e684c2cd54d903b605a8f097b061913f9f46f709ff14d553314a"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/reddit_cache1m/host_model.csv",
+      "sha256": "2e63682ac1afe40e12b05c47ec1c4e2a075f8dd6eb6ad3bae02342ea3edfdad9"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/reddit_cache256/causal_preflight.csv",
+      "sha256": "874faf3c4fcf0a30fbf371a9df2df856ed3bc3bc8d8520cd61df58a1defd96c0"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/reddit_cache256/host_model.csv",
+      "sha256": "f0f72127746a121021ed01381938019201191cccba0f9347044814fe2918a7cb"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/reddit_order_o1/causal_preflight.csv",
+      "sha256": "94e31c50171e6e2db33774debfb520fd56c9c9ed1206f2e27c895bb48b5c1273"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/reddit_order_o1/host_model.csv",
+      "sha256": "7552e467e388d8c59760420d9ec05c8068d48b1640469b322253711759cbde3a"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/reddit_slice256/causal_preflight.csv",
+      "sha256": "5b6054869d349584f62097a81e78c3aaff44fe016275b8e4f2ad0e45e8ab240b"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/reddit_slice256/host_model.csv",
+      "sha256": "d49aa14f231d9a160f24f9248d4246d83fe1232aa5cd647af2c257b721226bc7"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/reddit_slice64/causal_preflight.csv",
+      "sha256": "0a49065488cb1d2225c380995f21c64ad666e1589cad8ed2d7f8ddaac389fbb0"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/reddit_slice64/host_model.csv",
+      "sha256": "dbb57a539fac0ba9cec6ca7051c9d4cfbd1089595d8b273128f8229b92dea971"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/reddit_slice96/causal_preflight.csv",
+      "sha256": "2b826c8d22354d11a25df6b32a5d60348b10a98a6bbd8c92ea3a04f8e27650c6"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/reddit_slice96/host_model.csv",
+      "sha256": "a721eaa664ec23ab5f68214985bab9190fc5d93f1b34d35e7e1d04b989fc093a"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/reddit_support64k/causal_preflight.csv",
+      "sha256": "75ebf0d244b708ecbc6a34e9b93ac37e314113917533f2ca4a22b117ff8c3305"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/reddit_support64k/host_model.csv",
+      "sha256": "88b52c18555945f283c306bd326e499696d0a2283ab941f2e2145adea84c6e99"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/reddit_tile64/causal_preflight.csv",
+      "sha256": "94b632108e03056f975eb30a1e83c450b4c43115282c860e09a8a19f23c4d0f0"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/reddit_tile64/host_model.csv",
+      "sha256": "dc25bc964a27a6f31f7b9760770fe7b6abbe57bfacca3a86892841820dd24208"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/yelp_cache1m/causal_preflight.csv",
+      "sha256": "03d3e4636b4e49dd54ae0b8e7e6ef72e6f1ed6601c5b7b5ecca4b77b27ec960b"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/yelp_cache1m/host_model.csv",
+      "sha256": "d9519af690803c525e953346621efe968dc3deda4aef2c3b4b185b05e1aeb1a0"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/yelp_cache256/causal_preflight.csv",
+      "sha256": "abe7b9e9937e3eabb0dabdf305d21b8c040109d0b1686a7d11331f589055a65b"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/yelp_cache256/host_model.csv",
+      "sha256": "6bf403974e37beb8572e696499f0869bb08c17ece05248e88e5edac9f84b5327"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/yelp_order_o1/causal_preflight.csv",
+      "sha256": "088a8bd9f2c61e3834ac4e8f6adc974c25af7ed6347f190becdfd914f77d9efc"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/yelp_order_o1/host_model.csv",
+      "sha256": "3b85c9c3b230e20bf417ad6671e81c2a38f82989bc6c21d115b424f95e417205"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/yelp_slice64/causal_preflight.csv",
+      "sha256": "31d8a3b866ae72eeb7af93f01dc904fd2fd33c06c27422c4daaeafc889155f7f"
+    },
+    {
+      "path": "results_hpca_xorflow/complete_suite/runs/yelp_slice64/host_model.csv",
+      "sha256": "f23bc5d0d76ebf4e2d18fb4bc2691b4f1eee9cedc245d0e6e4549941b554486b"
+    }
+  ]
+}

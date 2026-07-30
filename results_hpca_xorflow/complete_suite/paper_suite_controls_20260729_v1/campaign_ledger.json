@@ -1,0 +1,18 @@
+{
+  "generated_utc": "2026-07-29T10:18:01Z",
+  "rows": [
+    {
+      "task_id": "traffic_controls_arxiv",
+      "stage": "controls",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "180",
+      "started_utc": "2026-07-29T10:14:23Z",
+      "finished_utc": "2026-07-29T10:18:01Z",
+      "wall_seconds": "218.0",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_controls_20260729_v1/traffic_controls_arxiv.log",
+      "command": "PYTHONPATH=src python -m mosaic_validation.hpca_format_controls --configs ogbn_arxiv_deepres8_w128_s17 --max-pairs 1 --output results_hpca_xorflow/complete_suite/controls/arxiv_s17/format_controls.csv --audit-output results_hpca_xorflow/complete_suite/controls/arxiv_s17/control_audit.csv",
+      "reason": ""
+    }
+  ]
+}

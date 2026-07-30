@@ -1,0 +1,17 @@
+{
+  "cacti_output": "/home/rishabh/HPCA2/mosaic_delta_phase1/artifacts_hpca_xorflow/complete_suite/local_toolchain_20260728T220001Z/cacti_default.txt",
+  "cuda_rows": 9,
+  "dramsim3": {
+    "error": "",
+    "memory_model": "DDR4_8Gb_x8_3200",
+    "returncode": 0,
+    "roofline_only": false,
+    "submitted_lines": 64,
+    "tool": "DRAMsim3",
+    "tool_run_success": true,
+    "trace": "/home/rishabh/HPCA2/mosaic_delta_phase1/results_hpca_xorflow/complete_suite/local_toolchain_20260728T220001Z/dramsim3_hbm2_smoke.trace"
+  },
+  "pipelined_cosim": "PASS cycles=9999 seed=7 latency=1 throughput_words_per_cycle=1",
+  "pytest_log": "/home/rishabh/HPCA2/mosaic_delta_phase1/artifacts_hpca_xorflow/complete_suite/local_toolchain_20260728T220001Z/pytest.log",
+  "run_tag": "20260728T220001Z"
+}

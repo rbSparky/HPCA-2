@@ -1,0 +1,7 @@
+config_id,pair_start_layer,format,trace_sha256,requests,metadata_bytes,nodes,edges,dram_cycles,served_requests,all_requests_drained,tool_success,error,speedup_vs_beicsr
+reddit_deepres8_w128_s7_native,4,beicsr,654a21c103937ab10ef66f22056d14344fb5c462595e19873a1e125bee24a1e2,896402028,0,232965,114615892,284758181,896402028,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/complete_suite/paper_suite_20260728_v1/ramulator/reddit_l4/xorflow_hbm_k_ivrxl_/beicsr.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 896402028 lines.
+",1.0
+reddit_deepres8_w128_s7_native,4,xorflow,f8db51e997acab5a9dff54e27c654eca158d10a910e7e6ae6f2d2c640c84e9a2,566002464,5718528,232965,114615892,182450720,566002464,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/complete_suite/paper_suite_20260728_v1/ramulator/reddit_l4/xorflow_hbm_k_ivrxl_/xorflow.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 566002464 lines.
+",1.5607402426255155

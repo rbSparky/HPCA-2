@@ -1,0 +1,9 @@
+access_time_ns,area_mm2,capacity_bytes,cell_count,component,cycle_time_ns,drc_count,dynamic_read_nj,error,fmax_mhz,instance_count,leakage_mw,power_w,provenance,status,technology_um,tool,worst_slack_ns
+,,8192,,support_cache_sram,,,,,,1,,,artifacts_hpca_xorflow/complete_suite/ppa/zzppa/cacti/support_cache_8192.log,PASS,0.045,CACTI7_DOCKER,
+,,16384,,support_cache_sram,,,,,,1,,,artifacts_hpca_xorflow/complete_suite/ppa/zzppa/cacti/support_cache_16384.log,PASS,0.045,CACTI7_DOCKER,
+,,32768,,support_cache_sram,,,,,,1,,,artifacts_hpca_xorflow/complete_suite/ppa/zzppa/cacti/support_cache_32768.log,PASS,0.045,CACTI7_DOCKER,
+,,65536,,support_cache_sram,,,,,,1,,,artifacts_hpca_xorflow/complete_suite/ppa/zzppa/cacti/support_cache_65536.log,PASS,0.045,CACTI7_DOCKER,
+,,0,1960.0,xorflow_decoder_lane_pipelined,,,,,,1,,,artifacts_hpca_xorflow/complete_suite/ppa/zzppa/rtl/xorflow_decoder_lane_pipelined_synthesis.log,PASS,0.045,YOSYS,
+,,0,61504.0,xorflow_decoder_bank_pipelined,,,,,,1,,,artifacts_hpca_xorflow/complete_suite/ppa/zzppa/rtl/xorflow_decoder_bank_pipelined_synthesis.log,PASS,0.045,YOSYS,
+,,0,,decoder_lane_placed,1.0,0,,imported verified ORFS result; use --rerun-openroad for a fresh route,1458.88,1,,0.0155,artifacts_hpca_xorflow/complete_suite/ppa/zzppa/openroad/6_finish.rpt,TOOL_FAILURE,0.045,OPENROAD_ORFS_NANGATE45,0.31
+,,0,,decoder_32lane_linear_estimate,1.0,0,,not a routed bank-level macro,1458.88,32,,0.496,linear extrapolation from decoder_lane_placed; bank integration is synthesized separately,UNASSESSED,0.045,OPENROAD_ORFS_NANGATE45,0.31

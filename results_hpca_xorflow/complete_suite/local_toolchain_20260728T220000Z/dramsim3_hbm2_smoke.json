@@ -1,0 +1,10 @@
+{
+  "tool": "DRAMsim3",
+  "memory_model": "DDR4_8Gb_x8_3200",
+  "roofline_only": false,
+  "trace": "/home/rishabh/HPCA2/mosaic_delta_phase1/results_hpca_xorflow/complete_suite/local_toolchain_20260728T220000Z/dramsim3_hbm2_smoke.trace",
+  "submitted_lines": 64,
+  "tool_run_success": true,
+  "returncode": 0,
+  "error": ""
+}

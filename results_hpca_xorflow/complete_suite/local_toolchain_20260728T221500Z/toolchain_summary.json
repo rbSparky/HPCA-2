@@ -1,0 +1,51 @@
+{
+  "cuda_rows": 9,
+  "dramsim3": {
+    "error": "",
+    "memory_model": "HBM2_8Gb_x128",
+    "returncode": 0,
+    "roofline_only": false,
+    "submitted_lines": 64,
+    "tool": "DRAMsim3",
+    "tool_run_success": true,
+    "trace": "results_hpca_xorflow/complete_suite/local_toolchain_20260728T221500Z/dramsim3_hbm2_smoke.trace"
+  },
+  "run_tag": "20260728T221500Z",
+  "steps": [
+    {
+      "artifact": "artifacts_hpca_xorflow/complete_suite/local_toolchain_20260728T221500Z/pytest.log",
+      "status": "SUCCEEDED",
+      "step": "pytest"
+    },
+    {
+      "artifact": "results_hpca_xorflow/complete_suite/local_toolchain_20260728T221500Z/cuda_microbench.csv",
+      "status": "SUCCEEDED",
+      "step": "cuda_microbench"
+    },
+    {
+      "artifact": "results_hpca_xorflow/complete_suite/local_toolchain_20260728T221500Z/dramsim3_hbm2_smoke.json",
+      "status": "SUCCEEDED",
+      "step": "dramsim3_hbm2"
+    },
+    {
+      "artifact": "artifacts_hpca_xorflow/complete_suite/local_toolchain_20260728T221500Z/pipelined_synthesis.log",
+      "status": "SUCCEEDED",
+      "step": "pipelined_synthesis"
+    },
+    {
+      "artifact": "artifacts_hpca_xorflow/complete_suite/local_toolchain_20260728T221500Z/pipelined_cosim.log",
+      "status": "SUCCEEDED",
+      "step": "pipelined_cosim"
+    },
+    {
+      "artifact": "artifacts_hpca_xorflow/complete_suite/local_toolchain_20260728T221500Z/cacti_default.log",
+      "status": "SUCCEEDED",
+      "step": "cacti"
+    },
+    {
+      "artifact": "artifacts_hpca_xorflow/complete_suite/local_toolchain_20260728T221500Z/openroad_version.log",
+      "status": "SUCCEEDED",
+      "step": "openroad"
+    }
+  ]
+}

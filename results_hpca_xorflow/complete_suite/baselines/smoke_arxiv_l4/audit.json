@@ -1,0 +1,13 @@
+{
+  "baseline_rows": 5,
+  "best_independent_format": "BEICSR",
+  "causal_rows": 1,
+  "failures": [],
+  "host_rows": 1,
+  "input_sha256": {
+    "baselines": "7102f8f41da6c17214f4d48df4d9cc99e95d8a88a0dd88a07939f555731985ac",
+    "causal": "7543f8509368b658db440ad519628aac3c2c9947479401cf428bcaa3ac3a6a3e",
+    "host": "2de2a4a66b42787ba34dc2e78c6406cbe547f1b38adae8cf2183958f507d33be"
+  },
+  "status": "PASS"
+}

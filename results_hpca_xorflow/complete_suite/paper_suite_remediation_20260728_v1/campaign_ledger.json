@@ -1,0 +1,96 @@
+{
+  "generated_utc": "2026-07-29T00:06:20Z",
+  "rows": [
+    {
+      "task_id": "regression_remote_retry",
+      "stage": "admission",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "20",
+      "started_utc": "2026-07-29T00:04:33Z",
+      "finished_utc": "2026-07-29T00:04:37Z",
+      "wall_seconds": "4.1",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_remediation_20260728_v1/regression_remote_retry.log",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -m pytest -q",
+      "reason": ""
+    },
+    {
+      "task_id": "analyze_arxiv_depth4_repaired",
+      "stage": "model_sensitivity",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "20",
+      "started_utc": "2026-07-29T00:04:37Z",
+      "finished_utc": "2026-07-29T00:05:03Z",
+      "wall_seconds": "26.0",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_remediation_20260728_v1/analyze_arxiv_depth4_repaired.log",
+      "command": "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_deepres4_w128_s7 arxiv_depth4_repaired",
+      "reason": ""
+    },
+    {
+      "task_id": "train_arxiv_graphsage8_residual",
+      "stage": "operators",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "60",
+      "started_utc": "2026-07-29T00:05:03Z",
+      "finished_utc": "2026-07-29T00:05:21Z",
+      "wall_seconds": "17.9",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_remediation_20260728_v1/train_arxiv_graphsage8_residual.log",
+      "command": "python scripts/train_hpca_workload.py --dataset ogbn-arxiv --config-id ogbn_arxiv_graphsage8_residual_w128_s7 --model-kind graphsage --width 128 --layers 8 --max-epochs 160 --learning-rate 0.005",
+      "reason": ""
+    },
+    {
+      "task_id": "train_arxiv_gin8_residual",
+      "stage": "operators",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "60",
+      "started_utc": "2026-07-29T00:05:21Z",
+      "finished_utc": "2026-07-29T00:05:39Z",
+      "wall_seconds": "18.2",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_remediation_20260728_v1/train_arxiv_gin8_residual.log",
+      "command": "python scripts/train_hpca_workload.py --dataset ogbn-arxiv --config-id ogbn_arxiv_gin8_residual_w128_s7 --model-kind gin --width 128 --layers 8 --max-epochs 160 --learning-rate 0.005",
+      "reason": ""
+    },
+    {
+      "task_id": "analyze_arxiv_graphsage8_residual",
+      "stage": "operators",
+      "status": "SUCCEEDED",
+      "depends_on": "train_arxiv_graphsage8_residual",
+      "estimated_minutes": "30",
+      "started_utc": "2026-07-29T00:05:39Z",
+      "finished_utc": "2026-07-29T00:06:00Z",
+      "wall_seconds": "21.4",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_remediation_20260728_v1/analyze_arxiv_graphsage8_residual.log",
+      "command": "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_graphsage8_residual_w128_s7 arxiv_graphsage8_residual",
+      "reason": ""
+    },
+    {
+      "task_id": "analyze_arxiv_gin8_residual",
+      "stage": "operators",
+      "status": "SUCCEEDED",
+      "depends_on": "train_arxiv_gin8_residual",
+      "estimated_minutes": "30",
+      "started_utc": "2026-07-29T00:06:00Z",
+      "finished_utc": "2026-07-29T00:06:20Z",
+      "wall_seconds": "19.3",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_remediation_20260728_v1/analyze_arxiv_gin8_residual.log",
+      "command": "MOSAIC_PY=python bash scripts/run_hpca_case.sh ogbn_arxiv_gin8_residual_w128_s7 arxiv_gin8_residual",
+      "reason": ""
+    },
+    {
+      "task_id": "consolidated_report",
+      "stage": "report",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "5",
+      "started_utc": "2026-07-29T00:06:20Z",
+      "finished_utc": "2026-07-29T00:06:20Z",
+      "wall_seconds": "0.2",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_remediation_20260728_v1/consolidated_report.log",
+      "command": "PYTHONPATH=src python scripts/report_hpca_complete_suite.py",
+      "reason": ""
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "generated_utc": "2026-07-29T09:26:50Z",
+  "rows": [
+    {
+      "task_id": "audit_primary_trace_quality",
+      "stage": "quality",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "10",
+      "started_utc": "2026-07-29T09:06:41Z",
+      "finished_utc": "2026-07-29T09:06:42Z",
+      "wall_seconds": "0.4",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_primary_format_20260729_v1/audit_primary_trace_quality.log",
+      "command": "python scripts/audit_hpca_quality.py --configs ogbn_arxiv_deepres8_w128_s7 ogbn_arxiv_deepres8_w128_s17 ogbn_arxiv_deepres8_w128_s27 reddit_deepres8_w128_s7_native yelp_deepres8_w128_s7_balanced_fallback --output results_hpca_xorflow/complete_suite/quality/primary_quality.csv",
+      "reason": ""
+    },
+    {
+      "task_id": "primary_matrix_arxiv",
+      "stage": "baselines",
+      "status": "SUCCEEDED",
+      "depends_on": "audit_primary_trace_quality",
+      "estimated_minutes": "180",
+      "started_utc": "2026-07-29T09:06:42Z",
+      "finished_utc": "2026-07-29T09:11:31Z",
+      "wall_seconds": "289.1",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_primary_format_20260729_v1/primary_matrix_arxiv.log",
+      "command": "PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs ogbn_arxiv_deepres8_w128_s7 ogbn_arxiv_deepres8_w128_s17 ogbn_arxiv_deepres8_w128_s27 --max-pairs 2 --output results_hpca_xorflow/complete_suite/baselines/arxiv/format_matrix.csv",
+      "reason": ""
+    },
+    {
+      "task_id": "primary_matrix_reddit",
+      "stage": "baselines",
+      "status": "SUCCEEDED",
+      "depends_on": "audit_primary_trace_quality",
+      "estimated_minutes": "240",
+      "started_utc": "2026-07-29T09:11:31Z",
+      "finished_utc": "2026-07-29T09:19:56Z",
+      "wall_seconds": "505.6",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_primary_format_20260729_v1/primary_matrix_reddit.log",
+      "command": "PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs reddit_deepres8_w128_s7_native --max-pairs 2 --output results_hpca_xorflow/complete_suite/baselines/reddit/format_matrix.csv",
+      "reason": ""
+    },
+    {
+      "task_id": "supplementary_matrix_yelp",
+      "stage": "baselines",
+      "status": "SUCCEEDED",
+      "depends_on": "audit_primary_trace_quality",
+      "estimated_minutes": "180",
+      "started_utc": "2026-07-29T09:19:56Z",
+      "finished_utc": "2026-07-29T09:26:50Z",
+      "wall_seconds": "413.6",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_primary_format_20260729_v1/supplementary_matrix_yelp.log",
+      "command": "PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs yelp_deepres8_w128_s7_balanced_fallback --max-pairs 2 --output results_hpca_xorflow/complete_suite/baselines/yelp_borderline/format_matrix.csv",
+      "reason": ""
+    },
+    {
+      "task_id": "canonical_evidence_refresh",
+      "stage": "report",
+      "status": "SUCCEEDED",
+      "depends_on": "primary_matrix_arxiv,primary_matrix_reddit,supplementary_matrix_yelp",
+      "estimated_minutes": "10",
+      "started_utc": "2026-07-29T09:26:50Z",
+      "finished_utc": "2026-07-29T09:26:50Z",
+      "wall_seconds": "0.4",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_primary_format_20260729_v1/canonical_evidence_refresh.log",
+      "command": "PYTHONPATH=src:. python scripts/build_hpca_paper_evidence.py",
+      "reason": ""
+    }
+  ]
+}

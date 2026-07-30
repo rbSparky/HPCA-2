@@ -6021,6 +6021,6 @@ Found and reported 0 problems.
      $_XOR_                      14720
 
 Warnings: 5 unique messages, 5 total
-End of script. Logfile hash: 563961fa58, CPU: user 34.96s system 1.61s, MEM: 546.71 MB peak
+End of script. Logfile hash: 563961fa58, CPU: user 32.79s system 2.25s, MEM: 546.78 MB peak
 Yosys 0.33 (git sha1 2584903a060)
-Time spent: 27% 30x opt_expr (9 sec), 19% 23x opt_clean (7 sec), ...
+Time spent: 26% 30x opt_expr (9 sec), 20% 23x opt_clean (7 sec), ...

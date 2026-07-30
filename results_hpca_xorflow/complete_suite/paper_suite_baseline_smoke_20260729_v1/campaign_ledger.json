@@ -1,0 +1,57 @@
+{
+  "generated_utc": "2026-07-29T08:55:25Z",
+  "rows": [
+    {
+      "task_id": "baseline_matrix_arxiv_l4",
+      "stage": "baseline_smoke",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "35",
+      "started_utc": "2026-07-29T08:54:57Z",
+      "finished_utc": "2026-07-29T08:55:08Z",
+      "wall_seconds": "11.5",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_baseline_smoke_20260729_v1/baseline_matrix_arxiv_l4.log",
+      "command": "PYTHONPATH=src python -m mosaic_validation.hpca_baseline_matrix --configs ogbn_arxiv_deepres8_w128_s17 --max-pairs 1 --output results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/baseline_matrix.csv",
+      "reason": ""
+    },
+    {
+      "task_id": "causal_preflight_arxiv_l4",
+      "stage": "baseline_smoke",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "25",
+      "started_utc": "2026-07-29T08:55:08Z",
+      "finished_utc": "2026-07-29T08:55:24Z",
+      "wall_seconds": "16.1",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_baseline_smoke_20260729_v1/causal_preflight_arxiv_l4.log",
+      "command": "PYTHONPATH=src python -m mosaic_validation.hpca_xorflow_cli --configs ogbn_arxiv_deepres8_w128_s17 --max-pairs 1 --output results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/causal_x1.csv",
+      "reason": ""
+    },
+    {
+      "task_id": "causal_host_arxiv_l4",
+      "stage": "baseline_smoke",
+      "status": "SUCCEEDED",
+      "depends_on": "causal_preflight_arxiv_l4",
+      "estimated_minutes": "15",
+      "started_utc": "2026-07-29T08:55:24Z",
+      "finished_utc": "2026-07-29T08:55:25Z",
+      "wall_seconds": "0.3",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_baseline_smoke_20260729_v1/causal_host_arxiv_l4.log",
+      "command": "PYTHONPATH=src python -m mosaic_validation.hpca_host --input results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/causal_x1.csv --output results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/causal_x1_host.csv",
+      "reason": ""
+    },
+    {
+      "task_id": "audit_arxiv_l4",
+      "stage": "baseline_smoke",
+      "status": "SUCCEEDED",
+      "depends_on": "baseline_matrix_arxiv_l4,causal_preflight_arxiv_l4,causal_host_arxiv_l4",
+      "estimated_minutes": "5",
+      "started_utc": "2026-07-29T08:55:25Z",
+      "finished_utc": "2026-07-29T08:55:25Z",
+      "wall_seconds": "0.3",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_baseline_smoke_20260729_v1/audit_arxiv_l4.log",
+      "command": "python scripts/verify_hpca_baseline_smoke.py --baselines results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/baseline_matrix.csv --causal results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/causal_x1.csv --host results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/causal_x1_host.csv --output results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/audit.json",
+      "reason": ""
+    }
+  ]
+}

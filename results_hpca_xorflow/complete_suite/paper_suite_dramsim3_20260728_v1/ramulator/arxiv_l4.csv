@@ -1,0 +1,7 @@
+config_id,pair_start_layer,format,trace_sha256,requests,metadata_bytes,nodes,edges,dram_cycles,served_requests,all_requests_drained,tool_success,error,speedup_vs_beicsr
+ogbn_arxiv_deepres8_w128_s17,4,beicsr,1738e6fee7e4cf3f7554f19b2887e543cbf6af15e2d0f64fe242bc0394ce674c,18866826,0,169343,2315598,6616878,18866826,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/complete_suite/paper_suite_dramsim3_20260728_v1/ramulator/arxiv_l4/xorflow_hbm_091xr7j3/beicsr.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 18866826 lines.
+",1.0
+ogbn_arxiv_deepres8_w128_s17,4,xorflow,10290475e55281f2190737bb59967deabf9f025afb63088a35994d46e19fcc13,16296274,4448448,169343,2315598,5808775,16296274,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/complete_suite/paper_suite_dramsim3_20260728_v1/ramulator/arxiv_l4/xorflow_hbm_091xr7j3/xorflow.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 16296274 lines.
+",1.139117628071323

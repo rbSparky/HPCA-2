@@ -1,0 +1,12 @@
+{
+  "error": "",
+  "memory_model": "HBM2_8Gb_x128",
+  "returncode": 0,
+  "sample_lines": 64,
+  "sampled_trace": true,
+  "source_prefix_lines_seen": 64,
+  "source_trace": "results_hpca_xorflow/complete_suite/local_toolchain_20260728T221500Z/dramsim3_hbm2_smoke.trace",
+  "tool": "DRAMsim3",
+  "tool_run_success": true,
+  "trace_sha256": "b3f82ff59396160a9d7bd54d6489b4b410a6fde92a1f03fdbcd5650eb6779a8d"
+}

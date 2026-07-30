@@ -1,0 +1,8 @@
+{
+  "command": "hpca_format_matrix",
+  "configs": [
+    "yelp_deepres8_w128_s7_balanced_fallback"
+  ],
+  "rows": 20,
+  "sha256": "46e605a650c7b29e3b16774d757fb4465eba8335bcb6dab738e31ac3daded94e"
+}

@@ -1,0 +1,12 @@
+{
+  "error": "tools/vendor/DRAMsim3/build/dramsim3main: error while loading shared libraries: libdramsim3.so: cannot open shared object file: No such file or directory\n",
+  "memory_model": "HBM2_8Gb_x128",
+  "returncode": 127,
+  "sample_lines": 250000,
+  "sampled_trace": true,
+  "source_prefix_lines_seen": 250000,
+  "source_trace": "artifacts_hpca_xorflow/complete_suite/paper_suite_dramsim3_20260728_v1/ramulator/arxiv_l4/ogbn_arxiv_deepres8_w128_s17_l4_xorflow.trace",
+  "tool": "DRAMsim3",
+  "tool_run_success": false,
+  "trace_sha256": "21fca1e8a38632ccfc199f473cb00e810c1753cca0ebdbde650e8243918384f8"
+}

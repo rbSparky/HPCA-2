@@ -1,0 +1,8 @@
+{
+  "failures": [],
+  "input_sha256": "d3ff6e40dca74dd9bc022c85d01f8921a3f2c182bad998b9464c1ac24981ba9d",
+  "rows": 10,
+  "status": "PASS",
+  "x1_selected_tile_slices": 1323,
+  "x1_traffic_ratio_to_beicsr": 0.8637528078054254
+}

@@ -1,0 +1,10 @@
+{
+  "audit_sha256": "aeb2690366216f9a975325f01eacda63e17c6412807e4fe0f8fe54dd5045d530",
+  "command": "hpca_format_controls",
+  "configs": [
+    "ogbn_arxiv_deepres8_w128_s17"
+  ],
+  "result_sha256": "78ac5e29a3fdd53b5587716605bcec7752c2558f035983d2b6d56d063c029170",
+  "rows": 40,
+  "seed": 7007
+}

@@ -1,0 +1,270 @@
+{
+  "generated_utc": "2026-07-28T20:09:13Z",
+  "deadline_hours_remaining": 75.82951037666666,
+  "queue": [
+    {
+      "queue_id": "admission_complete",
+      "stage": "smoke",
+      "depends_on": "none",
+      "estimated_minutes": 0,
+      "priority": "complete",
+      "already_complete": true
+    },
+    {
+      "queue_id": "quality_complete",
+      "stage": "quality",
+      "depends_on": "admission_complete",
+      "estimated_minutes": 0,
+      "priority": "complete",
+      "already_complete": true
+    },
+    {
+      "queue_id": "primary_complete",
+      "stage": "primary",
+      "depends_on": "quality_complete",
+      "estimated_minutes": 0,
+      "priority": "complete",
+      "already_complete": true
+    },
+    {
+      "queue_id": "controls_complete",
+      "stage": "controls",
+      "depends_on": "primary_complete",
+      "estimated_minutes": 0,
+      "priority": "complete",
+      "already_complete": true
+    },
+    {
+      "queue_id": "timing_smoke_complete",
+      "stage": "tools",
+      "depends_on": "controls_complete",
+      "estimated_minutes": 0,
+      "priority": "complete",
+      "already_complete": true
+    },
+    {
+      "queue_id": "temporal_arxiv_s17",
+      "stage": "temporal",
+      "depends_on": "primary_complete",
+      "config_id": "ogbn_arxiv_deepres8_w128_s17",
+      "max_pairs": 2,
+      "slice_width": 128,
+      "cache_bytes": 524288,
+      "edge_order": "O0",
+      "estimated_minutes": 18,
+      "priority": "principal"
+    },
+    {
+      "queue_id": "temporal_arxiv_s27",
+      "stage": "temporal",
+      "depends_on": "temporal_arxiv_s17",
+      "config_id": "ogbn_arxiv_deepres8_w128_s27",
+      "max_pairs": 2,
+      "slice_width": 128,
+      "cache_bytes": 524288,
+      "edge_order": "O0",
+      "estimated_minutes": 18,
+      "priority": "principal"
+    },
+    {
+      "queue_id": "temporal_reddit",
+      "stage": "temporal",
+      "depends_on": "temporal_arxiv_s27",
+      "config_id": "reddit_deepres8_w128_s7_native",
+      "max_pairs": 2,
+      "slice_width": 128,
+      "cache_bytes": 524288,
+      "edge_order": "O0",
+      "estimated_minutes": 50,
+      "priority": "principal"
+    },
+    {
+      "queue_id": "temporal_flickr",
+      "stage": "temporal",
+      "depends_on": "temporal_reddit",
+      "config_id": "flickr_deepres8_w128_s7",
+      "max_pairs": 2,
+      "slice_width": 128,
+      "cache_bytes": 524288,
+      "edge_order": "O0",
+      "estimated_minutes": 20,
+      "priority": "transfer"
+    },
+    {
+      "queue_id": "temporal_yelp_borderline",
+      "stage": "temporal",
+      "depends_on": "temporal_flickr",
+      "config_id": "yelp_deepres8_w128_s7_balanced_fallback",
+      "max_pairs": 2,
+      "slice_width": 128,
+      "cache_bytes": 524288,
+      "edge_order": "O0",
+      "estimated_minutes": 35,
+      "priority": "supplementary"
+    },
+    {
+      "queue_id": "sens_arxiv_cache256",
+      "stage": "sensitivity",
+      "depends_on": "temporal_yelp_borderline",
+      "config_id": "ogbn_arxiv_deepres8_w128_s17",
+      "max_pairs": 2,
+      "slice_width": 128,
+      "cache_bytes": 262144,
+      "edge_order": "O0",
+      "estimated_minutes": 18,
+      "priority": "principal"
+    },
+    {
+      "queue_id": "sens_arxiv_cache1m",
+      "stage": "sensitivity",
+      "depends_on": "sens_arxiv_cache256",
+      "config_id": "ogbn_arxiv_deepres8_w128_s17",
+      "max_pairs": 2,
+      "slice_width": 128,
+      "cache_bytes": 1048576,
+      "edge_order": "O0",
+      "estimated_minutes": 18,
+      "priority": "principal"
+    },
+    {
+      "queue_id": "sens_arxiv_slice64",
+      "stage": "sensitivity",
+      "depends_on": "sens_arxiv_cache1m",
+      "config_id": "ogbn_arxiv_deepres8_w128_s17",
+      "max_pairs": 2,
+      "slice_width": 64,
+      "cache_bytes": 524288,
+      "edge_order": "O0",
+      "estimated_minutes": 18,
+      "priority": "principal"
+    },
+    {
+      "queue_id": "sens_arxiv_slice96",
+      "stage": "sensitivity",
+      "depends_on": "sens_arxiv_slice64",
+      "config_id": "ogbn_arxiv_deepres8_w128_s17",
+      "max_pairs": 2,
+      "slice_width": 96,
+      "cache_bytes": 524288,
+      "edge_order": "O0",
+      "estimated_minutes": 18,
+      "priority": "principal"
+    },
+    {
+      "queue_id": "sens_arxiv_slice256",
+      "stage": "sensitivity",
+      "depends_on": "sens_arxiv_slice96",
+      "config_id": "ogbn_arxiv_deepres8_w128_s17",
+      "max_pairs": 2,
+      "slice_width": 256,
+      "cache_bytes": 524288,
+      "edge_order": "O0",
+      "estimated_minutes": 18,
+      "priority": "principal"
+    },
+    {
+      "queue_id": "sens_arxiv_source_tiled",
+      "stage": "sensitivity",
+      "depends_on": "sens_arxiv_slice256",
+      "config_id": "ogbn_arxiv_deepres8_w128_s17",
+      "max_pairs": 2,
+      "slice_width": 128,
+      "cache_bytes": 524288,
+      "edge_order": "O1",
+      "estimated_minutes": 18,
+      "priority": "principal"
+    },
+    {
+      "queue_id": "sens_reddit_cache256",
+      "stage": "sensitivity",
+      "depends_on": "sens_arxiv_source_tiled",
+      "config_id": "reddit_deepres8_w128_s7_native",
+      "max_pairs": 2,
+      "slice_width": 128,
+      "cache_bytes": 262144,
+      "edge_order": "O0",
+      "estimated_minutes": 50,
+      "priority": "principal"
+    },
+    {
+      "queue_id": "sens_reddit_cache1m",
+      "stage": "sensitivity",
+      "depends_on": "sens_reddit_cache256",
+      "config_id": "reddit_deepres8_w128_s7_native",
+      "max_pairs": 2,
+      "slice_width": 128,
+      "cache_bytes": 1048576,
+      "edge_order": "O0",
+      "estimated_minutes": 50,
+      "priority": "principal"
+    },
+    {
+      "queue_id": "sens_reddit_slice96",
+      "stage": "sensitivity",
+      "depends_on": "sens_reddit_cache1m",
+      "config_id": "reddit_deepres8_w128_s7_native",
+      "max_pairs": 2,
+      "slice_width": 96,
+      "cache_bytes": 524288,
+      "edge_order": "O0",
+      "estimated_minutes": 50,
+      "priority": "principal"
+    },
+    {
+      "queue_id": "sens_reddit_source_tiled",
+      "stage": "sensitivity",
+      "depends_on": "sens_reddit_slice96",
+      "config_id": "reddit_deepres8_w128_s7_native",
+      "max_pairs": 2,
+      "slice_width": 128,
+      "cache_bytes": 524288,
+      "edge_order": "O1",
+      "estimated_minutes": 50,
+      "priority": "principal"
+    },
+    {
+      "queue_id": "ramulator_existing_arxiv",
+      "stage": "memory_timing",
+      "depends_on": "temporal_arxiv_s17",
+      "estimated_minutes": 5,
+      "priority": "verify_existing",
+      "already_complete": true
+    },
+    {
+      "queue_id": "cuda_microbench",
+      "stage": "cuda",
+      "depends_on": "temporal_reddit",
+      "estimated_minutes": 35,
+      "priority": "implementation_required",
+      "status": "PENDING_IMPLEMENTATION"
+    },
+    {
+      "queue_id": "rtl_ppa",
+      "stage": "rtl",
+      "depends_on": "temporal_arxiv_s17",
+      "estimated_minutes": 90,
+      "priority": "tool_install_required",
+      "status": "PENDING_IMPLEMENTATION"
+    },
+    {
+      "queue_id": "expanded_models",
+      "stage": "expanded_models",
+      "depends_on": "temporal_arxiv_s27",
+      "estimated_minutes": 960,
+      "priority": "implementation_and_training_required",
+      "status": "PENDING_IMPLEMENTATION"
+    },
+    {
+      "queue_id": "reproducibility_arxiv_s17",
+      "stage": "reproduce",
+      "depends_on": "sens_reddit_source_tiled",
+      "config_id": "ogbn_arxiv_deepres8_w128_s17",
+      "max_pairs": 2,
+      "slice_width": 128,
+      "cache_bytes": 524288,
+      "edge_order": "O0",
+      "estimated_minutes": 18,
+      "priority": "principal"
+    }
+  ]
+}

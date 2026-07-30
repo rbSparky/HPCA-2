@@ -1,0 +1,10 @@
+{
+  "tool": "DRAMsim3",
+  "memory_model": "HBM2_8Gb_x128",
+  "roofline_only": false,
+  "trace": "results_hpca_xorflow/complete_suite/local_toolchain_20260728T221500Z/dramsim3_hbm2_smoke.trace",
+  "submitted_lines": 64,
+  "tool_run_success": true,
+  "returncode": 0,
+  "error": ""
+}

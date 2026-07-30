@@ -1,10 +1,26 @@
 
  /----------------------------------------------------------------------------\
+ |                                                                            |
  |  yosys -- Yosys Open SYnthesis Suite                                       |
- |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
- |  Distributed under an ISC-like license, type "license" to see terms        |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
  \----------------------------------------------------------------------------/
- Yosys 0.67 (git sha1 2d1509d1b, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)
+
+ Yosys 0.33 (git sha1 2584903a060)
+
 
 -- Running command `
   read_verilog -sv /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv;
@@ -61,623 +77,518 @@ Promoted 32 assignments to connections.
 Converted 0 switches.
 
 3.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$146'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$144'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$142'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$141'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$139'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$137'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$135'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$134'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$132'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$130'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$128'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$127'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$125'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$123'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$121'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$120'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$119'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$117'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$115'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$114'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$113'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$111'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$109'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$108'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$107'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:40$106'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$104'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$103'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$102'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:40$101'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:36$100'.
-Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$99'.
+Creating decoders for process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
 
 3.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[7]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$146'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[7]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$144'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[7]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$142'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[7]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$141'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[6]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$139'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[6]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$137'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[6]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$135'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[6]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$134'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[5]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$132'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[5]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$130'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[5]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$128'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[5]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$127'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[4]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$125'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[4]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$123'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[4]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$121'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[4]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$120'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[3]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$119'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[3]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$117'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[3]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$115'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[3]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$114'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[2]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$113'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[2]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$111'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[2]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$109'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[2]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$108'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[1]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$107'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[1]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:40$106'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[1]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$104'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[1]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$103'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[0]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$102'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[0]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:40$101'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[0]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:36$100'.
-No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[0]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[0]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[1]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[2]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[3]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[4]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[5]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[6]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s0[7]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[0]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[1]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[2]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[3]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[4]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[5]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[6]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s1[7]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[0]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[1]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[2]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[3]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[4]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[5]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[6]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s2[7]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[0]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[1]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[2]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[3]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[4]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[5]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[6]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
+No latch inferred for signal `\xorflow_decoder_lane.\gap_s3[7]' from process `\xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
 
 3.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
 
 3.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
 
 3.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$146'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$144'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$142'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$141'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$139'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$137'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$135'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$134'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$132'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$130'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$128'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$127'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$125'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$123'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$121'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$120'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$119'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$117'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$115'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$114'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$113'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$111'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$109'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$108'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$107'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:40$106'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$104'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$103'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:44$102'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:40$101'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:36$100'.
-Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:32$99'.
+Removing empty process `xorflow_decoder_lane.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:0$99'.
 Cleaned up 0 empty switches.
 
 3.2.12. Executing OPT_EXPR pass (perform const folding).
 Optimizing module xorflow_decoder_lane.
 <suppressed ~17 debug messages>
 
-3.3. Executing CHECK pass (checking for obvious problems).
-Checking module xorflow_decoder_lane...
-Found and reported 0 problems.
+3.3. Executing FLATTEN pass (flatten design).
 
-3.4. Executing FLATTEN pass (flatten design).
-
-3.5. Executing OPT_EXPR pass (perform const folding).
+3.4. Executing OPT_EXPR pass (perform const folding).
 Optimizing module xorflow_decoder_lane.
 
-3.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.5. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \xorflow_decoder_lane..
 Removed 8 unused cells and 90 unused wires.
 <suppressed ~9 debug messages>
 
-3.7. Executing CHECK pass (checking for obvious problems).
+3.6. Executing CHECK pass (checking for obvious problems).
 Checking module xorflow_decoder_lane...
 Found and reported 0 problems.
 
-3.8. Executing OPT pass (performing simple optimizations).
+3.7. Executing OPT pass (performing simple optimizations).
 
-3.8.1. Executing OPT_EXPR pass (perform const folding).
+3.7.1. Executing OPT_EXPR pass (perform const folding).
 Optimizing module xorflow_decoder_lane.
 
-3.8.2. Executing OPT_MERGE pass (detect identical cells).
+3.7.2. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\xorflow_decoder_lane'.
-Computing hashes of 91 cells of `\xorflow_decoder_lane'.
-Finding duplicate cells in `\xorflow_decoder_lane'.
-Computing hashes of 65 cells of `\xorflow_decoder_lane'.
-Finding duplicate cells in `\xorflow_decoder_lane'.
 <suppressed ~78 debug messages>
 Removed a total of 26 cells.
 
-3.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
 Running muxtree optimizer on module \xorflow_decoder_lane..
   Creating internal representation of mux trees.
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~22 debug messages>
+<suppressed ~9 debug messages>
 
-3.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \xorflow_decoder_lane.
 Performed a total of 0 changes.
 
-3.8.5. Executing OPT_MERGE pass (detect identical cells).
+3.7.5. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\xorflow_decoder_lane'.
-Computing hashes of 65 cells of `\xorflow_decoder_lane'.
-Finding duplicate cells in `\xorflow_decoder_lane'.
 Removed a total of 0 cells.
 
-3.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+3.7.6. Executing OPT_DFF pass (perform DFF optimizations).
 
-3.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \xorflow_decoder_lane..
 Removed 0 unused cells and 26 unused wires.
 <suppressed ~1 debug messages>
 
-3.8.8. Executing OPT_EXPR pass (perform const folding).
+3.7.8. Executing OPT_EXPR pass (perform const folding).
 Optimizing module xorflow_decoder_lane.
 
-3.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+3.7.9. Rerunning OPT passes. (Maybe there is more to do..)
 
-3.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.7.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
 Running muxtree optimizer on module \xorflow_decoder_lane..
   Creating internal representation of mux trees.
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~22 debug messages>
+<suppressed ~9 debug messages>
 
-3.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.7.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \xorflow_decoder_lane.
 Performed a total of 0 changes.
 
-3.8.12. Executing OPT_MERGE pass (detect identical cells).
+3.7.12. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\xorflow_decoder_lane'.
-Computing hashes of 65 cells of `\xorflow_decoder_lane'.
-Finding duplicate cells in `\xorflow_decoder_lane'.
 Removed a total of 0 cells.
 
-3.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+3.7.13. Executing OPT_DFF pass (perform DFF optimizations).
 
-3.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.7.14. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \xorflow_decoder_lane..
 
-3.8.15. Executing OPT_EXPR pass (perform const folding).
+3.7.15. Executing OPT_EXPR pass (perform const folding).
 Optimizing module xorflow_decoder_lane.
 
-3.8.16. Finished fast OPT passes. (There is nothing left to do.)
+3.7.16. Finished OPT passes. (There is nothing left to do.)
 
-3.9. Executing FSM pass (extract and optimize FSM).
+3.8. Executing FSM pass (extract and optimize FSM).
 
-3.9.1. Executing FSM_DETECT pass (finding FSMs in design).
+3.8.1. Executing FSM_DETECT pass (finding FSMs in design).
 
-3.9.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+3.8.2. Executing FSM_EXTRACT pass (extracting FSM from design).
 
-3.9.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+3.8.3. Executing FSM_OPT pass (simple optimizations of FSMs).
 
-3.9.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.8.4. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \xorflow_decoder_lane..
 
-3.9.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+3.8.5. Executing FSM_OPT pass (simple optimizations of FSMs).
 
-3.9.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+3.8.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
 
-3.9.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+3.8.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
 
-3.9.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+3.8.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
 
-3.10. Executing OPT pass (performing simple optimizations).
+3.9. Executing OPT pass (performing simple optimizations).
 
-3.10.1. Executing OPT_EXPR pass (perform const folding).
+3.9.1. Executing OPT_EXPR pass (perform const folding).
 Optimizing module xorflow_decoder_lane.
 
-3.10.2. Executing OPT_MERGE pass (detect identical cells).
+3.9.2. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\xorflow_decoder_lane'.
-Computing hashes of 65 cells of `\xorflow_decoder_lane'.
-Finding duplicate cells in `\xorflow_decoder_lane'.
 Removed a total of 0 cells.
 
-3.10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.9.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
 Running muxtree optimizer on module \xorflow_decoder_lane..
   Creating internal representation of mux trees.
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~22 debug messages>
+<suppressed ~9 debug messages>
 
-3.10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \xorflow_decoder_lane.
 Performed a total of 0 changes.
 
-3.10.5. Executing OPT_MERGE pass (detect identical cells).
+3.9.5. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\xorflow_decoder_lane'.
-Computing hashes of 65 cells of `\xorflow_decoder_lane'.
-Finding duplicate cells in `\xorflow_decoder_lane'.
 Removed a total of 0 cells.
 
-3.10.6. Executing OPT_DFF pass (perform DFF optimizations).
+3.9.6. Executing OPT_DFF pass (perform DFF optimizations).
 
-3.10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.9.7. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \xorflow_decoder_lane..
 
-3.10.8. Executing OPT_EXPR pass (perform const folding).
+3.9.8. Executing OPT_EXPR pass (perform const folding).
 Optimizing module xorflow_decoder_lane.
 
-3.10.9. Finished fast OPT passes. (There is nothing left to do.)
+3.9.9. Finished OPT passes. (There is nothing left to do.)
 
-3.11. Executing WREDUCE pass (reducing word size of cells).
+3.10. Executing WREDUCE pass (reducing word size of cells).
 Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$5 ($add).
-Removed top 31 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$13 ($lt).
-Removed top 31 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$26 ($lt).
-Removed top 30 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$39 ($lt).
-Removed top 1 bits (of 2) from port B of cell xorflow_decoder_lane.$eq$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:54$47 ($eq).
-Removed top 30 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$52 ($lt).
+Removed top 31 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:55$10 ($lt).
+Removed top 1 bits (of 2) from port B of cell xorflow_decoder_lane.$eq$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:47$16 ($eq).
+Removed top 31 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:55$23 ($lt).
+Removed top 30 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:55$36 ($lt).
+Removed top 30 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:55$49 ($lt).
 Removed top 29 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$63 ($lt).
 Removed top 29 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$74 ($lt).
 Removed top 29 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$85 ($lt).
 Removed top 29 bits (of 32) from port A of cell xorflow_decoder_lane.$lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$96 ($lt).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$100 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$100 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$100 ($add).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$101 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$101 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$101 ($add).
+Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$102 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$102 ($add).
+Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$102 ($add).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$103 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$103 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$103 ($add).
+Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$104 ($add).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$104 ($add).
+Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$104 ($add).
 Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$105 ($add).
 Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$105 ($add).
 Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$105 ($add).
-Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$110 ($add).
-Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$110 ($add).
-Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$110 ($add).
+Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$106 ($add).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$106 ($add).
+Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$106 ($add).
+Removed top 4 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$107 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$107 ($add).
+Removed top 3 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$107 ($add).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$108 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$108 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$108 ($add).
+Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$109 ($add).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$109 ($add).
+Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$109 ($add).
+Removed top 4 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$110 ($add).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$110 ($add).
+Removed top 3 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$110 ($add).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$111 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$111 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$111 ($add).
 Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$112 ($add).
-Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$112 ($add).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$112 ($add).
 Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$112 ($add).
-Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$116 ($add).
-Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$116 ($add).
-Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$116 ($add).
-Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$118 ($add).
-Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$118 ($add).
-Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$118 ($add).
-Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$122 ($add).
-Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$122 ($add).
-Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$122 ($add).
-Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$124 ($add).
-Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$124 ($add).
-Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$124 ($add).
-Removed top 4 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$126 ($add).
-Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$126 ($add).
-Removed top 3 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$126 ($add).
-Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$129 ($add).
-Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$129 ($add).
-Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$129 ($add).
-Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$131 ($add).
-Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$131 ($add).
-Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$131 ($add).
-Removed top 4 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$133 ($add).
-Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$133 ($add).
-Removed top 3 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$133 ($add).
-Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$136 ($add).
-Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$136 ($add).
-Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$136 ($add).
-Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$138 ($add).
-Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$138 ($add).
-Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$138 ($add).
-Removed top 4 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$140 ($add).
-Removed top 4 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$140 ($add).
-Removed top 3 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$140 ($add).
-Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$143 ($add).
-Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$143 ($add).
-Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$143 ($add).
-Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$145 ($add).
-Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$145 ($add).
-Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$145 ($add).
-Removed top 4 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$147 ($add).
-Removed top 4 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$147 ($add).
-Removed top 3 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$147 ($add).
-Removed top 3 bits (of 14) from wire xorflow_decoder_lane.gap_s3[7].
-Removed top 3 bits (of 14) from wire xorflow_decoder_lane.gap_s3[6].
-Removed top 3 bits (of 14) from wire xorflow_decoder_lane.gap_s3[5].
-Removed top 3 bits (of 14) from wire xorflow_decoder_lane.gap_s3[4].
-Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s3[3].
-Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s3[2].
-Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s3[1].
-Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s3[0].
-Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s2[7].
-Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s2[6].
-Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s2[5].
-Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s2[4].
-Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s2[3].
-Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s2[2].
-Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s2[1].
-Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s2[0].
-Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[7].
-Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[6].
-Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[5].
-Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[4].
-Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[3].
-Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[2].
-Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[1].
-Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s1[0].
-Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[7].
-Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[6].
-Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[5].
-Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[4].
-Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[3].
-Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[2].
-Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[1].
+Removed top 4 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$113 ($add).
+Removed top 4 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$113 ($add).
+Removed top 3 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$113 ($add).
+Removed top 6 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$114 ($add).
+Removed top 6 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$114 ($add).
+Removed top 5 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$114 ($add).
+Removed top 5 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$115 ($add).
+Removed top 5 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$115 ($add).
+Removed top 4 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$115 ($add).
+Removed top 4 bits (of 14) from port A of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$116 ($add).
+Removed top 4 bits (of 14) from port B of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$116 ($add).
+Removed top 3 bits (of 14) from port Y of cell xorflow_decoder_lane.$add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$116 ($add).
 Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[0].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[1].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[2].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[3].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[4].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[5].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[6].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s0[7].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s1[0].
+Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[1].
+Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[2].
+Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[3].
+Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[4].
+Removed top 5 bits (of 14) from wire xorflow_decoder_lane.gap_s1[6].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s2[0].
+Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s2[2].
+Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s2[3].
+Removed top 6 bits (of 14) from wire xorflow_decoder_lane.gap_s3[0].
+Removed top 4 bits (of 14) from wire xorflow_decoder_lane.gap_s3[2].
 
-3.12. Executing PEEPOPT pass (run peephole optimizers).
+3.11. Executing PEEPOPT pass (run peephole optimizers).
 
-3.13. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.12. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \xorflow_decoder_lane..
-Removed 0 unused cells and 32 unused wires.
+Removed 0 unused cells and 19 unused wires.
 <suppressed ~1 debug messages>
 
-3.14. Executing ALUMACC pass (create $alu and $macc cells).
+3.13. Executing ALUMACC pass (create $alu and $macc cells).
 Extracting $alu and $macc cells in module xorflow_decoder_lane:
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$133 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$136 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$110 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$138 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$100 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$101 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$103 ($add).
   creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$105 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$56 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$116 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$122 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$140 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$44 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$108 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$111 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$114 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$102 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$104 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$106 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$109 ($add).
   creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$112 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$124 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$143 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$78 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$31 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$89 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$126 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$145 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$115 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$107 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$110 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$113 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$116 ($add).
   creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$18 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$129 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$131 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$147 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$31 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$44 ($add).
   creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$5 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$56 ($add).
   creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$67 ($add).
-  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$118 ($add).
-  merging $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$145 into $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$147.
-  merging $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$143 into $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$147.
-  merging $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$124 into $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$126.
-  merging $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$138 into $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$140.
-  merging $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$136 into $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$140.
-  merging $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$131 into $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$133.
-  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$18.
-  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$129.
-  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$89.
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$78 ($add).
+  creating $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$89 ($add).
+  merging $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$115 into $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$116.
+  merging $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$114 into $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$116.
+  merging $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$112 into $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$113.
+  merging $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$111 into $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$113.
+  merging $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$109 into $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$110.
+  merging $macc model for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$106 into $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$107.
   creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$31.
-  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$78.
-  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$118.
-  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$112.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$18.
   creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$44.
-  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$122.
-  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$116.
   creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$56.
-  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$105.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$78.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$89.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$104.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$102.
   creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$5.
-  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$110.
   creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$67.
-  creating $macc cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$126: $auto$alumacc.cc:382:replace_macc$180
-  creating $macc cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$147: $auto$alumacc.cc:382:replace_macc$181
-  creating $macc cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$140: $auto$alumacc.cc:382:replace_macc$182
-  creating $macc cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$133: $auto$alumacc.cc:382:replace_macc$183
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$108.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$105.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$103.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$101.
+  creating $alu model for $macc $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$100.
+  creating $macc cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$113: $auto$alumacc.cc:365:replace_macc$136
+  creating $macc cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$116: $auto$alumacc.cc:365:replace_macc$137
+  creating $macc cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$107: $auto$alumacc.cc:365:replace_macc$138
+  creating $macc cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:42$110: $auto$alumacc.cc:365:replace_macc$139
+  creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:55$10 ($lt): new $alu
+  creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:55$23 ($lt): new $alu
+  creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:55$36 ($lt): new $alu
+  creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:55$49 ($lt): new $alu
   creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$63 ($lt): new $alu
-  creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$85 ($lt): new $alu
-  creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$52 ($lt): new $alu
-  creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$39 ($lt): new $alu
-  creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$26 ($lt): new $alu
   creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$74 ($lt): new $alu
+  creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$85 ($lt): new $alu
   creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$96 ($lt): new $alu
-  creating $alu model for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$13 ($lt): new $alu
-  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$13: $auto$alumacc.cc:512:replace_alu$192
-  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$96: $auto$alumacc.cc:512:replace_alu$197
-  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$74: $auto$alumacc.cc:512:replace_alu$202
-  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$26: $auto$alumacc.cc:512:replace_alu$207
-  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$39: $auto$alumacc.cc:512:replace_alu$212
-  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$52: $auto$alumacc.cc:512:replace_alu$217
-  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$85: $auto$alumacc.cc:512:replace_alu$222
-  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$63: $auto$alumacc.cc:512:replace_alu$227
-  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$67: $auto$alumacc.cc:512:replace_alu$232
-  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$110: $auto$alumacc.cc:512:replace_alu$235
-  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$5: $auto$alumacc.cc:512:replace_alu$238
-  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$105: $auto$alumacc.cc:512:replace_alu$241
-  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$56: $auto$alumacc.cc:512:replace_alu$244
-  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$116: $auto$alumacc.cc:512:replace_alu$247
-  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$122: $auto$alumacc.cc:512:replace_alu$250
-  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$44: $auto$alumacc.cc:512:replace_alu$253
-  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$112: $auto$alumacc.cc:512:replace_alu$256
-  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$118: $auto$alumacc.cc:512:replace_alu$259
-  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$78: $auto$alumacc.cc:512:replace_alu$262
-  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$31: $auto$alumacc.cc:512:replace_alu$265
-  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$89: $auto$alumacc.cc:512:replace_alu$268
-  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$129: $auto$alumacc.cc:512:replace_alu$271
-  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$18: $auto$alumacc.cc:512:replace_alu$274
+  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$96: $auto$alumacc.cc:485:replace_alu$148
+  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$85: $auto$alumacc.cc:485:replace_alu$153
+  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$74: $auto$alumacc.cc:485:replace_alu$158
+  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:56$63: $auto$alumacc.cc:485:replace_alu$163
+  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:55$49: $auto$alumacc.cc:485:replace_alu$168
+  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:55$36: $auto$alumacc.cc:485:replace_alu$173
+  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:55$23: $auto$alumacc.cc:485:replace_alu$178
+  creating $alu cell for $lt$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:55$10: $auto$alumacc.cc:485:replace_alu$183
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$100: $auto$alumacc.cc:485:replace_alu$188
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$101: $auto$alumacc.cc:485:replace_alu$191
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$103: $auto$alumacc.cc:485:replace_alu$194
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$105: $auto$alumacc.cc:485:replace_alu$197
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:34$108: $auto$alumacc.cc:485:replace_alu$200
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$67: $auto$alumacc.cc:485:replace_alu$203
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$5: $auto$alumacc.cc:485:replace_alu$206
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$102: $auto$alumacc.cc:485:replace_alu$209
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:38$104: $auto$alumacc.cc:485:replace_alu$212
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$89: $auto$alumacc.cc:485:replace_alu$215
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$78: $auto$alumacc.cc:485:replace_alu$218
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:51$56: $auto$alumacc.cc:485:replace_alu$221
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$44: $auto$alumacc.cc:485:replace_alu$224
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$18: $auto$alumacc.cc:485:replace_alu$227
+  creating $alu cell for $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder.sv:48$31: $auto$alumacc.cc:485:replace_alu$230
   created 23 $alu and 4 $macc cells.
 
-3.15. Executing SHARE pass (SAT-based resource sharing).
+3.14. Executing SHARE pass (SAT-based resource sharing).
 
-3.16. Executing OPT pass (performing simple optimizations).
+3.15. Executing OPT pass (performing simple optimizations).
 
-3.16.1. Executing OPT_EXPR pass (perform const folding).
+3.15.1. Executing OPT_EXPR pass (perform const folding).
 Optimizing module xorflow_decoder_lane.
 
-3.16.2. Executing OPT_MERGE pass (detect identical cells).
+3.15.2. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\xorflow_decoder_lane'.
-Computing hashes of 73 cells of `\xorflow_decoder_lane'.
-Finding duplicate cells in `\xorflow_decoder_lane'.
 Removed a total of 0 cells.
 
-3.16.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.15.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
 Running muxtree optimizer on module \xorflow_decoder_lane..
   Creating internal representation of mux trees.
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~22 debug messages>
+<suppressed ~9 debug messages>
 
-3.16.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.15.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \xorflow_decoder_lane.
 Performed a total of 0 changes.
 
-3.16.5. Executing OPT_MERGE pass (detect identical cells).
+3.15.5. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\xorflow_decoder_lane'.
-Computing hashes of 73 cells of `\xorflow_decoder_lane'.
-Finding duplicate cells in `\xorflow_decoder_lane'.
 Removed a total of 0 cells.
 
-3.16.6. Executing OPT_DFF pass (perform DFF optimizations).
+3.15.6. Executing OPT_DFF pass (perform DFF optimizations).
 
-3.16.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.15.7. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \xorflow_decoder_lane..
-Removed 6 unused cells and 14 unused wires.
-<suppressed ~13 debug messages>
+Removed 6 unused cells and 9 unused wires.
+<suppressed ~8 debug messages>
 
-3.16.8. Executing OPT_EXPR pass (perform const folding).
+3.15.8. Executing OPT_EXPR pass (perform const folding).
 Optimizing module xorflow_decoder_lane.
 
-3.16.9. Rerunning OPT passes. (Maybe there is more to do..)
+3.15.9. Rerunning OPT passes. (Maybe there is more to do..)
 
-3.16.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.15.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
 Running muxtree optimizer on module \xorflow_decoder_lane..
   Creating internal representation of mux trees.
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~22 debug messages>
+<suppressed ~9 debug messages>
 
-3.16.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.15.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \xorflow_decoder_lane.
 Performed a total of 0 changes.
 
-3.16.12. Executing OPT_MERGE pass (detect identical cells).
+3.15.12. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\xorflow_decoder_lane'.
-Computing hashes of 67 cells of `\xorflow_decoder_lane'.
-Finding duplicate cells in `\xorflow_decoder_lane'.
 Removed a total of 0 cells.
 
-3.16.13. Executing OPT_DFF pass (perform DFF optimizations).
+3.15.13. Executing OPT_DFF pass (perform DFF optimizations).
 
-3.16.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.15.14. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \xorflow_decoder_lane..
 
-3.16.15. Executing OPT_EXPR pass (perform const folding).
+3.15.15. Executing OPT_EXPR pass (perform const folding).
 Optimizing module xorflow_decoder_lane.
 
-3.16.16. Finished fast OPT passes. (There is nothing left to do.)
+3.15.16. Finished OPT passes. (There is nothing left to do.)
 
-3.17. Executing MEMORY pass.
+3.16. Executing MEMORY pass.
 
-3.17.1. Executing OPT_MEM pass (optimize memories).
+3.16.1. Executing OPT_MEM pass (optimize memories).
 Performed a total of 0 transformations.
 
-3.17.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+3.16.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
 Performed a total of 0 transformations.
 
-3.17.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+3.16.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
 
-3.17.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+3.16.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
 
-3.17.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+3.16.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
 
-3.17.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.16.6. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \xorflow_decoder_lane..
 
-3.17.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+3.16.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
 
-3.17.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+3.16.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
 Performed a total of 0 transformations.
 
-3.17.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.16.9. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \xorflow_decoder_lane..
 
-3.17.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+3.16.10. Executing MEMORY_COLLECT pass (generating $mem cells).
 
-3.18. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.17. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \xorflow_decoder_lane..
 
-3.19. Executing OPT pass (performing simple optimizations).
+3.18. Executing OPT pass (performing simple optimizations).
 
-3.19.1. Executing OPT_EXPR pass (perform const folding).
+3.18.1. Executing OPT_EXPR pass (perform const folding).
 Optimizing module xorflow_decoder_lane.
-<suppressed ~4 debug messages>
+<suppressed ~30 debug messages>
 
-3.19.2. Executing OPT_MERGE pass (detect identical cells).
+3.18.2. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\xorflow_decoder_lane'.
-Computing hashes of 74 cells of `\xorflow_decoder_lane'.
-Finding duplicate cells in `\xorflow_decoder_lane'.
-Computing hashes of 70 cells of `\xorflow_decoder_lane'.
-Finding duplicate cells in `\xorflow_decoder_lane'.
 <suppressed ~12 debug messages>
 Removed a total of 4 cells.
 
-3.19.3. Executing OPT_DFF pass (perform DFF optimizations).
+3.18.3. Executing OPT_DFF pass (perform DFF optimizations).
 
-3.19.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.18.4. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \xorflow_decoder_lane..
 Removed 3 unused cells and 7 unused wires.
 <suppressed ~4 debug messages>
 
-3.19.5. Finished fast OPT passes.
+3.18.5. Finished fast OPT passes.
 
-3.20. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+3.19. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
 
-3.21. Executing OPT pass (performing simple optimizations).
+3.20. Executing OPT pass (performing simple optimizations).
 
-3.21.1. Executing OPT_EXPR pass (perform const folding).
+3.20.1. Executing OPT_EXPR pass (perform const folding).
 Optimizing module xorflow_decoder_lane.
 
-3.21.2. Executing OPT_MERGE pass (detect identical cells).
+3.20.2. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\xorflow_decoder_lane'.
-Computing hashes of 67 cells of `\xorflow_decoder_lane'.
-Finding duplicate cells in `\xorflow_decoder_lane'.
 Removed a total of 0 cells.
 
-3.21.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.20.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
 Running muxtree optimizer on module \xorflow_decoder_lane..
   Creating internal representation of mux trees.
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~22 debug messages>
+<suppressed ~9 debug messages>
 
-3.21.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.20.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \xorflow_decoder_lane.
 Performed a total of 0 changes.
 
-3.21.5. Executing OPT_MERGE pass (detect identical cells).
+3.20.5. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\xorflow_decoder_lane'.
-Computing hashes of 67 cells of `\xorflow_decoder_lane'.
-Finding duplicate cells in `\xorflow_decoder_lane'.
 Removed a total of 0 cells.
 
-3.21.6. Executing OPT_SHARE pass.
+3.20.6. Executing OPT_SHARE pass.
 
-3.21.7. Executing OPT_DFF pass (perform DFF optimizations).
+3.20.7. Executing OPT_DFF pass (perform DFF optimizations).
 
-3.21.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.20.8. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \xorflow_decoder_lane..
 
-3.21.9. Executing OPT_EXPR pass (perform const folding).
+3.20.9. Executing OPT_EXPR pass (perform const folding).
 Optimizing module xorflow_decoder_lane.
 
-3.21.10. Finished fast OPT passes. (There is nothing left to do.)
+3.20.10. Finished OPT passes. (There is nothing left to do.)
 
-3.22. Executing TECHMAP pass (map to technology primitives).
+3.21. Executing TECHMAP pass (map to technology primitives).
 
-3.22.1. Executing Verilog-2005 frontend: /share/techmap.v
-Parsing Verilog input from `/share/techmap.v' to AST representation.
+3.21.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
 Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
 Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
 Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
@@ -687,140 +598,124 @@ Generating RTLIL representation for module `\_90_simplemap_registers'.
 Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
 Generating RTLIL representation for module `\_90_shift_shiftx'.
 Generating RTLIL representation for module `\_90_fa'.
-Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_lcu'.
 Generating RTLIL representation for module `\_90_alu'.
 Generating RTLIL representation for module `\_90_macc'.
 Generating RTLIL representation for module `\_90_alumacc'.
-Generating RTLIL representation for module `$__div_mod_u'.
-Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
 Generating RTLIL representation for module `\_90_div'.
 Generating RTLIL representation for module `\_90_mod'.
-Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
 Generating RTLIL representation for module `\_90_divfloor'.
 Generating RTLIL representation for module `\_90_modfloor'.
 Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
 Generating RTLIL representation for module `\_90_demux'.
 Generating RTLIL representation for module `\_90_lut'.
-Generating RTLIL representation for module `$connect'.
-Generating RTLIL representation for module `$input_port'.
 Successfully finished Verilog frontend.
 
-3.22.2. Continuing TECHMAP pass.
+3.21.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $mux.
 Using template $paramod$4ccbe221165818e15f326ddee3d1183c7924e12f\_90_alu for cells of type $alu.
-Using template $paramod$091610cd349a68bd5539cffd7126f0d76e9bca00\_90_alu for cells of type $alu.
 Using template $paramod$9befa12646ab1d64090f7cfa4f3c72972b2004e7\_90_alu for cells of type $alu.
-Using template $paramod$f31f04e77f067a6da635d02c4a81c0a799bf18a4\_90_alu for cells of type $alu.
-Using template $paramod$33acca59acb78d0be1d2963f30b104550f2b2c75\_90_alu for cells of type $alu.
-Using extmapper simplemap for cells of type $not.
-Using template $paramod$1a3a0c35c4a4896fbfd612699525c057298e72d2\_90_alu for cells of type $alu.
-Using template $paramod$d1615bf4e5e328245ffd1550e5fe105901cda77b\_90_alu for cells of type $alu.
-Using template $paramod$f85408ed1aa3d09e465edae8a7bf590332ae9f7b\_90_alu for cells of type $alu.
-Using template $paramod$7af24cf7f572852703f08ef7a936c59efa2c57af\_90_alu for cells of type $alu.
-Using template $paramod$79fc7abbb3333dbd5736999d565fd903198fb1eb\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $eq.
+Using template $paramod$091610cd349a68bd5539cffd7126f0d76e9bca00\_90_alu for cells of type $alu.
 Using template $paramod$adbaf76fa5a3091a329503792521395f8ff4d1a4\_90_alu for cells of type $alu.
 Using template $paramod$32a7b7b86c07519b7537abc18e96f0331f97914d\_90_alu for cells of type $alu.
-Using extmapper maccmap for cells of type $macc_v2.
-  add \gap_s1[5] (9 bits, unsigned)
-  add \gap_s1[1] (9 bits, unsigned)
-  add \gap_s1[3] (9 bits, unsigned)
+Using extmapper simplemap for cells of type $not.
+Using template $paramod$7af24cf7f572852703f08ef7a936c59efa2c57af\_90_alu for cells of type $alu.
+Using template $paramod$f85408ed1aa3d09e465edae8a7bf590332ae9f7b\_90_alu for cells of type $alu.
+Using template $paramod$f31f04e77f067a6da635d02c4a81c0a799bf18a4\_90_alu for cells of type $alu.
+Using extmapper maccmap for cells of type $macc.
   add \in_word [55:48] (8 bits, unsigned)
   add \gap_s2[2] (10 bits, unsigned)
   add \gap_s1[4] (9 bits, unsigned)
   add \in_word [47:40] (8 bits, unsigned)
+Using template $paramod$d1615bf4e5e328245ffd1550e5fe105901cda77b\_90_alu for cells of type $alu.
+Using template $paramod$33acca59acb78d0be1d2963f30b104550f2b2c75\_90_alu for cells of type $alu.
+Using template $paramod$1a3a0c35c4a4896fbfd612699525c057298e72d2\_90_alu for cells of type $alu.
+Using template $paramod$79fc7abbb3333dbd5736999d565fd903198fb1eb\_90_alu for cells of type $alu.
+  add \gap_s1[5] [8:0] (9 bits, unsigned)
+  add \gap_s1[1] (9 bits, unsigned)
+  add \gap_s1[3] (9 bits, unsigned)
   add \in_word [63:56] (8 bits, unsigned)
   add \gap_s2[3] (10 bits, unsigned)
-  add \gap_s1[5] (9 bits, unsigned)
+  add \gap_s1[5] [8:0] (9 bits, unsigned)
   add \in_word [55:48] (8 bits, unsigned)
   add \gap_s1[4] (9 bits, unsigned)
   add \in_word [7:0] (8 bits, unsigned)
   add \gap_s1[2] (9 bits, unsigned)
-Using extmapper simplemap for cells of type $logic_not.
-Using extmapper simplemap for cells of type $mux.
-Using extmapper simplemap for cells of type $logic_and.
-Using extmapper simplemap for cells of type $logic_or.
-Using extmapper simplemap for cells of type $eq.
-Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001001 for cells of type $fa.
-Using template $paramod$ec32b97001540459632a2df9accd677d3703ea0f\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000001001 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000001010 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000001110 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000001 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000100 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000011 for cells of type $lcu.
 Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001010 for cells of type $fa.
 Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001011 for cells of type $fa.
-Using extmapper simplemap for cells of type $pos.
-Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001110 for cells of type $fa.
-Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001110 for cells of type $lcu.
-Using extmapper simplemap for cells of type $xor.
-Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001001 for cells of type $lcu.
-Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001010 for cells of type $lcu.
-Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000100 for cells of type $fa.
-Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000100 for cells of type $lcu.
-Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000010 for cells of type $fa.
-Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000010 for cells of type $lcu.
-Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000011 for cells of type $fa.
-Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000011 for cells of type $lcu.
-Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000001 for cells of type $fa.
-Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000001 for cells of type $lcu.
+Using template $paramod$ec32b97001540459632a2df9accd677d3703ea0f\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000010 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001001 for cells of type $fa.
 Using extmapper simplemap for cells of type $or.
-Using extmapper simplemap for cells of type $and.
-Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001011 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000001011 for cells of type $lcu.
 No more expansions possible.
-<suppressed ~2599 debug messages>
+<suppressed ~2416 debug messages>
 
-3.23. Executing OPT pass (performing simple optimizations).
+3.22. Executing OPT pass (performing simple optimizations).
 
-3.23.1. Executing OPT_EXPR pass (perform const folding).
+3.22.1. Executing OPT_EXPR pass (perform const folding).
 Optimizing module xorflow_decoder_lane.
-<suppressed ~1700 debug messages>
+<suppressed ~962 debug messages>
 
-3.23.2. Executing OPT_MERGE pass (detect identical cells).
+3.22.2. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\xorflow_decoder_lane'.
-Computing hashes of 1954 cells of `\xorflow_decoder_lane'.
-Finding duplicate cells in `\xorflow_decoder_lane'.
-Computing hashes of 1889 cells of `\xorflow_decoder_lane'.
-Finding duplicate cells in `\xorflow_decoder_lane'.
-Computing hashes of 1880 cells of `\xorflow_decoder_lane'.
-Finding duplicate cells in `\xorflow_decoder_lane'.
-Computing hashes of 1879 cells of `\xorflow_decoder_lane'.
-Finding duplicate cells in `\xorflow_decoder_lane'.
-<suppressed ~225 debug messages>
-Removed a total of 75 cells.
+<suppressed ~276 debug messages>
+Removed a total of 92 cells.
 
-3.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+3.22.3. Executing OPT_DFF pass (perform DFF optimizations).
 
-3.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.22.4. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \xorflow_decoder_lane..
-Removed 216 unused cells and 1280 unused wires.
-<suppressed ~217 debug messages>
+Removed 199 unused cells and 902 unused wires.
+<suppressed ~200 debug messages>
 
-3.23.5. Finished fast OPT passes.
+3.22.5. Finished fast OPT passes.
 
-3.24. Executing HIERARCHY pass (managing design hierarchy).
-Attribute `top' found on module `xorflow_decoder_lane'. Setting top module to xorflow_decoder_lane.
+3.23. Executing HIERARCHY pass (managing design hierarchy).
 
-3.24.1. Analyzing design hierarchy..
+3.23.1. Analyzing design hierarchy..
 Top module:  \xorflow_decoder_lane
 
-3.24.2. Analyzing design hierarchy..
+3.23.2. Analyzing design hierarchy..
 Top module:  \xorflow_decoder_lane
 Removed 0 unused modules.
 
-3.25. Printing statistics.
+3.24. Printing statistics.
 
 === xorflow_decoder_lane ===
 
-        +----------Local Count, excluding submodules.
-        | 
-      614 wires
-     2104 wire bits
-       33 public wires
-      503 public wire bits
-        7 ports
-      268 port bits
-     1663 cells
-      660   $_AND_
-      232   $_MUX_
-       15   $_NOT_
-      309   $_OR_
-      447   $_XOR_
+   Number of wires:                619
+   Number of wire bits:           2205
+   Number of public wires:          38
+   Number of public wire bits:     604
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1663
+     $_AND_                        660
+     $_MUX_                        232
+     $_NOT_                         15
+     $_OR_                         309
+     $_XOR_                        447
 
-3.26. Executing CHECK pass (checking for obvious problems).
+3.25. Executing CHECK pass (checking for obvious problems).
 Checking module xorflow_decoder_lane...
 Found and reported 0 problems.
 
@@ -828,59 +723,58 @@ Found and reported 0 problems.
 
 === xorflow_decoder_lane ===
 
-        +----------Local Count, excluding submodules.
-        | 
-      614 wires
-     2104 wire bits
-       33 public wires
-      503 public wire bits
-        7 ports
-      268 port bits
-     1663 cells
-      660   $_AND_
-      232   $_MUX_
-       15   $_NOT_
-      309   $_OR_
-      447   $_XOR_
+   Number of wires:                619
+   Number of wire bits:           2205
+   Number of public wires:          38
+   Number of public wire bits:     604
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1663
+     $_AND_                        660
+     $_MUX_                        232
+     $_NOT_                         15
+     $_OR_                         309
+     $_XOR_                        447
 
 5. Executing LTP pass (find longest path).
 
 Longest topological path in xorflow_decoder_lane (length=33):
-    0: \in_word [9]
-    1: $auto$alumacc.cc:512:replace_alu$235.P [1] (via $auto$simplemap.cc:106:simplemap_bitop$2481)
-    2: $techmap$auto$alumacc.cc:512:replace_alu$235.lcu.$and$/share/techmap.v:240$836_Y (via $auto$simplemap.cc:106:simplemap_bitop$2516)
-    3: $auto$alumacc.cc:512:replace_alu$235.CO [1] (via $auto$simplemap.cc:106:simplemap_bitop$2515)
-    4: $techmap$auto$alumacc.cc:512:replace_alu$235.lcu.$and$/share/techmap.v:248$860_Y (via $auto$simplemap.cc:106:simplemap_bitop$2492)
-    5: $auto$alumacc.cc:512:replace_alu$235.CO [2] (via $auto$simplemap.cc:106:simplemap_bitop$2491)
-    6: \gap_s1[2] [3] (via $auto$simplemap.cc:106:simplemap_bitop$984)
-    7: $auto$alumacc.cc:512:replace_alu$256.P [3] (via $auto$simplemap.cc:106:simplemap_bitop$1605)
-    8: $techmap$auto$alumacc.cc:512:replace_alu$256.lcu.$and$/share/techmap.v:241$1028_Y (via $auto$simplemap.cc:106:simplemap_bitop$2596)
-    9: $techmap$auto$alumacc.cc:512:replace_alu$256.lcu.$and$/share/techmap.v:240$1038_Y (via $auto$simplemap.cc:106:simplemap_bitop$2586)
-   10: $auto$alumacc.cc:512:replace_alu$256.CO [3] (via $auto$simplemap.cc:106:simplemap_bitop$2585)
-   11: $techmap$auto$alumacc.cc:512:replace_alu$256.lcu.$and$/share/techmap.v:248$1047_Y (via $auto$simplemap.cc:106:simplemap_bitop$2577)
-   12: $auto$alumacc.cc:512:replace_alu$256.CO [5] (via $auto$simplemap.cc:106:simplemap_bitop$2576)
-   13: $techmap$auto$alumacc.cc:512:replace_alu$256.lcu.$and$/share/techmap.v:248$1059_Y (via $auto$simplemap.cc:106:simplemap_bitop$2569)
-   14: $auto$alumacc.cc:512:replace_alu$256.CO [6] (via $auto$simplemap.cc:106:simplemap_bitop$2572)
-   15: \gap_s2[2] [7] (via $auto$simplemap.cc:106:simplemap_bitop$1016)
-   16: $auto$maccmap.cc:114:fulladd$418.Y [7] (via $auto$simplemap.cc:106:simplemap_bitop$1900)
-   17: $auto$maccmap.cc:240:synth$419.P [7] (via $auto$simplemap.cc:106:simplemap_bitop$3993)
-   18: $techmap$auto$maccmap.cc:240:synth$419.lcu.$and$/share/techmap.v:240$1635_Y (via $auto$simplemap.cc:106:simplemap_bitop$4022)
-   19: $techmap$auto$maccmap.cc:240:synth$419.lcu.$or$/share/techmap.v:240$1636_Y (via $auto$simplemap.cc:106:simplemap_bitop$4021)
-   20: $techmap$auto$maccmap.cc:240:synth$419.lcu.$or$/share/techmap.v:240$1645_Y (via $auto$simplemap.cc:106:simplemap_bitop$4012)
-   21: $auto$maccmap.cc:240:synth$419.CO [7] (via $auto$simplemap.cc:106:simplemap_bitop$4009)
-   22: $techmap$auto$maccmap.cc:240:synth$419.lcu.$and$/share/techmap.v:248$1665_Y (via $auto$simplemap.cc:106:simplemap_bitop$3999)
-   23: $auto$maccmap.cc:240:synth$419.CO [8] (via $auto$simplemap.cc:106:simplemap_bitop$4002)
-   24: \gap_s3[6] [9] (via $auto$simplemap.cc:106:simplemap_bitop$1946)
-   25: $auto$alumacc.cc:512:replace_alu$262.P [9] (via $auto$simplemap.cc:106:simplemap_bitop$2791)
-   26: $techmap$auto$alumacc.cc:512:replace_alu$262.lcu.$and$/share/techmap.v:240$749_Y (via $auto$simplemap.cc:106:simplemap_bitop$2833)
-   27: $techmap$auto$alumacc.cc:512:replace_alu$262.lcu.$or$/share/techmap.v:240$750_Y (via $auto$simplemap.cc:106:simplemap_bitop$2832)
-   28: $techmap$auto$alumacc.cc:512:replace_alu$262.lcu.$and$/share/techmap.v:240$764_Y (via $auto$simplemap.cc:106:simplemap_bitop$2818)
-   29: $techmap$auto$alumacc.cc:512:replace_alu$262.lcu.$or$/share/techmap.v:240$765_Y (via $auto$simplemap.cc:106:simplemap_bitop$2817)
-   30: $auto$alumacc.cc:512:replace_alu$262.CO [11] (via $auto$simplemap.cc:106:simplemap_bitop$2811)
-   31: $auto$alumacc.cc:512:replace_alu$262.CO [12] (via $auto$simplemap.cc:106:simplemap_bitop$2813)
-   32: $auto$alumacc.cc:512:replace_alu$262.Y [13] (via $auto$simplemap.cc:106:simplemap_bitop$1141)
-   33: \event_ids [97] (via $auto$simplemap.cc:298:simplemap_mux$684)
+    0: \in_word [25]
+    1: $auto$alumacc.cc:485:replace_alu$194.X [1] (via $auto$simplemap.cc:75:simplemap_bitop$1234)
+    2: $techmap$auto$alumacc.cc:485:replace_alu$194.lcu.$and$/usr/bin/../share/yosys/techmap.v:240$728_Y (via $auto$simplemap.cc:75:simplemap_bitop$2163)
+    3: $auto$alumacc.cc:485:replace_alu$194.CO [1] (via $auto$simplemap.cc:75:simplemap_bitop$2180)
+    4: $techmap$auto$alumacc.cc:485:replace_alu$194.lcu.$and$/usr/bin/../share/yosys/techmap.v:248$752_Y (via $auto$simplemap.cc:75:simplemap_bitop$2175)
+    5: $auto$alumacc.cc:485:replace_alu$194.CO [2] (via $auto$simplemap.cc:75:simplemap_bitop$2188)
+    6: \gap_s1[3] [3] (via $auto$simplemap.cc:75:simplemap_bitop$1226)
+    7: $auto$alumacc.cc:485:replace_alu$212.X [3] (via $auto$simplemap.cc:75:simplemap_bitop$1283)
+    8: $techmap$auto$alumacc.cc:485:replace_alu$212.lcu.$and$/usr/bin/../share/yosys/techmap.v:241$821_Y (via $auto$simplemap.cc:75:simplemap_bitop$2201)
+    9: $techmap$auto$alumacc.cc:485:replace_alu$212.lcu.$and$/usr/bin/../share/yosys/techmap.v:240$831_Y (via $auto$simplemap.cc:75:simplemap_bitop$2198)
+   10: $auto$alumacc.cc:485:replace_alu$212.CO [3] (via $auto$simplemap.cc:75:simplemap_bitop$2218)
+   11: $techmap$auto$alumacc.cc:485:replace_alu$212.lcu.$and$/usr/bin/../share/yosys/techmap.v:248$840_Y (via $auto$simplemap.cc:75:simplemap_bitop$2206)
+   12: $auto$alumacc.cc:485:replace_alu$212.CO [5] (via $auto$simplemap.cc:75:simplemap_bitop$2221)
+   13: $techmap$auto$alumacc.cc:485:replace_alu$212.lcu.$and$/usr/bin/../share/yosys/techmap.v:248$852_Y (via $auto$simplemap.cc:75:simplemap_bitop$2210)
+   14: $auto$alumacc.cc:485:replace_alu$212.CO [6] (via $auto$simplemap.cc:75:simplemap_bitop$2225)
+   15: \gap_s2[3] [7] (via $auto$simplemap.cc:75:simplemap_bitop$1276)
+   16: $auto$maccmap.cc:114:fulladd$685.Y [7] (via $auto$simplemap.cc:75:simplemap_bitop$2990)
+   17: $auto$maccmap.cc:240:synth$686.X [7] (via $auto$simplemap.cc:75:simplemap_bitop$3034)
+   18: $techmap$auto$maccmap.cc:240:synth$686.lcu.$and$/usr/bin/../share/yosys/techmap.v:241$2432_Y (via $auto$simplemap.cc:75:simplemap_bitop$3288)
+   19: $techmap$auto$maccmap.cc:240:synth$686.lcu.$and$/usr/bin/../share/yosys/techmap.v:241$2441_Y (via $auto$simplemap.cc:75:simplemap_bitop$3290)
+   20: $techmap$auto$maccmap.cc:240:synth$686.lcu.$and$/usr/bin/../share/yosys/techmap.v:240$2442_Y (via $auto$simplemap.cc:75:simplemap_bitop$3285)
+   21: $auto$maccmap.cc:240:synth$686.CO [7] (via $auto$simplemap.cc:75:simplemap_bitop$3306)
+   22: $techmap$auto$maccmap.cc:240:synth$686.lcu.$and$/usr/bin/../share/yosys/techmap.v:248$2460_Y (via $auto$simplemap.cc:75:simplemap_bitop$3296)
+   23: $auto$maccmap.cc:240:synth$686.CO [8] (via $auto$simplemap.cc:75:simplemap_bitop$3312)
+   24: \gap_s3[7] [9] (via $auto$simplemap.cc:75:simplemap_bitop$3047)
+   25: $auto$alumacc.cc:485:replace_alu$215.X [9] (via $auto$simplemap.cc:75:simplemap_bitop$1764)
+   26: $techmap$auto$alumacc.cc:485:replace_alu$215.lcu.$and$/usr/bin/../share/yosys/techmap.v:240$982_Y (via $auto$simplemap.cc:75:simplemap_bitop$2712)
+   27: $techmap$auto$alumacc.cc:485:replace_alu$215.lcu.$or$/usr/bin/../share/yosys/techmap.v:240$983_Y (via $auto$simplemap.cc:75:simplemap_bitop$2742)
+   28: $techmap$auto$alumacc.cc:485:replace_alu$215.lcu.$and$/usr/bin/../share/yosys/techmap.v:240$997_Y (via $auto$simplemap.cc:75:simplemap_bitop$2717)
+   29: $techmap$auto$alumacc.cc:485:replace_alu$215.lcu.$or$/usr/bin/../share/yosys/techmap.v:240$998_Y (via $auto$simplemap.cc:75:simplemap_bitop$2747)
+   30: $auto$alumacc.cc:485:replace_alu$215.CO [11] (via $auto$simplemap.cc:75:simplemap_bitop$2748)
+   31: $auto$alumacc.cc:485:replace_alu$215.CO [12] (via $auto$simplemap.cc:75:simplemap_bitop$2735)
+   32: $auto$alumacc.cc:485:replace_alu$215.Y [13] (via $auto$simplemap.cc:75:simplemap_bitop$1753)
+   33: \event_ids [111] (via $auto$simplemap.cc:267:simplemap_mux$671)
 
-End of script. Logfile hash: 6fc71e1da3, time: 0.48s, user: 0.51s, system: 0.00s
-Yosys 0.67 (git sha1 2d1509d1b, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)
-Time spent: 23% 1x techmap (0 sec), 20% 30x opt_expr (0 sec), ...
+End of script. Logfile hash: 2ffd533a99, CPU: user 0.91s system 0.04s, MEM: 28.02 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 25% 30x opt_expr (0 sec), 21% 1x techmap (0 sec), ...

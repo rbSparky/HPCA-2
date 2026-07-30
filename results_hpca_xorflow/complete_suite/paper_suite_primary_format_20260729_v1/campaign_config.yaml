@@ -1,0 +1,45 @@
+campaign_id: paper_suite_primary_format_20260729_v1
+deadline_utc: '2026-07-31T18:29:00Z'
+deadline_margin_minutes: 45
+tasks:
+- task_id: audit_primary_trace_quality
+  stage: quality
+  estimated_minutes: 10
+  weight: 1
+  command: python scripts/audit_hpca_quality.py --configs ogbn_arxiv_deepres8_w128_s7
+    ogbn_arxiv_deepres8_w128_s17 ogbn_arxiv_deepres8_w128_s27 reddit_deepres8_w128_s7_native
+    yelp_deepres8_w128_s7_balanced_fallback --output results_hpca_xorflow/complete_suite/quality/primary_quality.csv
+- task_id: primary_matrix_arxiv
+  stage: baselines
+  estimated_minutes: 180
+  weight: 5
+  depends_on:
+  - audit_primary_trace_quality
+  command: PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs
+    ogbn_arxiv_deepres8_w128_s7 ogbn_arxiv_deepres8_w128_s17 ogbn_arxiv_deepres8_w128_s27
+    --max-pairs 2 --output results_hpca_xorflow/complete_suite/baselines/arxiv/format_matrix.csv
+- task_id: primary_matrix_reddit
+  stage: baselines
+  estimated_minutes: 240
+  weight: 5
+  depends_on:
+  - audit_primary_trace_quality
+  command: PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs
+    reddit_deepres8_w128_s7_native --max-pairs 2 --output results_hpca_xorflow/complete_suite/baselines/reddit/format_matrix.csv
+- task_id: supplementary_matrix_yelp
+  stage: baselines
+  estimated_minutes: 180
+  weight: 2
+  depends_on:
+  - audit_primary_trace_quality
+  command: PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs
+    yelp_deepres8_w128_s7_balanced_fallback --max-pairs 2 --output results_hpca_xorflow/complete_suite/baselines/yelp_borderline/format_matrix.csv
+- task_id: canonical_evidence_refresh
+  stage: report
+  estimated_minutes: 10
+  weight: 1
+  depends_on:
+  - primary_matrix_arxiv
+  - primary_matrix_reddit
+  - supplementary_matrix_yelp
+  command: PYTHONPATH=src:. python scripts/build_hpca_paper_evidence.py

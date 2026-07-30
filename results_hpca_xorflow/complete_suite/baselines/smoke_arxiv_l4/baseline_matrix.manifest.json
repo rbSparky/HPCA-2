@@ -1,0 +1,12 @@
+{
+  "command": "hpca_baseline_matrix",
+  "configs": [
+    "ogbn_arxiv_deepres8_w128_s17"
+  ],
+  "edge_order": "O0",
+  "feature_cache_bytes": 524288,
+  "output": "results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/baseline_matrix.csv",
+  "rows": 5,
+  "sha256": "7102f8f41da6c17214f4d48df4d9cc99e95d8a88a0dd88a07939f555731985ac",
+  "slice_width": 128
+}

@@ -1,0 +1,31 @@
+{
+  "generated_utc": "2026-07-29T09:03:19Z",
+  "rows": [
+    {
+      "task_id": "full_format_matrix_arxiv_l4",
+      "stage": "format_matrix_smoke",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "45",
+      "started_utc": "2026-07-29T09:02:26Z",
+      "finished_utc": "2026-07-29T09:03:19Z",
+      "wall_seconds": "53.3",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_format_matrix_smoke_20260729_v1/full_format_matrix_arxiv_l4.log",
+      "command": "PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs ogbn_arxiv_deepres8_w128_s17 --max-pairs 1 --output results_hpca_xorflow/complete_suite/baselines/format_matrix_smoke_arxiv_l4/format_matrix.csv",
+      "reason": ""
+    },
+    {
+      "task_id": "audit_full_format_matrix_arxiv_l4",
+      "stage": "format_matrix_smoke",
+      "status": "SUCCEEDED",
+      "depends_on": "full_format_matrix_arxiv_l4",
+      "estimated_minutes": "5",
+      "started_utc": "2026-07-29T09:03:19Z",
+      "finished_utc": "2026-07-29T09:03:19Z",
+      "wall_seconds": "0.3",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_format_matrix_smoke_20260729_v1/audit_full_format_matrix_arxiv_l4.log",
+      "command": "python scripts/verify_hpca_format_matrix.py --input results_hpca_xorflow/complete_suite/baselines/format_matrix_smoke_arxiv_l4/format_matrix.csv --output results_hpca_xorflow/complete_suite/baselines/format_matrix_smoke_arxiv_l4/audit.json",
+      "reason": ""
+    }
+  ]
+}

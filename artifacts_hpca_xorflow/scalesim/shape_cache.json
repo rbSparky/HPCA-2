@@ -1,4 +1,44 @@
 {
+  "08de49c47fb95e674d10cfc1dd3e346edd148db5ee501c7479ccea80bfb51648": {
+    "cycles": 8159,
+    "cycles_with_prefetch": 16224,
+    "error": "",
+    "k": 128,
+    "m": 416,
+    "n": 128,
+    "success": true,
+    "utilization": 81.57862483147444
+  },
+  "382dba346a23c40e6d00ec8c843697298c1344b7ad783df5e1cdf95bfeaba8d4": {
+    "cycles": 6063,
+    "cycles_with_prefetch": 13255,
+    "error": "",
+    "k": 128,
+    "m": 285,
+    "n": 128,
+    "success": true,
+    "utilization": 75.2102919346858
+  },
+  "3864e734a831a814d6614570873d569f5049f917ab4f716c575e3cc30ef8033a": {
+    "cycles": 180015,
+    "cycles_with_prefetch": 195472,
+    "error": "",
+    "k": 128,
+    "m": 11157,
+    "n": 128,
+    "success": true,
+    "utilization": 99.1650695775352
+  },
+  "59cb402b98cf9b3c63b23a1bca0fa2067c99cfd960529218696d8b0a56a6d805": {
+    "cycles": 1435199,
+    "cycles_with_prefetch": 1452256,
+    "error": "",
+    "k": 128,
+    "m": 89606,
+    "n": 128,
+    "success": true,
+    "utilization": 99.89527584676411
+  },
   "5a198adf70186df120e64e63b3b8a7e938bed9f8a38b03a28a1ddd4323c785db": {
     "cycles": 40943,
     "cycles_with_prefetch": 56592,
@@ -9,15 +49,25 @@
     "success": true,
     "utilization": 96.32904281562172
   },
-  "7d77358b22a5d1e0d959827c160bb3c75448456a399246ca80ae6bd6cf5df934": {
-    "cycles": 2015,
-    "cycles_with_prefetch": 4361,
+  "884566db1e01a508124a65a1440c4286f06af30f36773b17bfea26d2aba4a5e1": {
+    "cycles": 1360767,
+    "cycles_with_prefetch": 1376912,
     "error": "",
-    "k": 128,
-    "m": 32,
-    "n": 128,
+    "k": 256,
+    "m": 21168,
+    "n": 256,
     "success": true,
-    "utilization": 25.409429280397024
+    "utilization": 99.55796988022196
+  },
+  "a554ce84f2e9a2a96f5d83e4ce41861eb0e533a985b8ba1d9eb2bc36efffcb95": {
+    "cycles": 116859,
+    "cycles_with_prefetch": 132216,
+    "error": "",
+    "k": 64,
+    "m": 29121,
+    "n": 64,
+    "success": true,
+    "utilization": 99.67910045439376
   },
   "aab415af2a7d84d0231c8d9f3a90f9a841412e06739f9148477589ef810bbb8a": {
     "cycles": 340191,
@@ -28,6 +78,76 @@
     "n": 128,
     "success": true,
     "utilization": 99.55818937008915
+  },
+  "af8d8bcaf412a4ff04d5eaeeb8774420c9297f062b41136c81b2eb2a8b30838f": {
+    "cycles": 45003,
+    "cycles_with_prefetch": 61744,
+    "error": "",
+    "k": 64,
+    "m": 11157,
+    "n": 64,
+    "success": true,
+    "utilization": 99.16672221851877
+  },
+  "b395beb19bad1604d0b2593834c79cb837f4e37f7b35f48e6af012fc67a12ff2": {
+    "cycles": 358799,
+    "cycles_with_prefetch": 373944,
+    "error": "",
+    "k": 64,
+    "m": 89606,
+    "n": 64,
+    "success": true,
+    "utilization": 99.8954846585414
+  },
+  "b536a4491c7fa2e24ab652138159fd6a1706ee25d0e127474859895c2ac7f08f": {
+    "cycles": 85047,
+    "cycles_with_prefetch": 100872,
+    "error": "",
+    "k": 64,
+    "m": 21168,
+    "n": 64,
+    "success": true,
+    "utilization": 99.55906733923595
+  },
+  "b8a48931d1513026082e1b73710299b89fdddb5a5e1ab73c5bd5ef87c3b88433": {
+    "cycles": 262934,
+    "cycles_with_prefetch": 280048,
+    "error": "",
+    "k": 96,
+    "m": 29121,
+    "n": 96,
+    "success": true,
+    "utilization": 99.67862657549043
+  },
+  "b8ba3dd9e960b582b903c8f1a7912acb14a05a9793883fa362615f7faed3081b": {
+    "cycles": 467439,
+    "cycles_with_prefetch": 483600,
+    "error": "",
+    "k": 128,
+    "m": 29121,
+    "n": 128,
+    "success": true,
+    "utilization": 99.67846071893872
+  },
+  "b9128bdf4f4f8cd4bb88810e5df3d09b6ae1169a3873843ce7bfdaa31639f59a": {
+    "cycles": 1869759,
+    "cycles_with_prefetch": 1886848,
+    "error": "",
+    "k": 256,
+    "m": 29121,
+    "n": 256,
+    "success": true,
+    "utilization": 99.67830078635802
+  },
+  "c8faeb6796afe3a3de993c60cbad1e708d68faf44ad4a75fe4e9c7d919310a93": {
+    "cycles": 191357,
+    "cycles_with_prefetch": 206526,
+    "error": "",
+    "k": 96,
+    "m": 21168,
+    "n": 96,
+    "success": true,
+    "utilization": 99.55841699023291
   },
   "ec0a2a5e82321e9ea8d10cc971229c639110d4574474a7e4d94a4d03d92f02e2": {
     "cycles": 6927,
