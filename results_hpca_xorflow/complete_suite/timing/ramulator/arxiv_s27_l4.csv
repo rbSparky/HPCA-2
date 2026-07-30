@@ -1,0 +1,7 @@
+config_id,pair_start_layer,format,trace_sha256,requests,metadata_bytes,nodes,edges,dram_cycles,served_requests,all_requests_drained,tool_success,error,speedup_vs_beicsr
+ogbn_arxiv_deepres8_w128_s27,4,beicsr,869b51a27d9119bb7eb3bbd746459e619a9d0d6c2c5def40b1cfc5337ded8241,18866970,0,169343,2315598,6616388,18866970,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/complete_suite/timing/ramulator/arxiv_s27_l4/xorflow_hbm_pnzpb1ui/beicsr.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 18866970 lines.
+",1.0
+ogbn_arxiv_deepres8_w128_s27,4,xorflow,f0715c5f9f5dd5ddaebf7450be50102cb6671360097576ac10883738249dff0b,15422714,4434752,169343,2315598,5521869,15422714,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/complete_suite/timing/ramulator/arxiv_s27_l4/xorflow_hbm_pnzpb1ui/xorflow.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 15422714 lines.
+",1.1982153144161878

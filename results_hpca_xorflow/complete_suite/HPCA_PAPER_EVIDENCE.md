@@ -16,13 +16,12 @@ This is the canonical, path-linked evidence inventory. It intentionally distingu
 
 | Section | Rows | Source files |
 |---|---:|---:|
-| causal_preflight | 606 | 51 |
-| format_matrix | 565 | 5 |
-| host | 400 | 50 |
-| invalid_csv | 1 | 1 |
-| matched_controls | 160 | 1 |
+| causal_preflight | 822 | 69 |
+| format_matrix | 815 | 10 |
+| host | 544 | 68 |
+| matched_controls | 480 | 3 |
 | ppa | 86 | 5 |
-| ramulator | 32 | 4 |
+| ramulator | 64 | 8 |
 
 Machine-readable ledger: `HPCA_PAPER_EVIDENCE.csv`.
 Gate table: `HPCA_PAPER_GATES.csv`.

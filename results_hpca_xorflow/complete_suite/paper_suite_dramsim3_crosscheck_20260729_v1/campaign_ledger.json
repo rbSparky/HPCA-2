@@ -1,0 +1,96 @@
+{
+  "generated_utc": "2026-07-29T13:05:38Z",
+  "rows": [
+    {
+      "task_id": "dramsim_arxiv_s17_beicsr",
+      "stage": "dramsim3",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "20",
+      "started_utc": "2026-07-29T13:04:45Z",
+      "finished_utc": "2026-07-29T13:04:53Z",
+      "wall_seconds": "8.8",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_dramsim3_crosscheck_20260729_v1/dramsim_arxiv_s17_beicsr.log",
+      "command": "python scripts/run_dramsim3_trace_sample.py --trace artifacts_hpca_xorflow/complete_suite/timing/ramulator/arxiv_s17_l4/ogbn_arxiv_deepres8_w128_s17_l4_beicsr.trace --output results_hpca_xorflow/complete_suite/timing/dramsim3/arxiv_s17_beicsr.json",
+      "reason": ""
+    },
+    {
+      "task_id": "dramsim_arxiv_s17_xorflow",
+      "stage": "dramsim3",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "20",
+      "started_utc": "2026-07-29T13:04:53Z",
+      "finished_utc": "2026-07-29T13:05:02Z",
+      "wall_seconds": "8.8",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_dramsim3_crosscheck_20260729_v1/dramsim_arxiv_s17_xorflow.log",
+      "command": "python scripts/run_dramsim3_trace_sample.py --trace artifacts_hpca_xorflow/complete_suite/timing/ramulator/arxiv_s17_l4/ogbn_arxiv_deepres8_w128_s17_l4_xorflow.trace --output results_hpca_xorflow/complete_suite/timing/dramsim3/arxiv_s17_xorflow.json",
+      "reason": ""
+    },
+    {
+      "task_id": "dramsim_reddit_beicsr",
+      "stage": "dramsim3",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "20",
+      "started_utc": "2026-07-29T13:05:02Z",
+      "finished_utc": "2026-07-29T13:05:11Z",
+      "wall_seconds": "9.2",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_dramsim3_crosscheck_20260729_v1/dramsim_reddit_beicsr.log",
+      "command": "python scripts/run_dramsim3_trace_sample.py --trace artifacts_hpca_xorflow/complete_suite/timing/ramulator/reddit_l4/reddit_deepres8_w128_s7_native_l4_beicsr.trace --output results_hpca_xorflow/complete_suite/timing/dramsim3/reddit_beicsr.json",
+      "reason": ""
+    },
+    {
+      "task_id": "dramsim_reddit_xorflow",
+      "stage": "dramsim3",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "20",
+      "started_utc": "2026-07-29T13:05:11Z",
+      "finished_utc": "2026-07-29T13:05:20Z",
+      "wall_seconds": "8.8",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_dramsim3_crosscheck_20260729_v1/dramsim_reddit_xorflow.log",
+      "command": "python scripts/run_dramsim3_trace_sample.py --trace artifacts_hpca_xorflow/complete_suite/timing/ramulator/reddit_l4/reddit_deepres8_w128_s7_native_l4_xorflow.trace --output results_hpca_xorflow/complete_suite/timing/dramsim3/reddit_xorflow.json",
+      "reason": ""
+    },
+    {
+      "task_id": "dramsim_yelp_beicsr",
+      "stage": "dramsim3",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "20",
+      "started_utc": "2026-07-29T13:05:20Z",
+      "finished_utc": "2026-07-29T13:05:29Z",
+      "wall_seconds": "8.8",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_dramsim3_crosscheck_20260729_v1/dramsim_yelp_beicsr.log",
+      "command": "python scripts/run_dramsim3_trace_sample.py --trace artifacts_hpca_xorflow/complete_suite/timing/ramulator/yelp_borderline_l4/yelp_deepres8_w128_s7_balanced_fallback_l4_beicsr.trace --output results_hpca_xorflow/complete_suite/timing/dramsim3/yelp_beicsr.json",
+      "reason": ""
+    },
+    {
+      "task_id": "dramsim_yelp_xorflow",
+      "stage": "dramsim3",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "20",
+      "started_utc": "2026-07-29T13:05:29Z",
+      "finished_utc": "2026-07-29T13:05:38Z",
+      "wall_seconds": "8.8",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_dramsim3_crosscheck_20260729_v1/dramsim_yelp_xorflow.log",
+      "command": "python scripts/run_dramsim3_trace_sample.py --trace artifacts_hpca_xorflow/complete_suite/timing/ramulator/yelp_borderline_l4/yelp_deepres8_w128_s7_balanced_fallback_l4_xorflow.trace --output results_hpca_xorflow/complete_suite/timing/dramsim3/yelp_xorflow.json",
+      "reason": ""
+    },
+    {
+      "task_id": "canonical_evidence_refresh_dramsim3",
+      "stage": "report",
+      "status": "SUCCEEDED",
+      "depends_on": "dramsim_arxiv_s17_beicsr,dramsim_arxiv_s17_xorflow,dramsim_reddit_beicsr,dramsim_reddit_xorflow,dramsim_yelp_beicsr,dramsim_yelp_xorflow",
+      "estimated_minutes": "10",
+      "started_utc": "2026-07-29T13:05:38Z",
+      "finished_utc": "2026-07-29T13:05:38Z",
+      "wall_seconds": "0.5",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_dramsim3_crosscheck_20260729_v1/canonical_evidence_refresh_dramsim3.log",
+      "command": "PYTHONPATH=src:. python scripts/build_hpca_paper_evidence.py",
+      "reason": ""
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "command": "hpca_format_matrix",
+  "configs": [
+    "pubmed_gcnii16"
+  ],
+  "rows": 10,
+  "sha256": "aa4995fb235e06f2f33e9ead3591f02ca76f75c749e16880172bc2e19f50a320"
+}

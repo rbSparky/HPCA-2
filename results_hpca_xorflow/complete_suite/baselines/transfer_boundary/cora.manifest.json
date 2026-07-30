@@ -1,0 +1,8 @@
+{
+  "command": "hpca_format_matrix",
+  "configs": [
+    "cora_gcnii16"
+  ],
+  "rows": 10,
+  "sha256": "8651667dc56dfcab4b0e05f24b3da9bae54da1f91299e5b683100979085999ed"
+}

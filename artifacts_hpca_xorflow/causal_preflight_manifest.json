@@ -1,7 +1,7 @@
 {
   "command": "causal_pair_preflight",
-  "output": "results_hpca_xorflow/complete_suite/runs/abl_reddit_slice256/causal_preflight.csv",
+  "output": "results_hpca_xorflow/complete_suite/runs/arxiv_window1/causal_preflight.csv",
   "rows": 2,
-  "sha256": "5b6054869d349584f62097a81e78c3aaff44fe016275b8e4f2ad0e45e8ab240b",
-  "wall_seconds": 119.90455991774797
+  "sha256": "6a85a236cd9d9f015aa76b1797f2b294542b86241669586bf0dcef4808ab5374",
+  "wall_seconds": 22.840466983616352
 }

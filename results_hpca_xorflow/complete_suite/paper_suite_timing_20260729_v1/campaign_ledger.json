@@ -1,0 +1,70 @@
+{
+  "generated_utc": "2026-07-29T12:24:53Z",
+  "rows": [
+    {
+      "task_id": "ramulator_arxiv_s17_pair4",
+      "stage": "ramulator",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "120",
+      "started_utc": "2026-07-29T10:51:31Z",
+      "finished_utc": "2026-07-29T10:53:45Z",
+      "wall_seconds": "134.0",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_timing_20260729_v1/ramulator_arxiv_s17_pair4.log",
+      "command": "MOSAIC_RAMULATOR_PY=/usr/bin/python3.12 python scripts/run_hpca_ramulator.py --config-id ogbn_arxiv_deepres8_w128_s17 --pair-start-layer 4 --keep-trace --artifact-dir artifacts_hpca_xorflow/complete_suite/timing/ramulator/arxiv_s17_l4 --results results_hpca_xorflow/complete_suite/timing/ramulator/arxiv_s17_l4.csv",
+      "reason": ""
+    },
+    {
+      "task_id": "ramulator_arxiv_s27_pair4",
+      "stage": "ramulator",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "120",
+      "started_utc": "2026-07-29T10:53:45Z",
+      "finished_utc": "2026-07-29T10:55:57Z",
+      "wall_seconds": "132.4",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_timing_20260729_v1/ramulator_arxiv_s27_pair4.log",
+      "command": "MOSAIC_RAMULATOR_PY=/usr/bin/python3.12 python scripts/run_hpca_ramulator.py --config-id ogbn_arxiv_deepres8_w128_s27 --pair-start-layer 4 --keep-trace --artifact-dir artifacts_hpca_xorflow/complete_suite/timing/ramulator/arxiv_s27_l4 --results results_hpca_xorflow/complete_suite/timing/ramulator/arxiv_s27_l4.csv",
+      "reason": ""
+    },
+    {
+      "task_id": "ramulator_reddit_pair4",
+      "stage": "ramulator",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "180",
+      "started_utc": "2026-07-29T10:55:57Z",
+      "finished_utc": "2026-07-29T12:10:18Z",
+      "wall_seconds": "4461.3",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_timing_20260729_v1/ramulator_reddit_pair4.log",
+      "command": "MOSAIC_RAMULATOR_PY=/usr/bin/python3.12 python scripts/run_hpca_ramulator.py --config-id reddit_deepres8_w128_s7_native --pair-start-layer 4 --keep-trace --artifact-dir artifacts_hpca_xorflow/complete_suite/timing/ramulator/reddit_l4 --results results_hpca_xorflow/complete_suite/timing/ramulator/reddit_l4.csv",
+      "reason": ""
+    },
+    {
+      "task_id": "ramulator_yelp_supplementary_pair4",
+      "stage": "ramulator",
+      "status": "SUCCEEDED",
+      "depends_on": "",
+      "estimated_minutes": "120",
+      "started_utc": "2026-07-29T12:10:18Z",
+      "finished_utc": "2026-07-29T12:24:52Z",
+      "wall_seconds": "874.0",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_timing_20260729_v1/ramulator_yelp_supplementary_pair4.log",
+      "command": "MOSAIC_RAMULATOR_PY=/usr/bin/python3.12 python scripts/run_hpca_ramulator.py --config-id yelp_deepres8_w128_s7_balanced_fallback --pair-start-layer 4 --keep-trace --artifact-dir artifacts_hpca_xorflow/complete_suite/timing/ramulator/yelp_borderline_l4 --results results_hpca_xorflow/complete_suite/timing/ramulator/yelp_borderline_l4.csv",
+      "reason": ""
+    },
+    {
+      "task_id": "canonical_evidence_refresh_timing",
+      "stage": "report",
+      "status": "SUCCEEDED",
+      "depends_on": "ramulator_arxiv_s17_pair4,ramulator_arxiv_s27_pair4,ramulator_reddit_pair4,ramulator_yelp_supplementary_pair4",
+      "estimated_minutes": "10",
+      "started_utc": "2026-07-29T12:24:52Z",
+      "finished_utc": "2026-07-29T12:24:53Z",
+      "wall_seconds": "0.5",
+      "log": "artifacts_hpca_xorflow/complete_suite/paper_suite_timing_20260729_v1/canonical_evidence_refresh_timing.log",
+      "command": "PYTHONPATH=src:. python scripts/build_hpca_paper_evidence.py",
+      "reason": ""
+    }
+  ]
+}

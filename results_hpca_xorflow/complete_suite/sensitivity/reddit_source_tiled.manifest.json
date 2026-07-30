@@ -1,0 +1,8 @@
+{
+  "command": "hpca_format_matrix",
+  "configs": [
+    "reddit_deepres8_w128_s7_native"
+  ],
+  "rows": 10,
+  "sha256": "a926c500ab5cb393bff76571d20749dd3e902dc1145c09997971e706f4f53436"
+}

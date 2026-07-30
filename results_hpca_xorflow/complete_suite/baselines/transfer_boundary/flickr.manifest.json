@@ -1,0 +1,8 @@
+{
+  "command": "hpca_format_matrix",
+  "configs": [
+    "flickr_deepres8_w128_s7"
+  ],
+  "rows": 10,
+  "sha256": "1c0f80313e1ca8a3c14d255f92a0aad7d9d8b63077bd2334851f7c055e3b98bf"
+}

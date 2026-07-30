@@ -1,0 +1,7 @@
+config_id,pair_start_layer,format,trace_sha256,requests,metadata_bytes,nodes,edges,dram_cycles,served_requests,all_requests_drained,tool_success,error,speedup_vs_beicsr
+yelp_deepres8_w128_s7_balanced_fallback,4,beicsr,633e0ae5127ce0142b6b01f35e747a40cb03099633eb1015ea3d30bc4aa2592c,118893892,0,716847,13954819,44022361,118893892,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/complete_suite/timing/ramulator/yelp_borderline_l4/xorflow_hbm_t3ow8t6o/beicsr.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 118893892 lines.
+",1.0
+yelp_deepres8_w128_s7_balanced_fallback,4,xorflow,7d2118fe424d8b5201b5f314469c5c0cc43b1f72d0f663c0a9354ecbd66c7341,110031490,12670912,716847,13954819,40965317,110031490,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/complete_suite/timing/ramulator/yelp_borderline_l4/xorflow_hbm_t3ow8t6o/xorflow.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 110031490 lines.
+",1.0746251762191905

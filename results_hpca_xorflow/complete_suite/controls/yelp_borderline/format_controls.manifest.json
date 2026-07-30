@@ -1,0 +1,10 @@
+{
+  "audit_sha256": "97316277a133d20ec4414464e40317a1cc5cb7816e56bdd9ba6b93f77e0fad70",
+  "command": "hpca_format_controls",
+  "configs": [
+    "yelp_deepres8_w128_s7_balanced_fallback"
+  ],
+  "result_sha256": "093bcef9355bb0b8dafd17197fea08f071b5fdbba2006b9aaae4302ec8ccc2c3",
+  "rows": 40,
+  "seed": 7007
+}

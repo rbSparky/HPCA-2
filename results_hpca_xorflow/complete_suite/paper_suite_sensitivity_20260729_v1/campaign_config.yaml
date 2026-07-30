@@ -1,0 +1,84 @@
+campaign_id: paper_suite_sensitivity_20260729_v1
+deadline_utc: '2026-07-31T18:29:00Z'
+deadline_margin_minutes: 45
+tasks:
+- task_id: arxiv_slice64
+  stage: sensitivity
+  estimated_minutes: 90
+  weight: 1
+  command: PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs
+    ogbn_arxiv_deepres8_w128_s17 --slice-width 64 --max-pairs 1 --output results_hpca_xorflow/complete_suite/sensitivity/arxiv_slice64.csv
+- task_id: arxiv_slice96
+  stage: sensitivity
+  estimated_minutes: 90
+  weight: 1
+  command: PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs
+    ogbn_arxiv_deepres8_w128_s17 --slice-width 96 --max-pairs 1 --output results_hpca_xorflow/complete_suite/sensitivity/arxiv_slice96.csv
+- task_id: arxiv_slice256
+  stage: sensitivity
+  estimated_minutes: 90
+  weight: 1
+  command: PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs
+    ogbn_arxiv_deepres8_w128_s17 --slice-width 256 --max-pairs 1 --output results_hpca_xorflow/complete_suite/sensitivity/arxiv_slice256.csv
+- task_id: arxiv_cache256
+  stage: sensitivity
+  estimated_minutes: 90
+  weight: 1
+  command: PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs
+    ogbn_arxiv_deepres8_w128_s17 --feature-cache-bytes 262144 --max-pairs 1 --output
+    results_hpca_xorflow/complete_suite/sensitivity/arxiv_cache256.csv
+- task_id: arxiv_cache1m
+  stage: sensitivity
+  estimated_minutes: 90
+  weight: 1
+  command: PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs
+    ogbn_arxiv_deepres8_w128_s17 --feature-cache-bytes 1048576 --max-pairs 1 --output
+    results_hpca_xorflow/complete_suite/sensitivity/arxiv_cache1m.csv
+- task_id: arxiv_source_tiled
+  stage: sensitivity
+  estimated_minutes: 90
+  weight: 1
+  command: PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs
+    ogbn_arxiv_deepres8_w128_s17 --edge-order O1 --max-pairs 1 --output results_hpca_xorflow/complete_suite/sensitivity/arxiv_source_tiled.csv
+- task_id: reddit_slice96
+  stage: sensitivity
+  estimated_minutes: 150
+  weight: 1
+  command: PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs
+    reddit_deepres8_w128_s7_native --slice-width 96 --max-pairs 1 --output results_hpca_xorflow/complete_suite/sensitivity/reddit_slice96.csv
+- task_id: reddit_cache256
+  stage: sensitivity
+  estimated_minutes: 150
+  weight: 1
+  command: PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs
+    reddit_deepres8_w128_s7_native --feature-cache-bytes 262144 --max-pairs 1 --output
+    results_hpca_xorflow/complete_suite/sensitivity/reddit_cache256.csv
+- task_id: reddit_cache1m
+  stage: sensitivity
+  estimated_minutes: 150
+  weight: 1
+  command: PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs
+    reddit_deepres8_w128_s7_native --feature-cache-bytes 1048576 --max-pairs 1 --output
+    results_hpca_xorflow/complete_suite/sensitivity/reddit_cache1m.csv
+- task_id: reddit_source_tiled
+  stage: sensitivity
+  estimated_minutes: 150
+  weight: 1
+  command: PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs
+    reddit_deepres8_w128_s7_native --edge-order O1 --max-pairs 1 --output results_hpca_xorflow/complete_suite/sensitivity/reddit_source_tiled.csv
+- task_id: canonical_evidence_refresh_sensitivity
+  stage: report
+  estimated_minutes: 10
+  weight: 1
+  depends_on:
+  - arxiv_slice64
+  - arxiv_slice96
+  - arxiv_slice256
+  - arxiv_cache256
+  - arxiv_cache1m
+  - arxiv_source_tiled
+  - reddit_slice96
+  - reddit_cache256
+  - reddit_cache1m
+  - reddit_source_tiled
+  command: PYTHONPATH=src:. python scripts/build_hpca_paper_evidence.py

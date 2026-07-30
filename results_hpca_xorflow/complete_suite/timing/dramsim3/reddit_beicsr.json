@@ -1,0 +1,12 @@
+{
+  "error": "",
+  "memory_model": "HBM2_8Gb_x128",
+  "returncode": 0,
+  "sample_lines": 250000,
+  "sampled_trace": true,
+  "source_prefix_lines_seen": 250000,
+  "source_trace": "artifacts_hpca_xorflow/complete_suite/timing/ramulator/reddit_l4/reddit_deepres8_w128_s7_native_l4_beicsr.trace",
+  "tool": "DRAMsim3",
+  "tool_run_success": true,
+  "trace_sha256": "c7d42eaeb31779ea3f21c204c131838fc81a005251101cbd810f9a91ee94df9b"
+}

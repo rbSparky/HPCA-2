@@ -1,0 +1,8 @@
+{
+  "command": "hpca_format_matrix",
+  "configs": [
+    "ogbn_arxiv_deepres8_w128_s17"
+  ],
+  "rows": 10,
+  "sha256": "f7d9135fd5db2ba04c7d7dbef0b2744419b94b92bfc88af1f3dec9c00b9fd288"
+}

@@ -1,0 +1,12 @@
+{
+  "error": "",
+  "memory_model": "HBM2_8Gb_x128",
+  "returncode": 0,
+  "sample_lines": 250000,
+  "sampled_trace": true,
+  "source_prefix_lines_seen": 250000,
+  "source_trace": "artifacts_hpca_xorflow/complete_suite/timing/ramulator/yelp_borderline_l4/yelp_deepres8_w128_s7_balanced_fallback_l4_xorflow.trace",
+  "tool": "DRAMsim3",
+  "tool_run_success": true,
+  "trace_sha256": "cd678762b350e01a70addf54fafd716c3cef6bd1bbd5fe783db0156bbce8976f"
+}

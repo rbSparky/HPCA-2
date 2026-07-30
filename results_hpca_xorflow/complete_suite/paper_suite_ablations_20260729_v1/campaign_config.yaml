@@ -1,0 +1,87 @@
+campaign_id: paper_suite_ablations_20260729_v1
+deadline_utc: '2026-07-31T18:29:00Z'
+deadline_margin_minutes: 45
+tasks:
+- task_id: arxiv_decoder8
+  stage: ablations
+  estimated_minutes: 90
+  weight: 1
+  command: bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 abl_arxiv_decoder8
+    128 524288 O0 128 16384 256 8 0
+- task_id: arxiv_single_buffered
+  stage: ablations
+  estimated_minutes: 90
+  weight: 1
+  command: bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 abl_arxiv_single_buffered
+    128 524288 O0 128 16384 256 32 1
+- task_id: arxiv_support_cache_min
+  stage: ablations
+  estimated_minutes: 90
+  weight: 1
+  command: bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 abl_arxiv_support_cache_min
+    128 524288 O0 128 512 256 32 0
+- task_id: arxiv_dram128
+  stage: ablations
+  estimated_minutes: 90
+  weight: 1
+  command: bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 abl_arxiv_dram128
+    128 524288 O0 128 16384 128 32 0
+- task_id: arxiv_dram512
+  stage: ablations
+  estimated_minutes: 90
+  weight: 1
+  command: bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 abl_arxiv_dram512
+    128 524288 O0 128 16384 512 32 0
+- task_id: arxiv_slice256
+  stage: ablations
+  estimated_minutes: 90
+  weight: 1
+  command: bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 abl_arxiv_slice256
+    256 524288 O0 128 16384 256 32 0
+- task_id: arxiv_source_tiled
+  stage: ablations
+  estimated_minutes: 90
+  weight: 1
+  command: bash scripts/run_hpca_case.sh ogbn_arxiv_deepres8_w128_s17 abl_arxiv_source_tiled
+    128 524288 O1 128 16384 256 32 0
+- task_id: reddit_decoder8
+  stage: ablations
+  estimated_minutes: 150
+  weight: 1
+  command: bash scripts/run_hpca_case.sh reddit_deepres8_w128_s7_native abl_reddit_decoder8
+    128 524288 O0 128 16384 256 8 0
+- task_id: reddit_single_buffered
+  stage: ablations
+  estimated_minutes: 150
+  weight: 1
+  command: bash scripts/run_hpca_case.sh reddit_deepres8_w128_s7_native abl_reddit_single_buffered
+    128 524288 O0 128 16384 256 32 1
+- task_id: reddit_support_cache_min
+  stage: ablations
+  estimated_minutes: 150
+  weight: 1
+  command: bash scripts/run_hpca_case.sh reddit_deepres8_w128_s7_native abl_reddit_support_cache_min
+    128 524288 O0 128 512 256 32 0
+- task_id: reddit_slice256
+  stage: ablations
+  estimated_minutes: 150
+  weight: 1
+  command: bash scripts/run_hpca_case.sh reddit_deepres8_w128_s7_native abl_reddit_slice256
+    256 524288 O0 128 16384 256 32 0
+- task_id: canonical_evidence_refresh_ablations
+  stage: report
+  estimated_minutes: 10
+  weight: 1
+  depends_on:
+  - arxiv_decoder8
+  - arxiv_single_buffered
+  - arxiv_support_cache_min
+  - arxiv_dram128
+  - arxiv_dram512
+  - arxiv_slice256
+  - arxiv_source_tiled
+  - reddit_decoder8
+  - reddit_single_buffered
+  - reddit_support_cache_min
+  - reddit_slice256
+  command: PYTHONPATH=src:. python scripts/build_hpca_paper_evidence.py

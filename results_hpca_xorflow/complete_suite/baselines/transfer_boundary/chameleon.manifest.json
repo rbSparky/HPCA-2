@@ -1,0 +1,8 @@
+{
+  "command": "hpca_format_matrix",
+  "configs": [
+    "chameleon_gcnii16"
+  ],
+  "rows": 10,
+  "sha256": "1d7ac8718f6095f4215d5e0645fb96714e5791a4a5f2be002fbd644d4ad77a69"
+}

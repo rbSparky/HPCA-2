@@ -1,0 +1,12 @@
+{
+  "error": "",
+  "memory_model": "HBM2_8Gb_x128",
+  "returncode": 0,
+  "sample_lines": 250000,
+  "sampled_trace": true,
+  "source_prefix_lines_seen": 250000,
+  "source_trace": "artifacts_hpca_xorflow/complete_suite/timing/ramulator/arxiv_s17_l4/ogbn_arxiv_deepres8_w128_s17_l4_beicsr.trace",
+  "tool": "DRAMsim3",
+  "tool_run_success": true,
+  "trace_sha256": "c21a0b7505140f47b9211f35d58b255d2c4290bd37758fab2fa8cb7c9ee2613f"
+}
