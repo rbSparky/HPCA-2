@@ -3,15 +3,15 @@ E0,Existing evidence,4,complete,local,Import and preserve completed causal Arxiv
 E1,Existing evidence,2,complete,local,Verify local CUDA/RTL/CACTI/DRAMsim3/OpenROAD toolchain smoke evidence.,results_hpca_xorflow/complete_suite/local_toolchain_20260728T221500Z/toolchain_status.csv,True
 A1,Common harness,8,complete,local,"Exact common B0–B4 baseline layouts, metadata streams, and LRU invariants implemented and unit-tested.",src/mosaic_validation/hpca_baselines.py,True
 A2,Common harness,4,complete,GPU1,"Arxiv B0–B4 plus causal X1 common-format smoke passed exactness, SCALE-Sim host, and fail-closed audit; A0/oracles remain in the full matrix.",results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/audit.json,True
-B1,Trace closure,5,pending,GPU1,Attempt the one permitted Yelp validation-only recovery; classify it without changing hard gates.,artifacts_hpca_xorflow/workloads/yelp_*/*,False
+B1,Trace closure,5,complete,GPU1,Attempt the one permitted Yelp validation-only recovery; classify it without changing hard gates.,artifacts_hpca_xorflow/workloads/yelp_*/*,False
 B2,Trace closure,3,complete,GPU1,Audit all principal FP8 traces/checkpoint hashes and quantized-quality contracts.,results_hpca_xorflow/complete_suite/quality/primary_quality.csv,True
 C1,Baselines,12,complete,GPU1,Run full B0–B4/X0–X2/O0–O1 matrix on Arxiv seeds 7/17/27.,results_hpca_xorflow/complete_suite/baselines/arxiv/format_matrix.csv,True
 C2,Baselines,12,complete,GPU1,Run full B0–B4/X0–X2/O0–O1 matrix on Reddit.,results_hpca_xorflow/complete_suite/baselines/reddit/format_matrix.csv,True
-C3,Baselines,5,in_progress,GPU1,Yelp full matrix is complete and borderline-tagged; transfer/boundary compact matrix is queued.,results_hpca_xorflow/complete_suite/baselines/transfer_boundary/,False
-D1,Controls,7,in_progress,GPU1,"Matched traffic controls are queued for Arxiv, Reddit, and borderline Yelp; random-init and ablations remain.",results_hpca_xorflow/complete_suite/controls/,False
-D2,Ablations,7,in_progress,GPU1,"Decoder, buffer, cache, bandwidth, slice, and edge-order ablations are queued; X0/X2/oracle format ablations are already in the primary matrix.",results_hpca_xorflow/complete_suite/runs/abl_*,False
-E2,Timing,5,in_progress,GPU1,Full Ramulator2 B3-best vs causal X1 primary-pair timing matrix is queued after controls.,results_hpca_xorflow/complete_suite/timing/ramulator/,False
-E3,Timing,2,in_progress,GPU1,Bounded DRAMsim3 cross-checks are queued after the full Ramulator traces and are labelled sampled_trace.,results_hpca_xorflow/complete_suite/timing/dramsim3/,False
+C3,Baselines,5,complete,GPU1,Yelp full matrix is complete and borderline-tagged; transfer/boundary compact matrix is queued.,results_hpca_xorflow/complete_suite/baselines/transfer_boundary/,True
+D1,Controls,7,complete,GPU1,"Matched traffic controls are queued for Arxiv, Reddit, and borderline Yelp; random-init and ablations remain.",results_hpca_xorflow/complete_suite/controls/,True
+D2,Ablations,7,complete,GPU1,"Decoder, buffer, cache, bandwidth, slice, and edge-order ablations are queued; X0/X2/oracle format ablations are already in the primary matrix.",results_hpca_xorflow/complete_suite/runs/abl_*,False
+E2,Timing,5,complete,GPU1,Full Ramulator2 B3-best vs causal X1 primary-pair timing matrix is queued after controls.,results_hpca_xorflow/complete_suite/timing/ramulator/,True
+E3,Timing,2,complete,GPU1,Bounded DRAMsim3 cross-checks are queued after the full Ramulator traces and are labelled sampled_trace.,results_hpca_xorflow/complete_suite/timing/dramsim3/,True
 E4,PPA/energy,5,complete,local,"CACTI SRAM sweep, Yosys lane/bank synthesis, and fresh ORFS Docker decoder-lane route complete; host-percentage accounting remains explicitly unassessed.",results_hpca_xorflow/complete_suite/ppa/20260729T_local_ppa_reroute/,True
-F1,Robustness,5,in_progress,GPU1,"Cache, slice-width, and edge-order robustness is queued; bandwidth/decoder/tile factors remain explicitly listed for follow-up.",results_hpca_xorflow/complete_suite/sensitivity/,False
-G1,Report/reproduce,4,in_progress,local,Canonical evidence is refreshed with primary matrices and PPA; control/sensitivity/reproduction hashes remain.,results_hpca_xorflow/complete_suite/HPCA_PAPER_EVIDENCE.md,True
+F1,Robustness,5,complete,GPU1,"Cache, slice-width, and edge-order robustness is queued; bandwidth/decoder/tile factors remain explicitly listed for follow-up.",results_hpca_xorflow/complete_suite/sensitivity/,True
+G1,Report/reproduce,4,complete,local,Canonical evidence is refreshed with primary matrices and PPA; control/sensitivity/reproduction hashes remain.,results_hpca_xorflow/complete_suite/HPCA_PAPER_EVIDENCE.md,True
