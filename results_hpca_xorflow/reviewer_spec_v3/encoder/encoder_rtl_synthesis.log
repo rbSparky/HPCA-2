@@ -88,19 +88,19 @@ No latch inferred for signal `\xorflow_encoder_pipelined.\selected_bytes_next' f
 
 3.9. Executing PROC_DFF pass (convert process syncs to FFs).
 Creating register for signal `\xorflow_encoder_pipelined.\out_valid' using process `\xorflow_encoder_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:45$26'.
-  created $dff cell `$procdff$2270' with positive edge clock.
+  created $dff cell `$procdff$2262' with positive edge clock.
 Creating register for signal `\xorflow_encoder_pipelined.\out_word' using process `\xorflow_encoder_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:45$26'.
-  created $dff cell `$procdff$2271' with positive edge clock.
+  created $dff cell `$procdff$2263' with positive edge clock.
 Creating register for signal `\xorflow_encoder_pipelined.\out_last' using process `\xorflow_encoder_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:45$26'.
-  created $dff cell `$procdff$2272' with positive edge clock.
+  created $dff cell `$procdff$2264' with positive edge clock.
 Creating register for signal `\xorflow_encoder_pipelined.\selected_kind' using process `\xorflow_encoder_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:45$26'.
-  created $dff cell `$procdff$2273' with positive edge clock.
+  created $dff cell `$procdff$2265' with positive edge clock.
 Creating register for signal `\xorflow_encoder_pipelined.\input_words' using process `\xorflow_encoder_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:45$26'.
-  created $dff cell `$procdff$2274' with positive edge clock.
+  created $dff cell `$procdff$2266' with positive edge clock.
 Creating register for signal `\xorflow_encoder_pipelined.\output_words' using process `\xorflow_encoder_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:45$26'.
-  created $dff cell `$procdff$2275' with positive edge clock.
+  created $dff cell `$procdff$2267' with positive edge clock.
 Creating register for signal `\xorflow_encoder_pipelined.\stall_cycles' using process `\xorflow_encoder_pipelined.$proc$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:45$26'.
-  created $dff cell `$procdff$2276' with positive edge clock.
+  created $dff cell `$procdff$2268' with positive edge clock.
 
 3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
 
@@ -129,8 +129,8 @@ Running muxtree optimizer on module \xorflow_encoder_pipelined..
   Creating internal representation of mux trees.
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
-    dead port 1/2 on $mux $procmux$2253.
-    dead port 2/2 on $mux $procmux$2253.
+    dead port 1/2 on $mux $procmux$2245.
+    dead port 2/2 on $mux $procmux$2245.
 Removed 2 multiplexer ports.
 <suppressed ~9 debug messages>
 
@@ -143,20 +143,20 @@ Finding identical cells in module `\xorflow_encoder_pipelined'.
 Removed a total of 0 cells.
 
 4.6. Executing OPT_DFF pass (perform DFF optimizations).
-Adding SRST signal on $procdff$2276 ($dff) from module xorflow_encoder_pipelined (D = $procmux$2210_Y, Q = \stall_cycles, rval = 0).
-Adding EN signal on $auto$ff.cc:266:slice$2277 ($sdff) from module xorflow_encoder_pipelined (D = $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:66$34_Y, Q = \stall_cycles).
-Adding SRST signal on $procdff$2270 ($dff) from module xorflow_encoder_pipelined (D = $procmux$2247_Y, Q = \out_valid, rval = 1'0).
-Adding EN signal on $auto$ff.cc:266:slice$2283 ($sdff) from module xorflow_encoder_pipelined (D = $procmux$2247_Y, Q = \out_valid).
-Adding SRST signal on $procdff$2271 ($dff) from module xorflow_encoder_pipelined (D = $procmux$2239_Y, Q = \out_word, rval = 64'0000000000000000000000000000000000000000000000000000000000000000).
-Adding EN signal on $auto$ff.cc:266:slice$2287 ($sdff) from module xorflow_encoder_pipelined (D = \in_word, Q = \out_word).
-Adding SRST signal on $procdff$2272 ($dff) from module xorflow_encoder_pipelined (D = $procmux$2233_Y, Q = \out_last, rval = 1'0).
-Adding EN signal on $auto$ff.cc:266:slice$2289 ($sdff) from module xorflow_encoder_pipelined (D = \in_last, Q = \out_last).
-Adding SRST signal on $procdff$2273 ($dff) from module xorflow_encoder_pipelined (D = $procmux$2227_Y, Q = \selected_kind, rval = 2'00).
-Adding EN signal on $auto$ff.cc:266:slice$2291 ($sdff) from module xorflow_encoder_pipelined (D = \selected_kind_next, Q = \selected_kind).
-Adding SRST signal on $procdff$2274 ($dff) from module xorflow_encoder_pipelined (D = $procmux$2221_Y, Q = \input_words, rval = 0).
-Adding EN signal on $auto$ff.cc:266:slice$2293 ($sdff) from module xorflow_encoder_pipelined (D = $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:64$31_Y, Q = \input_words).
-Adding SRST signal on $procdff$2275 ($dff) from module xorflow_encoder_pipelined (D = $procmux$2215_Y, Q = \output_words, rval = 0).
-Adding EN signal on $auto$ff.cc:266:slice$2295 ($sdff) from module xorflow_encoder_pipelined (D = $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:57$29_Y, Q = \output_words).
+Adding SRST signal on $procdff$2268 ($dff) from module xorflow_encoder_pipelined (D = $procmux$2202_Y, Q = \stall_cycles, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$2269 ($sdff) from module xorflow_encoder_pipelined (D = $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:66$34_Y, Q = \stall_cycles).
+Adding SRST signal on $procdff$2262 ($dff) from module xorflow_encoder_pipelined (D = $procmux$2239_Y, Q = \out_valid, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$2275 ($sdff) from module xorflow_encoder_pipelined (D = $procmux$2239_Y, Q = \out_valid).
+Adding SRST signal on $procdff$2263 ($dff) from module xorflow_encoder_pipelined (D = $procmux$2231_Y, Q = \out_word, rval = 64'0000000000000000000000000000000000000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$2279 ($sdff) from module xorflow_encoder_pipelined (D = \in_word, Q = \out_word).
+Adding SRST signal on $procdff$2264 ($dff) from module xorflow_encoder_pipelined (D = $procmux$2225_Y, Q = \out_last, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$2281 ($sdff) from module xorflow_encoder_pipelined (D = \in_last, Q = \out_last).
+Adding SRST signal on $procdff$2265 ($dff) from module xorflow_encoder_pipelined (D = $procmux$2219_Y, Q = \selected_kind, rval = 2'00).
+Adding EN signal on $auto$ff.cc:266:slice$2283 ($sdff) from module xorflow_encoder_pipelined (D = \selected_kind_next, Q = \selected_kind).
+Adding SRST signal on $procdff$2266 ($dff) from module xorflow_encoder_pipelined (D = $procmux$2213_Y, Q = \input_words, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$2285 ($sdff) from module xorflow_encoder_pipelined (D = $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:64$31_Y, Q = \input_words).
+Adding SRST signal on $procdff$2267 ($dff) from module xorflow_encoder_pipelined (D = $procmux$2207_Y, Q = \output_words, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$2287 ($sdff) from module xorflow_encoder_pipelined (D = $add$/home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:57$29_Y, Q = \output_words).
 
 4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \xorflow_encoder_pipelined..
@@ -369,6 +369,6 @@ Removed 0 unused cells and 487 unused wires.
      $_XOR_                        138
 
 Warnings: 1 unique messages, 1 total
-End of script. Logfile hash: 0c1e8a5fc7, CPU: user 0.92s system 0.08s, MEM: 29.22 MB peak
+End of script. Logfile hash: 98ca58d505, CPU: user 1.93s system 0.13s, MEM: 46.41 MB peak
 Yosys 0.33 (git sha1 2584903a060)
-Time spent: 42% 3x read_verilog (0 sec), 21% 1x abc (0 sec), ...
+Time spent: 48% 3x read_verilog (1 sec), 15% 1x abc (0 sec), ...

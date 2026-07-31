@@ -54,13 +54,13 @@
                                                                                                       : ... note: In instance 'xorflow_encoder_tile_engine'
   106 |   reg [63:0] xor_q;
       |              ^~~~~
-%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:107:14: Signal is not used: 'ids_q'
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:107:15: Signal is not used: 'ids_q'
                                                                                                       : ... note: In instance 'xorflow_encoder_tile_engine'
-  107 |   reg [63:0] ids_q;
-      |              ^~~~~
+  107 |   reg [383:0] ids_q;
+      |               ^~~~~
 %Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:108:13: Signal is not used: 'count_q'
                                                                                                       : ... note: In instance 'xorflow_encoder_tile_engine'
-  108 |   reg [3:0] count_q;
+  108 |   reg [6:0] count_q;
       |             ^~~~~~~
 %Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:109:13: Signal is not used: 'kind_q'
                                                                                                       : ... note: In instance 'xorflow_encoder_tile_engine'

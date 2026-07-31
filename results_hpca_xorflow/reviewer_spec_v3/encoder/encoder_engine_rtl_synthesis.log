@@ -2617,6 +2617,6 @@ Optimizing module xorflow_encoder_tile_engine.
      $xor                            1
 
 Warnings: 1 unique messages, 1 total
-End of script. Logfile hash: 92ea7a9425, CPU: user 17.89s system 7.70s, MEM: 238.90 MB peak
+End of script. Logfile hash: 92ea7a9425, CPU: user 18.27s system 1.33s, MEM: 238.91 MB peak
 Yosys 0.33 (git sha1 2584903a060)
-Time spent: 21% 5x opt_expr (5 sec), 18% 3x opt_clean (4 sec), ...
+Time spent: 30% 5x opt_expr (6 sec), 22% 3x opt_clean (4 sec), ...
