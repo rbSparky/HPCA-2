@@ -92,9 +92,9 @@ module xorflow_encoder_tile_engine (
     output reg out_valid,
     input wire out_ready,
     output reg [63:0] xor_mask,
-    output reg [63:0] packed_event_ids,
+    output reg [383:0] packed_event_ids,
     output reg [63:0] majority_mask,
-    output reg [3:0] event_count,
+    output reg [6:0] event_count,
     output reg [1:0] selected_kind,
     output reg [15:0] selected_bytes,
     output reg [31:0] rows_ingested,
@@ -104,8 +104,8 @@ module xorflow_encoder_tile_engine (
   reg [4:0] row_q;
   reg last_q;
   reg [63:0] xor_q;
-  reg [63:0] ids_q;
-  reg [3:0] count_q;
+  reg [383:0] ids_q;
+  reg [6:0] count_q;
   reg [1:0] kind_q;
   reg [15:0] bytes_q;
   reg [5:0] majority_counts [0:63];
@@ -113,7 +113,7 @@ module xorflow_encoder_tile_engine (
   integer b;
   integer n;
   reg [6:0] local_count;
-  reg [63:0] local_ids;
+  reg [383:0] local_ids;
   reg [63:0] local_xor;
   reg [15:0] local_fixed_bits;
   reg [15:0] local_dense_bits;
@@ -131,18 +131,18 @@ module xorflow_encoder_tile_engine (
     local_ids = 0;
     for (b = 0; b < 64; b = b + 1) begin
       if (local_xor[b]) begin
-        if (local_count < 10) local_ids[local_count*6 +: 6] = b[5:0];
+        if (local_count < 64) local_ids[local_count*6 +: 6] = b[5:0];
         local_count = local_count + 1'b1;
       end
     end
     local_dense_bits = 64;
     local_fixed_bits = 4 + (local_count * 6);
     // Four count bits plus packed IDs is the exact fixed-ID candidate.  The
-    // supplied candidates include stream-level metadata; this local candidate
-    // is still used to prevent a selector from choosing an impossible format.
+    // complete 64-entry vector is retained, so high-density slices are not
+    // silently truncated at the hardware boundary.
     local_kind = 2'd3;
     local_bytes = (local_fixed_bits + 7) >> 3;
-    if ((local_count > 10) || (local_bytes * 8 > local_dense_bits)) begin
+    if (local_bytes * 8 > local_dense_bits) begin
       local_kind = 2'd0;
       local_bytes = 8;
     end
@@ -174,11 +174,11 @@ module xorflow_encoder_tile_engine (
       if (in_valid && in_ready) begin
         out_valid <= 1'b1;
         row_q <= row_id; last_q <= in_last;
-        xor_q <= local_xor; ids_q <= local_ids; count_q <= (local_count > 10) ? 10 : local_count[3:0];
+        xor_q <= local_xor; ids_q <= local_ids; count_q <= local_count[6:0];
         kind_q <= local_kind; bytes_q <= local_bytes;
         xor_mask <= local_xor;
         packed_event_ids <= local_ids;
-        event_count <= (local_count > 10) ? 10 : local_count[3:0];
+        event_count <= local_count[6:0];
         selected_kind <= local_kind; selected_bytes <= local_bytes;
         rows_ingested <= rows_ingested + 1'b1;
         flip_events <= flip_events + {{25{1'b0}}, local_count};

@@ -17,9 +17,10 @@ int main() {
   bool ok = d->out_valid && d->xor_mask == d->support_word && d->event_count == 3;
   ok = ok && d->majority_mask == 0; // one-row tile: no strict majority bit
   // Three six-bit IDs are packed in ascending bit order: 1, 3, 7.
-  ok = ok && ((d->packed_event_ids & 0x3f) == 1);
-  ok = ok && (((d->packed_event_ids >> 6) & 0x3f) == 3);
-  ok = ok && (((d->packed_event_ids >> 12) & 0x3f) == 7);
+  const uint32_t low_ids = d->packed_event_ids[0];
+  ok = ok && ((low_ids & 0x3f) == 1);
+  ok = ok && (((low_ids >> 6) & 0x3f) == 3);
+  ok = ok && (((low_ids >> 12) & 0x3f) == 7);
   std::cout << "status=" << (ok ? "PASS" : "FAIL")
             << " events=" << (unsigned)d->event_count
             << " selected_kind=" << (unsigned)d->selected_kind

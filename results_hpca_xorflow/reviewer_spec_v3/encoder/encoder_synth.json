@@ -8,7 +8,7 @@
   "engine_cosimulation": "results_hpca_xorflow/reviewer_spec_v3/encoder/encoder_engine_cosim.log",
   "stream_equivalence": "results_hpca_xorflow/reviewer_spec_v3/encoder/stream_equivalence.csv",
   "yosys_cells_boundary": 810,
-  "yosys_cells_engine": 9444,
+  "yosys_cells_engine": 1055,
   "candidate_discovery_scope": "64-bit slice exact XOR/event discovery; full tile candidate packing remains software-backed",
   "required_next_step": "Extend the bounded slice engine across tile-scale stream offsets and add routed activity before a final silicon encoder claim."
 }

@@ -4,7 +4,7 @@ Two no-training finalization runs were executed against the frozen cached traces
 
 | Artifact | Run A SHA-256 | Run B SHA-256 |
 |---|---|---|
-| `RESULT_MANIFEST.csv` | `b687c9b3982b4d8de76e8200926ac6ffc2e035f05dffff4858bca639c4fbe31a` | `b687c9b3982b4d8de76e8200926ac6ffc2e035f05dffff4858bca639c4fbe31a` |
+| `RESULT_MANIFEST.csv` | `00c72fa70125e5ceb8364ec6bf0e9fa266607305a39e3d7f3577885a5b92cbdf` | `00c72fa70125e5ceb8364ec6bf0e9fa266607305a39e3d7f3577885a5b92cbdf` |
 | `report/paper_summary.csv` | `dffa1bec8a5ce4d2169f1519d98f9b1fdfd607179cd3ea522408f328a6b5a7ab` | `dffa1bec8a5ce4d2169f1519d98f9b1fdfd607179cd3ea522408f328a6b5a7ab` |
 | `schedule/system_cycles.csv` | `1a619b4b9045087e9f3113d1d54fba8ac01d7553b5f80a19fe957e577402587f` | `1a619b4b9045087e9f3113d1d54fba8ac01d7553b5f80a19fe957e577402587f` |
 | `schedule/overlap_breakdown.csv` | `75fd5c946a07a4be60205bc36b9f96a52794865cac5129ed05056de98f973d7b` | `75fd5c946a07a4be60205bc36b9f96a52794865cac5129ed05056de98f973d7b` |
