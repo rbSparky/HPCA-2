@@ -68,6 +68,10 @@ def generated_text() -> tuple[str, str, str, str]:
         "while encoder RTL, complete-workload independent DRAM timing, and final figure regeneration remain explicitly unresolved.",
         "The handoff includes synthesized ready/valid encoder-boundary RTL, Verilator stream equivalence, deterministic rerun hashes, pair/sampled independent DRAM evidence, and a complete Arxiv online replay timing record; it does not overclaim a full RTL candidate-discovery engine or full all-workload DRAM timing.",
     )
+    readme = readme.replace(
+        "26-configuration campaign outputs",
+        "26-configuration campaign summaries (bulk per-configuration traces are intentionally omitted and hash-indexed)",
+    )
     return readme, environment, status + "\n", diff
 
 
@@ -77,16 +81,29 @@ def main() -> None:
     # Source, tests, RTL, configs, tools, and all reviewer implementation.
     for rel in ("src", "scripts", "tests", "tools", "rtl", "configs"):
         add_tree(rel, members, omitted, max_bytes=20 * 1024 * 1024)
-    # Immutable reviewer outputs.  Avoid only duplicate aggregate files; keep
-    # per-configuration CSVs and exact streams whenever they are tractable.
+    # Immutable reviewer outputs.  The zip is deliberately compact: raw
+    # per-configuration traces/streams remain in the local results tree and
+    # are represented by hashes in RESULT_MANIFEST.csv and MANIFEST.json.
+    # Keep the reviewer-facing ledger, reports, compact tool summaries, and
+    # figures; do not silently pretend bulk traces are portable.
+    compact_v3_prefixes = (
+        "report/", "audit/", "traces/", "figures/", "memory/", "quality/",
+        "encoder/encoder_synth.json", "encoder/encoder_rtl_synthesis.log",
+        "encoder/encoder_verilator_lint.log", "encoder/stream_equivalence.csv",
+        "decoder/decoder_cluster_synth.json", "schedule/system_cycles.csv",
+        "schedule/overlap_breakdown.csv", "RESULT_MANIFEST.csv",
+        "REPRODUCE_COMMANDS.txt", "REVIEWER_SPEC_STATUS.md",
+    )
+    compact_v3_exact = {"report/FINAL_RESULTS.md", "report/RESULT_SUMMARY.yaml"}
     aggregate_names = {"adjacent_support.csv", "memory_transactions.csv", "support_records.csv", "roundtrip_all_real.csv", "conflicts.csv", "encoder_trace.csv", "decoder_cluster_trace.csv"}
     for path in sorted(V3.rglob("*")):
         if not path.is_file() or "__pycache__" in path.parts:
             continue
-        if path.name in aggregate_names:
-            omitted.append({"path": str(path.relative_to(ROOT)), "size_bytes": path.stat().st_size, "sha256": sha(path), "reason": "duplicate aggregate; per-configuration sources retained"})
+        rel = str(path.relative_to(V3))
+        if not (rel in compact_v3_exact or any(rel.startswith(prefix) for prefix in compact_v3_prefixes)):
+            omitted.append({"path": str(path.relative_to(ROOT)), "size_bytes": path.stat().st_size, "sha256": sha(path), "reason": "bulk raw trace omitted from compact handoff; local path and aggregate hash retained"})
             continue
-        add_candidate(path, str(Path("reviewer_spec_v3") / path.relative_to(V3)), members, omitted, 100 * 1024 * 1024)
+        add_candidate(path, str(Path("reviewer_spec_v3") / path.relative_to(V3)), members, omitted, 20 * 1024 * 1024)
     # Existing complete-suite evidence needed to interpret PPA/timing/quality.
     for path in sorted((ROOT / "results_hpca_xorflow" / "complete_suite").rglob("*")):
         if not path.is_file() or "runs" in path.parts and path.suffix not in {".csv", ".json"}:
