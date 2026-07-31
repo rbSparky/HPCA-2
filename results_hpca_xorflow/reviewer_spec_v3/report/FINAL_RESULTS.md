@@ -1,7 +1,7 @@
 # XORFLOW Reviewer-Spec Final Results
 
-Generated UTC: 2026-07-31T05:16:36.665164+00:00
-Git commit: `675a368ede272049e13c322a472e4734b84795b5`; generated tables and tool artifacts are committed alongside this source revision in the handoff.
+Generated UTC: 2026-07-31T05:18:16.386829+00:00
+Git commit: `81563704415213db54bc77bbdfd7fad920e4e823`; generated tables and tool artifacts are committed alongside this source revision in the handoff.
 
 ## Executive status
 
