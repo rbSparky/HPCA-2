@@ -13,7 +13,9 @@
   "bank_cell_count": 61504,
   "routed_cluster_claim": true,
   "real_trace_vcd_saif": true,
+  "fullstream_activity_scaling": true,
+  "fullstream_activity_scaling_csv": "results_hpca_xorflow/reviewer_spec_v3/activity/fullstream_activity_scaling.csv",
   "vcd_activity_summary": "results_hpca_xorflow/reviewer_spec_v3/activity/vcd_summary.csv",
   "power_claim": "ROUTED_VCD_ANNOTATED_SHORT_STREAM_ONLY",
-  "required_next_step": "Scale the VCD activity campaign to full workload streams before making a full-workload energy claim."
+  "required_next_step": "Use cell-annotated power weighted by the full stream if a full-workload energy claim is required; prefix power remains explicitly scoped."
 }

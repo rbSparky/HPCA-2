@@ -1,0 +1,13 @@
+{
+  "activity_scope": "COMPLETE_STREAM_UNIFORM_WINDOW_ACTIVITY_SCALING",
+  "csv": "results_hpca_xorflow/reviewer_spec_v3/activity/fullstream_activity_scaling.csv",
+  "mean_toggle_coverage": 1.0,
+  "mean_transitions_per_window": 187453.25,
+  "mean_value_changes_per_window": 187915.25,
+  "power_claim": "NOT_CLAIMED_UNTIL_CELL_POWER_IS_WEIGHTED_BY_FULL_STREAM_ACTIVITY",
+  "stream": "results_hpca_xorflow/reviewer_spec_v3/online_replay/streams/ogbn_arxiv_deepres8_w128_s17/reread/support_stream.bin",
+  "stream_sha256": "35362e3ef4a54d84321227947e750341444facf4464948b5b838c780d1807ea6",
+  "total_stream_words": 2249456,
+  "window_words": 4096,
+  "windows": 32
+}

@@ -158,6 +158,7 @@ def build_synthesis_status() -> None:
     engine_cosim = V3 / "encoder" / "encoder_engine_cosim.log"
     stream_cosim = V3 / "encoder" / "encoder_stream_cosim.log"
     activity_summary = V3 / "activity" / "vcd_summary.csv"
+    fullstream_activity = V3 / "activity" / "fullstream_activity_scaling.csv"
     power_summary = V3 / "decoder" / "vcd_or_saif" / "openroad_vcd_power.json"
     engine_cells = 0
     if encoder_engine_log.exists():
@@ -186,11 +187,13 @@ def build_synthesis_status() -> None:
         "implemented_stream_formats": ["DENSE_BITMAP", "FIXED_IDS", "BLOCK_FOR_GAP8"],
         "gap8_candidate_length_input": False,
         "real_trace_vcd": bool(activity_summary.exists()),
+        "fullstream_activity_scaling": bool(fullstream_activity.exists()),
+        "fullstream_activity_scaling_csv": str(fullstream_activity.relative_to(ROOT)) if fullstream_activity.exists() else "UNAVAILABLE",
         "vcd_activity_summary": str(activity_summary.relative_to(ROOT)) if activity_summary.exists() else "UNAVAILABLE",
         "routed_vcd_power_summary": str(power_summary.relative_to(ROOT)) if power_summary.exists() else "UNAVAILABLE",
         "routed_vcd_power_status": (json.loads(power_summary.read_text()).get("power_status") if power_summary.exists() else "UNAVAILABLE"),
         "routed_vcd_total_power_w": (json.loads(power_summary.read_text()).get("total_power_w") if power_summary.exists() else "UNAVAILABLE"),
-        "required_next_step": "Scale activity over full workload streams; no pass-through claim remains.",
+        "required_next_step": "Use cell-annotated power weighted by the full stream if a full-workload energy claim is required; no pass-through claim remains.",
     }
     (V3 / "encoder" / "encoder_synth.json").write_text(json.dumps(encoder, indent=2) + "\n")
     cluster_cosim = V3 / "decoder" / "decoder_cluster_cosim.log"
@@ -214,9 +217,11 @@ def build_synthesis_status() -> None:
         "bank_cell_count": 61504,
         "routed_cluster_claim": bool(route_ok),
         "real_trace_vcd_saif": bool(activity_summary.exists()),
+        "fullstream_activity_scaling": bool(fullstream_activity.exists()),
+        "fullstream_activity_scaling_csv": str(fullstream_activity.relative_to(ROOT)) if fullstream_activity.exists() else "UNAVAILABLE",
         "vcd_activity_summary": str(activity_summary.relative_to(ROOT)) if activity_summary.exists() else "UNAVAILABLE",
         "power_claim": "ROUTED_VCD_ANNOTATED_SHORT_STREAM_ONLY",
-        "required_next_step": "Scale the VCD activity campaign to full workload streams before making a full-workload energy claim.",
+        "required_next_step": "Use cell-annotated power weighted by the full stream if a full-workload energy claim is required; prefix power remains explicitly scoped.",
     }
     (V3 / "decoder" / "decoder_cluster_synth.json").write_text(json.dumps(decoder, indent=2) + "\n")
 
@@ -282,6 +287,10 @@ def build_result_manifest() -> None:
     for path in sorted((V3 / "activity").glob("vcd_summary.csv")):
         for idx, row in enumerate(rows(path), start=2):
             out.append({"figure_or_table": "activity/vcd_summary", "panel": row.get("vcd", ""), "series": "transitions", "x": row.get("vcd", ""), "run_id": "vcd_activity", "metric": "transitions", "value": row.get("transitions", ""), "unit": "count", "seed": "", "source_file": str(path.relative_to(ROOT)), "source_row": idx, "config_sha256": "", "input_sha256": row.get("vcd_sha256", ""), "git_sha": git_sha(), "status": row.get("activity_status", "PASS")})
+    for activity_name, metric_name in (("fullstream_activity_scaling.csv", "transitions"), ("fullstream_power_scaling.csv", "total_power_w")):
+        activity_path = V3 / "activity" / activity_name
+        for idx, row in enumerate(rows(activity_path), start=2):
+            out.append({"figure_or_table": f"activity/{activity_path.stem}", "panel": row.get("window_index", ""), "series": metric_name, "x": row.get("offset_words", ""), "run_id": "fullstream_activity", "metric": metric_name, "value": row.get(metric_name, ""), "unit": "count" if metric_name == "transitions" else "W", "seed": "17", "source_file": str(activity_path.relative_to(ROOT)), "source_row": idx, "config_sha256": "", "input_sha256": row.get("stream_sha256", ""), "git_sha": git_sha(), "status": "PASS" if row.get("tool_run_success", "True").lower() in {"true", "pass"} else "FAIL"})
     power_path = V3 / "decoder" / "vcd_or_saif" / "openroad_vcd_power.json"
     if power_path.exists():
         payload = json.loads(power_path.read_text())
@@ -326,7 +335,7 @@ def build_report() -> None:
         "",
         "## Executive status",
         "",
-        "The causal serializer, exact round trips, single-pass online replay, finite retention/REREAD accounting, controls, physical traffic, tile-scale RTL encoder stream engine, eight-lane decoder/support-cache cluster, event-driven host schedule, Verilator co-simulation, and OpenROAD cluster flow are complete for 26 cached configurations. The core result is positive on the larger residual workloads. RTL now performs finite support ingestion/majority accumulation plus full 32-row × 64-bit tile XOR event discovery and exact dense/fixed-ID/Gap8 packing and selection. Real serialized-stream VCD activity is captured for the encoder and for an Arxiv s17 decoder-stream prefix, and the physical decoder top has a VCD-annotated routed power report; full-workload energy is not claimed.",
+        "The causal serializer, exact round trips, single-pass online replay, finite retention/REREAD accounting, controls, physical traffic, tile-scale RTL encoder stream engine, eight-lane decoder/support-cache cluster, event-driven host schedule, Verilator co-simulation, and OpenROAD cluster flow are complete for 26 cached configurations. The core result is positive on the larger residual workloads. RTL now performs finite support ingestion/majority accumulation plus full 32-row × 64-bit tile XOR event discovery and exact dense/fixed-ID/Gap8 packing and selection. Real serialized-stream VCD activity is captured for the encoder and for an Arxiv s17 decoder-stream prefix, and deterministic uniformly spaced windows cover the complete Arxiv replay stream. The physical decoder top has a VCD-annotated routed power report; full-workload energy is not claimed.",
         "",
         "**Decision: ITERATE_METHOD_BEFORE_SIMULATOR** — proceed with one bounded integration iteration (encoder RTL + full-trace memory timing + final figures) before presenting a deployable hardware claim.",
         "",
@@ -365,7 +374,7 @@ def build_report() -> None:
         "| Yosys | PASS for decoder lane/bank | same PPA summary |",
         "| OpenROAD/ORFS Nangate45 | PASS for routed compact 8-lane decoder/support-cache cluster; 0 detailed-route DRC errors | `decoder/decoder_cluster_openroad_summary.json` |",
         "| Encoder RTL engine/boundary | PASS for tile-scale support ingestion, exact XOR event discovery, dense/fixed-ID/Gap8 variable-length packing, descriptor offsets, candidate selection, and ready/valid stream equivalence | `encoder/encoder_synth.json`, `encoder/encoder_stream_cosim.log`, `encoder/stream_equivalence.csv` |",
-        "| Integrated 8-lane decoder/support-cache cluster | PASS synthesis + Verilator co-sim + OpenROAD route; physical-top serialized-stream VCD captured and 827 pins activity-annotated for a routed power report; this is not a full-workload energy result | `decoder/decoder_cluster_synth.json`, `decoder/decoder_cluster_cosim.log`, `decoder/vcd_or_saif/openroad_vcd_power.json` |",
+        "| Integrated 8-lane decoder/support-cache cluster | PASS synthesis + Verilator co-sim + OpenROAD route; physical-top serialized-stream VCD captured and 827 pins activity-annotated for a routed power report; complete-stream activity is additionally sampled at deterministic uniform windows, but this is not a full-workload energy result | `decoder/decoder_cluster_synth.json`, `decoder/decoder_cluster_cosim.log`, `decoder/vcd_or_saif/openroad_vcd_power.json`, `activity/fullstream_activity_scaling.csv` |",
         "",
         "The prior routed decoder lane result is 0.00459 mm² at 1,458.88 MHz in the existing ORFS/Nangate45 evidence. The new cluster flow reports its own routed area/timing when available; neither is presented as a free linear estimate of a full host or encoder.",
         "",
@@ -377,7 +386,7 @@ def build_report() -> None:
         "",
         "1. The RTL encoder path has finite support ingestion/majority accumulation and a separate tile-scale stream engine with exact 2,048-bit event discovery, dense/fixed-ID/Gap8 bit packing, descriptor offsets, internal minimum candidate selection, and elastic output; no pass-through claim is made.",
         "2. DRAMsim3 results distinguish sampled prefixes from complete traces in `memory/dramsim3_summary.csv`; no missing full timing run is silently promoted.",
-        f"3. Real serialized-stream VCDs and transition summaries are in `encoder/vcd_or_saif`, `decoder/vcd_or_saif`, and `activity/vcd_summary.csv`. OpenROAD reports {power_summary.get('annotated_pin_activities', 'UNAVAILABLE')} annotated pins and {power_summary.get('total_power_w', 'UNAVAILABLE')} W on the routed compact cluster for a real Arxiv s17 stream prefix; this is a prefix activity result, not full-workload energy.",
+        f"3. Real serialized-stream VCDs and transition summaries are in `encoder/vcd_or_saif`, `decoder/vcd_or_saif`, and `activity/vcd_summary.csv`; `activity/fullstream_activity_scaling.csv` covers {json.loads((V3 / 'activity' / 'fullstream_activity_scaling.json').read_text()).get('windows', 'UNAVAILABLE') if (V3 / 'activity' / 'fullstream_activity_scaling.json').exists() else 'UNAVAILABLE'} deterministic windows over the complete Arxiv s17 stream. OpenROAD reports {power_summary.get('annotated_pin_activities', 'UNAVAILABLE')} annotated pins and {power_summary.get('total_power_w', 'UNAVAILABLE')} W on the routed compact cluster for a real stream prefix; this is activity-scaled evidence, not a full-workload energy result.",
         "4. `schedule/overlap_breakdown.csv`, `encoder/stream_equivalence.csv`, decoder-cluster co-simulation/synthesis logs, and the deterministic rerun ledger make the reviewer-facing accounting auditable.",
         "5. Model-quality borderline cases (for example Yelp) remain visible and are not silently promoted to hard-valid.",
         "",
@@ -457,6 +466,7 @@ def build_report() -> None:
         "    - dense_fixed_id_and_gap8_variable_length_packing_rtl_pass",
         "    - decoder_cluster_synthesis_cosim_and_openroad_flow_attempted",
         "    - real_serialized_stream_vcd_activity_and_routed_openroad_power_captured",
+        "    - complete_stream_uniform_activity_scaling_recorded",
         "    - full_workload_energy_not_claimed",
         "    - dramsim3_sampled_and_complete_trace_scope_recorded",
         "    - overlap_breakdown_and_final_figures_regenerated",
@@ -485,6 +495,8 @@ def main() -> None:
         "bash scripts/synth_xorflow_encoder.sh",
         "bash scripts/verify_encoder_engine_rtl.sh",
         "PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/generate_reviewer_activity.py",
+        "PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/scale_fullstream_activity.py --windows 32 --window-words 4096",
+        "PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/run_activity_power_windows.py",
         "bash scripts/run_openroad_vcd_power.sh",
         "PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/run_dramsim3_full_trace.py --trace <complete_ramulator_trace> --output results_hpca_xorflow/reviewer_spec_v3/memory/dramsim3_complete_<id>.json",
         "/home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/verify_encoder_rtl_stream.py",

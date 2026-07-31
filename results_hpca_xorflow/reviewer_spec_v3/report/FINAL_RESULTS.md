@@ -1,11 +1,11 @@
 # XORFLOW Reviewer-Spec Final Results
 
-Generated UTC: 2026-07-31T05:25:08.605380+00:00
-Git commit: `f3689dd575e5d0621610e3141d1593b9c986bff2`; generated tables and tool artifacts are committed alongside this source revision in the handoff.
+Generated UTC: 2026-07-31T05:37:01.479218+00:00
+Git commit: `c4329d86891c4c9d582a79620c87824e7f229752`; generated tables and tool artifacts are committed alongside this source revision in the handoff.
 
 ## Executive status
 
-The causal serializer, exact round trips, single-pass online replay, finite retention/REREAD accounting, controls, physical traffic, tile-scale RTL encoder stream engine, eight-lane decoder/support-cache cluster, event-driven host schedule, Verilator co-simulation, and OpenROAD cluster flow are complete for 26 cached configurations. The core result is positive on the larger residual workloads. RTL now performs finite support ingestion/majority accumulation plus full 32-row × 64-bit tile XOR event discovery and exact dense/fixed-ID/Gap8 packing and selection. Real serialized-stream VCD activity is captured for the encoder and for an Arxiv s17 decoder-stream prefix, and the physical decoder top has a VCD-annotated routed power report; full-workload energy is not claimed.
+The causal serializer, exact round trips, single-pass online replay, finite retention/REREAD accounting, controls, physical traffic, tile-scale RTL encoder stream engine, eight-lane decoder/support-cache cluster, event-driven host schedule, Verilator co-simulation, and OpenROAD cluster flow are complete for 26 cached configurations. The core result is positive on the larger residual workloads. RTL now performs finite support ingestion/majority accumulation plus full 32-row × 64-bit tile XOR event discovery and exact dense/fixed-ID/Gap8 packing and selection. Real serialized-stream VCD activity is captured for the encoder and for an Arxiv s17 decoder-stream prefix, and deterministic uniformly spaced windows cover the complete Arxiv replay stream. The physical decoder top has a VCD-annotated routed power report; full-workload energy is not claimed.
 
 **Decision: ITERATE_METHOD_BEFORE_SIMULATOR** — proceed with one bounded integration iteration (encoder RTL + full-trace memory timing + final figures) before presenting a deployable hardware claim.
 
@@ -45,7 +45,7 @@ The strongest causal/event-driven points are Reddit seed 7 (1.277× in the compl
 | Yosys | PASS for decoder lane/bank | same PPA summary |
 | OpenROAD/ORFS Nangate45 | PASS for routed compact 8-lane decoder/support-cache cluster; 0 detailed-route DRC errors | `decoder/decoder_cluster_openroad_summary.json` |
 | Encoder RTL engine/boundary | PASS for tile-scale support ingestion, exact XOR event discovery, dense/fixed-ID/Gap8 variable-length packing, descriptor offsets, candidate selection, and ready/valid stream equivalence | `encoder/encoder_synth.json`, `encoder/encoder_stream_cosim.log`, `encoder/stream_equivalence.csv` |
-| Integrated 8-lane decoder/support-cache cluster | PASS synthesis + Verilator co-sim + OpenROAD route; physical-top serialized-stream VCD captured and 827 pins activity-annotated for a routed power report; this is not a full-workload energy result | `decoder/decoder_cluster_synth.json`, `decoder/decoder_cluster_cosim.log`, `decoder/vcd_or_saif/openroad_vcd_power.json` |
+| Integrated 8-lane decoder/support-cache cluster | PASS synthesis + Verilator co-sim + OpenROAD route; physical-top serialized-stream VCD captured and 827 pins activity-annotated for a routed power report; complete-stream activity is additionally sampled at deterministic uniform windows, but this is not a full-workload energy result | `decoder/decoder_cluster_synth.json`, `decoder/decoder_cluster_cosim.log`, `decoder/vcd_or_saif/openroad_vcd_power.json`, `activity/fullstream_activity_scaling.csv` |
 
 The prior routed decoder lane result is 0.00459 mm² at 1,458.88 MHz in the existing ORFS/Nangate45 evidence. The new cluster flow reports its own routed area/timing when available; neither is presented as a free linear estimate of a full host or encoder.
 
@@ -57,7 +57,7 @@ The corrected hierarchical top has `0` detailed-route DRC errors, `13881` µm ro
 
 1. The RTL encoder path has finite support ingestion/majority accumulation and a separate tile-scale stream engine with exact 2,048-bit event discovery, dense/fixed-ID/Gap8 bit packing, descriptor offsets, internal minimum candidate selection, and elastic output; no pass-through claim is made.
 2. DRAMsim3 results distinguish sampled prefixes from complete traces in `memory/dramsim3_summary.csv`; no missing full timing run is silently promoted.
-3. Real serialized-stream VCDs and transition summaries are in `encoder/vcd_or_saif`, `decoder/vcd_or_saif`, and `activity/vcd_summary.csv`. OpenROAD reports 827 annotated pins and 1.27e-02 W on the routed compact cluster for a real Arxiv s17 stream prefix; this is a prefix activity result, not full-workload energy.
+3. Real serialized-stream VCDs and transition summaries are in `encoder/vcd_or_saif`, `decoder/vcd_or_saif`, and `activity/vcd_summary.csv`; `activity/fullstream_activity_scaling.csv` covers 32 deterministic windows over the complete Arxiv s17 stream. OpenROAD reports 827 annotated pins and 1.27e-02 W on the routed compact cluster for a real stream prefix; this is activity-scaled evidence, not a full-workload energy result.
 4. `schedule/overlap_breakdown.csv`, `encoder/stream_equivalence.csv`, decoder-cluster co-simulation/synthesis logs, and the deterministic rerun ledger make the reviewer-facing accounting auditable.
 5. Model-quality borderline cases (for example Yelp) remain visible and are not silently promoted to hard-valid.
 

@@ -1,6 +1,6 @@
 result_summary:
-  generated_utc: "2026-07-31T05:25:08.613511+00:00"
-  git_sha: "f3689dd575e5d0621610e3141d1593b9c986bff2"
+  generated_utc: "2026-07-31T05:37:01.486814+00:00"
+  git_sha: "c4329d86891c4c9d582a79620c87824e7f229752"
   dirty: false
   decision: ITERATE_METHOD_BEFORE_SIMULATOR
   correctness:
@@ -87,6 +87,7 @@ result_summary:
     - dense_fixed_id_and_gap8_variable_length_packing_rtl_pass
     - decoder_cluster_synthesis_cosim_and_openroad_flow_attempted
     - real_serialized_stream_vcd_activity_and_routed_openroad_power_captured
+    - complete_stream_uniform_activity_scaling_recorded
     - full_workload_energy_not_claimed
     - dramsim3_sampled_and_complete_trace_scope_recorded
     - overlap_breakdown_and_final_figures_regenerated

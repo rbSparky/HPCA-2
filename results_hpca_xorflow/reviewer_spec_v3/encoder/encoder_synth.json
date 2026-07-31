@@ -20,9 +20,11 @@
   ],
   "gap8_candidate_length_input": false,
   "real_trace_vcd": true,
+  "fullstream_activity_scaling": true,
+  "fullstream_activity_scaling_csv": "results_hpca_xorflow/reviewer_spec_v3/activity/fullstream_activity_scaling.csv",
   "vcd_activity_summary": "results_hpca_xorflow/reviewer_spec_v3/activity/vcd_summary.csv",
   "routed_vcd_power_summary": "results_hpca_xorflow/reviewer_spec_v3/decoder/vcd_or_saif/openroad_vcd_power.json",
   "routed_vcd_power_status": "VCD_ANNOTATED_OPENROAD_REPORT",
   "routed_vcd_total_power_w": "1.27e-02",
-  "required_next_step": "Scale activity over full workload streams; no pass-through claim remains."
+  "required_next_step": "Use cell-annotated power weighted by the full stream if a full-workload energy claim is required; no pass-through claim remains."
 }

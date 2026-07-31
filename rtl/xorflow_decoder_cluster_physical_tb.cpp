@@ -14,9 +14,13 @@ static void tick(Vxorflow_decoder_cluster8_pipelined* d, VerilatedVcdC* trace, v
 int main(int argc, char** argv) {
   std::string vcd;
   std::string stream;
+  size_t word_offset = 0;
+  size_t max_words = 4096;
   for (int i = 1; i < argc; ++i) {
     if (std::string(argv[i]) == "--vcd" && i + 1 < argc) vcd = argv[++i];
     else if (std::string(argv[i]) == "--stream" && i + 1 < argc) stream = argv[++i];
+    else if (std::string(argv[i]) == "--offset-words" && i + 1 < argc) word_offset = std::stoull(argv[++i]);
+    else if (std::string(argv[i]) == "--max-words" && i + 1 < argc) max_words = std::stoull(argv[++i]);
   }
   auto* d = new Vxorflow_decoder_cluster8_pipelined;
   VerilatedVcdC* trace = nullptr; vluint64_t t = 0;
@@ -31,7 +35,8 @@ int main(int argc, char** argv) {
                                  0x55aa55aa55aa55aaULL, 0xaa55aa55aa55aa55ULL, 1, 2, 4, 8};
   if (!stream.empty()) {
     std::ifstream in(stream, std::ios::binary); uint64_t w = 0; words.clear();
-    while (in.read(reinterpret_cast<char*>(&w), sizeof(w)) && words.size() < 4096) words.push_back(w);
+    in.seekg(static_cast<std::streamoff>(word_offset * sizeof(uint64_t)), std::ios::beg);
+    while (in.read(reinterpret_cast<char*>(&w), sizeof(w)) && words.size() < max_words) words.push_back(w);
     if (words.empty()) words.push_back(0);
   }
   for (size_t base = 0; base < words.size(); base += 8) {
