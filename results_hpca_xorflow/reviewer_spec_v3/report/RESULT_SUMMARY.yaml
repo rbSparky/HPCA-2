@@ -1,10 +1,10 @@
 result_summary:
-  generated_utc: "2026-07-31T01:30:09.408464+00:00"
-  git_sha: "2670d32f16332b982df6572b99a4b588819eff3d"
+  generated_utc: "2026-07-31T02:15:59.154795+00:00"
+  git_sha: "fe9b67e7861754c083b8577676b578d27e030e51"
   dirty: true
   decision: ITERATE_METHOD_BEFORE_SIMULATOR
   correctness:
-    pytest_passed: 223
+    pytest_passed: 226
     pytest_failed: 0
     causal_failures: 0
     serializer_roundtrip_failures: 0
@@ -41,9 +41,44 @@ result_summary:
       support_reduction: 0.45237660433305193
       edge_traffic_reduction: 0.047962282270331946
       event_speedup: 1.0498940794627574
+  primary_configuration:
+    tile_rows: 128
+    slice_width: 128
+    cohort_rows: 32
+    stream_alignment_bytes: 64
+    anchor_policy: FINITE_RETENTION
+    encoder_queue_depth: 1
+    decoder_lanes: 8
+    decoder_support_cache_words: 256
+    decoder_bank_count: 4
+  encoder:
+    bounded_rtl_engine: true
+    support_ingestion: true
+    a0_population_count: true
+    a2_majority_accumulation: true
+    candidate_selector: true
+    variable_length_bit_packer_rtl: false
+    stream_equivalence_cases: 24
+  decoder_cluster:
+    lanes: 8
+    finite_ready_valid_lanes: true
+    support_cache_model: true
+    bank_conflict_counters: true
+    verilator_cosim: true
+    routed_cluster: true
+    routed_drc_errors: 0
+    routed_die_area_um2: 68220.2161
+    routed_clock_slack_ns: 0.565
+    real_trace_vcd_saif: false
+  schedule_validation:
+    event_model: complete_cached_campaign
+    analytical_vs_event_csv: results_hpca_xorflow/reviewer_spec_v3/schedule/analytical_vs_event.csv
+    max_relative_error: recorded_in_source_csv
   scope_notes:
-    - encoder_boundary_rtl_synthesis_and_stream_equivalence_pass
-    - full_encoder_candidate_generator_rtl_not_claimed
-    - dramsim3_sampled_and_ramulator_pair_scope_only
+    - bounded_encoder_rtl_engine_synthesis_and_stream_equivalence_pass
+    - variable_length_event_discovery_and_bit_packing_rtl_not_claimed
+    - decoder_cluster_synthesis_cosim_and_openroad_flow_attempted
+    - real_trace_vcd_saif_power_not_claimed
+    - dramsim3_sampled_and_ramulator_complete_online_scope_recorded
     - overlap_breakdown_and_final_figures_regenerated
     - deterministic_principal_csv_hashes_match

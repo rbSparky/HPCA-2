@@ -3,5 +3,12 @@ tools/remote_xorflow.sh list
 tools/remote_xorflow.sh pull
 PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/consolidate_reviewer_spec.py --root results_hpca_xorflow/reviewer_spec_v3
 PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/finalize_reviewer_spec.py
+bash scripts/synth_xorflow_encoder.sh
+bash scripts/verify_encoder_engine_rtl.sh
+/home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/verify_encoder_rtl_stream.py
+bash scripts/synth_xorflow_cluster.sh
+bash scripts/run_openroad_xorflow_cluster8.sh
+/home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/collect_openroad_cluster.py
+/home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/check_reviewer_determinism.py
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 /home/rishabh/miniconda/envs/taugat_pyg/bin/python -m pytest -q
 MOSAIC_PY=/home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/run_hpca.sh --quick --stage reproduce

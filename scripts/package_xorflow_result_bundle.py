@@ -89,8 +89,11 @@ def main() -> None:
     compact_v3_prefixes = (
         "report/", "audit/", "traces/", "figures/", "memory/", "quality/",
         "encoder/encoder_synth.json", "encoder/encoder_rtl_synthesis.log",
+        "encoder/encoder_engine_rtl_synthesis.log", "encoder/encoder_engine_cosim.log",
         "encoder/encoder_verilator_lint.log", "encoder/stream_equivalence.csv",
-        "decoder/decoder_cluster_synth.json", "schedule/system_cycles.csv",
+        "decoder/decoder_cluster_synth.json", "decoder/decoder_cluster_rtl_synthesis.log",
+        "decoder/decoder_cluster_verilator_lint.log", "decoder/decoder_cluster_cosim.log",
+        "decoder/decoder_cluster_openroad_summary.json", "schedule/system_cycles.csv",
         "schedule/overlap_breakdown.csv", "RESULT_MANIFEST.csv",
         "REPRODUCE_COMMANDS.txt", "REVIEWER_SPEC_STATUS.md",
     )
@@ -134,6 +137,13 @@ def main() -> None:
         zf.writestr("xorflow_result_bundle/environment/git_diff.patch", diff)
         for path, arc in members:
             zf.write(path, str(Path("xorflow_result_bundle") / arc))
+        # Put the two machine-readable reviewer ledgers at the archive root as
+        # well as under the historical reviewer directory.  This avoids making
+        # consumers know the internal campaign directory layout.
+        for rel in ("report/RESULT_SUMMARY.yaml", "RESULT_MANIFEST.csv"):
+            source = V3 / rel
+            if source.is_file():
+                zf.write(source, str(Path("xorflow_result_bundle") / source.name))
     print(json.dumps({"archive": str(OUT), "bytes": OUT.stat().st_size, "members": len(members), "omitted": len(omitted)}, sort_keys=True))
 
 

@@ -1,11 +1,11 @@
 # XORFLOW Reviewer-Spec Final Results
 
-Generated UTC: 2026-07-31T01:30:09.399233+00:00
-Git commit: `2670d32f16332b982df6572b99a4b588819eff3d`; the working tree is intentionally dirty because this continuation adds the reviewer-spec implementation and outputs.
+Generated UTC: 2026-07-31T02:15:59.146823+00:00
+Git commit: `fe9b67e7861754c083b8577676b578d27e030e51`; the working tree is intentionally dirty because this continuation adds the reviewer-spec implementation and outputs.
 
 ## Executive status
 
-The causal serializer, exact round trips, single-pass online replay, finite retention/REREAD accounting, controls, physical traffic, finite encoder model, synthesized ready/valid encoder boundary, integrated decoder-cluster model, and event-driven host schedule are complete for 26 cached configurations. The core result is positive on the larger residual workloads. The handoff keeps explicit scope boundaries: the encoder candidate generator is software-backed, the decoder cluster has synthesis/cycle evidence rather than a routed full-cluster activity run, and independent DRAM timing is pair/sampled plus one complete Arxiv online replay rather than a complete all-workload trace.
+The causal serializer, exact round trips, single-pass online replay, finite retention/REREAD accounting, controls, physical traffic, finite encoder model, bounded RTL encoder engine, eight-lane decoder/support-cache cluster, event-driven host schedule, Verilator co-simulation, and OpenROAD cluster flow are complete for 26 cached configurations. The core result is positive on the larger residual workloads. The handoff keeps exact scope boundaries: the encoder still delegates variable-length bit packing to the audited software reference, and real-trace VCD/SAIF power is not claimed until activity is driven through the routed cluster.
 
 **Decision: ITERATE_METHOD_BEFORE_SIMULATOR** — proceed with one bounded integration iteration (encoder RTL + full-trace memory timing + final figures) before presenting a deployable hardware claim.
 
@@ -28,7 +28,7 @@ The strongest causal/event-driven points are Reddit seed 7 (1.277× in the compl
 
 ## Correctness and regression
 
-- `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 /home/rishabh/miniconda/envs/taugat_pyg/bin/python -m pytest -q`: **223 passed**, 2 non-fatal warnings.
+- `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 /home/rishabh/miniconda/envs/taugat_pyg/bin/python -m pytest -q`: **226 passed**, 2 non-fatal warnings.
 - The reviewer-spec round-trip summary has one row per real serialized source; failures are counted in `decoder/stream_roundtrip.csv`.
 - Causal commits use only the currently available layer; finite retention and REREAD are charged explicitly.
 - The consolidated manifest is `RESULT_MANIFEST.csv`; every aggregate records source files and SHA-256.
@@ -43,17 +43,21 @@ The strongest causal/event-driven points are Reddit seed 7 (1.277× in the compl
 | Ramulator2 | PASS for pair-4 traces plus complete Arxiv s7 online replay (33,779,460 requests accounted; forwarded reads included) | `memory/ramulator2_summary.csv` |
 | CACTI 7 Docker | PASS | `results_hpca_xorflow/complete_suite/ppa/20260729T_local_ppa_v3/ppa_summary.csv` |
 | Yosys | PASS for decoder lane/bank | same PPA summary |
-| OpenROAD/ORFS Nangate45 | PASS for routed decoder lane | same PPA summary |
-| Encoder RTL boundary | PASS (810 Yosys cells; Verilator lint; 24 exact stream cases) | `encoder/encoder_synth.json`, `encoder/stream_equivalence.csv` |
-| Integrated routed decoder cluster | PARTIAL; cycle model and bank synthesis exist | `decoder/decoder_cluster_synth.json` |
+| OpenROAD/ORFS Nangate45 | PASS for routed compact 8-lane decoder/support-cache cluster; 0 detailed-route DRC errors | `decoder/decoder_cluster_openroad_summary.json` |
+| Encoder RTL engine/boundary | PASS for bounded support ingestion, A0/A2 counters, candidate selector, ready/valid stream equivalence; variable-length packer remains software-backed | `encoder/encoder_synth.json`, `encoder/stream_equivalence.csv` |
+| Integrated 8-lane decoder/support-cache cluster | PASS when synthesis + Verilator co-sim + OpenROAD flow artifacts are present; real-trace VCD/SAIF power intentionally separate | `decoder/decoder_cluster_synth.json`, `decoder/decoder_cluster_cosim.log` |
 
-The routed decoder lane result is 0.00459 mm² at 1,458.88 MHz in the existing ORFS/Nangate45 evidence. It is lane evidence, not a free linear estimate of a full host or encoder.
+The prior routed decoder lane result is 0.00459 mm² at 1,458.88 MHz in the existing ORFS/Nangate45 evidence. The new cluster flow reports its own routed area/timing when available; neither is presented as a free linear estimate of a full host or encoder.
+
+### Routed compact cluster record
+
+The corrected hierarchical top has `0` detailed-route DRC errors, `13881` µm routed wire, `7748` vias, and a reported post-route clock slack of `0.565` ns at a 1.0 ns target. The die area is `68220.2161` µm² at the explicitly recorded `11.0%` core-utilization setting; this low utilization is the perimeter required by the compact control interface. The decoder/event buses are internal hierarchical nets, not package pins.
 
 ## Scope and remaining engineering work
 
-1. The exact stream boundary is synthesized and co-simulated; a full RTL candidate-discovery/bit-packing engine and routed activity campaign remain future silicon work.
+1. The bounded RTL encoder now performs finite support ingestion, A0 population counting, A2 majority accumulation, candidate minimum selection, and elastic output. The exact variable-length event discovery/bit-packing engine remains software-backed and is the remaining encoder integration item.
 2. DRAMsim3 evidence remains sampled-prefix; Ramulator2 has pair timing for prior cases and one complete Arxiv s7 online replay timing run. No other complete-workload cycles are fabricated.
-3. `schedule/overlap_breakdown.csv`, `encoder/stream_equivalence.csv`, and the deterministic rerun ledger make the reviewer-facing accounting auditable.
+3. `schedule/overlap_breakdown.csv`, `encoder/stream_equivalence.csv`, decoder-cluster co-simulation/synthesis logs, and the deterministic rerun ledger make the reviewer-facing accounting auditable.
 4. Model-quality borderline cases (for example Yelp) remain visible and are not silently promoted to hard-valid.
 
 ## Reproduction

@@ -1,0 +1,76 @@
+%Warning-DECLFILENAME: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:3:8: Filename 'xorflow_decoder_pipelined' does not match MODULE name: 'xorflow_decoder_lane_pipelined'
+    3 | module xorflow_decoder_lane_pipelined (
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                       ... For warning description see https://verilator.org/warn/DECLFILENAME?v=5.020
+                       ... Use "/* verilator lint_off DECLFILENAME */" and lint_on around source to disable this message.
+%Warning-DECLFILENAME: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_cluster_pipelined.sv:7:8: Filename 'xorflow_decoder_cluster_pipelined' does not match MODULE name: 'xorflow_decoder_cluster8_debug'
+    7 | module xorflow_decoder_cluster8_debug (
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-MULTITOP: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_cluster_pipelined.sv:84:8: Multiple top level modules
+                                                                                                        : ... Suggest see manual; fix the duplicates, or use --top-module to select top.
+                                                                                                        : ... Top module 'xorflow_decoder_bank_pipelined'
+   41 | module xorflow_decoder_bank_pipelined (
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                        : ... Top module 'xorflow_decoder_cluster8_pipelined'
+   84 | module xorflow_decoder_cluster8_pipelined (
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-GENUNNAMED: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20:28: Unnamed generate block 'genblk1' (IEEE 1800-2017 27.6)
+                                                                                                   : ... Suggest assign a label with 'begin : gen_<label_name>'
+   20 |     if (i>=1) assign s1[i] = s0[i]+s0[i-1]; else assign s1[i]=s0[i];
+      |                            ^
+%Warning-GENUNNAMED: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:20:62: Unnamed generate block 'genblk1' (IEEE 1800-2017 27.6)
+                                                                                                   : ... Suggest assign a label with 'begin : gen_<label_name>'
+   20 |     if (i>=1) assign s1[i] = s0[i]+s0[i-1]; else assign s1[i]=s0[i];
+      |                                                              ^
+%Warning-GENUNNAMED: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21:28: Unnamed generate block 'genblk2' (IEEE 1800-2017 27.6)
+                                                                                                   : ... Suggest assign a label with 'begin : gen_<label_name>'
+   21 |     if (i>=2) assign s2[i] = s1[i]+s1[i-2]; else assign s2[i]=s1[i];
+      |                            ^
+%Warning-GENUNNAMED: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:21:62: Unnamed generate block 'genblk2' (IEEE 1800-2017 27.6)
+                                                                                                   : ... Suggest assign a label with 'begin : gen_<label_name>'
+   21 |     if (i>=2) assign s2[i] = s1[i]+s1[i-2]; else assign s2[i]=s1[i];
+      |                                                              ^
+%Warning-GENUNNAMED: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22:28: Unnamed generate block 'genblk3' (IEEE 1800-2017 27.6)
+                                                                                                   : ... Suggest assign a label with 'begin : gen_<label_name>'
+   22 |     if (i>=4) assign s3[i] = s2_q[i]+s2_q[i-4]; else assign s3[i]=s2_q[i];
+      |                            ^
+%Warning-GENUNNAMED: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_pipelined.sv:22:66: Unnamed generate block 'genblk3' (IEEE 1800-2017 27.6)
+                                                                                                   : ... Suggest assign a label with 'begin : gen_<label_name>'
+   22 |     if (i>=4) assign s3[i] = s2_q[i]+s2_q[i-4]; else assign s3[i]=s2_q[i];
+      |                                                                  ^
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_cluster_pipelined.sv:100:16: Signal is not used: 'dense_masks'
+                                                                                                              : ... note: In instance 'xorflow_decoder_cluster8_pipelined'
+  100 |   wire [511:0] dense_masks;
+      |                ^~~~~~~~~~~
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_cluster_pipelined.sv:101:16: Signal is not used: 'event_ids'
+                                                                                                              : ... note: In instance 'xorflow_decoder_cluster8_pipelined'
+  101 |   wire [895:0] event_ids;
+      |                ^~~~~~~~~
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_cluster_pipelined.sv:102:15: Signal is not used: 'event_valid'
+                                                                                                              : ... note: In instance 'xorflow_decoder_cluster8_pipelined'
+  102 |   wire [63:0] event_valid;
+      |               ^~~~~~~~~~~
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_cluster_pipelined.sv:103:15: Signal is not used: 'support_cache_head'
+                                                                                                              : ... note: In instance 'xorflow_decoder_cluster8_pipelined'
+  103 |   wire [63:0] support_cache_head;
+      |               ^~~~~~~~~~~~~~~~~~
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_cluster_pipelined.sv:59:17: Blocking assignment '=' in sequential logic process
+                                                                                                       : ... Suggest using delayed assignment '<='
+   59 |       bank_seen = 0; word_seen = 0;
+      |                 ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_cluster_pipelined.sv:59:32: Blocking assignment '=' in sequential logic process
+                                                                                                       : ... Suggest using delayed assignment '<='
+   59 |       bank_seen = 0; word_seen = 0;
+      |                                ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_cluster_pipelined.sv:63:26: Blocking assignment '=' in sequential logic process
+                                                                                                       : ... Suggest using delayed assignment '<='
+   63 |           bank_seen[j%4] = 1'b1;
+      |                          ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_cluster_pipelined.sv:68:26: Blocking assignment '=' in sequential logic process
+                                                                                                       : ... Suggest using delayed assignment '<='
+   68 |           word_seen[j%4] = 1'b1;
+      |                          ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_decoder_cluster_pipelined.sv:57:46: Blocking assignment '=' in sequential logic process
+                                                                                                       : ... Suggest using delayed assignment '<='
+   57 |       for (i=0;i<256;i=i+1) support_cache[i] = 0;
+      |                                              ^

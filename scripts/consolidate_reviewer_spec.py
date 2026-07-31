@@ -73,7 +73,7 @@ def main()->None:
   f=lambda v: 'pending' if v=='' else f'{float(v):.3f}'
   lines.append(f"| {x['config_id']} | {f(x['support_reduction'])} | {f(x['exact_edge_traffic_reduction'])} | {f(x['event_speedup'])} |")
  (r/'report'/'PAPER_TABLES.md').write_text('\n'.join(lines)+'\n')
- (r/'RESULT_MANIFEST.csv').parent.mkdir(parents=True,exist_ok=True)
- with (r/'RESULT_MANIFEST.csv').open('w',newline='') as h:w=csv.DictWriter(h,fieldnames=list(manifest[0]));w.writeheader();w.writerows(manifest)
+ (r/'ARTIFACT_MANIFEST.csv').parent.mkdir(parents=True,exist_ok=True)
+ with (r/'ARTIFACT_MANIFEST.csv').open('w',newline='') as h:w=csv.DictWriter(h,fieldnames=list(manifest[0]));w.writeheader();w.writerows(manifest)
  print(json.dumps({'artifacts':len(manifest),'workloads':len(table),'missing':[x['artifact'] for x in manifest if x['status']=='missing']},sort_keys=True))
 if __name__=='__main__':main()

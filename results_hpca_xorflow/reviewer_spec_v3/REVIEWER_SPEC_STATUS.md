@@ -1,10 +1,12 @@
 # XORFLOW Reviewer-Spec Execution Status
 
-Last updated: 2026-07-31 00:03 UTC. Canonical output root:
+Last updated: 2026-07-31 02:11 UTC. Canonical output root:
 `results_hpca_xorflow/reviewer_spec_v3/`.
 
-Progress: **7/8 evidence blocks complete; primary campaign complete; final
-hardware/report validation remains**.
+Progress: **8/8 evidence blocks complete; primary campaign and scoped hardware
+validation complete**. Two explicit scope limits remain: full tile-scale
+variable-length encoder packing is still software-backed, and real-trace
+VCD/SAIF power plus complete-workload DRAMsim3 timing are not claimed.
 
 | Evidence block | State | Canonical path |
 |---|---|---|
@@ -15,7 +17,7 @@ hardware/report validation remains**.
 | Exact edge/cache physical traffic | Complete (26 configurations) | `physical_traffic/` |
 | Finite encoder and integrated decoder sweeps | Complete (26 configurations × 3 bank modes) | `encoder/`, `decoder/` |
 | Unified event-driven host schedule | Complete (26 configurations) | `schedule/` |
-| RTL/PPA, DRAM timing, report, figures, bundle | Pending upstream results | `hardware/`, `memory/`, `report/` |
+| RTL/PPA, DRAM timing, report, figures, bundle | Complete with explicit scope limits | `encoder/`, `decoder/`, `memory/`, `report/` |
 
 Compute allocation: four bounded CPU lanes on the cluster for codec/cache work;
 GPU1 is reserved for genuine GPU tasks; GPU0 is untouched. Superseded pre-RCM
@@ -29,6 +31,13 @@ ablation, physical traffic, encoder, all three decoder bank modes, and the
 event schedule. The consolidator was rerun after ignoring its own empty
 aggregate input on repeat runs; `RESULT_MANIFEST.csv` and `report/` are now
 complete.
+
+The final continuation added a bounded RTL encoder tile engine (support/anchor
+XOR, exact 64-bit flip discovery, fixed-ID packing, majority accumulation and
+candidate selection), an 8-lane decoder/support-cache cluster with ready/valid
+co-simulation, and a compact hierarchical OpenROAD top. The corrected top
+routed cleanly on Nangate45 with zero detailed-route DRC errors; decoded event
+buses terminate internally rather than being exported as package pins.
 
 Validated optimization canary (`ogbn_arxiv_deepres8_w128_s7`):
 

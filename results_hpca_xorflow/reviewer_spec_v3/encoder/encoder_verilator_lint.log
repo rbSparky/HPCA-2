@@ -1,0 +1,80 @@
+%Warning-DECLFILENAME: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:80:8: Filename 'xorflow_encoder_pipelined' does not match MODULE name: 'xorflow_encoder_tile_engine'
+   80 | module xorflow_encoder_tile_engine (
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+                       ... For warning description see https://verilator.org/warn/DECLFILENAME?v=5.020
+                       ... Use "/* verilator lint_off DECLFILENAME */" and lint_on around source to disable this message.
+%Warning-MULTITOP: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:80:8: Multiple top level modules
+                                                                                                : ... Suggest see manual; fix the duplicates, or use --top-module to select top.
+                                                                                                : ... Top module 'xorflow_encoder_pipelined'
+    5 | module xorflow_encoder_pipelined (
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                : ... Top module 'xorflow_encoder_tile_engine'
+   80 | module xorflow_encoder_tile_engine (
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                : ... Top module 'xorflow_encoder_engine'
+  203 | module xorflow_encoder_engine (
+      |        ^~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:235:57: Operator ADD expects 7 bits on the RHS, but RHS's SEL generates 1 bits.
+                                                                                                     : ... note: In instance 'xorflow_encoder_engine'
+  235 |     begin pop64 = 0; for (j=0;j<64;j=j+1) pop64 = pop64 + x[j]; end
+      |                                                         ^
+%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:239:80: Operator COND expects 7 bits on the Conditional True, but Conditional True's CONST '1'h1' generates 1 bits.
+                                                                                                     : ... note: In instance 'xorflow_encoder_engine'
+  239 |     begin majority64 = 0; for (j=0;j<64;j=j+1) majority64 = majority64 + (x[j] ? 1'b1 : 1'b0); end
+      |                                                                                ^
+%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:239:80: Operator COND expects 7 bits on the Conditional False, but Conditional False's CONST '1'h0' generates 1 bits.
+                                                                                                     : ... note: In instance 'xorflow_encoder_engine'
+  239 |     begin majority64 = 0; for (j=0;j<64;j=j+1) majority64 = majority64 + (x[j] ? 1'b1 : 1'b0); end
+      |                                                                                ^
+%Warning-WIDTHTRUNC: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:243:36: Bit extraction of array[31:0] requires 5 bit index, not 6 bits.
+                                                                                                    : ... note: In instance 'xorflow_encoder_engine'
+  243 |   assign encoded_word = row_support[row_q];
+      |                                    ^
+%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:256:15: Operator ASSIGNDLY expects 6 bits on the Assign RHS, but Assign RHS's SEL generates 5 bits.
+                                                                                                     : ... note: In instance 'xorflow_encoder_engine'
+  256 |         row_q <= row_id[4:0]; last_q <= in_last; valid_q <= 1'b1;
+      |               ^~
+%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:258:42: Operator ADD expects 32 bits on the RHS, but RHS's FUNCREF 'pop64' generates 7 bits.
+                                                                                                     : ... note: In instance 'xorflow_encoder_engine'
+  258 |         a0_active_bits <= a0_active_bits + pop64(support_word);
+      |                                          ^
+%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:260:59: Operator ADD expects 32 bits on the RHS, but RHS's FUNCREF 'majority64' generates 7 bits.
+                                                                                                     : ... note: In instance 'xorflow_encoder_engine'
+  260 |         if (in_last) a2_majority_bits <= a2_majority_bits + majority64(support_word);
+      |                                                           ^
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:104:13: Signal is not used: 'row_q'
+                                                                                                      : ... note: In instance 'xorflow_encoder_tile_engine'
+  104 |   reg [4:0] row_q;
+      |             ^~~~~
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:105:7: Signal is not used: 'last_q'
+                                                                                                     : ... note: In instance 'xorflow_encoder_tile_engine'
+  105 |   reg last_q;
+      |       ^~~~~~
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:106:14: Signal is not used: 'xor_q'
+                                                                                                      : ... note: In instance 'xorflow_encoder_tile_engine'
+  106 |   reg [63:0] xor_q;
+      |              ^~~~~
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:107:14: Signal is not used: 'ids_q'
+                                                                                                      : ... note: In instance 'xorflow_encoder_tile_engine'
+  107 |   reg [63:0] ids_q;
+      |              ^~~~~
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:108:13: Signal is not used: 'count_q'
+                                                                                                      : ... note: In instance 'xorflow_encoder_tile_engine'
+  108 |   reg [3:0] count_q;
+      |             ^~~~~~~
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:109:13: Signal is not used: 'kind_q'
+                                                                                                      : ... note: In instance 'xorflow_encoder_tile_engine'
+  109 |   reg [1:0] kind_q;
+      |             ^~~~~~
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:110:14: Signal is not used: 'bytes_q'
+                                                                                                      : ... note: In instance 'xorflow_encoder_tile_engine'
+  110 |   reg [15:0] bytes_q;
+      |              ^~~~~~~
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:209:22: Bits of signal are not used: 'row_id'[5]
+                                                                                                      : ... note: In instance 'xorflow_encoder_engine'
+  209 |     input wire [5:0] row_id,
+      |                      ^~~~~~
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:227:13: Bits of signal are not used: 'row_q'[5]
+                                                                                                      : ... note: In instance 'xorflow_encoder_engine'
+  227 |   reg [5:0] row_q;
+      |             ^~~~~
