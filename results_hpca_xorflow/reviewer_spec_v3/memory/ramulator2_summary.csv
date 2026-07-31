@@ -1,0 +1,27 @@
+config_id,pair_start_layer,format,scope,trace_sha256,requests,metadata_bytes,dram_cycles,served_requests,forwarded_requests,accounted_requests,all_requests_drained,tool_run_success,error,speedup_vs_beicsr
+ogbn_arxiv_deepres8_w128_s17,4,beicsr,pair4_microbenchmark,1738e6fee7e4cf3f7554f19b2887e543cbf6af15e2d0f64fe242bc0394ce674c,18866826,0,6616878,18866826,,,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/complete_suite/timing/ramulator/arxiv_s17_l4/xorflow_hbm__ipr0vs5/beicsr.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 18866826 lines.
+",1.0
+ogbn_arxiv_deepres8_w128_s17,4,xorflow,pair4_microbenchmark,10290475e55281f2190737bb59967deabf9f025afb63088a35994d46e19fcc13,16296274,4448448,5808775,16296274,,,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/complete_suite/timing/ramulator/arxiv_s17_l4/xorflow_hbm__ipr0vs5/xorflow.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 16296274 lines.
+",1.139117628071323
+ogbn_arxiv_deepres8_w128_s27,4,beicsr,pair4_microbenchmark,869b51a27d9119bb7eb3bbd746459e619a9d0d6c2c5def40b1cfc5337ded8241,18866970,0,6616388,18866970,,,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/complete_suite/timing/ramulator/arxiv_s27_l4/xorflow_hbm_pnzpb1ui/beicsr.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 18866970 lines.
+",1.0
+ogbn_arxiv_deepres8_w128_s27,4,xorflow,pair4_microbenchmark,f0715c5f9f5dd5ddaebf7450be50102cb6671360097576ac10883738249dff0b,15422714,4434752,5521869,15422714,,,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/complete_suite/timing/ramulator/arxiv_s27_l4/xorflow_hbm_pnzpb1ui/xorflow.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 15422714 lines.
+",1.1982153144161878
+reddit_deepres8_w128_s7_native,4,beicsr,pair4_microbenchmark,654a21c103937ab10ef66f22056d14344fb5c462595e19873a1e125bee24a1e2,896402028,0,284758181,896402028,,,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/complete_suite/timing/ramulator/reddit_l4/xorflow_hbm_e74bviqt/beicsr.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 896402028 lines.
+",1.0
+reddit_deepres8_w128_s7_native,4,xorflow,pair4_microbenchmark,f8db51e997acab5a9dff54e27c654eca158d10a910e7e6ae6f2d2c640c84e9a2,566002464,5718528,182450720,566002464,,,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/complete_suite/timing/ramulator/reddit_l4/xorflow_hbm_e74bviqt/xorflow.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 566002464 lines.
+",1.5607402426255155
+yelp_deepres8_w128_s7_balanced_fallback,4,beicsr,pair4_microbenchmark,633e0ae5127ce0142b6b01f35e747a40cb03099633eb1015ea3d30bc4aa2592c,118893892,0,44022361,118893892,,,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/complete_suite/timing/ramulator/yelp_borderline_l4/xorflow_hbm_t3ow8t6o/beicsr.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 118893892 lines.
+",1.0
+yelp_deepres8_w128_s7_balanced_fallback,4,xorflow,pair4_microbenchmark,7d2118fe424d8b5201b5f314469c5c0cc43b1f72d0f663c0a9354ecbd66c7341,110031490,12670912,40965317,110031490,,,True,True,"[Ramulator::LoadStoreTrace] [[32minfo[0m] Loading trace file /home/Rishabh@MLL-5090/remote-work/HPCA-2-xorflow/artifacts_hpca_xorflow/complete_suite/timing/ramulator/yelp_borderline_l4/xorflow_hbm_t3ow8t6o/xorflow.trace ...
+[Ramulator::LoadStoreTrace] [[32minfo[0m] Loaded 110031490 lines.
+",1.0746251762191905
+ogbn_arxiv_deepres8_w128_s7,all,xorflow_online,complete_online_replay_trace,b161aea24c9f56afb52ad021d78ef56d3dc03139ea1794f74fd628096237f462,33779460,,33779459,33702849,76611,33779460,True,True,,
+reddit_deepres8_w128_s7_native,all,xorflow_online,complete_online_replay_trace,190f6384e72dd39eb908e3f5ae7fae3be2d08bd042a0e515931c4a1f02bf28d9,156780038,,156780037,156672511,107527,156780038,True,True,,

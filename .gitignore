@@ -24,4 +24,9 @@ XORFLOW_HPCA_PROGRESS_HANDOFF.zip
 XORFLOW_SAFEZONE_HANDOFF.zip
 results_phase2/
 artifacts_phase2/
-
+# Reviewer-spec raw per-configuration traces are retained in the local handoff
+# archive and manifest, but are too large/volatile for the source repository.
+results_hpca_xorflow/reviewer_spec/
+results_hpca_xorflow/reviewer_spec_v2/
+results_hpca_xorflow/reviewer_spec_v3/
+results_hpca_xorflow/reviewer_spec_v3_canary/

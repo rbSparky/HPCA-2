@@ -1,0 +1,19 @@
+{
+  "accounted_requests": 156780038,
+  "all_requests_drained": true,
+  "controller_count": 8,
+  "drain_cycles": 1000000,
+  "dram_cycles": 156780037,
+  "forwarded_requests": 107527,
+  "hbm_request_bytes": 32,
+  "read_requests": 119427344,
+  "served_requests": 156672511,
+  "source": "results_hpca_xorflow/reviewer_spec_v3/online_replay/memory_transactions_reddit_deepres8_w128_s7_native_finite_retention.csv",
+  "submitted_requests": 156780038,
+  "tool": "Ramulator2",
+  "tool_run_success": true,
+  "trace": "/tmp/xorflow_fullram_reddit_s7/reddit_s7.trace",
+  "trace_sha256": "190f6384e72dd39eb908e3f5ae7fae3be2d08bd042a0e515931c4a1f02bf28d9",
+  "transaction_bytes": 5016494848,
+  "write_requests": 37352694
+}

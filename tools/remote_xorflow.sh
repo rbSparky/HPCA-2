@@ -51,6 +51,20 @@ submit() {
   remote_shell "mkdir -p '${JOB_DIR}'; job='${JOB_DIR}/${id}'; mkdir -p \"\$job\"; printf '%s' '${command_b64}' | base64 -d > \"\$job/command.sh\"; chmod 700 \"\$job/command.sh\"; printf '%s\\n' '${commit}' > \"\$job/local_commit.txt\"; date -u +%FT%TZ > \"\$job/submitted_utc.txt\"; nohup env XORFLOW_JOB_DIR=\"\$job\" XORFLOW_GPU_ID='${GPU_ID}' XORFLOW_MAMBA_ENV='${MAMBA_ENV}' XORFLOW_QUEUE_LOCK='${JOB_DIR}/gpu${GPU_ID}.lock' bash tools/remote_job_runner.sh > \"\$job/stdout_stderr.log\" 2>&1 & echo \$! > \"\$job/pid\"; printf '%s\\n' '${id}'"
 }
 
+submit_cpu() {
+  [[ $# -ge 2 ]] || { echo 'usage: submit-cpu <lane 0..3> <command...>' >&2; exit 2; }
+  local lane="$1"; shift
+  [[ "$lane" =~ ^[0-3]$ ]] || { echo 'CPU lane must be 0, 1, 2, or 3' >&2; exit 2; }
+  sync_up
+  local id="cpu${lane}_$(date -u +%Y%m%dT%H%M%SZ)_$RANDOM"
+  local command_b64 commit
+  command_b64="$(printf '%s' "$*" | base64 -w0)"
+  commit="$(local_commit)"
+  # Four explicitly bounded CPU lanes prevent oversubscription.  CUDA is
+  # hidden from these processes, reserving GPU1 for actual GPU workloads.
+  remote_shell "mkdir -p '${JOB_DIR}'; job='${JOB_DIR}/${id}'; mkdir -p \"\$job\"; printf '%s' '${command_b64}' | base64 -d > \"\$job/command.sh\"; chmod 700 \"\$job/command.sh\"; printf '%s\\n' '${commit}' > \"\$job/local_commit.txt\"; printf 'cpu%s\\n' '${lane}' > \"\$job/resource_pool.txt\"; date -u +%FT%TZ > \"\$job/submitted_utc.txt\"; nohup env XORFLOW_JOB_DIR=\"\$job\" XORFLOW_GPU_ID='' XORFLOW_MAMBA_ENV='${MAMBA_ENV}' XORFLOW_QUEUE_LOCK='${JOB_DIR}/cpu${lane}.lock' bash tools/remote_job_runner.sh > \"\$job/stdout_stderr.log\" 2>&1 & echo \$! > \"\$job/pid\"; printf '%s\\n' '${id}'"
+}
+
 list_jobs() {
   remote_shell "if [[ ! -d '${JOB_DIR}' ]]; then exit 0; fi; for d in '${JOB_DIR}'/*; do [[ -d \"\$d\" ]] || continue; id=\$(basename \"\$d\"); status=\$(cat \"\$d/status\" 2>/dev/null || echo queued); pid=\$(cat \"\$d/pid\" 2>/dev/null || echo -); printf '%-28s %-10s %s\\n' \"\$id\" \"\$status\" \"\$pid\"; done | sort"
 }
@@ -90,12 +104,13 @@ case "${1:-}" in
   sync) sync_up ;;
   smoke) smoke ;;
   submit) shift; submit "$@" ;;
+  submit-cpu) shift; submit_cpu "$@" ;;
   list) list_jobs ;;
   tail) shift; tail_job "$@" ;;
   pull) pull ;;
   stage) shift; stage_input "$@" ;;
   *)
-    echo "usage: $0 {sync|smoke|submit <command...>|list|tail <job-id>|pull|stage <relative-path>...}" >&2
+    echo "usage: $0 {sync|smoke|submit <command...>|submit-cpu <lane 0..3> <command...>|list|tail <job-id>|pull|stage <relative-path>...}" >&2
     exit 2
     ;;
 esac

@@ -1,0 +1,7 @@
+cd /home/rishabh/HPCA2/mosaic_delta_phase1
+tools/remote_xorflow.sh list
+tools/remote_xorflow.sh pull
+PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/consolidate_reviewer_spec.py --root results_hpca_xorflow/reviewer_spec_v3
+PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/finalize_reviewer_spec.py
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 /home/rishabh/miniconda/envs/taugat_pyg/bin/python -m pytest -q
+MOSAIC_PY=/home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/run_hpca.sh --quick --stage reproduce

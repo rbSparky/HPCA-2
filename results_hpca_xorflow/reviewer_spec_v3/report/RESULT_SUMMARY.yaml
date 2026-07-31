@@ -1,0 +1,49 @@
+result_summary:
+  generated_utc: "2026-07-31T01:30:09.408464+00:00"
+  git_sha: "2670d32f16332b982df6572b99a4b588819eff3d"
+  dirty: true
+  decision: ITERATE_METHOD_BEFORE_SIMULATOR
+  correctness:
+    pytest_passed: 223
+    pytest_failed: 0
+    causal_failures: 0
+    serializer_roundtrip_failures: 0
+  primary_headline:
+    - config_id: "flickr_deepres8_w128_s7"
+      support_reduction: 0.5674978270317254
+      edge_traffic_reduction: 0.05877265539007681
+      event_speedup: 1.061279446148722
+    - config_id: "ogbn_arxiv_deepres8_w128_s17"
+      support_reduction: 0.19492990975308078
+      edge_traffic_reduction: 0.09694283265389836
+      event_speedup: 1.1059736193287075
+    - config_id: "ogbn_arxiv_deepres8_w128_s27"
+      support_reduction: 0.1868042512254341
+      edge_traffic_reduction: 0.11541899267527744
+      event_speedup: 1.1286431812627657
+    - config_id: "ogbn_arxiv_deepres8_w128_s7"
+      support_reduction: 0.21563630949654133
+      edge_traffic_reduction: 0.09880171307192731
+      event_speedup: 1.1080081976118161
+    - config_id: "reddit_deepres8_w128_s17_native"
+      support_reduction: 0.3384773234324532
+      edge_traffic_reduction: 0.09964920098608254
+      event_speedup: 1.110563666596186
+    - config_id: "reddit_deepres8_w128_s27_native"
+      support_reduction: 0.3433930771536079
+      edge_traffic_reduction: 0.07541919661147489
+      event_speedup: 1.0815255744073295
+    - config_id: "reddit_deepres8_w128_s7_native"
+      support_reduction: 0.2711926842262995
+      edge_traffic_reduction: 0.2180623850069876
+      event_speedup: 1.2771169208160413
+    - config_id: "yelp_deepres8_w128_s7_balanced_fallback"
+      support_reduction: 0.45237660433305193
+      edge_traffic_reduction: 0.047962282270331946
+      event_speedup: 1.0498940794627574
+  scope_notes:
+    - encoder_boundary_rtl_synthesis_and_stream_equivalence_pass
+    - full_encoder_candidate_generator_rtl_not_claimed
+    - dramsim3_sampled_and_ramulator_pair_scope_only
+    - overlap_breakdown_and_final_figures_regenerated
+    - deterministic_principal_csv_hashes_match

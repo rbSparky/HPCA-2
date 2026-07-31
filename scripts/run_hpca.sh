@@ -47,7 +47,10 @@ if [[ "$STAGE" == "rtl" ]]; then
   run scripts/synth_decoder.sh
 fi
 if [[ "$STAGE" == "report" || "$STAGE" == "reproduce" ]]; then
-  run "$PYTHON_BIN" -m pytest -q
+  # The host ROS installation exposes an unrelated pytest plugin.  Disable
+  # third-party auto-discovery so the declared project suite is reproducible
+  # in both the Conda and system environments.
+  run env PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 "$PYTHON_BIN" -m pytest -q
 fi
 if [[ "$STAGE" == "overnight" ]]; then
   # Dependency-aware GPU-1 admission/tranche controller.  This command does

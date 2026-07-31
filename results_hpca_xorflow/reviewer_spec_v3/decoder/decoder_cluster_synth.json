@@ -1,0 +1,10 @@
+{
+  "status": "PARTIAL",
+  "reason": "The integrated decoder cluster is cycle-modeled on all 26 configurations and the 8-lane bank is synthesized. A complete routed cluster with real-stream VCD/SAIF is not claimed.",
+  "cycle_model": "results_hpca_xorflow/reviewer_spec_v3/decoder",
+  "synthesis_evidence": "results_hpca_xorflow/complete_suite/ppa/20260729T_local_ppa_v3/ppa_summary.csv",
+  "lane_area_mm2": 0.00459,
+  "lane_fmax_mhz": 1458.88,
+  "bank_cell_count": 61504,
+  "required_next_step": "Route the integrated 8-lane cluster and generate real-trace VCD/SAIF power."
+}

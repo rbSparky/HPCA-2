@@ -87,9 +87,14 @@ def _parse_stats(path: Path, expected_requests: int) -> dict:
     stats = json.loads(path.read_text())
     controllers = stats["memory_system"]["controller"]
     served = sum(int(c["num_read_reqs_served"]) + int(c["num_write_reqs_served"]) for c in controllers)
+    # HBM controller statistics count migrated read requests as forwarded at
+    # the source controller. They are still accounted requests, not drops.
+    forwarded = sum(int(c.get("num_read_reqs_forwarded", 0)) for c in controllers)
     # A known fixed 4096-cycle frontend drain applies equally to both formats.
     cycles = max(int(c["cycles"]) for c in controllers) - 4096
-    return {"dram_cycles": cycles, "served_requests": served, "all_requests_drained": served == expected_requests}
+    return {"dram_cycles": cycles, "served_requests": served, "forwarded_requests": forwarded,
+            "accounted_requests": served + forwarded,
+            "all_requests_drained": served + forwarded == expected_requests}
 
 
 def run_pair(project: Path, *, config_id: str, pair_start_layer: int, artifact_dir: Path, keep_trace: bool = False) -> pd.DataFrame:

@@ -4,7 +4,7 @@
 set -euo pipefail
 
 : "${XORFLOW_JOB_DIR:?XORFLOW_JOB_DIR must name this job directory}"
-: "${XORFLOW_GPU_ID:=1}"
+: "${XORFLOW_GPU_ID=1}"
 : "${XORFLOW_MAMBA_ENV:?XORFLOW_MAMBA_ENV must name a micromamba prefix}"
 : "${XORFLOW_QUEUE_LOCK:?XORFLOW_QUEUE_LOCK must name the GPU lock}"
 

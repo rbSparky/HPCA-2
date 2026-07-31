@@ -1,0 +1,19 @@
+{
+  "accounted_requests": 33779460,
+  "all_requests_drained": true,
+  "controller_count": 8,
+  "drain_cycles": 1000000,
+  "dram_cycles": 33779459,
+  "forwarded_requests": 76611,
+  "hbm_request_bytes": 32,
+  "read_requests": 6105244,
+  "served_requests": 33702849,
+  "source": "results_hpca_xorflow/reviewer_spec_v3/online_replay/memory_transactions_ogbn_arxiv_deepres8_w128_s7_finite_retention.csv",
+  "submitted_requests": 33779460,
+  "tool": "Ramulator2",
+  "tool_run_success": true,
+  "trace": "/tmp/xorflow_fullram_arxiv_s7/arxiv_s7.trace",
+  "trace_sha256": "b161aea24c9f56afb52ad021d78ef56d3dc03139ea1794f74fd628096237f462",
+  "transaction_bytes": 1080603968,
+  "write_requests": 27674216
+}
