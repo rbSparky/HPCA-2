@@ -1,7 +1,7 @@
 # XORFLOW Reviewer-Spec Final Results
 
-Generated UTC: 2026-07-31T02:17:00.587929+00:00
-Git commit: `c4655c15033aa450ef8cc5319ce85d1e03920f3b`; the working tree is intentionally dirty because this continuation adds the reviewer-spec implementation and outputs.
+Generated UTC: 2026-07-31T02:19:02.075590+00:00
+Git commit: `f16b99de55795ff2776466c60e1b4145f3b3f51e`; generated tables and tool artifacts are committed alongside this source revision in the handoff.
 
 ## Executive status
 

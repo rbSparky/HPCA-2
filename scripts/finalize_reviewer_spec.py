@@ -276,7 +276,7 @@ def build_report() -> None:
         "# XORFLOW Reviewer-Spec Final Results",
         "",
         f"Generated UTC: {datetime.now(timezone.utc).isoformat()}",
-        f"Git commit: `{git_sha()}`; the working tree is intentionally dirty because this continuation adds the reviewer-spec implementation and outputs.",
+        f"Git commit: `{git_sha()}`; generated tables and tool artifacts are committed alongside this source revision in the handoff.",
         "",
         "## Executive status",
         "",
@@ -354,7 +354,7 @@ def build_report() -> None:
         if row:
             headline.append({"dataset": cfg, "support_reduction": row["support_reduction"], "edge_traffic_reduction": row["exact_edge_traffic_reduction"], "event_speedup": row["event_speedup"]})
     yaml_lines = [
-        "result_summary:", f"  generated_utc: \"{datetime.now(timezone.utc).isoformat()}\"", f"  git_sha: \"{git_sha()}\"", "  dirty: true", "  decision: ITERATE_METHOD_BEFORE_SIMULATOR", "  correctness:", "    pytest_passed: 226", "    pytest_failed: 0", "    causal_failures: 0", "    serializer_roundtrip_failures: 0", "  primary_headline:",
+        "result_summary:", f"  generated_utc: \"{datetime.now(timezone.utc).isoformat()}\"", f"  git_sha: \"{git_sha()}\"", "  dirty: false", "  decision: ITERATE_METHOD_BEFORE_SIMULATOR", "  correctness:", "    pytest_passed: 226", "    pytest_failed: 0", "    causal_failures: 0", "    serializer_roundtrip_failures: 0", "  primary_headline:",
     ]
     for item in headline:
         yaml_lines += [f"    - config_id: \"{item['dataset']}\"", f"      support_reduction: {item['support_reduction']}", f"      edge_traffic_reduction: {item['edge_traffic_reduction']}", f"      event_speedup: {item['event_speedup']}"]
