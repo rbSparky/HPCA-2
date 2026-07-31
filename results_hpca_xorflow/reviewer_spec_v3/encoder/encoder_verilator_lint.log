@@ -14,33 +14,80 @@
                                                                                                 : ... Top module 'xorflow_encoder_engine'
   203 | module xorflow_encoder_engine (
       |        ^~~~~~~~~~~~~~~~~~~~~~
-%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:235:57: Operator ADD expects 7 bits on the RHS, but RHS's SEL generates 1 bits.
-                                                                                                     : ... note: In instance 'xorflow_encoder_engine'
-  235 |     begin pop64 = 0; for (j=0;j<64;j=j+1) pop64 = pop64 + x[j]; end
-      |                                                         ^
-%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:239:80: Operator COND expects 7 bits on the Conditional True, but Conditional True's CONST '1'h1' generates 1 bits.
-                                                                                                     : ... note: In instance 'xorflow_encoder_engine'
-  239 |     begin majority64 = 0; for (j=0;j<64;j=j+1) majority64 = majority64 + (x[j] ? 1'b1 : 1'b0); end
-      |                                                                                ^
-%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:239:80: Operator COND expects 7 bits on the Conditional False, but Conditional False's CONST '1'h0' generates 1 bits.
-                                                                                                     : ... note: In instance 'xorflow_encoder_engine'
-  239 |     begin majority64 = 0; for (j=0;j<64;j=j+1) majority64 = majority64 + (x[j] ? 1'b1 : 1'b0); end
-      |                                                                                ^
-%Warning-WIDTHTRUNC: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:243:36: Bit extraction of array[31:0] requires 5 bit index, not 6 bits.
-                                                                                                    : ... note: In instance 'xorflow_encoder_engine'
-  243 |   assign encoded_word = row_support[row_q];
-      |                                    ^
-%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:256:15: Operator ASSIGNDLY expects 6 bits on the Assign RHS, but Assign RHS's SEL generates 5 bits.
-                                                                                                     : ... note: In instance 'xorflow_encoder_engine'
-  256 |         row_q <= row_id[4:0]; last_q <= in_last; valid_q <= 1'b1;
-      |               ^~
-%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:258:42: Operator ADD expects 32 bits on the RHS, but RHS's FUNCREF 'pop64' generates 7 bits.
-                                                                                                     : ... note: In instance 'xorflow_encoder_engine'
-  258 |         a0_active_bits <= a0_active_bits + pop64(support_word);
+                                                                                                : ... Top module 'xorflow_encoder_stream_engine'
+  281 | module xorflow_encoder_stream_engine (
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-VARHIDDEN: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:236:13: Declaration of signal hides declaration in upper scope: 'j'
+  236 |     integer j;
+      |             ^
+                    /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:234:11: ... Location of original declaration
+  234 |   integer j;
+      |           ^
+%Warning-VARHIDDEN: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:240:13: Declaration of signal hides declaration in upper scope: 'j'
+  240 |     integer j;
+      |             ^
+                    /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:234:11: ... Location of original declaration
+  234 |   integer j;
+      |           ^
+%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:408:42: Operator ASSIGN expects 16 bits on the Assign RHS, but Assign RHS's VARREF 'event_count' generates 12 bits.
+                                                                                                     : ... note: In instance 'xorflow_encoder_stream_engine'
+  408 |         packed_gap = 0; packed_gap[15:0] = event_count;
       |                                          ^
-%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:260:59: Operator ADD expects 32 bits on the RHS, but RHS's FUNCREF 'majority64' generates 7 bits.
+%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:411:71: Operator SUB expects 32 bits on the LHS, but LHS's ARRAYSEL generates 4 bits.
+                                                                                                     : ... note: In instance 'xorflow_encoder_stream_engine'
+  411 |             gap_bits_total = gap_bits_total + 11 + 4 + ((gap_counts[i]-1) * gap_width[i]);
+      |                                                                       ^
+%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:418:45: Operator ADD expects 32 bits on the RHS, but RHS's ARRAYSEL generates 4 bits.
+                                                                                                     : ... note: In instance 'xorflow_encoder_stream_engine'
+  418 |                 gap_pack_pos = gap_pack_pos + gap_width[i];
+      |                                             ^
+%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:415:36: Operator SUB expects 32 bits on the LHS, but LHS's ARRAYSEL generates 4 bits.
+                                                                                                     : ... note: In instance 'xorflow_encoder_stream_engine'
+  415 |               if (n < gap_counts[i]-1) begin
+      |                                    ^
+%Warning-WIDTHTRUNC: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:426:30: Operator ASSIGNDLY expects 16 bits on the Assign RHS, but Assign RHS's SHIFTR generates 32 bits.
+                                                                                                    : ... note: In instance 'xorflow_encoder_stream_engine'
+  426 |         gap8_candidate_bytes <= (gap_candidate + 7) >> 3;
+      |                              ^~
+%Warning-WIDTHTRUNC: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:442:22: Operator ASSIGNDLY expects 9 bits on the Assign RHS, but Assign RHS's SHIFTR generates 32 bits.
+                                                                                                    : ... note: In instance 'xorflow_encoder_stream_engine'
+  442 |           emit_words <= (gap_candidate + 63) >> 6;
+      |                      ^~
+%Warning-WIDTHTRUNC: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:446:22: Operator ASSIGNDLY expects 9 bits on the Assign RHS, but Assign RHS's SHIFTR generates 32 bits.
+                                                                                                    : ... note: In instance 'xorflow_encoder_stream_engine'
+  446 |           emit_words <= (fixed_candidate + 63) >> 6;
+      |                      ^~
+%Warning-WIDTHTRUNC: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:450:22: Operator ASSIGNDLY expects 9 bits on the Assign RHS, but Assign RHS's SHIFTR generates 32 bits.
+                                                                                                    : ... note: In instance 'xorflow_encoder_stream_engine'
+  450 |           emit_words <= (dense_candidate + 63) >> 6;
+      |                      ^~
+%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:237:57: Operator ADD expects 7 bits on the RHS, but RHS's SEL generates 1 bits.
                                                                                                      : ... note: In instance 'xorflow_encoder_engine'
-  260 |         if (in_last) a2_majority_bits <= a2_majority_bits + majority64(support_word);
+  237 |     begin pop64 = 0; for (j=0;j<64;j=j+1) pop64 = pop64 + x[j]; end
+      |                                                         ^
+%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:241:80: Operator COND expects 7 bits on the Conditional True, but Conditional True's CONST '1'h1' generates 1 bits.
+                                                                                                     : ... note: In instance 'xorflow_encoder_engine'
+  241 |     begin majority64 = 0; for (j=0;j<64;j=j+1) majority64 = majority64 + (x[j] ? 1'b1 : 1'b0); end
+      |                                                                                ^
+%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:241:80: Operator COND expects 7 bits on the Conditional False, but Conditional False's CONST '1'h0' generates 1 bits.
+                                                                                                     : ... note: In instance 'xorflow_encoder_engine'
+  241 |     begin majority64 = 0; for (j=0;j<64;j=j+1) majority64 = majority64 + (x[j] ? 1'b1 : 1'b0); end
+      |                                                                                ^
+%Warning-WIDTHTRUNC: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:245:36: Bit extraction of array[31:0] requires 5 bit index, not 6 bits.
+                                                                                                    : ... note: In instance 'xorflow_encoder_engine'
+  245 |   assign encoded_word = row_support[row_q];
+      |                                    ^
+%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:258:15: Operator ASSIGNDLY expects 6 bits on the Assign RHS, but Assign RHS's SEL generates 5 bits.
+                                                                                                     : ... note: In instance 'xorflow_encoder_engine'
+  258 |         row_q <= row_id[4:0]; last_q <= in_last; valid_q <= 1'b1;
+      |               ^~
+%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:260:42: Operator ADD expects 32 bits on the RHS, but RHS's FUNCREF 'pop64' generates 7 bits.
+                                                                                                     : ... note: In instance 'xorflow_encoder_engine'
+  260 |         a0_active_bits <= a0_active_bits + pop64(support_word);
+      |                                          ^
+%Warning-WIDTHEXPAND: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:262:59: Operator ADD expects 32 bits on the RHS, but RHS's FUNCREF 'majority64' generates 7 bits.
+                                                                                                     : ... note: In instance 'xorflow_encoder_engine'
+  262 |         if (in_last) a2_majority_bits <= a2_majority_bits + majority64(support_word);
       |                                                           ^
 %Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:104:13: Signal is not used: 'row_q'
                                                                                                       : ... note: In instance 'xorflow_encoder_tile_engine'
@@ -78,3 +125,159 @@
                                                                                                       : ... note: In instance 'xorflow_encoder_engine'
   227 |   reg [5:0] row_q;
       |             ^~~~~
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:233:11: Signal is not driven, nor used: 'n'
+                                                                                                      : ... note: In instance 'xorflow_encoder_engine'
+  233 |   integer n;
+      |           ^
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:234:11: Signal is not driven, nor used: 'j'
+                                                                                                      : ... note: In instance 'xorflow_encoder_engine'
+  234 |   integer j;
+      |           ^
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:323:14: Signal is not used: 'fixed_bits'
+                                                                                                      : ... note: In instance 'xorflow_encoder_stream_engine'
+  323 |   reg [15:0] fixed_bits;
+      |              ^~~~~~~~~~
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:324:14: Signal is not used: 'dense_bits'
+                                                                                                      : ... note: In instance 'xorflow_encoder_stream_engine'
+  324 |   reg [15:0] dense_bits;
+      |              ^~~~~~~~~~
+%Warning-UNUSEDSIGNAL: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:332:11: Bits of signal are not used: 'gap_block'[31:8]
+                                                                                                      : ... note: In instance 'xorflow_encoder_stream_engine'
+  332 |   integer gap_block;
+      |           ^~~~~~~~~
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:380:25: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  380 |         fixed_candidate = 16 + (event_count * 11);
+      |                         ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:381:25: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  381 |         dense_candidate = 2048;
+      |                         ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:387:24: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  387 |           gap_first[i] = 0; gap_width[i] = 1; gap_counts[i] = 0;
+      |                        ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:387:42: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  387 |           gap_first[i] = 0; gap_width[i] = 1; gap_counts[i] = 0;
+      |                                          ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:387:61: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  387 |           gap_first[i] = 0; gap_width[i] = 1; gap_counts[i] = 0;
+      |                                                             ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:388:48: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  388 |           for (n=0;n<8;n=n+1) gap_values[i][n] = 0;
+      |                                                ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:390:22: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  390 |         packed_index = 0; gap_prev = 0;
+      |                      ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:390:36: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  390 |         packed_index = 0; gap_prev = 0;
+      |                                    ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:393:23: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  393 |             gap_block = packed_index >> 3;
+      |                       ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:394:22: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  394 |             gap_slot = packed_index & 7;
+      |                      ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:395:53: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  395 |             if (gap_slot == 0) gap_first[gap_block] = i[10:0];
+      |                                                     ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:397:25: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  397 |               gap_value = i - gap_prev - 1;
+      |                         ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:398:49: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  398 |               gap_values[gap_block][gap_slot-1] = gap_value[10:0];
+      |                                                 ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:399:27: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  399 |               gap_width_i = 1;
+      |                           ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:400:87: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  400 |               while ((1 << gap_width_i) <= gap_value && gap_width_i < 11) gap_width_i = gap_width_i + 1;
+      |                                                                                       ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:401:76: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  401 |               if (gap_width_i > gap_width[gap_block]) gap_width[gap_block] = gap_width_i[3:0];
+      |                                                                            ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:403:35: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  403 |             gap_counts[gap_block] = gap_counts[gap_block] + 1;
+      |                                   ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:404:22: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  404 |             gap_prev = i; packed_index = packed_index + 1;
+      |                      ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:404:40: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  404 |             gap_prev = i; packed_index = packed_index + 1;
+      |                                        ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:407:24: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  407 |         gap_bits_total = 16; gap_pack_pos = 16;
+      |                        ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:407:43: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  407 |         gap_bits_total = 16; gap_pack_pos = 16;
+      |                                           ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:408:20: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  408 |         packed_gap = 0; packed_gap[15:0] = event_count;
+      |                    ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:408:42: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  408 |         packed_gap = 0; packed_gap[15:0] = event_count;
+      |                                          ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:411:28: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  411 |             gap_bits_total = gap_bits_total + 11 + 4 + ((gap_counts[i]-1) * gap_width[i]);
+      |                            ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:412:23: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  412 |             packed_gap[gap_pack_pos +: 11] = gap_first[i]; gap_pack_pos = gap_pack_pos + 11;
+      |                       ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:412:73: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  412 |             packed_gap[gap_pack_pos +: 11] = gap_first[i]; gap_pack_pos = gap_pack_pos + 11;
+      |                                                                         ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:413:23: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  413 |             packed_gap[gap_pack_pos +: 4] = gap_width[i] - 1; gap_pack_pos = gap_pack_pos + 4;
+      |                       ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:413:76: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  413 |             packed_gap[gap_pack_pos +: 4] = gap_width[i] - 1; gap_pack_pos = gap_pack_pos + 4;
+      |                                                                            ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:417:51: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  417 |                   if (j < gap_width[i]) packed_gap[gap_pack_pos + j] = gap_values[i][n][j];
+      |                                                   ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:418:30: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  418 |                 gap_pack_pos = gap_pack_pos + gap_width[i];
+      |                              ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:423:23: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  423 |         gap_candidate = gap_bits_total;
+      |                       ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:432:22: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  432 |         packed_index = 0;
+      |                      ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:436:26: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  436 |             packed_index = packed_index + 1;
+      |                          ^
+%Warning-BLKSEQ: /home/rishabh/HPCA2/mosaic_delta_phase1/rtl/xorflow_encoder_pipelined.sv:349:56: Blocking assignment '=' in sequential logic process
+                                                                                                : ... Suggest using delayed assignment '<='
+  349 |       event_bitmap <= 0; packed_fixed <= 0; packed_gap = 0;
+      |                                                        ^

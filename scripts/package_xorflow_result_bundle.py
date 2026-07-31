@@ -66,7 +66,7 @@ def generated_text() -> tuple[str, str, str, str]:
     readme = f"""# XORFLOW reviewer result bundle\n\nGenerated UTC: {now}\nGit HEAD: `{git('rev-parse', 'HEAD')}`\n\nThis archive contains the causal online serializer/replay implementation, 26-configuration campaign outputs, exact round-trip summaries, event-driven schedules, controls, timing/PPA evidence, tests, logs, and the final honest report. It excludes raw checkpoints/activation NPZs, transient giant aggregate files, and third-party histories. Omitted files are hashed in `MANIFEST.json`.\n\nStart with:\n\n1. `reviewer_spec_v3/report/FINAL_RESULTS.md`\n2. `reviewer_spec_v3/report/RESULT_SUMMARY.yaml`\n3. `reviewer_spec_v3/RESULT_MANIFEST.csv`\n4. `reviewer_spec_v3/REPRODUCE_COMMANDS.txt`\n5. `reviewer_spec_v3/audit/REPO_AUDIT.md`\n\nThe declared decision is `ITERATE_METHOD_BEFORE_SIMULATOR`: causal data and modeled subsystem results are positive, while encoder RTL, complete-workload independent DRAM timing, and final figure regeneration remain explicitly unresolved.\n"""
     readme = readme.replace(
         "while encoder RTL, complete-workload independent DRAM timing, and final figure regeneration remain explicitly unresolved.",
-        "The handoff includes synthesized ready/valid encoder-boundary RTL, Verilator stream equivalence, deterministic rerun hashes, pair/sampled independent DRAM evidence, and a complete Arxiv online replay timing record; it does not overclaim a full RTL candidate-discovery engine or full all-workload DRAM timing.",
+        "The handoff includes the tile-scale dense/fixed-ID/Gap8 RTL stream engine, Verilator stream equivalence, real serialized-stream VCD activity, routed VCD-annotated power, deterministic rerun hashes, explicit complete-versus-sampled independent DRAM evidence, and a complete Arxiv online replay timing record; any remaining limits are listed in RESULT_SUMMARY.yaml.",
     )
     readme = readme.replace(
         "26-configuration campaign outputs",
@@ -89,8 +89,9 @@ def main() -> None:
     compact_v3_prefixes = (
         "report/", "audit/", "traces/", "figures/", "memory/", "quality/",
         "encoder/encoder_synth.json", "encoder/encoder_rtl_synthesis.log",
-        "encoder/encoder_engine_rtl_synthesis.log", "encoder/encoder_engine_cosim.log",
-        "encoder/encoder_verilator_lint.log", "encoder/stream_equivalence.csv",
+        "encoder/encoder_engine_rtl_synthesis.log", "encoder/encoder_engine_cosim.log", "encoder/encoder_stream_cosim.log", "encoder/encoder_stream_rtl_synthesis.log",
+        "encoder/encoder_verilator_lint.log", "encoder/stream_equivalence.csv", "encoder/vcd_or_saif/",
+        "decoder/vcd_or_saif/", "activity/",
         "decoder/decoder_cluster_synth.json", "decoder/decoder_cluster_rtl_synthesis.log",
         "decoder/decoder_cluster_verilator_lint.log", "decoder/decoder_cluster_cosim.log",
         "decoder/decoder_cluster_openroad_summary.json", "schedule/system_cycles.csv",

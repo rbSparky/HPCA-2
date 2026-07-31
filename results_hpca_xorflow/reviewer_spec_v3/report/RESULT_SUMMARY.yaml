@@ -1,10 +1,10 @@
 result_summary:
-  generated_utc: "2026-07-31T02:42:54.645867+00:00"
-  git_sha: "ed8e0f749a05df67eb96a0e07a196645fbf55a83"
+  generated_utc: "2026-07-31T05:16:36.672786+00:00"
+  git_sha: "675a368ede272049e13c322a472e4734b84795b5"
   dirty: false
   decision: ITERATE_METHOD_BEFORE_SIMULATOR
   correctness:
-    pytest_passed: 226
+    pytest_passed: 228
     pytest_failed: 0
     causal_failures: 0
     serializer_roundtrip_failures: 0
@@ -57,7 +57,11 @@ result_summary:
     a0_population_count: true
     a2_majority_accumulation: true
     candidate_selector: true
-    variable_length_bit_packer_rtl: false
+    variable_length_bit_packer_rtl: true
+    tile_stream_engine: true
+    tile_domain_bits: 2048
+    implemented_stream_formats: [DENSE_BITMAP, FIXED_IDS, BLOCK_FOR_GAP8]
+    gap8_candidate_length_input: false
     stream_equivalence_cases: 24
   decoder_cluster:
     lanes: 8
@@ -69,16 +73,23 @@ result_summary:
     routed_drc_errors: 0
     routed_die_area_um2: 68220.2161
     routed_clock_slack_ns: 0.565
-    real_trace_vcd_saif: false
+    real_trace_vcd_saif: true
+    characterized_power: true
+    routed_vcd_power_status: VCD_ANNOTATED_OPENROAD_REPORT
+    routed_vcd_total_power_w: 1.27e-02
+    routed_vcd_annotated_pins: 827
   schedule_validation:
     event_model: complete_cached_campaign
     analytical_vs_event_csv: results_hpca_xorflow/reviewer_spec_v3/schedule/analytical_vs_event.csv
     max_relative_error: recorded_in_source_csv
   scope_notes:
-    - bounded_encoder_rtl_engine_synthesis_and_stream_equivalence_pass
-    - variable_length_event_discovery_and_bit_packing_rtl_not_claimed
+    - tile_scale_encoder_engine_synthesis_and_stream_equivalence_pass
+    - dense_fixed_id_and_gap8_variable_length_packing_rtl_pass
     - decoder_cluster_synthesis_cosim_and_openroad_flow_attempted
-    - real_trace_vcd_saif_power_not_claimed
-    - dramsim3_sampled_and_ramulator_complete_online_scope_recorded
+    - real_serialized_stream_vcd_activity_and_routed_openroad_power_captured
+    - full_workload_energy_not_claimed
+    - dramsim3_sampled_and_complete_trace_scope_recorded
     - overlap_breakdown_and_final_figures_regenerated
     - deterministic_principal_csv_hashes_match
+  unresolved_items:
+    - full_workload_energy_and_activity_scaling_not_claimed

@@ -1,6 +1,6 @@
 {
   "status": "PASS_SYNTHESIS_COSIM_ROUTED",
-  "reason": "The integrated 8-lane cluster instantiates eight pipelined variable-event lanes, has finite ready/valid inputs, tile-local support-cache storage, bank/same-word conflict accounting, and software/RTL co-simulation. OpenROAD evidence is included when the Docker flow completes. Real-trace VCD/SAIF power remains separate and is not fabricated.",
+  "reason": "The integrated 8-lane cluster instantiates eight pipelined variable-event lanes, has finite ready/valid inputs, tile-local support-cache storage, bank/same-word conflict accounting, and software/RTL co-simulation. OpenROAD evidence includes a physical-top VCD annotation and routed power report driven by a real Arxiv s17 serialized support-stream prefix; this is not a full-workload energy result.",
   "cycle_model": "results_hpca_xorflow/reviewer_spec_v3/decoder",
   "rtl_synthesis_log": "results_hpca_xorflow/reviewer_spec_v3/decoder/decoder_cluster_rtl_synthesis.log",
   "verilator_lint_log": "results_hpca_xorflow/reviewer_spec_v3/decoder/decoder_cluster_verilator_lint.log",
@@ -12,6 +12,8 @@
   "lane_fmax_mhz": 1458.88,
   "bank_cell_count": 61504,
   "routed_cluster_claim": true,
-  "real_trace_vcd_saif": false,
-  "required_next_step": "Add descriptor/event-parser RTL and a real-trace VCD/SAIF activity campaign before a final power claim."
+  "real_trace_vcd_saif": true,
+  "vcd_activity_summary": "results_hpca_xorflow/reviewer_spec_v3/activity/vcd_summary.csv",
+  "power_claim": "ROUTED_VCD_ANNOTATED_SHORT_STREAM_ONLY",
+  "required_next_step": "Scale the VCD activity campaign to full workload streams before making a full-workload energy claim."
 }

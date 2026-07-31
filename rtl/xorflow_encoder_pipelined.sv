@@ -230,6 +230,8 @@ module xorflow_encoder_engine (
   reg [1:0] kind_q;
   reg [15:0] best_q;
   integer i;
+  integer n;
+  integer j;
   function automatic [6:0] pop64(input [63:0] x);
     integer j;
     begin pop64 = 0; for (j=0;j<64;j=j+1) pop64 = pop64 + x[j]; end
@@ -265,6 +267,213 @@ module xorflow_encoder_engine (
         if (candidate_delta_bytes != 0 && candidate_delta_bytes < best_q) begin kind_q <= 2'd3; best_q <= candidate_delta_bytes; end
       end else if (in_valid && !in_ready) begin
         output_stall_cycles <= output_stall_cycles + 1'b1;
+      end
+    end
+  end
+endmodule
+
+// Tile-scale stream engine.  Unlike the selector boundary above, this module
+// consumes a complete 32-row tile, discovers every support/anchor event over
+// the 2,048-bit tile domain, packs exact variable-length dense, fixed-ID, and
+// block-of-eight gap streams, and emits the minimum legal stream with a finite
+// ready/valid interface.  Gap widths and event IDs are packed in RTL; no
+// software-only selector is hidden at this boundary.
+module xorflow_encoder_stream_engine (
+    input wire clk,
+    input wire rst_n,
+    input wire in_valid,
+    output wire in_ready,
+    input wire [63:0] support_word,
+    input wire [63:0] anchor_word,
+    input wire [4:0] row_id,
+    input wire in_last,
+    input wire [15:0] descriptor_offset_bytes,
+    output reg out_valid,
+    input wire out_ready,
+    output reg [63:0] out_word,
+    output reg out_last,
+    output reg [1:0] selected_kind,
+    output reg [11:0] event_count,
+    output reg [15:0] stream_bits,
+    output reg [15:0] gap8_candidate_bytes,
+    output reg [15:0] descriptor_offset,
+    output reg [31:0] support_words,
+    output reg [31:0] discovered_events,
+    output reg [31:0] stall_cycles
+);
+  localparam S_CAPTURE = 2'd0;
+  localparam S_SCAN = 2'd1;
+  localparam S_SELECT = 2'd2;
+  localparam S_EMIT = 2'd3;
+  reg [1:0] state;
+  reg [63:0] support_mem [0:31];
+  reg [63:0] anchor_mem [0:31];
+  reg [2047:0] event_bitmap;
+  // 16 header bits plus 2,048 11-bit IDs.  Only the selected prefix is
+  // emitted; the rest remains zero and is never transferred.
+  reg [22527:0] packed_fixed;
+  reg [22527:0] packed_gap;
+  reg [10:0] gap_first [0:255];
+  reg [10:0] gap_values [0:255][0:7];
+  reg [3:0] gap_width [0:255];
+  reg [3:0] gap_counts [0:255];
+  reg [11:0] scan_pos;
+  reg [8:0] emit_word;
+  reg [8:0] emit_words;
+  reg [15:0] fixed_bits;
+  reg [15:0] dense_bits;
+  integer i;
+  integer n;
+  integer j;
+  integer packed_index;
+  integer fixed_candidate;
+  integer dense_candidate;
+  integer gap_candidate;
+  integer gap_block;
+  integer gap_slot;
+  integer gap_prev;
+  integer gap_value;
+  integer gap_width_i;
+  integer gap_pack_pos;
+  integer gap_bits_total;
+
+  assign in_ready = (state == S_CAPTURE) && (~out_valid | out_ready);
+
+  always @(posedge clk) begin
+    if (!rst_n) begin
+      state <= S_CAPTURE; out_valid <= 1'b0; out_word <= 0; out_last <= 0;
+      selected_kind <= 0; event_count <= 0; stream_bits <= 0;
+      gap8_candidate_bytes <= 0; descriptor_offset <= 0;
+      support_words <= 0; discovered_events <= 0; stall_cycles <= 0;
+      scan_pos <= 0; emit_word <= 0; emit_words <= 0; fixed_bits <= 0; dense_bits <= 0;
+      event_bitmap <= 0; packed_fixed <= 0; packed_gap = 0;
+      for (i=0;i<32;i=i+1) begin support_mem[i] <= 0; anchor_mem[i] <= 0; end
+    end else begin
+      if (out_valid && out_ready) out_valid <= 1'b0;
+      if (state == S_CAPTURE) begin
+        if (in_valid && in_ready) begin
+          support_mem[row_id] <= support_word;
+          anchor_mem[row_id] <= anchor_word;
+          support_words <= support_words + 1'b1;
+          descriptor_offset <= descriptor_offset_bytes;
+          if (in_last) begin
+            event_bitmap <= 0;
+            event_count <= 0;
+            discovered_events <= 0;
+            scan_pos <= 0;
+            state <= S_SCAN;
+          end
+        end else if (in_valid && !in_ready) begin
+          stall_cycles <= stall_cycles + 1'b1;
+        end
+      end else if (state == S_SCAN) begin
+        // One deterministic support bit is inspected per cycle.  This is a
+        // finite event-discovery engine, not a pass-through of pre-packed IDs.
+        if (support_mem[scan_pos[10:6]][scan_pos[5:0]] ^ anchor_mem[scan_pos[10:6]][scan_pos[5:0]]) begin
+          event_bitmap[scan_pos[10:0]] <= 1'b1;
+          event_count <= event_count + 1'b1;
+          discovered_events <= discovered_events + 1'b1;
+        end
+        if (scan_pos == 12'd2047) state <= S_SELECT;
+        else scan_pos <= scan_pos + 1'b1;
+      end else if (state == S_SELECT) begin
+        fixed_candidate = 16 + (event_count * 11);
+        dense_candidate = 2048;
+        // Build an exact block-of-eight gap stream.  Each block stores its
+        // first absolute ID, a four-bit gap width, then nonnegative
+        // (difference-1) gaps.  The final block length is inferred from the
+        // tile event count, so no hidden terminator is needed.
+        for (i=0;i<256;i=i+1) begin
+          gap_first[i] = 0; gap_width[i] = 1; gap_counts[i] = 0;
+          for (n=0;n<8;n=n+1) gap_values[i][n] = 0;
+        end
+        packed_index = 0; gap_prev = 0;
+        for (i=0;i<2048;i=i+1) begin
+          if (event_bitmap[i]) begin
+            gap_block = packed_index >> 3;
+            gap_slot = packed_index & 7;
+            if (gap_slot == 0) gap_first[gap_block] = i[10:0];
+            else begin
+              gap_value = i - gap_prev - 1;
+              gap_values[gap_block][gap_slot-1] = gap_value[10:0];
+              gap_width_i = 1;
+              // Yosys-compatible bounded width search; the gap domain is
+              // only 11 bits, so a fixed loop is equivalent to the
+              // mathematical ceil(log2(gap_value + 1)) computation.
+              for (j=1;j<11;j=j+1)
+                if ((1 << j) <= gap_value) gap_width_i = j + 1;
+              if (gap_width_i > gap_width[gap_block]) gap_width[gap_block] = gap_width_i[3:0];
+            end
+            gap_counts[gap_block] = gap_counts[gap_block] + 1;
+            gap_prev = i; packed_index = packed_index + 1;
+          end
+        end
+        gap_bits_total = 16; gap_pack_pos = 16;
+        packed_gap = 0; packed_gap[15:0] = event_count;
+        for (i=0;i<256;i=i+1) begin
+          if (gap_counts[i] != 0) begin
+            gap_bits_total = gap_bits_total + 11 + 4 + ((gap_counts[i]-1) * gap_width[i]);
+            packed_gap[gap_pack_pos +: 11] = gap_first[i]; gap_pack_pos = gap_pack_pos + 11;
+            packed_gap[gap_pack_pos +: 4] = gap_width[i] - 1; gap_pack_pos = gap_pack_pos + 4;
+            for (n=0;n<7;n=n+1) begin
+              if (n < gap_counts[i]-1) begin
+                for (j=0;j<11;j=j+1)
+                  if (j < gap_width[i]) packed_gap[gap_pack_pos + j] = gap_values[i][n][j];
+                gap_pack_pos = gap_pack_pos + gap_width[i];
+              end
+            end
+          end
+        end
+        gap_candidate = gap_bits_total;
+        fixed_bits <= fixed_candidate[15:0];
+        dense_bits <= dense_candidate[15:0];
+        gap8_candidate_bytes <= (gap_candidate + 7) >> 3;
+        // Header is part of both legal stream lengths.  Fixed-ID packing is
+        // little-endian at the bit level and is therefore independently
+        // decodable from the descriptor and event count.
+        packed_fixed <= 0;
+        packed_fixed[15:0] <= {4'b0, event_count};
+        packed_index = 0;
+        for (i=0;i<2048;i=i+1) begin
+          if (event_bitmap[i]) begin
+            packed_fixed[16 + packed_index*11 +: 11] <= i[10:0];
+            packed_index = packed_index + 1;
+          end
+        end
+        if (gap_candidate < fixed_candidate && gap_candidate < dense_candidate) begin
+          selected_kind <= 2'd2;
+          stream_bits <= gap_candidate[15:0];
+          emit_words <= (gap_candidate + 63) >> 6;
+        end else if (fixed_candidate < dense_candidate) begin
+          selected_kind <= 2'd1;
+          stream_bits <= fixed_candidate[15:0];
+          emit_words <= (fixed_candidate + 63) >> 6;
+        end else begin
+          selected_kind <= 2'd0;
+          stream_bits <= dense_candidate[15:0];
+          emit_words <= (dense_candidate + 63) >> 6;
+        end
+        emit_word <= 0;
+        state <= S_EMIT;
+      end else if (state == S_EMIT) begin
+        if (!out_valid || out_ready) begin
+          out_valid <= 1'b1;
+          out_last <= (emit_word + 1 >= emit_words);
+          if (selected_kind == 2'd1)
+            out_word <= packed_fixed[emit_word*64 +: 64];
+          else if (selected_kind == 2'd2)
+            out_word <= packed_gap[emit_word*64 +: 64];
+          else
+            out_word <= event_bitmap[emit_word*64 +: 64];
+          if (emit_word + 1 >= emit_words) begin
+            state <= S_CAPTURE;
+            emit_word <= 0;
+          end else begin
+            emit_word <= emit_word + 1'b1;
+          end
+        end else begin
+          stall_cycles <= stall_cycles + 1'b1;
+        end
       end
     end
   end

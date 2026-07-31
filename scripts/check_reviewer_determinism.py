@@ -14,6 +14,9 @@ FILES = (
     "schedule/system_cycles.csv",
     "schedule/overlap_breakdown.csv",
     "encoder/stream_equivalence.csv",
+    "encoder/encoder_stream_cosim.log",
+    "activity/vcd_summary.csv",
+    "memory/dramsim3_summary.csv",
     "quality/paired_quality.csv",
     "decoder/decoder_cluster_openroad_summary.json",
 )

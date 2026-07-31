@@ -1,12 +1,13 @@
 # XORFLOW Reviewer-Spec Execution Status
 
-Last updated: 2026-07-31 02:11 UTC. Canonical output root:
+Last updated: 2026-07-31 04:45 UTC. Canonical output root:
 `results_hpca_xorflow/reviewer_spec_v3/`.
 
 Progress: **8/8 evidence blocks complete; primary campaign and scoped hardware
-validation complete**. Two explicit scope limits remain: full tile-scale
-variable-length encoder packing is still software-backed, and real-trace
-VCD/SAIF power plus complete-workload DRAMsim3 timing are not claimed.
+validation complete**. The follow-up audit added a tile-scale dense/fixed-ID/Gap8
+RTL stream engine, physical-top serialized-stream VCD activity, an OpenROAD
+VCD-annotated routed power report, and complete paired DRAMsim3 replays. Full-
+workload energy remains explicitly scoped rather than silently claimed.
 
 | Evidence block | State | Canonical path |
 |---|---|---|
@@ -33,11 +34,21 @@ aggregate input on repeat runs; `RESULT_MANIFEST.csv` and `report/` are now
 complete.
 
 The final continuation added a bounded RTL encoder tile engine (support/anchor
-XOR, exact 64-bit flip discovery, fixed-ID packing, majority accumulation and
-candidate selection), an 8-lane decoder/support-cache cluster with ready/valid
-co-simulation, and a compact hierarchical OpenROAD top. The corrected top
+XOR, exact 64-bit flip discovery, fixed-ID/Gap8 packing, majority accumulation and
+candidate selection), a 32-row × 64-bit tile stream engine with exact dense/
+fixed-ID/Gap8 packing and descriptor offsets, an 8-lane decoder/support-cache
+cluster with ready/valid co-simulation, and a compact hierarchical OpenROAD top.
+The corrected top
 routed cleanly on Nangate45 with zero detailed-route DRC errors; decoded event
 buses terminate internally rather than being exported as package pins.
+
+The physical compact decoder top was driven by a real Arxiv s17 serialized
+support-stream prefix in Verilator. OpenROAD annotated 827 VCD pin activities
+and reported 12.7 mW for that routed prefix activity test; this is a routed
+prefix cell-power result, not a full-workload energy number. DRAMsim3 conversion
+now emits the correct `address operation cycle` format, one request every eight
+feeder cycles, and records complete paired service counts under the explicit
+8-GiB HBM address mapping.
 
 Validated optimization canary (`ogbn_arxiv_deepres8_w128_s7`):
 

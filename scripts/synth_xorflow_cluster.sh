@@ -7,7 +7,7 @@ yosys -p "read_verilog -sv $root/rtl/xorflow_decoder_pipelined.sv $root/rtl/xorf
 verilator --lint-only --Wall --Wno-fatal "$root/rtl/xorflow_decoder_pipelined.sv" "$root/rtl/xorflow_decoder_cluster_pipelined.sv" > "$out/verilator_cluster_lint.log" 2>&1
 build="$out/cluster_obj_dir"
 mkdir -p "$build"
-verilator --cc --exe --build --Wno-fatal --top-module xorflow_decoder_cluster8_debug \
+verilator --cc --exe --build --trace --Wno-fatal --top-module xorflow_decoder_cluster8_debug \
   --Mdir "$build" "$root/rtl/xorflow_decoder_pipelined.sv" "$root/rtl/xorflow_decoder_cluster_pipelined.sv" \
   "$root/rtl/xorflow_decoder_cluster_tb.cpp" -o decoder_cluster_tb >/dev/null
 "$build/decoder_cluster_tb" | tee "$out/decoder_cluster_cosim.log"

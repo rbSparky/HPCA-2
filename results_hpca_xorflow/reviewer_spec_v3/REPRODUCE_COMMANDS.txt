@@ -5,6 +5,9 @@ PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/consol
 PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/finalize_reviewer_spec.py
 bash scripts/synth_xorflow_encoder.sh
 bash scripts/verify_encoder_engine_rtl.sh
+PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/generate_reviewer_activity.py
+bash scripts/run_openroad_vcd_power.sh
+PYTHONPATH=src /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/run_dramsim3_full_trace.py --trace <complete_ramulator_trace> --output results_hpca_xorflow/reviewer_spec_v3/memory/dramsim3_complete_<id>.json
 /home/rishabh/miniconda/envs/taugat_pyg/bin/python scripts/verify_encoder_rtl_stream.py
 bash scripts/synth_xorflow_cluster.sh
 bash scripts/run_openroad_xorflow_cluster8.sh

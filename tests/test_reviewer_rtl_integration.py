@@ -14,6 +14,9 @@ def test_encoder_engine_is_not_pass_through() -> None:
     assert "support_word ^ anchor_word" in source
     assert "packed_event_ids" in source
     assert "local_count" in source
+    assert "module xorflow_encoder_stream_engine" in source
+    assert "packed_fixed" in source
+    assert "event_bitmap" in source
 
 
 def test_decoder_cluster_is_hierarchical_and_routed() -> None:
@@ -32,6 +35,18 @@ def test_decoder_cluster_is_hierarchical_and_routed() -> None:
 def test_engine_and_cluster_cosim_pass() -> None:
     for rel in (
         "results_hpca_xorflow/reviewer_spec_v3/encoder/encoder_engine_cosim.log",
+        "results_hpca_xorflow/reviewer_spec_v3/encoder/encoder_stream_cosim.log",
         "results_hpca_xorflow/reviewer_spec_v3/decoder/decoder_cluster_cosim.log",
     ):
         assert "PASS" in (ROOT / rel).read_text()
+
+
+def test_physical_activity_and_power_artifacts() -> None:
+    vcd = ROOT / "results_hpca_xorflow/reviewer_spec_v3/decoder/vcd_or_saif/decoder_cluster_realstream.vcd"
+    power = ROOT / "results_hpca_xorflow/reviewer_spec_v3/decoder/vcd_or_saif/openroad_vcd_power.json"
+    summary = ROOT / "results_hpca_xorflow/reviewer_spec_v3/activity/vcd_summary.csv"
+    assert vcd.stat().st_size > 0
+    assert summary.stat().st_size > 0
+    payload = json.loads(power.read_text())
+    assert payload["annotation_pass"] is True
+    assert int(payload["annotated_pin_activities"]) > 0

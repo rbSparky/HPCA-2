@@ -17787,6 +17787,6 @@ Removed 0 unused cells and 1417 unused wires.
      $_XOR_                       3380
 
 Warnings: 6 unique messages, 6 total
-End of script. Logfile hash: ffc83b193c, CPU: user 4.80s system 0.26s, MEM: 55.84 MB peak
+End of script. Logfile hash: ffc83b193c, CPU: user 4.51s system 0.20s, MEM: 56.00 MB peak
 Yosys 0.33 (git sha1 2584903a060)
-Time spent: 18% 3x proc_mux (1 sec), 16% 13x opt_expr (0 sec), ...
+Time spent: 19% 3x proc_mux (1 sec), 16% 13x opt_expr (0 sec), ...
