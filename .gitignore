@@ -30,3 +30,7 @@ results_hpca_xorflow/reviewer_spec/
 results_hpca_xorflow/reviewer_spec_v2/
 results_hpca_xorflow/reviewer_spec_v3/
 results_hpca_xorflow/reviewer_spec_v3_canary/
+# Acceptance campaigns retain compact reports/tables in Git; raw lifecycle,
+# event, timing, and transient bundle staging files remain in the local handoff.
+results_hpca_xorflow/review4_acceptance/
+results_hpca_xorflow/review5_acceptance/
