@@ -19,6 +19,8 @@
 
 \pdfpagewidth=8.5in
 \pdfpageheight=11in
+\vbadness=10000
+\vfuzz=1pt
 \newcommand{\hpcayear}{2027}
 \newcommand{\hpcasubmissionnumber}{1467}
 \title{XORFLOW: Online Inter-Layer Support Compression for Deep Residual GNN Accelerators}
@@ -31,18 +33,18 @@
 \newcommand\hpcaemail{anonymous@example.com}
 \input{hpca-template}
 
-\newcommand{\sys}{\textsc{XORFLOW}}
-\newcommand{\beicsr}{\textsc{BEICSR}}
-\newcommand{\Azero}{\textsc{A0}}
-\newcommand{\Atwo}{\textsc{A2}}
-\newcommand{\DeltaFmt}{\textsc{Delta}}
+\newcommand{\sys}{\textnormal{\textsc{XORFLOW}}}
+\newcommand{\beicsr}{\textnormal{\textsc{BEICSR}}}
+\newcommand{\Azero}{\textnormal{\textsc{A0}}}
+\newcommand{\Atwo}{\textnormal{\textsc{A2}}}
+\newcommand{\DeltaFmt}{\textnormal{\textsc{Delta}}}
 \newcommand{\xor}{\mathbin{\oplus}}
 \newcommand{\argminpref}{\operatorname*{arg\,min}}
 \newtheorem{proposition}{Proposition}
 \newtheorem{lemma}{Lemma}
 
 \begin{abstract}
-Deep residual graph neural networks repeatedly materialize sparse intermediate features, making activation movement a major off-chip cost. This paper presents \sys, an online lossless representation that exploits positional persistence between adjacent post-ReLU supports. \sys{} independently encodes an anchor support and represents the following support by an XOR event stream only when the complete delta record is smaller than independent encoding. Across ten compatible eight-layer checkpoints, \sys{} reduces serialized support writes by 37.1\% and complete physical traffic by 7.9\%, yielding 1.083$\times$ trace-weighted geometric-mean modeled subsystem speedup. On valid deeper configurations, the modeled subsystem speedup reaches \textbf{1.324$\times$} on Reddit D16. Byte-exact reconstruction, finite-capacity producer/consumer scheduling, external memory replay, RTL co-simulation, and physical implementation substantiate the representation and datapath.\\
+Deep residual graph neural networks repeatedly materialize sparse intermediate features, making activation movement a major off-chip cost. This paper presents \sys, an online lossless representation that exploits positional persistence between adjacent post-ReLU supports. \sys{} independently encodes an anchor support and represents the following support by an XOR event stream only when the complete delta record is smaller than independent encoding. Across ten compatible eight-layer checkpoints, \sys{} reduces serialized support writes by 37.1\% and complete physical traffic by 7.9\%, yielding 1.083$\times$ trace-weighted geometric-mean modeled subsystem speedup. On valid deeper configurations, the modeled subsystem speedup reaches \textbf{1.324$\times$} on Reddit D16. Byte-exact reconstruction, finite-capacity producer/consumer scheduling, external memory replay, RTL co-simulation, and physical implementation substantiate the representation and datapath.\par\smallskip\noindent
 Anonymous artifact: \url{https://anonymous.4open.science/r/HPCA-2-0315/}.
 \end{abstract}
 
