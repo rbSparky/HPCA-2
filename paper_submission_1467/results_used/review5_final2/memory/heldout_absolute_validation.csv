@@ -1,0 +1,3 @@
+case,role,raw_internal_cycles,prediction_cycles,ramulator2_cycles,absolute_error_percent,calibration_source,same_case_external_used_for_prediction
+flickr_s7,CALIBRATION,2381344,4004721,4004721,0.0,flickr_s7_only,True
+flickr_s17,HELD_OUT_VALIDATION,2417140,4064919,4083428,0.45327112416332555,flickr_s7_only,False

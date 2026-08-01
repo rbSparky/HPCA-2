@@ -1,0 +1,72 @@
+{
+  "3140f0b4ec4d2fc59b66cf17f62e45497e172107a6cb5564f8fef237277bd209": {
+    "cycles": 3535,
+    "cycles_with_prefetch": 7401,
+    "error": "",
+    "k": 128,
+    "m": 127,
+    "n": 128,
+    "success": true,
+    "utilization": 57.482319660537485
+  },
+  "812189c6aa96011083be721e352d34b92c17e84c8add72dafd9935837c42c8bb": {
+    "cycles": 2255,
+    "cycles_with_prefetch": 4841,
+    "error": "",
+    "k": 128,
+    "m": 47,
+    "n": 128,
+    "success": true,
+    "utilization": 33.348115299334815
+  },
+  "9f3bf1203dcbf10f1a95eedbcfe62f0e1ddb028f5c6cba438ed497af08bb743a": {
+    "cycles": 2047,
+    "cycles_with_prefetch": 4425,
+    "error": "",
+    "k": 128,
+    "m": 34,
+    "n": 128,
+    "success": true,
+    "utilization": 26.575476306790424
+  },
+  "a6f170d5083d36959ed2e4c5c5faf72640ac86ddde5f85267f52cd42941bce57": {
+    "cycles": 3551,
+    "cycles_with_prefetch": 7433,
+    "error": "",
+    "k": 128,
+    "m": 128,
+    "n": 128,
+    "success": true,
+    "utilization": 57.673894677555616
+  },
+  "ba3446c68e644f6b7d546b3c33d9004e2ad690a0454b24404f6042bbbe6f0c8d": {
+    "cycles": 1583,
+    "cycles_with_prefetch": 3497,
+    "error": "",
+    "k": 128,
+    "m": 5,
+    "n": 128,
+    "success": true,
+    "utilization": 5.053695514845231
+  },
+  "c047e829acc54fbdf4e97ac7c03570f7853a4be2a18b05c3cad95adfb9d1b271": {
+    "cycles": 779,
+    "cycles_with_prefetch": 1969,
+    "error": "",
+    "k": 64,
+    "m": 101,
+    "n": 64,
+    "success": true,
+    "utilization": 51.861360718870344
+  },
+  "e619558e800500c24299b7a42aeebbcb3c95e9a68a87950427d888624e31e7eb": {
+    "cycles": 887,
+    "cycles_with_prefetch": 2447,
+    "error": "",
+    "k": 64,
+    "m": 128,
+    "n": 64,
+    "success": true,
+    "utilization": 57.72266065388951
+  }
+}

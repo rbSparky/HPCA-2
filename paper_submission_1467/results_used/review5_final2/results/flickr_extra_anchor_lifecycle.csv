@@ -1,0 +1,9 @@
+run_id,capacity_bytes,entry_granularity,replacement_policy,insertion_point,release_point,read_ports,write_ports,bank_mapping,delta_targets,resident_decoded,resident_compressed,concurrent_stream,memory_reread,unclassified,consumer_hit_rate,consumer_anchor_read_bytes,consumer_anchor_decode_cycles
+flickr_deepres8_w128_s17,16384,decoded_tile_slice_bitmap,LRU,consumer_anchor_decode_done,eviction_or_layer_pair_done,1,1,record_id_mod_16,2792,32,0,0,2760,0,0.011461318051575931,4520000,73342
+flickr_deepres8_w128_s17,262144,decoded_tile_slice_bitmap,LRU,consumer_anchor_decode_done,eviction_or_layer_pair_done,1,1,record_id_mod_16,2792,512,0,0,2280,0,0.1833810888252149,3720960,60420
+flickr_deepres8_w128_s17,1048576,decoded_tile_slice_bitmap,LRU,consumer_anchor_decode_done,eviction_or_layer_pair_done,1,1,record_id_mod_16,2792,2048,0,0,744,0,0.7335243553008596,1196224,19453
+flickr_deepres8_w128_s17,4194304,decoded_tile_slice_bitmap,LRU,consumer_anchor_decode_done,eviction_or_layer_pair_done,1,1,record_id_mod_16,2792,2792,0,0,0,0,1.0,0,0
+flickr_deepres8_w128_s27,16384,decoded_tile_slice_bitmap,LRU,consumer_anchor_decode_done,eviction_or_layer_pair_done,1,1,record_id_mod_16,2792,32,0,0,2760,0,0.011461318051575931,4849216,76139
+flickr_deepres8_w128_s27,262144,decoded_tile_slice_bitmap,LRU,consumer_anchor_decode_done,eviction_or_layer_pair_done,1,1,record_id_mod_16,2792,512,0,0,2280,0,0.1833810888252149,4006336,62898
+flickr_deepres8_w128_s27,1048576,decoded_tile_slice_bitmap,LRU,consumer_anchor_decode_done,eviction_or_layer_pair_done,1,1,record_id_mod_16,2792,2048,0,0,744,0,0.7335243553008596,1308416,20508
+flickr_deepres8_w128_s27,4194304,decoded_tile_slice_bitmap,LRU,consumer_anchor_decode_done,eviction_or_layer_pair_done,1,1,record_id_mod_16,2792,2792,0,0,0,0,1.0,0,0

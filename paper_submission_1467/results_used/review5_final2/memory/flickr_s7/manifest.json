@@ -1,0 +1,18 @@
+{
+  "base_read_requests": 2767854,
+  "base_requests": 17292276,
+  "base_transaction_bytes": 553174112,
+  "base_transactions": 47440,
+  "base_write_requests": 14524422,
+  "combined_requests": 17438504,
+  "combined_transaction_bytes": 558032128,
+  "config_id": "flickr_deepres8_w128_s7",
+  "consumer_anchor_bytes": 4679296,
+  "consumer_anchor_requests": 146228,
+  "consumer_misses": 2760,
+  "delta_targets": 2792,
+  "hbm_transaction_bytes": 32,
+  "ordering": "all producer/target stream then exact consumer rereads (conservative)",
+  "scope": "all_layers_full_network",
+  "trace_sha256": "d899e78ab3ee1d945ed458dedf8c318246ae128e837fa9deab06c67f06ea984d"
+}

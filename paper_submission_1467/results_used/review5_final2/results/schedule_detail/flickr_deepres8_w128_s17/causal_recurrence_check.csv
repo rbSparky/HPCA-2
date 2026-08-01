@@ -1,0 +1,17 @@
+run_id,variant,layer,event_layer_cycles,recurrence_layer_cycles,relative_error,pass
+flickr_deepres8_w128_s17,BEICSR_OPT,0,5782127,5782127,0.0,True
+flickr_deepres8_w128_s17,BEICSR_OPT,1,5781668,5781668,0.0,True
+flickr_deepres8_w128_s17,BEICSR_OPT,2,5781079,5781079,0.0,True
+flickr_deepres8_w128_s17,BEICSR_OPT,3,5783376,5783376,0.0,True
+flickr_deepres8_w128_s17,BEICSR_OPT,4,5784771,5784771,0.0,True
+flickr_deepres8_w128_s17,BEICSR_OPT,5,5786417,5786417,0.0,True
+flickr_deepres8_w128_s17,BEICSR_OPT,6,5786782,5786782,0.0,True
+flickr_deepres8_w128_s17,BEICSR_OPT,7,5785643,5785643,0.0,True
+flickr_deepres8_w128_s17,XORFLOW_ONLINE,0,5819448,5819448,0.0,True
+flickr_deepres8_w128_s17,XORFLOW_ONLINE,1,5779557,5779557,0.0,True
+flickr_deepres8_w128_s17,XORFLOW_ONLINE,2,5820870,5820870,0.0,True
+flickr_deepres8_w128_s17,XORFLOW_ONLINE,3,5783608,5783608,0.0,True
+flickr_deepres8_w128_s17,XORFLOW_ONLINE,4,5829087,5829087,0.0,True
+flickr_deepres8_w128_s17,XORFLOW_ONLINE,5,5789972,5789972,0.0,True
+flickr_deepres8_w128_s17,XORFLOW_ONLINE,6,5837740,5837740,0.0,True
+flickr_deepres8_w128_s17,XORFLOW_ONLINE,7,5795135,5795135,0.0,True

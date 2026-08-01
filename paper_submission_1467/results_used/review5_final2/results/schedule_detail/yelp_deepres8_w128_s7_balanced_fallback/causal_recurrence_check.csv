@@ -1,0 +1,17 @@
+run_id,variant,layer,event_layer_cycles,recurrence_layer_cycles,relative_error,pass
+yelp_deepres8_w128_s7_balanced_fallback,BEICSR_OPT,0,92269049,92269049,0.0,True
+yelp_deepres8_w128_s7_balanced_fallback,BEICSR_OPT,1,92467724,92467724,0.0,True
+yelp_deepres8_w128_s7_balanced_fallback,BEICSR_OPT,2,92558061,92558061,0.0,True
+yelp_deepres8_w128_s7_balanced_fallback,BEICSR_OPT,3,92629896,92629896,0.0,True
+yelp_deepres8_w128_s7_balanced_fallback,BEICSR_OPT,4,92714090,92714090,0.0,True
+yelp_deepres8_w128_s7_balanced_fallback,BEICSR_OPT,5,92785927,92785927,0.0,True
+yelp_deepres8_w128_s7_balanced_fallback,BEICSR_OPT,6,92749471,92749471,0.0,True
+yelp_deepres8_w128_s7_balanced_fallback,BEICSR_OPT,7,92740911,92740911,0.0,True
+yelp_deepres8_w128_s7_balanced_fallback,XORFLOW_ONLINE,0,91585245,91585245,0.0,True
+yelp_deepres8_w128_s7_balanced_fallback,XORFLOW_ONLINE,1,88431319,88431319,0.0,True
+yelp_deepres8_w128_s7_balanced_fallback,XORFLOW_ONLINE,2,91241012,91241012,0.0,True
+yelp_deepres8_w128_s7_balanced_fallback,XORFLOW_ONLINE,3,86587579,86587579,0.0,True
+yelp_deepres8_w128_s7_balanced_fallback,XORFLOW_ONLINE,4,90728752,90728752,0.0,True
+yelp_deepres8_w128_s7_balanced_fallback,XORFLOW_ONLINE,5,85248349,85248349,0.0,True
+yelp_deepres8_w128_s7_balanced_fallback,XORFLOW_ONLINE,6,90304171,90304171,0.0,True
+yelp_deepres8_w128_s7_balanced_fallback,XORFLOW_ONLINE,7,84008148,84008148,0.0,True

@@ -1,0 +1,4 @@
+capacity_bytes,banks,technology_nm,access_time_ns,cycle_time_ns,dynamic_read_energy_nj,data_array_area_mm2,tool_success,raw_log
+16384,8,45,0.396747,0.203442,0.00936399,0.0781839,True,results_hpca_xorflow/reviewer_spec_v3/hardware/cacti/cacti_support_cache_b8.txt
+16384,16,45,0.433947,0.17227,0.00959811,0.0902128,True,results_hpca_xorflow/reviewer_spec_v3/hardware/cacti/cacti_support_cache_b16.txt
+16384,32,45,0.466889,0.156603,0.0110084,0.104827,True,results_hpca_xorflow/reviewer_spec_v3/hardware/cacti/cacti_support_cache_b32.txt

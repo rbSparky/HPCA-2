@@ -1,0 +1,6 @@
+PDF: XORFLOW_final_paper.pdf
+Pages: 12
+Encrypted: False
+Openable (PyMuPDF): True
+Likely scanned: False
+XFA present: False

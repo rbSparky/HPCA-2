@@ -1,0 +1,17 @@
+run_id,variant,layer,event_layer_cycles,recurrence_layer_cycles,relative_error,pass
+reddit_deepres8_w128_s17_native,BEICSR_OPT,0,759202884,759202884,0.0,True
+reddit_deepres8_w128_s17_native,BEICSR_OPT,1,759201001,759201001,0.0,True
+reddit_deepres8_w128_s17_native,BEICSR_OPT,2,759187078,759187078,0.0,True
+reddit_deepres8_w128_s17_native,BEICSR_OPT,3,759170697,759170697,0.0,True
+reddit_deepres8_w128_s17_native,BEICSR_OPT,4,759116305,759116305,0.0,True
+reddit_deepres8_w128_s17_native,BEICSR_OPT,5,759166271,759166271,0.0,True
+reddit_deepres8_w128_s17_native,BEICSR_OPT,6,759183493,759183493,0.0,True
+reddit_deepres8_w128_s17_native,BEICSR_OPT,7,759185625,759185625,0.0,True
+reddit_deepres8_w128_s17_native,XORFLOW_ONLINE,0,754952377,754952377,0.0,True
+reddit_deepres8_w128_s17_native,XORFLOW_ONLINE,1,717644528,717644528,0.0,True
+reddit_deepres8_w128_s17_native,XORFLOW_ONLINE,2,753820646,753820646,0.0,True
+reddit_deepres8_w128_s17_native,XORFLOW_ONLINE,3,643097769,643097769,0.0,True
+reddit_deepres8_w128_s17_native,XORFLOW_ONLINE,4,746162721,746162721,0.0,True
+reddit_deepres8_w128_s17_native,XORFLOW_ONLINE,5,578117105,578117105,0.0,True
+reddit_deepres8_w128_s17_native,XORFLOW_ONLINE,6,715356798,715356798,0.0,True
+reddit_deepres8_w128_s17_native,XORFLOW_ONLINE,7,558595147,558595147,0.0,True

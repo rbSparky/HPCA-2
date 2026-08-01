@@ -1,0 +1,9 @@
+{
+  "held_out_absolute_error_percent": 0.45327112416332555,
+  "held_out_case": "flickr_s17_all_layers",
+  "held_out_pass_le_5_percent": true,
+  "same_case_calibration_for_held_out_prediction": false,
+  "timing_scale": 1.6817062129620919,
+  "training_case": "flickr_s7_all_layers",
+  "version": "hbm2_flickr_s7_calibration_v1"
+}

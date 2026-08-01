@@ -1,0 +1,17 @@
+run_id,variant,layer,event_layer_cycles,recurrence_layer_cycles,relative_error,pass
+ogbn_arxiv_deepres8_w128_s7,BEICSR_OPT,0,14708557,14708557,0.0,True
+ogbn_arxiv_deepres8_w128_s7,BEICSR_OPT,1,14800060,14800060,0.0,True
+ogbn_arxiv_deepres8_w128_s7,BEICSR_OPT,2,14762835,14762835,0.0,True
+ogbn_arxiv_deepres8_w128_s7,BEICSR_OPT,3,14752906,14752906,0.0,True
+ogbn_arxiv_deepres8_w128_s7,BEICSR_OPT,4,14775300,14775300,0.0,True
+ogbn_arxiv_deepres8_w128_s7,BEICSR_OPT,5,14761378,14761378,0.0,True
+ogbn_arxiv_deepres8_w128_s7,BEICSR_OPT,6,14763998,14763998,0.0,True
+ogbn_arxiv_deepres8_w128_s7,BEICSR_OPT,7,14729963,14729963,0.0,True
+ogbn_arxiv_deepres8_w128_s7,XORFLOW_ONLINE,0,14845224,14845224,0.0,True
+ogbn_arxiv_deepres8_w128_s7,XORFLOW_ONLINE,1,14913979,14913979,0.0,True
+ogbn_arxiv_deepres8_w128_s7,XORFLOW_ONLINE,2,14858094,14858094,0.0,True
+ogbn_arxiv_deepres8_w128_s7,XORFLOW_ONLINE,3,13070912,13070912,0.0,True
+ogbn_arxiv_deepres8_w128_s7,XORFLOW_ONLINE,4,14615950,14615950,0.0,True
+ogbn_arxiv_deepres8_w128_s7,XORFLOW_ONLINE,5,11099817,11099817,0.0,True
+ogbn_arxiv_deepres8_w128_s7,XORFLOW_ONLINE,6,14051717,14051717,0.0,True
+ogbn_arxiv_deepres8_w128_s7,XORFLOW_ONLINE,7,10143394,10143394,0.0,True
