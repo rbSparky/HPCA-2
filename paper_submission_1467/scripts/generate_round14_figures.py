@@ -86,4 +86,30 @@ axs[1].set_title('(b) External memory validation')
 axs[1].grid(axis='y',color=LIGHT,lw=.35); axs[1].legend(frameon=False,loc='upper right')
 fig.tight_layout(pad=.45)
 save(fig,'fig8_final_validation')
+
+# Depth sensitivity under one authoritative consumer-complete scheduler.
+# D8 anchors come from the final ten-checkpoint primary table, Arxiv D16 comes
+# from its final unified schedule, and D12+ points come from the independently
+# trained depth-extension table.
+depth=pd.read_csv(ROOT/'results_used/depth_extension/depth_extension_summary.csv')
+def primary_speed(run_id):
+    return float(df.loc[df.run_id.eq(run_id),'speedup'].iloc[0])
+arxiv16=pd.read_csv(NEW/'results/schedule_detail/ogbn_arxiv_deepres16_w128_s7/causal_event_schedule.csv')
+arxiv16_speed=float(arxiv16.loc[arxiv16.variant.eq('XORFLOW_ONLINE'),'speedup_vs_selected_baseline'].iloc[0])
+series={
+    'Arxiv': [(8,primary_speed('ogbn_arxiv_deepres8_w128_s7')),(16,arxiv16_speed)],
+    'Reddit': [(8,primary_speed('reddit_deepres8_w128_s7_native'))],
+    'Flickr': [(8,primary_speed('flickr_deepres8_w128_s7'))],
+    'Yelp': [(8,primary_speed('yelp_deepres8_w128_s7_balanced_fallback'))],
+}
+for row in depth.itertuples(index=False):
+    series[row.dataset].append((int(row.depth),float(row.consumer_complete_speedup)))
+fig,ax=plt.subplots(figsize=(7.2,4.4))
+for name,values in series.items():
+    values=sorted(values)
+    ax.plot([x for x,_ in values],[y for _,y in values],marker='o',linewidth=2,label=name)
+ax.axhline(1.0,color=DARK,linewidth=1,linestyle='--')
+ax.set(xlabel='Model depth (layers)',ylabel='Consumer-complete subsystem speedup vs BEICSR',xticks=[8,12,16,24,32])
+ax.grid(alpha=.25); ax.legend(frameon=False,ncol=2); fig.tight_layout()
+save(fig,'fig_depth_scaling_consumer_complete')
 print('round14 figures generated')
