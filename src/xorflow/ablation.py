@@ -127,6 +127,7 @@ def _choose_precomputed(variant: str, layer: int, records: dict[str, Choice]) ->
 def run(
     *, project: Path, config_id: str, output_dir: Path, widths: tuple[int, ...] = (64, 96, 128, 256),
     tile_rows: int = 128, cache_bytes: int = 512 * 1024, edge_order: str = "O0",
+    emit_selected_records: Path | None = None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     trace = project / "artifacts_hpca_xorflow" / "workloads" / config_id / "fp8_supports.npz"
     if not trace.exists(): trace = project / "artifacts_final8" / "masks" / f"{config_id}_fp8_supports.npz"
@@ -139,6 +140,7 @@ def run(
     edge_index = data.edge_index.cpu().numpy(); _, order = symmetrized_edges_and_rcm(data.edge_index, data.num_nodes)
     sources = _sources(edge_index, edge_order); topology_layer = int(edge_index.shape[1] * 4 + (data.num_nodes + 1) * 4)
     results: list[dict[str, Any]] = []; selections: list[dict[str, Any]] = []
+    selected_records: dict[tuple[str, int], list[dict[str, Any]]] = {}
     for width in widths:
         slices = math.ceil(supports.shape[2] / width)
         candidate_cache: dict[tuple[int, int, int], dict[str, Choice]] = {}
@@ -170,13 +172,31 @@ def run(
             support_bytes = padding = value_bytes = descriptor = total = decode_bits = 0
             format_counts: dict[str, int] = {}; format_bytes: dict[str, int] = {}
             layouts = []
+            record_rows: list[dict[str, Any]] = []
             for layer, mask in enumerate(supports):
                 metadata_layer = 0
                 formats = np.full((mask.shape[0], slices), "BEICSR", dtype=object)
                 for tile, start in enumerate(range(0, len(order), tile_rows)):
                     nodes = order[start:min(len(order), start + tile_rows)]
                     for sid, col in enumerate(range(0, mask.shape[1], width)):
+                        stop = min(mask.shape[1], col + width)
+                        local = mask[nodes, col:stop]
                         choice = _choose_precomputed(variant, layer, candidate_cache[(layer, tile, sid)])
+                        # Preserve the exact per-tile choice that generated the
+                        # aggregate byte row.  Final-review event scheduling
+                        # consumes this file; it never reconstructs variant
+                        # cycles from the historical aggregate cycle column.
+                        record_rows.append({
+                            "run_id": config_id, "dataset": dataset, "model": model,
+                            "seed": seed, "layer": layer, "tile": tile, "slice": sid,
+                            "pair_id": layer // 2, "role": "anchor" if layer % 2 == 0 else "target",
+                            "chosen_format": "DELTA" if choice.name in {"DELTA", "GENERIC_RLE"} else choice.name,
+                            "payload_bits": choice.payload_bits, "header_bits": 16,
+                            "unpadded_bytes": choice.unpadded_bytes, "padded_bytes": choice.padded_bytes,
+                            "input_support_bits": int(local.size), "rows": int(len(nodes)),
+                            "features": int(stop - col), "anchor_read_bytes": 0,
+                            "consumer_anchor_read_bytes": 0, "consumer_anchor_decode_cycles": 0,
+                        })
                         if choice.name != "BEICSR":
                             formats[nodes, sid] = "XORFLOW"
                             support_bytes += choice.padded_bytes; metadata_layer += choice.padded_bytes
@@ -214,11 +234,19 @@ def run(
                 "run_id": config_id, "variant": variant, "slice_width": width, "format": name,
                 "count": number, "fraction": number / count, "bytes": format_bytes[name],
             } for name, number in sorted(format_counts.items()))
+            selected_records[(variant, width)] = record_rows
     # Select each variant's best independently; only deployable BEICSR_OPT and
     # FULL_ONLINE_EVENT rows are eligible for the paper headline.
     for variant in VARIANTS:
         candidates = [row for row in results if row["variant"] == variant]
         selected = min(candidates, key=lambda row: (row["cycles"], row["slice_width"]))
+        if emit_selected_records is not None:
+            emit_selected_records.mkdir(parents=True, exist_ok=True)
+            chosen = selected_records[(variant, int(selected["slice_width"]))]
+            path = emit_selected_records / f"{config_id}_{variant}.csv"
+            with path.open("w", newline="") as handle:
+                fields = list(chosen[0]) if chosen else ["run_id"]
+                writer = csv.DictWriter(handle, fieldnames=fields); writer.writeheader(); writer.writerows(chosen)
         if variant in {"BEICSR_OPT", "FULL_ONLINE_EVENT"}:
             selected["selected_for_headline"] = True
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -238,8 +266,9 @@ def main() -> None:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--widths", type=int, nargs="+", default=(64, 96, 128, 256))
     parser.add_argument("--edge-order", choices=("O0", "O1"), default="O0")
+    parser.add_argument("--emit-selected-records", type=Path)
     args = parser.parse_args()
-    results, _ = run(project=args.project.resolve(), config_id=args.config_id, output_dir=args.output_dir, widths=tuple(args.widths), edge_order=args.edge_order)
+    results, _ = run(project=args.project.resolve(), config_id=args.config_id, output_dir=args.output_dir, widths=tuple(args.widths), edge_order=args.edge_order, emit_selected_records=args.emit_selected_records)
     print(json.dumps({"rows": len(results), "output": str(args.output_dir)}, sort_keys=True))
 
 

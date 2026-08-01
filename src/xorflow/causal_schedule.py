@@ -191,7 +191,13 @@ def _record_services(
     rows: list[dict[str, str]], weights: np.ndarray, traffic_row: dict[str, str], encoder_row: dict[str, str] | None,
     decoder_rate: float, variant: str, cfg: QueueConfig,
 ) -> dict[str, list[int] | int]:
-    if variant == "XORFLOW_ONLINE":
+    # Every non-baseline row is a coded exact format under the same final
+    # causal event schedule.  The variant label changes only the selected
+    # record/traffic inputs; it never grants a second free memory or decoder
+    # path.  Anchor work is present only for records whose selected format is
+    # DELTA (the independent A0/A2/BEICSR choices carry no anchor lifecycle).
+    coded = variant != "BEICSR_OPT"
+    if coded:
         # Producer anchor rereads are a prerequisite of target XOR generation,
         # not part of the later consumer input stream.
         input_total = int(traffic_row["xorflow_feature_read_bytes"]) + int(traffic_row["xorflow_metadata_bytes"]) + int(traffic_row["xorflow_topology_bytes"])
@@ -205,7 +211,7 @@ def _record_services(
         producer = [0] * len(rows)
     input_parts = [int(x) for x in _partition(input_total, weights)]
     producer_anchor_parts = [
-        int(row.get("anchor_read_bytes") or 0) if variant == "XORFLOW_ONLINE" else 0
+        int(row.get("anchor_read_bytes") or 0) if coded and row.get("chosen_format") == "DELTA" else 0
         for row in rows
     ]
     # Review-4 consumer recovery is distinct from the producer anchor reread
@@ -214,7 +220,7 @@ def _record_services(
     # stage makes anchor and target requests contend for identical finite
     # workers and queues rather than granting a second free memory path.
     consumer_anchor_parts = [
-        int(row.get("consumer_anchor_read_bytes") or 0) if variant == "XORFLOW_ONLINE" else 0
+        int(row.get("consumer_anchor_read_bytes") or 0) if coded and row.get("chosen_format") == "DELTA" else 0
         for row in rows
     ]
     input_parts = [base + anchor for base, anchor in zip(input_parts, consumer_anchor_parts, strict=True)]
@@ -227,7 +233,7 @@ def _record_services(
     hits = recoveries = recovery_bytes = 0
     for row in rows:
         anchor_read = int(row.get("anchor_read_bytes") or 0)
-        if variant == "XORFLOW_ONLINE":
+        if coded:
             payload_bits = int(row.get("payload_bits") or 0) + int(row.get("header_bits") or 0)
             if row.get("role") == "anchor":
                 anchor_bits = int(row.get("input_support_bits") or 0)
@@ -266,6 +272,7 @@ def simulate(
     *, project: Path, config_id: str, records_path: Path, traffic_path: Path,
     encoder_path: Path, decoder_path: Path, output_dir: Path,
     queue_config: QueueConfig | None = None, decoder_banks: int = 16,
+    variants: tuple[str, ...] = ("BEICSR_OPT", "XORFLOW_ONLINE"),
 ) -> list[dict[str, Any]]:
     cfg = queue_config or QueueConfig()
     records = _read(records_path)
@@ -293,7 +300,9 @@ def simulate(
     all_audit: list[dict[str, Any]] = []
     all_trace: list[dict[str, Any]] = []
     recurrence_rows: list[dict[str, Any]] = []
-    for variant in ("BEICSR_OPT", "XORFLOW_ONLINE"):
+    if "BEICSR_OPT" not in variants:
+        raise ValueError("variants must include BEICSR_OPT for a common baseline")
+    for variant in variants:
         barrier = 0
         totals = {k: 0 for k in ("memory", "decode", "aggregation", "combination", "encode", "writeback", "queue_wait", "producer_stall", "decoder_stall", "memory_stall")}
         first_ready: int | None = None; final_done = 0; total_recurrence = 0
@@ -353,11 +362,11 @@ def simulate(
                     "input_bytes": svc["input_parts"][i], "output_bytes": svc["output_parts"][i],
                     "anchor_read_bytes": anchor_read,
                     "anchor_hit": int(
-                        variant == "XORFLOW_ONLINE" and row.get("role") == "target"
+                        variant != "BEICSR_OPT" and row.get("role") == "target"
                         and row.get("chosen_format") == "DELTA" and anchor_read == 0
                     ),
                     "anchor_recovery": int(
-                        variant == "XORFLOW_ONLINE" and row.get("role") == "target"
+                        variant != "BEICSR_OPT" and row.get("role") == "target"
                         and row.get("chosen_format") == "DELTA" and anchor_read > 0
                     ),
                 })
@@ -422,8 +431,10 @@ def main() -> None:
     p.add_argument("--records", type=Path, required=True); p.add_argument("--traffic", type=Path, required=True)
     p.add_argument("--encoder", type=Path, required=True); p.add_argument("--decoder", type=Path, required=True)
     p.add_argument("--output-dir", type=Path, required=True)
+    p.add_argument("--variants", nargs="+", default=["BEICSR_OPT", "XORFLOW_ONLINE"],
+                   help="final schedule variants; BEICSR_OPT is always required")
     args = p.parse_args()
-    print(json.dumps(simulate(project=args.project.resolve(), config_id=args.config_id, records_path=args.records, traffic_path=args.traffic, encoder_path=args.encoder, decoder_path=args.decoder, output_dir=args.output_dir), sort_keys=True))
+    print(json.dumps(simulate(project=args.project.resolve(), config_id=args.config_id, records_path=args.records, traffic_path=args.traffic, encoder_path=args.encoder, decoder_path=args.decoder, output_dir=args.output_dir, variants=tuple(args.variants)), sort_keys=True))
 
 
 if __name__ == "__main__":

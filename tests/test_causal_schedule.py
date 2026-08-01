@@ -63,3 +63,24 @@ def test_producer_and_consumer_recovery_are_charged_separately() -> None:
     assert services["producer_decode"][0] > 0
     assert services["memory"][0] > 0
     assert services["decode"][0] >= 9
+
+
+def test_final_ablation_variants_share_coded_path_without_free_anchors() -> None:
+    traffic = {
+        "xorflow_feature_read_bytes": "256", "xorflow_metadata_bytes": "64",
+        "xorflow_topology_bytes": "32", "xorflow_output_bytes": "128",
+        "xorflow_writeback_bytes": "64",
+    }
+    independent = {
+        "anchor_read_bytes": "128", "consumer_anchor_read_bytes": "128",
+        "consumer_anchor_decode_cycles": "9", "payload_bits": "400",
+        "header_bits": "16", "role": "target", "chosen_format": "A2",
+        "input_support_bits": "16384", "padded_bytes": "64",
+    }
+    delta = dict(independent, chosen_format="DELTA")
+    a2 = _record_services([independent], np.asarray([1]), traffic, {"total_cycles": "10"}, 64.0, "A2_ONLY", QueueConfig())
+    forced = _record_services([delta], np.asarray([1]), traffic, {"total_cycles": "10"}, 64.0, "FORCED_XORFLOW", QueueConfig())
+    assert a2["producer_anchor_parts"] == [0]
+    assert a2["consumer_anchor_parts"] == [0]
+    assert forced["producer_anchor_parts"] == [128]
+    assert forced["consumer_anchor_parts"] == [128]
