@@ -1,0 +1,11 @@
+run_id,target_records,producer_recovery_records,minimum_memory_to_decode_slack_cycles,minimum_decode_to_encode_slack_cycles,premature_encode_targets,dependency_pass
+chameleon_gcnii16,144,16,0,0,0,True
+flickr_deepres8_w128_s7,2792,2760,0,0,0,True
+ogbn_arxiv_deepres16_w128_s7,10584,10460,0,0,0,True
+ogbn_arxiv_deepres8_w128_s17,5292,4858,0,0,0,True
+ogbn_arxiv_deepres8_w128_s27,5292,4830,0,0,0,True
+ogbn_arxiv_deepres8_w128_s7,5292,5199,0,0,0,True
+reddit_deepres8_w128_s17_native,7284,7252,0,0,0,True
+reddit_deepres8_w128_s27_native,7284,7252,0,0,0,True
+reddit_deepres8_w128_s7_native,7284,7183,0,0,0,True
+yelp_deepres8_w128_s7_balanced_fallback,22404,22372,0,0,0,True

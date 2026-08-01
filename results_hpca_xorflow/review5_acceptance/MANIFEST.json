@@ -1,0 +1,1009 @@
+{
+  "files": [
+    {
+      "bytes": 500,
+      "path": "CONSUMER_PATH_REPORT.md",
+      "sha256": "791d9f9365a4e0fc7e837d22af031ea8e71952518e72367f91d9965343ddf4aa"
+    },
+    {
+      "bytes": 1833,
+      "path": "EXECUTIVE_SUMMARY.md",
+      "sha256": "df257acd63f7a054e25d3c0e097396162c336b0344eab790b6db98ddf964fb12"
+    },
+    {
+      "bytes": 1134,
+      "path": "FINAL_SCHEDULER_REPORT.md",
+      "sha256": "22a446f472bcd16889ac968a41e964c1fdecbd347f58faa55d740e6819c32ce4"
+    },
+    {
+      "bytes": 1757,
+      "path": "MEMORY_TIMING_VALIDATION_REPORT.md",
+      "sha256": "bdf4d4d4c5bb7ba30dfeefea32bc1c0847a18bc70de7544cb0da0f15d628e16e"
+    },
+    {
+      "bytes": 595,
+      "path": "PRODUCER_PACKER_REPORT.md",
+      "sha256": "8d7e07609a77ff9b921063832403e530e2df9416adb37570b661fe4c6867c151"
+    },
+    {
+      "bytes": 978,
+      "path": "RESULT_SUMMARY.yaml",
+      "sha256": "6609a085d67d76110ffa4d22756f88af3e0de13213ed4b1961ffc5dfc515acd7"
+    },
+    {
+      "bytes": 572,
+      "path": "RUN_MANIFEST.yaml",
+      "sha256": "8165bcbc9f86f8c2c53604a15cee10740195f9a6308fe7b9d34d51d47d63111c"
+    },
+    {
+      "bytes": 400,
+      "path": "UNIFIED_ABLATION_REPORT.md",
+      "sha256": "66da4aee01e4273e220525f36992fc5af7342dc63e2f54eb3f53911e0fc92b83"
+    },
+    {
+      "bytes": 395,
+      "path": "UNIFIED_ANCHOR_LIFECYCLE_REPORT.md",
+      "sha256": "ffdb2712468e740293bcf7492226bb9c3c9aee3a010ccd652edd4bbd94bd14d7"
+    },
+    {
+      "bytes": 368,
+      "path": "audit/anchor_reconciliation.yaml",
+      "sha256": "3c6b427d5a832d37e020525967fcef97a68685bdc06659ee8fd2c9abf3773b59"
+    },
+    {
+      "bytes": 572,
+      "path": "configs/final_acceptance.yaml",
+      "sha256": "8165bcbc9f86f8c2c53604a15cee10740195f9a6308fe7b9d34d51d47d63111c"
+    },
+    {
+      "bytes": 2174,
+      "path": "depth_extension/DEPTH_EXTENSION_REPORT.md",
+      "sha256": "d6e80e5b001dd5f8f955c5f75c90eaf8e4b42229a774ce026d574ac0bab3388d"
+    },
+    {
+      "bytes": 78243667,
+      "path": "depth_extension/events/unified_record_trace.csv",
+      "sha256": "1a2298591df49e421a4df1ef6a74c4b5e3d6b74f2721d9970cb808da1dd2457b"
+    },
+    {
+      "bytes": 18160,
+      "path": "depth_extension/figures/depth_scaling_consumer_complete.pdf",
+      "sha256": "c4d8a28bf6d4dcb1f03af222cdd5a7a23cfee3b4c7e3c3f6c73ad8f25cc13656"
+    },
+    {
+      "bytes": 102423,
+      "path": "depth_extension/figures/depth_scaling_consumer_complete.png",
+      "sha256": "3f2a3afba14c27a9ff91dc6a0ebe55e61949dfeb8d32a1fb7fd1cf59de5e6a7d"
+    },
+    {
+      "bytes": 1616,
+      "path": "depth_extension/quality/flickr_deepres16_w128_s7.json",
+      "sha256": "6bd6c0fc59cf2d61aa2623fab692b9d203c4f594c451c09debe7eab6cf052e10"
+    },
+    {
+      "bytes": 1632,
+      "path": "depth_extension/quality/ogbn_arxiv_deepres24_w128_s7.json",
+      "sha256": "bd3b8089ae427848f3fa8880403e4992c2803989a23253ac61b2c8040280d182"
+    },
+    {
+      "bytes": 1635,
+      "path": "depth_extension/quality/ogbn_arxiv_deepres32_w128_s7.json",
+      "sha256": "e1ae8ae651535efb0c8aedfb7ba2ccb14b4735d66f69e5e289af8690a51a37a2"
+    },
+    {
+      "bytes": 1646,
+      "path": "depth_extension/quality/reddit_deepres12_w128_s7_native.json",
+      "sha256": "583215192c344fcb06b91a62d7a19e333404a3552d7a1fee0096132a4c38ef4f"
+    },
+    {
+      "bytes": 1647,
+      "path": "depth_extension/quality/reddit_deepres16_w128_s7_native.json",
+      "sha256": "38f11d43272460e81e6d40a6935cf9d5d313d1d0649dbaa402bab73cbcc00f90"
+    },
+    {
+      "bytes": 1663,
+      "path": "depth_extension/quality/yelp_deepres12_w128_s7_balanced_fallback.json",
+      "sha256": "cbe14881b8cae25935fcaf6a41e144a527d1103b4504f8f724e56d52ecc2c3b8"
+    },
+    {
+      "bytes": 1666,
+      "path": "depth_extension/quality/yelp_deepres16_w128_s7_balanced_fallback.json",
+      "sha256": "3175483fdfc78e425d412f29cc35c5862d0b6133b7b688659c4ad4f63268f65e"
+    },
+    {
+      "bytes": 38963736,
+      "path": "depth_extension/results/anchor_lifecycle_per_record.csv",
+      "sha256": "9bc3d2a9a774b8abe19d5dd6962b5641a2fb9f67d1716302411307d7d42afaa9"
+    },
+    {
+      "bytes": 5912,
+      "path": "depth_extension/results/anchor_lifecycle_summary.csv",
+      "sha256": "a73cd736c3d51977704ec354258fc1b780e02c59b62bd0ea36dfe7c4fc674b44"
+    },
+    {
+      "bytes": 1571,
+      "path": "depth_extension/results/depth_extension_summary.csv",
+      "sha256": "dd65bdbe1c87782d27832b988f487cd672f7b9d0a1c75bc31d5913e932bfabe1"
+    },
+    {
+      "bytes": 838,
+      "path": "depth_extension/results/final_schedule/flickr_deepres16_w128_s7/causal_event_schedule.csv",
+      "sha256": "463c5a59388dbb15900c5a325441776f8a96204ebaf48b606fba0cb287437a15"
+    },
+    {
+      "bytes": 2145,
+      "path": "depth_extension/results/final_schedule/flickr_deepres16_w128_s7/causal_recurrence_check.csv",
+      "sha256": "c1bed4aff3c44a6b5851ef83719c1881602db828958537263737bde73403fbe7"
+    },
+    {
+      "bytes": 7044,
+      "path": "depth_extension/results/final_schedule/flickr_deepres16_w128_s7/causal_resource_audit.csv",
+      "sha256": "57a1de7c0d41908aeda3dae0af7888bb2776ed222c03eed4a5a33ce06f5982fe"
+    },
+    {
+      "bytes": 616,
+      "path": "depth_extension/results/final_schedule/flickr_deepres16_w128_s7/system_cycles.csv",
+      "sha256": "7e3e698fc20b6898e2029aba6a9eeb9053046b4f32ba39d6c97f0a360f5c5e1a"
+    },
+    {
+      "bytes": 854,
+      "path": "depth_extension/results/final_schedule/ogbn_arxiv_deepres24_w128_s7/causal_event_schedule.csv",
+      "sha256": "f5d563b462319238f89fc6effe935886ad38f78d036f87bcc47d02bd6edeb9a3"
+    },
+    {
+      "bytes": 3473,
+      "path": "depth_extension/results/final_schedule/ogbn_arxiv_deepres24_w128_s7/causal_recurrence_check.csv",
+      "sha256": "fdc97e002546f0e94c19aa040d66bc1336c0eaa6860daf402aa0f573edecd52c"
+    },
+    {
+      "bytes": 10638,
+      "path": "depth_extension/results/final_schedule/ogbn_arxiv_deepres24_w128_s7/causal_resource_audit.csv",
+      "sha256": "11cbcf486869f4c0f591d7fdf083e6a430b0160f5437045c6ab95054184cc738"
+    },
+    {
+      "bytes": 632,
+      "path": "depth_extension/results/final_schedule/ogbn_arxiv_deepres24_w128_s7/system_cycles.csv",
+      "sha256": "ef285e00a03f243e4b79872b7055251b97eddc8387b0942fe7ceb47f38efd613"
+    },
+    {
+      "bytes": 855,
+      "path": "depth_extension/results/final_schedule/ogbn_arxiv_deepres32_w128_s7/causal_event_schedule.csv",
+      "sha256": "ff887024b926bcffb37cdcd7ba7b2d57d1913ef3ee373785d99f5bafdde37bcb"
+    },
+    {
+      "bytes": 4609,
+      "path": "depth_extension/results/final_schedule/ogbn_arxiv_deepres32_w128_s7/causal_recurrence_check.csv",
+      "sha256": "d7af4fa67027ee589451c8ef9fd47e7acdd4065761c89c5078e33e1139a3992d"
+    },
+    {
+      "bytes": 13950,
+      "path": "depth_extension/results/final_schedule/ogbn_arxiv_deepres32_w128_s7/causal_resource_audit.csv",
+      "sha256": "0f0bfffdcdc61b0fa082b8e1b4c5f84e907f8d633089345b50cb6b39297f67d8"
+    },
+    {
+      "bytes": 633,
+      "path": "depth_extension/results/final_schedule/ogbn_arxiv_deepres32_w128_s7/system_cycles.csv",
+      "sha256": "e543d23f8fed5ec2d84426e1f249b838e39771ff16142ad8537145d4b52204ca"
+    },
+    {
+      "bytes": 884,
+      "path": "depth_extension/results/final_schedule/reddit_deepres12_w128_s7_native/causal_event_schedule.csv",
+      "sha256": "dd5706623ec915d604262d23618f27369176b7825a5de4197a1c16ee79f1bd3f"
+    },
+    {
+      "bytes": 1915,
+      "path": "depth_extension/results/final_schedule/reddit_deepres12_w128_s7_native/causal_recurrence_check.csv",
+      "sha256": "6f9ad85ba6bfbe105a159b4d2d15ba8433f228f914c978c037d82a9568e8cc03"
+    },
+    {
+      "bytes": 5872,
+      "path": "depth_extension/results/final_schedule/reddit_deepres12_w128_s7_native/causal_resource_audit.csv",
+      "sha256": "e1d512475d09932bcf5f85182b1a84f9247a3ee007646198c83c954be18765f3"
+    },
+    {
+      "bytes": 654,
+      "path": "depth_extension/results/final_schedule/reddit_deepres12_w128_s7_native/system_cycles.csv",
+      "sha256": "1485aaa18ee153a3a5553a4095e2930c63a3a78db589df4d9d1f3bae83364ae1"
+    },
+    {
+      "bytes": 888,
+      "path": "depth_extension/results/final_schedule/reddit_deepres16_w128_s7_native/causal_event_schedule.csv",
+      "sha256": "298a2c2771466ad709a164973af31a597587e8eaede41f0860f86978037fd3c2"
+    },
+    {
+      "bytes": 2529,
+      "path": "depth_extension/results/final_schedule/reddit_deepres16_w128_s7_native/causal_recurrence_check.csv",
+      "sha256": "d15a3eb6e56c8272c2090ef7b00fd5d8a1bcc6c5c4719df1e977bdfd049d15e5"
+    },
+    {
+      "bytes": 7597,
+      "path": "depth_extension/results/final_schedule/reddit_deepres16_w128_s7_native/causal_resource_audit.csv",
+      "sha256": "797c55bd81bc95ade4b51d10fb1224c510a1d8487614649025752dff06cce30f"
+    },
+    {
+      "bytes": 658,
+      "path": "depth_extension/results/final_schedule/reddit_deepres16_w128_s7_native/system_cycles.csv",
+      "sha256": "c13079223f23be2a1dd3abbcebcbf5ce8f46260dfc1efd5854da314de41988a3"
+    },
+    {
+      "bytes": 892,
+      "path": "depth_extension/results/final_schedule/yelp_deepres12_w128_s7_balanced_fallback/causal_event_schedule.csv",
+      "sha256": "5b94208c99e7600ec06027ce17765f938cf656231bc51ce3a9fbfe65692cb179"
+    },
+    {
+      "bytes": 2105,
+      "path": "depth_extension/results/final_schedule/yelp_deepres12_w128_s7_balanced_fallback/causal_recurrence_check.csv",
+      "sha256": "8d12b9bd1a5c3f9b5670ca2fb191af6d5995a192827aafa6b2123afa57ddd8ce"
+    },
+    {
+      "bytes": 6069,
+      "path": "depth_extension/results/final_schedule/yelp_deepres12_w128_s7_balanced_fallback/causal_resource_audit.csv",
+      "sha256": "ab769f4c1e260a786f7d5919bc92660487d4bc9ff22ad09754e70fd271fda1d9"
+    },
+    {
+      "bytes": 666,
+      "path": "depth_extension/results/final_schedule/yelp_deepres12_w128_s7_balanced_fallback/system_cycles.csv",
+      "sha256": "642c35bd5eda4ac9b4663732b5ca566227c53e9af39f00477cfe9df9da02b9e4"
+    },
+    {
+      "bytes": 894,
+      "path": "depth_extension/results/final_schedule/yelp_deepres16_w128_s7_balanced_fallback/causal_event_schedule.csv",
+      "sha256": "d016790e9708b1edbfbc7703aff86a270fd38f9809d33d04ac9d1b7b97af49b3"
+    },
+    {
+      "bytes": 2785,
+      "path": "depth_extension/results/final_schedule/yelp_deepres16_w128_s7_balanced_fallback/causal_recurrence_check.csv",
+      "sha256": "cafc983767c03f49fe4f79e6422cfaf87d9a6ea2626a05653724f7fbedb397c6"
+    },
+    {
+      "bytes": 7871,
+      "path": "depth_extension/results/final_schedule/yelp_deepres16_w128_s7_balanced_fallback/causal_resource_audit.csv",
+      "sha256": "5233b002df6842b3f2fd5838fc792261b5a7f7c9057e81f161e5dd3e803af047"
+    },
+    {
+      "bytes": 668,
+      "path": "depth_extension/results/final_schedule/yelp_deepres16_w128_s7_balanced_fallback/system_cycles.csv",
+      "sha256": "7959777c2e645cb6ecf79d3a12fe592f05f32a1a9489e423a6868e61863b7db5"
+    },
+    {
+      "bytes": 1641,
+      "path": "depth_extension/results/final_schedule_flickr_deepres16_w128_s7.log",
+      "sha256": "076682d242002109fb91bd76eb37f7ae85c602514e5f2b19aa499aad12825e05"
+    },
+    {
+      "bytes": 2693,
+      "path": "depth_extension/results/final_schedule_ogbn_arxiv_deepres24_w128_s7.log",
+      "sha256": "6509b0b47aeb3c40c7d6963e784e90e8ce3e047391f4909748878129e95fb328"
+    },
+    {
+      "bytes": 2694,
+      "path": "depth_extension/results/final_schedule_ogbn_arxiv_deepres32_w128_s7.log",
+      "sha256": "07f01c8ff289b543b4272b3c8f97090f27b5b3464979245f2d0f273d0c1e512c"
+    },
+    {
+      "bytes": 1687,
+      "path": "depth_extension/results/final_schedule_reddit_deepres12_w128_s7_native.log",
+      "sha256": "7c717737a7f42fce0bf88f7db09ec752e58be299bccd14b75a795c07dd86329b"
+    },
+    {
+      "bytes": 1691,
+      "path": "depth_extension/results/final_schedule_reddit_deepres16_w128_s7_native.log",
+      "sha256": "2641e60dcc155134409a4bbac0edbcbfc542857291e91ad506812d2c3f08c852"
+    },
+    {
+      "bytes": 1695,
+      "path": "depth_extension/results/final_schedule_yelp_deepres12_w128_s7_balanced_fallback.log",
+      "sha256": "6081c5fb3295350e90ff49269b96841c9b321232e44a0350f7efe91aecef58e0"
+    },
+    {
+      "bytes": 1697,
+      "path": "depth_extension/results/final_schedule_yelp_deepres16_w128_s7_balanced_fallback.log",
+      "sha256": "6e64838a201c902c80d7e838b92ba857066c099e21fe3121fbfbf2a7cdb50398"
+    },
+    {
+      "bytes": 449,
+      "path": "depth_extension/results/producer_dependency_audit.csv",
+      "sha256": "e2025a3ddd450739329af1bea02a6c979394205c1d0286b35867059428a5d9a2"
+    },
+    {
+      "bytes": 37983530,
+      "path": "events/unified_record_trace.csv",
+      "sha256": "1c332fbdcbbf15de38d6d3bc34e8911f1e2669c576e294b85b9a5b99c3ea7adc"
+    },
+    {
+      "bytes": 79542,
+      "path": "figures/xorflow_real_decision_map.pdf",
+      "sha256": "cdc8ad58dcfc6b2fd09768dc7df20ac22694782f1976dd048ecd169f94f9c6b1"
+    },
+    {
+      "bytes": 834847,
+      "path": "figures/xorflow_real_decision_map.png",
+      "sha256": "e9876704acd9fad8c18673966a6833c6f6a2598befeed450fe5664266056635a"
+    },
+    {
+      "bytes": 0,
+      "path": "logs/build_bundle.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 3912,
+      "path": "logs/external_commands.txt",
+      "sha256": "268670c676d6ed5bfcc95b17544298a809547c0238cd0164c20d96b8d7ec942d"
+    },
+    {
+      "bytes": 2227,
+      "path": "logs/external_summary.log",
+      "sha256": "86bed5bce4b2fb651f6a94fe66242d5dbd48cb965dd497c4d0bb272c245674aa"
+    },
+    {
+      "bytes": 1546,
+      "path": "logs/pytest_full.log",
+      "sha256": "8faa1838933af7f199fae2a82d386b048350c88e9a266ce4478ec7a943b1b464"
+    },
+    {
+      "bytes": 890,
+      "path": "memory_validation/arxiv_s17_pair4_consumer_complete_manifest.json",
+      "sha256": "a11f69cebe88a5675fb7c8b00caad52e2491280cae3b6b505d00d9f131102fcd"
+    },
+    {
+      "bytes": 725,
+      "path": "memory_validation/complete_external_memory_validation.csv",
+      "sha256": "1326de99167a8763d15967010a6060fbd3222da98cb59372c94047761453f881"
+    },
+    {
+      "bytes": 1333,
+      "path": "memory_validation/dramsim3_arxiv_s17_consumer_complete.json",
+      "sha256": "22fab52641516a1740364b5af51d4dad80a9b8c830a751b5250d0e6a80af1745"
+    },
+    {
+      "bytes": 147,
+      "path": "memory_validation/dramsim3_arxiv_s17_consumer_complete.log",
+      "sha256": "ecd070d3dcb1186797f24baf4f481e41e7dcd91c2700948b4c18b0fe0dc33ed0"
+    },
+    {
+      "bytes": 1323,
+      "path": "memory_validation/dramsim3_flickr_consumer_250k.json",
+      "sha256": "f3ab87e37c417282639d82ca265a524048d6d4496ce0efd00e266ec21dcd617a"
+    },
+    {
+      "bytes": 142,
+      "path": "memory_validation/dramsim3_flickr_consumer_250k.log",
+      "sha256": "2540132b8213042ae3bbef7eb74a6910a6940be39811d739e6c83c480857afdf"
+    },
+    {
+      "bytes": 1310,
+      "path": "memory_validation/dramsim3_flickr_producer_250k.json",
+      "sha256": "64ee932da0e1f38df55f135fee869a34be3fc3f68d58719e463679ba2ec57785"
+    },
+    {
+      "bytes": 142,
+      "path": "memory_validation/dramsim3_flickr_producer_250k.log",
+      "sha256": "d112340a562ddd7fa0aee2c24861388eccf8aa2d6caf3a394b5018480a8245b6"
+    },
+    {
+      "bytes": 1318,
+      "path": "memory_validation/dramsim3_reddit_consumer_250k.json",
+      "sha256": "53270a95d014b199d9f5cb0519d4083d5920b4a78b15a931839c4efeb1ea8f80"
+    },
+    {
+      "bytes": 142,
+      "path": "memory_validation/dramsim3_reddit_consumer_250k.log",
+      "sha256": "1941e1d7ef1f1fee149e56a6a0253b7f8654d9cbf3624dbf4844920aba695029"
+    },
+    {
+      "bytes": 1305,
+      "path": "memory_validation/dramsim3_reddit_producer_250k.json",
+      "sha256": "400a53efbb4ec9d10dc18d82c3a3e562a1380c536869faa83e94c2ee69b67cef"
+    },
+    {
+      "bytes": 142,
+      "path": "memory_validation/dramsim3_reddit_producer_250k.log",
+      "sha256": "0d7639f4d289cbd57737aa2502b98f04b88bcf12ff5f630eb584a3270f310920"
+    },
+    {
+      "bytes": 1302,
+      "path": "memory_validation/dramsim3_row_conflict_250k.json",
+      "sha256": "afe21e485a8f90d8c4ab6260e81a9a5a3412f4b90e181508ced4cb9275bd5e1f"
+    },
+    {
+      "bytes": 142,
+      "path": "memory_validation/dramsim3_row_conflict_250k.log",
+      "sha256": "67a9119d19296dbc3d7e9d5a08b4586915af6e463ea2a0648ad5345f1d378f87"
+    },
+    {
+      "bytes": 577,
+      "path": "memory_validation/dramsim3_service_crosscheck.csv",
+      "sha256": "8484ce988d80810d110caf663ebfb024a53f89f2df3b9a7bf2a44bf0a19004d4"
+    },
+    {
+      "bytes": 1305,
+      "path": "memory_validation/dramsim3_write_heavy_250k.json",
+      "sha256": "63674c25ff65308eafbbcaa4a116ad1840c42b9dfae2be5d86b32be8642af190"
+    },
+    {
+      "bytes": 142,
+      "path": "memory_validation/dramsim3_write_heavy_250k.log",
+      "sha256": "ce409b51f6389996767ce3b24246fc81a3c2fae146783a6db0db9fc2833b8ed7"
+    },
+    {
+      "bytes": 1316,
+      "path": "memory_validation/dramsim3_yelp_consumer_250k.json",
+      "sha256": "852efaf23b0b56d67ed830c013f2578d0bba3dc9458d6225159c4923f5ac620e"
+    },
+    {
+      "bytes": 142,
+      "path": "memory_validation/dramsim3_yelp_consumer_250k.log",
+      "sha256": "6771b7c7000d0c03df721f2b8270a0d0c5da19c98b9e204d5eb6cabda452944c"
+    },
+    {
+      "bytes": 1303,
+      "path": "memory_validation/dramsim3_yelp_producer_250k.json",
+      "sha256": "167957ba9dcdb3a043886678a69cb3ea3966ae22cf38030e2acc74dca88a9e15"
+    },
+    {
+      "bytes": 142,
+      "path": "memory_validation/dramsim3_yelp_producer_250k.log",
+      "sha256": "885c07ed251e3d164a11117c232c2274e214fb15784ab36406b497e1079b97b0"
+    },
+    {
+      "bytes": 2585,
+      "path": "memory_validation/external_memory_validation.csv",
+      "sha256": "bcb7dc14515ca0ac85c7d2f2f5637acb3fed9773a2a42cbae694c27ee3b71f27"
+    },
+    {
+      "bytes": 2227,
+      "path": "memory_validation/external_memory_validation_summary.json",
+      "sha256": "b31b6c00175bdefc4bc3d6d0a5af54bd0a97873786d91cd191f04d482402c13c"
+    },
+    {
+      "bytes": 528,
+      "path": "memory_validation/flickr_pair4_base_250k.json",
+      "sha256": "1d63fa51c0b13bcbb99747e29f51ffa8a9f19ce8c1594bd7b65a3ce52b860298"
+    },
+    {
+      "bytes": 890,
+      "path": "memory_validation/flickr_pair4_consumer_complete_250k.json",
+      "sha256": "f46e36a9b8da61aac5b087d4e5a093d0e60cd8f5f4a210773b256a4a88d8ad86"
+    },
+    {
+      "bytes": 892,
+      "path": "memory_validation/flickr_pair4_consumer_complete_manifest.json",
+      "sha256": "4caa512582a4e37287144f4664ca74c42490d487b56ad795ab825967bec17ef0"
+    },
+    {
+      "bytes": 535,
+      "path": "memory_validation/flickr_pair4_producer_complete_manifest.json",
+      "sha256": "be5998687ed8e713915a32ff2345f59d9b700c02b565a25677a02e0235975467"
+    },
+    {
+      "bytes": 13032,
+      "path": "memory_validation/ramulator2_arxiv_s17_consumer_complete.json",
+      "sha256": "094d9fa292f38de4907299b9eae20c8d56bced7cd6fecfcd08ec8910ce01d9fb"
+    },
+    {
+      "bytes": 234,
+      "path": "memory_validation/ramulator2_arxiv_s17_consumer_complete.log",
+      "sha256": "ddb8406715779d36ac36ef6ca1ec3fd1c68c6c82d1735d29afec187b743c7431"
+    },
+    {
+      "bytes": 12744,
+      "path": "memory_validation/ramulator2_flickr_consumer_250k.json",
+      "sha256": "0a1f6c8fb481b92518fee92efbbbd5572dec2fb02c546ff46f9291d35c773118"
+    },
+    {
+      "bytes": 234,
+      "path": "memory_validation/ramulator2_flickr_consumer_250k.log",
+      "sha256": "8d4fa03d746b36c66fd874d7c3beb7dd17e669cb35843e5fb1bff1113e388aa6"
+    },
+    {
+      "bytes": 12927,
+      "path": "memory_validation/ramulator2_flickr_consumer_complete.json",
+      "sha256": "51c375470af03d15c7f75416f435a58d98da6539bcb9912921a25ebe84529b5c"
+    },
+    {
+      "bytes": 230,
+      "path": "memory_validation/ramulator2_flickr_consumer_complete.log",
+      "sha256": "42b73c13c138c7392bba97f2ab2ef45c78fd0e3c481e35ee7e212b8c6c0e673e"
+    },
+    {
+      "bytes": 12741,
+      "path": "memory_validation/ramulator2_flickr_producer_250k.json",
+      "sha256": "8dd4178e8e8c69fc04db91d90098394f7fdc141c6aead093bb9cf0fa53db810f"
+    },
+    {
+      "bytes": 221,
+      "path": "memory_validation/ramulator2_flickr_producer_250k.log",
+      "sha256": "3b77209622aa4ce0d52290bbf7db358bee09f31cfbbdf323c57a9bd2aea2c6e8"
+    },
+    {
+      "bytes": 12910,
+      "path": "memory_validation/ramulator2_flickr_producer_complete.json",
+      "sha256": "8a5f2ffbd9d1c8ef3cc7a7e1a1e8cfdb9217f010b5c15772e768aa1291c28d5c"
+    },
+    {
+      "bytes": 230,
+      "path": "memory_validation/ramulator2_flickr_producer_complete.log",
+      "sha256": "c6f2ef97433ca47477fb513bae7156311302986c2c73e99ee30038a4311dc17e"
+    },
+    {
+      "bytes": 12453,
+      "path": "memory_validation/ramulator2_reddit_consumer_250k.json",
+      "sha256": "96799ec2366b2b9a43a550770c237d35b258a853f240731743ed7a5e9dd1f96b"
+    },
+    {
+      "bytes": 234,
+      "path": "memory_validation/ramulator2_reddit_consumer_250k.log",
+      "sha256": "27d5371d5f6ae366b0d2508221eda42396af5df58101f44029a52950b5a0feee"
+    },
+    {
+      "bytes": 13187,
+      "path": "memory_validation/ramulator2_reddit_consumer_complete.json",
+      "sha256": "c4c2e74c867300b48b1cb9c0e877d3de4266b006101c0cf319bf4fa08e54dd79"
+    },
+    {
+      "bytes": 232,
+      "path": "memory_validation/ramulator2_reddit_consumer_complete.log",
+      "sha256": "da1b9261789e3bbb363c9c0c2cc1135b3230d14351c2f81bfae1e0416a9fc9f0"
+    },
+    {
+      "bytes": 12450,
+      "path": "memory_validation/ramulator2_reddit_producer_250k.json",
+      "sha256": "c1b21dc6fafad434c063219285300ef503973ed91935486d9a1d9281ddcba963"
+    },
+    {
+      "bytes": 221,
+      "path": "memory_validation/ramulator2_reddit_producer_250k.log",
+      "sha256": "f73e1f0600d4f9a7f313523801381ee1c6dcd8b5a18c636ead29e14b2224e057"
+    },
+    {
+      "bytes": 12147,
+      "path": "memory_validation/ramulator2_row_conflict_250k.json",
+      "sha256": "10e5330fb4c26ea765847ba3194e3eaf3f92b679c349b5429fdc4820e96b3e73"
+    },
+    {
+      "bytes": 218,
+      "path": "memory_validation/ramulator2_row_conflict_250k.log",
+      "sha256": "37109c082daeb6cd7ffbd1e143b4f222d9ef73f1164364ba5d9cb3bcab7f84e6"
+    },
+    {
+      "bytes": 12311,
+      "path": "memory_validation/ramulator2_write_heavy_250k.json",
+      "sha256": "76c93d1267704617d4a9eb393ca122c31a6da62d8211e92fd5812fd3a642f1bc"
+    },
+    {
+      "bytes": 217,
+      "path": "memory_validation/ramulator2_write_heavy_250k.log",
+      "sha256": "bb2ee66be72f7ec4d8c316713bae095678a2df7e37af32a31ef7c37c0b94f893"
+    },
+    {
+      "bytes": 12447,
+      "path": "memory_validation/ramulator2_yelp_consumer_250k.json",
+      "sha256": "179657a9117c1305110660afe0a12e02ed208db9687e1811fa53f8cee190698b"
+    },
+    {
+      "bytes": 232,
+      "path": "memory_validation/ramulator2_yelp_consumer_250k.log",
+      "sha256": "165245c0c04dee0aa36e0ad0e4f7f759ddd9d761ae7146862fbd20d25e197c03"
+    },
+    {
+      "bytes": 13184,
+      "path": "memory_validation/ramulator2_yelp_consumer_complete.json",
+      "sha256": "6d10252913d15de12055e32120cff25374bf3a558dade05686268e017c015e02"
+    },
+    {
+      "bytes": 230,
+      "path": "memory_validation/ramulator2_yelp_consumer_complete.log",
+      "sha256": "edc4d66aedc39d4b3f9a705210ffa1f446e671dd8beeedd1e284ef62a8d2ed41"
+    },
+    {
+      "bytes": 12439,
+      "path": "memory_validation/ramulator2_yelp_producer_250k.json",
+      "sha256": "6f13ee49e305c06bd7e4b83e94294713be7697e6464d52512af1e5e8260e7c6f"
+    },
+    {
+      "bytes": 219,
+      "path": "memory_validation/ramulator2_yelp_producer_250k.log",
+      "sha256": "020fbea8f43e350901430a74c989d7c9cd284489133b19a134a45617584d7214"
+    },
+    {
+      "bytes": 889,
+      "path": "memory_validation/reddit_pair4_consumer_complete_250k.json",
+      "sha256": "e9d69e0fa8dfc5ae590d33884fc2efc0a0d6fc3478e00a6c5f2a6ee850db0360"
+    },
+    {
+      "bytes": 890,
+      "path": "memory_validation/reddit_pair4_consumer_complete_manifest.json",
+      "sha256": "de10a7aab89a9e8f9011f9c6469be4ddc3f0ed00fbbc41b7ba12c8bfddd455ea"
+    },
+    {
+      "bytes": 914,
+      "path": "memory_validation/yelp_pair4_consumer_complete_250k.json",
+      "sha256": "e9eb3e5e8ef951d32580861ba217009c30bd4d6b464820b01facb19eb3da9035"
+    },
+    {
+      "bytes": 915,
+      "path": "memory_validation/yelp_pair4_consumer_complete_manifest.json",
+      "sha256": "90d7d85f804d248c96cef5289f00d298b36c99f3c406a116f44f321dedf10c9c"
+    },
+    {
+      "bytes": 19018257,
+      "path": "results/anchor_lifecycle_per_record.csv",
+      "sha256": "d60dca800d9aec17d3b5dbed60ac5b8dd9e6e149698ea9b222092f8c88d92e88"
+    },
+    {
+      "bytes": 7962,
+      "path": "results/anchor_lifecycle_summary.csv",
+      "sha256": "acc3456b40b3de07c210753e875e95eb9e3ea3039e96a65a97b6bf45ff90e06b"
+    },
+    {
+      "bytes": 3806,
+      "path": "results/final_primary_cycles.csv",
+      "sha256": "7bf839619ced14b5fe1f87c70647c1f6deb246abe17135038892d11d868fb482"
+    },
+    {
+      "bytes": 769,
+      "path": "results/final_schedule/chameleon_gcnii16/causal_event_schedule.csv",
+      "sha256": "4420e6b33f52a4ae63c99d09eb2fbcbacb4bd83223f6e554fa48e12da9ee7f9d"
+    },
+    {
+      "bytes": 1843,
+      "path": "results/final_schedule/chameleon_gcnii16/causal_recurrence_check.csv",
+      "sha256": "ee61fc4915e30be64752a6b653fc0e34b16876b626e11d4519b62c109df609ab"
+    },
+    {
+      "bytes": 6322,
+      "path": "results/final_schedule/chameleon_gcnii16/causal_resource_audit.csv",
+      "sha256": "d5cd8601c8b060c73e9bf6199a76524e5d046ec58d83222dbb8bead850affb32"
+    },
+    {
+      "bytes": 555,
+      "path": "results/final_schedule/chameleon_gcnii16/system_cycles.csv",
+      "sha256": "24c754471073752ad3a62373ca88ae78f5769332f01752fe372d719df780eb78"
+    },
+    {
+      "bytes": 819,
+      "path": "results/final_schedule/flickr_deepres8_w128_s7/causal_event_schedule.csv",
+      "sha256": "2b154bd5301ee0e8ff85ce0e54acc55d1f20074a310d56142198e859e5ba46c0"
+    },
+    {
+      "bytes": 1093,
+      "path": "results/final_schedule/flickr_deepres8_w128_s7/causal_recurrence_check.csv",
+      "sha256": "4fedfe6971beecc969fdfda3d751f068497c8c909c37dadbe4a5cf03bc848d2b"
+    },
+    {
+      "bytes": 3851,
+      "path": "results/final_schedule/flickr_deepres8_w128_s7/causal_resource_audit.csv",
+      "sha256": "337ed3b08bae55d769a8b91649a35769137edd3370c5231f7213f14582481c78"
+    },
+    {
+      "bytes": 601,
+      "path": "results/final_schedule/flickr_deepres8_w128_s7/system_cycles.csv",
+      "sha256": "71eb447bdfab715941b70830414ca94c7ef081e7f989ee66c4989994dff84117"
+    },
+    {
+      "bytes": 851,
+      "path": "results/final_schedule/ogbn_arxiv_deepres16_w128_s7/causal_event_schedule.csv",
+      "sha256": "16db62366b19aa86e682af27db865195ec38494da65d6232731678562726f964"
+    },
+    {
+      "bytes": 2337,
+      "path": "results/final_schedule/ogbn_arxiv_deepres16_w128_s7/causal_recurrence_check.csv",
+      "sha256": "e1af6439e80ea5a30e3d62154370ac12415c9002bfda956ad0939524af7a1668"
+    },
+    {
+      "bytes": 7325,
+      "path": "results/final_schedule/ogbn_arxiv_deepres16_w128_s7/causal_resource_audit.csv",
+      "sha256": "3ef81db3805023ead8cbf36e67fa09e95261b9c0d70de5e52e4d5019921d9b0c"
+    },
+    {
+      "bytes": 629,
+      "path": "results/final_schedule/ogbn_arxiv_deepres16_w128_s7/system_cycles.csv",
+      "sha256": "2d7c7ab69b4236ffdda14b2e74cf28663abbc7e922ba70f2dff0aa5229549cd5"
+    },
+    {
+      "bytes": 848,
+      "path": "results/final_schedule/ogbn_arxiv_deepres8_w128_s17/causal_event_schedule.csv",
+      "sha256": "5323127cc0b5efcd43429c39c61937a790fe8942936bf86a616ecf4be72cec17"
+    },
+    {
+      "bytes": 1205,
+      "path": "results/final_schedule/ogbn_arxiv_deepres8_w128_s17/causal_recurrence_check.csv",
+      "sha256": "5c19732f5d8de4fa5451f55176dfbbb41f71ef5fdbe1886a4536e375aecf2bca"
+    },
+    {
+      "bytes": 3993,
+      "path": "results/final_schedule/ogbn_arxiv_deepres8_w128_s17/causal_resource_audit.csv",
+      "sha256": "1d9b8af0373a6518154ed82d4f59b5b0464788ca36cb6972fa777f1f1ac131f5"
+    },
+    {
+      "bytes": 626,
+      "path": "results/final_schedule/ogbn_arxiv_deepres8_w128_s17/system_cycles.csv",
+      "sha256": "69eb5e7461e120c8b196a8ccd70a0b73c522df76636845fa1ce4fbc31c1496c0"
+    },
+    {
+      "bytes": 848,
+      "path": "results/final_schedule/ogbn_arxiv_deepres8_w128_s27/causal_event_schedule.csv",
+      "sha256": "e22e57c968efd9a18c18424203b69338c2d4cf164842b59c28ceb78a58615849"
+    },
+    {
+      "bytes": 1205,
+      "path": "results/final_schedule/ogbn_arxiv_deepres8_w128_s27/causal_recurrence_check.csv",
+      "sha256": "5a35653f9af58d2a47e61da5db28ecdd8757a8ba4cec649502f20b912d254a5f"
+    },
+    {
+      "bytes": 3993,
+      "path": "results/final_schedule/ogbn_arxiv_deepres8_w128_s27/causal_resource_audit.csv",
+      "sha256": "15cd710b3af9103272d534034127808568b1ff70027d8d7078e4ed030f1631ab"
+    },
+    {
+      "bytes": 626,
+      "path": "results/final_schedule/ogbn_arxiv_deepres8_w128_s27/system_cycles.csv",
+      "sha256": "39d6f92dba43af7f3d318b183341005de03c5e62edf012bd72b3bb1514f6b979"
+    },
+    {
+      "bytes": 845,
+      "path": "results/final_schedule/ogbn_arxiv_deepres8_w128_s7/causal_event_schedule.csv",
+      "sha256": "f9ad558722b8881b2851e9a4f909dd82de1754cb94043ca35d1fddc262d1c08b"
+    },
+    {
+      "bytes": 1189,
+      "path": "results/final_schedule/ogbn_arxiv_deepres8_w128_s7/causal_recurrence_check.csv",
+      "sha256": "78223b44f530102bae0f12654af5c5d8d6fadbf267956449f52bf5035ac89ca9"
+    },
+    {
+      "bytes": 3995,
+      "path": "results/final_schedule/ogbn_arxiv_deepres8_w128_s7/causal_resource_audit.csv",
+      "sha256": "da2b33a353a8e810ed179a3afded5cc456d5b496f7bbd116cccf17784e4f556a"
+    },
+    {
+      "bytes": 623,
+      "path": "results/final_schedule/ogbn_arxiv_deepres8_w128_s7/system_cycles.csv",
+      "sha256": "2e9d3e79389aebd40ee3f49bea67bcd29e074ea89f8e1cafcf7cb909fe10a0fb"
+    },
+    {
+      "bytes": 876,
+      "path": "results/final_schedule/reddit_deepres8_w128_s17_native/causal_event_schedule.csv",
+      "sha256": "a4768dea256658b3d5d35e1fbbc65a07f31464257699eb705e6e49ea79823213"
+    },
+    {
+      "bytes": 1311,
+      "path": "results/final_schedule/reddit_deepres8_w128_s17_native/causal_recurrence_check.csv",
+      "sha256": "676a8f2c396f47cba7a5b8c88819d9bd0b3e8ba9b38be38a3b2efd6fa0cffe6c"
+    },
+    {
+      "bytes": 4152,
+      "path": "results/final_schedule/reddit_deepres8_w128_s17_native/causal_resource_audit.csv",
+      "sha256": "141c42ed3b872690d42b61bdd1f64797ad0eab57117372ce29275d9f6b83980f"
+    },
+    {
+      "bytes": 649,
+      "path": "results/final_schedule/reddit_deepres8_w128_s17_native/system_cycles.csv",
+      "sha256": "8c7777bfb0da7f6cf4b2c89957068535215f5182bc76302c53aa79c60e39eac0"
+    },
+    {
+      "bytes": 877,
+      "path": "results/final_schedule/reddit_deepres8_w128_s27_native/causal_event_schedule.csv",
+      "sha256": "b6d6bc0fd05903e60052ef323657c90340f665f39ac0c08ad08fad23c9d83470"
+    },
+    {
+      "bytes": 1313,
+      "path": "results/final_schedule/reddit_deepres8_w128_s27_native/causal_recurrence_check.csv",
+      "sha256": "8f1e78ac4af3ef21485d6ab662722bd087f84b76f0390364b9eb965cbd1db8b4"
+    },
+    {
+      "bytes": 4153,
+      "path": "results/final_schedule/reddit_deepres8_w128_s27_native/causal_resource_audit.csv",
+      "sha256": "005f86fa07c7250e86b4edbeb2ba1cdeda12f17e3bb9fd556b0ac55126876696"
+    },
+    {
+      "bytes": 649,
+      "path": "results/final_schedule/reddit_deepres8_w128_s27_native/system_cycles.csv",
+      "sha256": "2fed35add1961505948ab42a2ada52b9ffd589827bb173acdc897b0ff7b2a95a"
+    },
+    {
+      "bytes": 873,
+      "path": "results/final_schedule/reddit_deepres8_w128_s7_native/causal_event_schedule.csv",
+      "sha256": "824638b174fe5ad47fb233ea5ec9f5cde286f7fdb8e79392ad46b130bdb703b6"
+    },
+    {
+      "bytes": 1291,
+      "path": "results/final_schedule/reddit_deepres8_w128_s7_native/causal_recurrence_check.csv",
+      "sha256": "304a6a56faf83dc0009df990f2dec8ebf1e1821a3ad9d9b8790d6ac4b55a2b53"
+    },
+    {
+      "bytes": 4132,
+      "path": "results/final_schedule/reddit_deepres8_w128_s7_native/causal_resource_audit.csv",
+      "sha256": "1ce137301909c8fd0fd4a80608416d619d48217cfe8ada556166c982bfbbe4bc"
+    },
+    {
+      "bytes": 647,
+      "path": "results/final_schedule/reddit_deepres8_w128_s7_native/system_cycles.csv",
+      "sha256": "54630c71c7bee3cf5f518f397bbf6ed7e4ad9c736e186e9d5ed23586ca23866d"
+    },
+    {
+      "bytes": 889,
+      "path": "results/final_schedule/yelp_deepres8_w128_s7_balanced_fallback/causal_event_schedule.csv",
+      "sha256": "1f9856a752850682ffdb41845bd788ad8b12f24f3c34a871bd512a1cfc2601a2"
+    },
+    {
+      "bytes": 1413,
+      "path": "results/final_schedule/yelp_deepres8_w128_s7_balanced_fallback/causal_recurrence_check.csv",
+      "sha256": "bfeddaf41587a9b216514714ebdecf59d8b0d7e7c76d29eef4c8f77c96215fa0"
+    },
+    {
+      "bytes": 4267,
+      "path": "results/final_schedule/yelp_deepres8_w128_s7_balanced_fallback/causal_resource_audit.csv",
+      "sha256": "84f376519a34061668921e09c9758c9963b7d2f36807f365e50009931b68099e"
+    },
+    {
+      "bytes": 663,
+      "path": "results/final_schedule/yelp_deepres8_w128_s7_balanced_fallback/system_cycles.csv",
+      "sha256": "9410c7e193a4ad30de8611b58be6ef140a075f4777226e74e011ab914d991b2a"
+    },
+    {
+      "bytes": 1572,
+      "path": "results/final_schedule_chameleon_gcnii16.log",
+      "sha256": "313013344327006bfa5c69e15491ca8f724b07eea31d4cc1f915de8eb02b6955"
+    },
+    {
+      "bytes": 1622,
+      "path": "results/final_schedule_flickr_deepres8_w128_s7.log",
+      "sha256": "1a8373730ddfa37100e2ab2b304383ef77aafa45046d1ef86f01f52c01bce04a"
+    },
+    {
+      "bytes": 2690,
+      "path": "results/final_schedule_ogbn_arxiv_deepres16_w128_s7.log",
+      "sha256": "a2bf3287f4493eed94cf29edf5d5099cbc645d7ed8e12cfb05ab5ae88dce2f98"
+    },
+    {
+      "bytes": 2687,
+      "path": "results/final_schedule_ogbn_arxiv_deepres8_w128_s17.log",
+      "sha256": "7d843c35db20be3b9a1c3e04e99c6f9ac1cdf638c0d97a6c21a8b9ff9dc24e48"
+    },
+    {
+      "bytes": 2687,
+      "path": "results/final_schedule_ogbn_arxiv_deepres8_w128_s27.log",
+      "sha256": "fac385f857ea215105ba89f18ac393058118db3cc191242cddb7cf6649be2f90"
+    },
+    {
+      "bytes": 2684,
+      "path": "results/final_schedule_ogbn_arxiv_deepres8_w128_s7.log",
+      "sha256": "8c45bf44db78f90238fb3ec6774014a51ef325b43fc195bb82675d4a97027dfd"
+    },
+    {
+      "bytes": 1679,
+      "path": "results/final_schedule_reddit_deepres8_w128_s17_native.log",
+      "sha256": "165f9fbabb559b3eeab088b07dddea528b347c8694a6c63e9b88a1cfadc87ee5"
+    },
+    {
+      "bytes": 1680,
+      "path": "results/final_schedule_reddit_deepres8_w128_s27_native.log",
+      "sha256": "33f31a0b75d9c05b79064d20b4c995afc1330d46d8d586969a80f74503dbd104"
+    },
+    {
+      "bytes": 1676,
+      "path": "results/final_schedule_reddit_deepres8_w128_s7_native.log",
+      "sha256": "97013f10a07d5b6a05c80ac22695c5f42c24667203e855926b9e415d5f08d0ae"
+    },
+    {
+      "bytes": 1692,
+      "path": "results/final_schedule_yelp_deepres8_w128_s7_balanced_fallback.log",
+      "sha256": "44403bd63972032d1427ee36d57f8afa3daed8c9af91243d9b8790de8d23314a"
+    },
+    {
+      "bytes": 1862,
+      "path": "results/hardware/decoder_cluster_openroad_summary.json",
+      "sha256": "9512a46c116e845c836148a8fe650e65a68e2a0f41dd3895f4b2835783b869e7"
+    },
+    {
+      "bytes": 2304,
+      "path": "results/hardware/encoder_synth.json",
+      "sha256": "ffc24775cfcf1c5671f15a386f5c1b64437b77c5ca5ce00c3fd0c43b9380cbd6"
+    },
+    {
+      "bytes": 7049,
+      "path": "results/hardware/stream_equivalence.csv",
+      "sha256": "151bf83ddcaa96313f522d2c2caf2a7cb5cd624593670134efa6d655de5eade0"
+    },
+    {
+      "bytes": 1316,
+      "path": "results/memory_prior_evidence/dramsim3_complete_arxiv_s17_beicsr.json",
+      "sha256": "9fdc607e15d90b762aab158c5efe54f6480ee5c1362ce4e3eb54634347925c46"
+    },
+    {
+      "bytes": 1317,
+      "path": "results/memory_prior_evidence/dramsim3_complete_arxiv_s17_xorflow.json",
+      "sha256": "e34679bd239d5530f6d97dbc1489655c52df61903d60040e7405ab8279dadd67"
+    },
+    {
+      "bytes": 2811,
+      "path": "results/memory_prior_evidence/dramsim3_summary.csv",
+      "sha256": "a86ca29ace205927b218afbfb58890b255e05dc46e4bc5c20a588ee9a0e3f8f6"
+    },
+    {
+      "bytes": 1028,
+      "path": "results/memory_prior_evidence/dramsim3_tiny_grammar.json",
+      "sha256": "16fcc4d12411deaa2f360026ac702eb535828055b299e6a6b6c058dd1cc8f7f8"
+    },
+    {
+      "bytes": 4414,
+      "path": "results/memory_prior_evidence/ramulator2_summary.csv",
+      "sha256": "1fe0ae3dee95ce34e72e9656f67413305197c416b6434feda2f24e0e2f1a77db"
+    },
+    {
+      "bytes": 697,
+      "path": "results/memory_prior_evidence/ramulator_complete_arxiv_s7.json",
+      "sha256": "c2fdc1fbe8f6e573ca3feaf993cca5f3f97cee7e7bb0c5bdb903612e576806fa"
+    },
+    {
+      "bytes": 709,
+      "path": "results/memory_prior_evidence/ramulator_complete_reddit_s7.json",
+      "sha256": "5e3134ff31b2cbc36a8785030d87fc7d9ddf770503e00c0bc4cb9435d2260ba1"
+    },
+    {
+      "bytes": 1144,
+      "path": "results/memory_prior_evidence/ramulator_complete_scope.md",
+      "sha256": "236efa79b6ee52e15b80e360828ff37a4f760af98f678206f744abadff8c87b9"
+    },
+    {
+      "bytes": 668,
+      "path": "results/producer_dependency_audit.csv",
+      "sha256": "c7bc77b90358d8e00cca8852cccea1c5c65728656d6752f924773991a7a895d1"
+    },
+    {
+      "bytes": 15396,
+      "path": "results/unified_ablation.csv",
+      "sha256": "adcb7cdb9a51aaeb71e7e3fe9bd70fa695e49339c130bf2fafd053c901167219"
+    },
+    {
+      "bytes": 18752,
+      "path": "source/build_review4_acceptance_bundle.py",
+      "sha256": "b5efac77cf6ae191a721b13658698f80445a91d4feafc29eaf16bfefa02ff760"
+    },
+    {
+      "bytes": 7885,
+      "path": "source/build_review4_depth_extension.py",
+      "sha256": "0609062fb8e808db13f634c95a881f0fb7227ab4f7478433ba4a5323e55337b3"
+    },
+    {
+      "bytes": 4620,
+      "path": "source/build_review4_external_memory_trace.py",
+      "sha256": "fc7c708dff77a177bf9ad9e921aefad36daf2b36738ea332e45ad3bcea23c6db"
+    },
+    {
+      "bytes": 25493,
+      "path": "source/causal_schedule.py",
+      "sha256": "cb921aa017cfb7b3591163c23665fad0e8a616ba7e3f32ad0b596766c6f989fd"
+    },
+    {
+      "bytes": 1389,
+      "path": "source/generate_review4_memory_adversaries.py",
+      "sha256": "3e634ada47acc8fbfa6cdeb452b0db468962b0d52e9aede10337663bfb1118d6"
+    },
+    {
+      "bytes": 12563,
+      "path": "source/review4_acceptance.py",
+      "sha256": "6c693fb71e9034a29232546f1f0af26b5dd4fb6a74ddf2493b37248f8a8f019a"
+    },
+    {
+      "bytes": 9602,
+      "path": "source/summarize_review4_external_memory.py",
+      "sha256": "e3dfa9afdb84302fdde228b73b6e0ba79792e2cf902c2447f035a41739703305"
+    },
+    {
+      "bytes": 2689,
+      "path": "tests/test_causal_schedule.py",
+      "sha256": "4cfd4aafff06bc29dabc14f0a95c98f5c7f3793df296af84e138a3aa976cb2a4"
+    },
+    {
+      "bytes": 1574,
+      "path": "tests/test_review4_anchor_lifecycle.py",
+      "sha256": "648e5289b7f84dcc2bd40059075eecaf9960f47ecb8dce0cdcb80af377f36749"
+    },
+    {
+      "bytes": 1458,
+      "path": "tests/test_review4_external_memory_trace.py",
+      "sha256": "5f1b634435fa6910dccffae37060144c45145aa24019b3880b1e5ffb2a5d7510"
+    }
+  ]
+}

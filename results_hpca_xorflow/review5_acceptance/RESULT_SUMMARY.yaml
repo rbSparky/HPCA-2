@@ -1,0 +1,33 @@
+producer_anchor:
+  recovery_records: 72182
+  bytes_read: 149601344
+  decode_cycles: 1320325
+  premature_encode_targets: 0
+  dependency_pass: true
+consumer_anchor:
+  delta_targets: 72604
+  classified_targets: 72604
+  unclassified_targets: 0
+  bytes_read: 149601344
+  decode_cycles: 1320325
+  hit_rate_by_capacity:
+    '16384': 0.005812351936532422
+    '262144': 0.07098782436229409
+    '1048576': 0.27935099994490664
+    '4194304': 0.8042532091895763
+primary:
+  trace_weighted_geomean_speedup: 1.105908131566281
+  dataset_balanced_geomean_speedup: 1.0716080729523219
+  minimum_speedup: 0.97830118391786
+  maximum_speedup: 1.2723998065236886
+  regressions: 1
+ablation:
+  complete_matches_primary_all_traces: true
+memory_validation:
+  max_completion_error_percent: 0.5605645241952544
+  mappings_tested: 2
+  status: PASS_CONSUMER_COMPLETE_EXTERNAL_REPLAY
+hardware:
+  full_packer_mapped: true
+  producer_rate_meets_model_all_traces: true
+  consumer_rate_meets_model_all_traces: true

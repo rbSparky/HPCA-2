@@ -2,8 +2,9 @@
 
 The original schedule apportioned work to independent pools and then inserted
 writebacks after the fact.  This module uses one conservative, auditable
-layer-barrier pipeline: producer -> memory reads -> support reconstruction ->
-aggregation -> combination -> memory writeback.  Every inter-stage queue has
+layer-barrier pipeline: producer anchor recovery -> producer encoding ->
+consumer memory reads -> support reconstruction -> aggregation -> combination
+-> memory writeback.  Every inter-stage queue has
 a finite capacity, every stage has a finite worker pool, and a layer cannot
 start until all of its writes complete.  A separate scalar recurrence is run
 for every stage and must agree exactly with the event-list implementation.
@@ -44,16 +45,18 @@ AUDIT_COLUMNS = [
     "decode_queue_depth", "aggregation_queue_depth", "combination_queue_depth",
     "writeback_queue_depth", "anchor_cache_capacity_bytes", "anchor_cache_live_bytes",
     "anchor_cache_hits", "anchor_recoveries", "anchor_recovery_bytes",
-    "anchor_hit_rate", "anchor_recovery_bits", "producer_decode_cycles",
+    "anchor_hit_rate", "anchor_recovery_bits", "producer_recovery_memory_cycles", "producer_decode_cycles",
     "producer_encode_cycles", "support_decode_cycles", "memory_read_cycles",
     "aggregation_cycles", "combination_cycles", "writeback_cycles", "layer_barrier_cycles",
     "max_input_queue", "max_decode_queue", "max_aggregation_queue", "max_combination_queue",
-    "max_writeback_queue", "premature_consumption_pass", "memory_completion_pass",
+    "max_writeback_queue", "producer_anchor_ready_pass", "premature_consumption_pass", "memory_completion_pass",
     "layer_barrier_pass", "exact_recurrence_pass",
 ]
 
 TRACE_COLUMNS = [
     "run_id", "variant", "layer", "ordinal", "tile", "slice", "role",
+    "producer_anchor_memory_start", "producer_anchor_memory_done",
+    "producer_anchor_decode_start", "producer_anchor_decode_done",
     "producer_start", "producer_done", "memory_start", "memory_done",
     "decode_start", "decode_done", "aggregation_start", "aggregation_done",
     "combination_start", "combination_done", "writeback_start", "writeback_done",
@@ -189,7 +192,9 @@ def _record_services(
     decoder_rate: float, variant: str, cfg: QueueConfig,
 ) -> dict[str, list[int] | int]:
     if variant == "XORFLOW_ONLINE":
-        input_total = int(traffic_row["xorflow_feature_read_bytes"]) + int(traffic_row["xorflow_metadata_bytes"]) + int(traffic_row["xorflow_anchor_read_bytes"]) + int(traffic_row["xorflow_topology_bytes"])
+        # Producer anchor rereads are a prerequisite of target XOR generation,
+        # not part of the later consumer input stream.
+        input_total = int(traffic_row["xorflow_feature_read_bytes"]) + int(traffic_row["xorflow_metadata_bytes"]) + int(traffic_row["xorflow_topology_bytes"])
         output_total = int(traffic_row["xorflow_output_bytes"]) + int(traffic_row["xorflow_writeback_bytes"])
         enc_total = int(float(encoder_row["total_cycles"])) if encoder_row else 0
         enc_weights = np.asarray([max(1, int(r["padded_bytes"]) * 8) for r in rows], dtype=np.int64)
@@ -199,8 +204,23 @@ def _record_services(
         output_total = int(traffic_row["baseline_output_bytes"]) + int(traffic_row["baseline_writeback_bytes"])
         producer = [0] * len(rows)
     input_parts = [int(x) for x in _partition(input_total, weights)]
+    producer_anchor_parts = [
+        int(row.get("anchor_read_bytes") or 0) if variant == "XORFLOW_ONLINE" else 0
+        for row in rows
+    ]
+    # Review-4 consumer recovery is distinct from the producer anchor reread
+    # already present in physical traffic.  Augmented record files carry the
+    # exact padded committed-anchor bytes.  Adding them to the same memory
+    # stage makes anchor and target requests contend for identical finite
+    # workers and queues rather than granting a second free memory path.
+    consumer_anchor_parts = [
+        int(row.get("consumer_anchor_read_bytes") or 0) if variant == "XORFLOW_ONLINE" else 0
+        for row in rows
+    ]
+    input_parts = [base + anchor for base, anchor in zip(input_parts, consumer_anchor_parts, strict=True)]
     output_parts = [int(x) for x in _partition(output_total, weights)]
     memory = [math.ceil(x / cfg.memory_bytes_per_cycle) + (50 if x else 0) for x in input_parts]
+    producer_memory = [math.ceil(x / cfg.memory_bytes_per_cycle) + (50 if x else 0) for x in producer_anchor_parts]
     decode: list[int] = []
     producer_decode: list[int] = []
     anchor_recovery_bits = 0
@@ -215,9 +235,14 @@ def _record_services(
                 anchor_bits = anchor_read * 8
             recon = math.ceil(anchor_bits / cfg.support_decode_width_bits)
             parse = math.ceil(max(1, int(row["padded_bytes"]) * 8) / max(decoder_rate, 1.0))
-            producer_decode.append(recon)
-            decode.append(recon + parse + math.ceil(payload_bits / max(decoder_rate, 1.0)))
-            if row.get("role") == "target":
+            producer_decode.append(
+                math.ceil(anchor_read * 8 / max(decoder_rate, 1.0))
+                + math.ceil(int(row.get("input_support_bits") or 0) / cfg.support_decode_width_bits)
+                if anchor_read else 0
+            )
+            consumer_decode = int(row.get("consumer_anchor_decode_cycles") or 0)
+            decode.append(recon + parse + math.ceil(payload_bits / max(decoder_rate, 1.0)) + consumer_decode)
+            if row.get("role") == "target" and row.get("chosen_format") == "DELTA":
                 if anchor_read > 0:
                     recoveries += 1; recovery_bytes += anchor_read; anchor_recovery_bits += anchor_bits
                 else:
@@ -228,6 +253,8 @@ def _record_services(
     aggregation = [max(1, math.ceil(int(w) / 32)) for w in weights]
     return {
         "input_parts": input_parts, "output_parts": output_parts, "producer": producer,
+        "producer_anchor_parts": producer_anchor_parts, "producer_memory": producer_memory,
+        "consumer_anchor_parts": consumer_anchor_parts,
         "memory": memory, "decode": decode, "producer_decode": producer_decode,
         "aggregation": aggregation, "anchor_hits": hits, "anchor_recoveries": recoveries,
         "anchor_recovery_bytes": recovery_bytes, "anchor_recovery_bits": anchor_recovery_bits,
@@ -274,9 +301,18 @@ def simulate(
             local = sorted(by_layer[layer], key=lambda r: (int(r["tile"]), int(r["slice"])))
             weights = _weighted_activity(supports, layer, local, order, src_degree)
             svc = _record_services(local, weights, traffic[layer], enc.get(layer), decoder_rate, variant, cfg)
-            producer = _assert_stage_agreement([barrier] * len(local), list(svc["producer"]), cfg.encoder_workers, cfg.input_depth)
-            memory = _assert_stage_agreement(producer.ends, list(svc["memory"]), cfg.memory_workers, cfg.input_depth)
-            decode = _assert_stage_agreement(memory.ends, list(svc["decode"]), cfg.decoder_workers, cfg.decode_depth)
+            producer_memory = _assert_stage_agreement([barrier] * len(local), list(svc["producer_memory"]), cfg.memory_workers, cfg.input_depth)
+            producer_decode = _assert_stage_agreement(producer_memory.ends, list(svc["producer_decode"]), cfg.decoder_workers, cfg.decode_depth)
+            producer = _assert_stage_agreement(producer_decode.ends, list(svc["producer"]), cfg.encoder_workers, cfg.input_depth)
+            # Producer and consumer requests share physical ports.  These
+            # conservative phase fences ensure cross-record overlap cannot
+            # create a free second memory or decoder resource.
+            producer_memory_fence = max(producer_memory.ends, default=barrier)
+            memory_releases = [max(end, producer_memory_fence) for end in producer.ends]
+            memory = _assert_stage_agreement(memory_releases, list(svc["memory"]), cfg.memory_workers, cfg.input_depth)
+            producer_decode_fence = max(producer_decode.ends, default=barrier)
+            decode_releases = [max(end, producer_decode_fence) for end in memory.ends]
+            decode = _assert_stage_agreement(decode_releases, list(svc["decode"]), cfg.decoder_workers, cfg.decode_depth)
             aggregation = _assert_stage_agreement(decode.ends, list(svc["aggregation"]), cfg.aggregation_workers, cfg.aggregation_depth)
             # Combination cycles are shape-cached but each record still executes its own GEMM.
             combo_services = [max(1, math.ceil(int(r["rows"]) / 32) * 32) for r in local]
@@ -291,21 +327,23 @@ def simulate(
             first_ready = aggregation.ends[0] if first_ready is None and aggregation.ends else first_ready
             final_done = max(final_done, layer_done)
             barrier_cycles = layer_done - barrier
-            totals["memory"] += memory.busy + writeback.busy
-            totals["decode"] += decode.busy
+            totals["memory"] += producer_memory.busy + memory.busy + writeback.busy
+            totals["decode"] += producer_decode.busy + decode.busy
             totals["aggregation"] += aggregation.busy
             totals["combination"] += combination.busy
             totals["encode"] += producer.busy
             totals["writeback"] += writeback.busy
-            totals["queue_wait"] += producer.queue_wait + memory.queue_wait + decode.queue_wait + aggregation.queue_wait + combination.queue_wait + writeback.queue_wait
-            totals["producer_stall"] += producer.queue_wait + producer.resource_wait
-            totals["decoder_stall"] += decode.queue_wait + decode.resource_wait
-            totals["memory_stall"] += memory.queue_wait + memory.resource_wait + writeback.queue_wait + writeback.resource_wait
+            totals["queue_wait"] += producer_memory.queue_wait + producer_decode.queue_wait + producer.queue_wait + memory.queue_wait + decode.queue_wait + aggregation.queue_wait + combination.queue_wait + writeback.queue_wait
+            totals["producer_stall"] += producer_memory.queue_wait + producer_memory.resource_wait + producer_decode.queue_wait + producer_decode.resource_wait + producer.queue_wait + producer.resource_wait
+            totals["decoder_stall"] += producer_decode.queue_wait + producer_decode.resource_wait + decode.queue_wait + decode.resource_wait
+            totals["memory_stall"] += producer_memory.queue_wait + producer_memory.resource_wait + memory.queue_wait + memory.resource_wait + writeback.queue_wait + writeback.resource_wait
             for i, row in enumerate(local):
                 anchor_read = int(row.get("anchor_read_bytes") or 0)
                 all_trace.append({
                     "run_id": config_id, "variant": variant, "layer": layer, "ordinal": i,
                     "tile": row["tile"], "slice": row["slice"], "role": row.get("role", ""),
+                    "producer_anchor_memory_start": producer_memory.starts[i], "producer_anchor_memory_done": producer_memory.ends[i],
+                    "producer_anchor_decode_start": producer_decode.starts[i], "producer_anchor_decode_done": producer_decode.ends[i],
                     "producer_start": producer.starts[i], "producer_done": producer.ends[i],
                     "memory_start": memory.starts[i], "memory_done": memory.ends[i],
                     "decode_start": decode.starts[i], "decode_done": decode.ends[i],
@@ -314,8 +352,14 @@ def simulate(
                     "writeback_start": writeback.starts[i], "writeback_done": writeback.ends[i],
                     "input_bytes": svc["input_parts"][i], "output_bytes": svc["output_parts"][i],
                     "anchor_read_bytes": anchor_read,
-                    "anchor_hit": int(variant == "XORFLOW_ONLINE" and row.get("role") == "target" and anchor_read == 0),
-                    "anchor_recovery": int(variant == "XORFLOW_ONLINE" and row.get("role") == "target" and anchor_read > 0),
+                    "anchor_hit": int(
+                        variant == "XORFLOW_ONLINE" and row.get("role") == "target"
+                        and row.get("chosen_format") == "DELTA" and anchor_read == 0
+                    ),
+                    "anchor_recovery": int(
+                        variant == "XORFLOW_ONLINE" and row.get("role") == "target"
+                        and row.get("chosen_format") == "DELTA" and anchor_read > 0
+                    ),
                 })
             audit = {
                 "run_id": config_id, "variant": variant, "layer": layer, "records": len(local), "queue_config": cfg.name,
@@ -326,13 +370,18 @@ def simulate(
                 "anchor_cache_hits": svc["anchor_hits"], "anchor_recoveries": svc["anchor_recoveries"],
                 "anchor_recovery_bytes": svc["anchor_recovery_bytes"],
                 "anchor_hit_rate": svc["anchor_hits"] / max(1, svc["anchor_hits"] + svc["anchor_recoveries"]),
-                "anchor_recovery_bits": svc["anchor_recovery_bits"], "producer_decode_cycles": sum(svc["producer_decode"]),
+                "anchor_recovery_bits": svc["anchor_recovery_bits"], "producer_recovery_memory_cycles": producer_memory.busy,
+                "producer_decode_cycles": sum(svc["producer_decode"]),
                 "producer_encode_cycles": producer.busy, "support_decode_cycles": decode.busy,
                 "memory_read_cycles": memory.busy, "aggregation_cycles": aggregation.busy,
                 "combination_cycles": combination.busy, "writeback_cycles": writeback.busy,
                 "layer_barrier_cycles": barrier_cycles, "max_input_queue": max(producer.max_queue, memory.max_queue),
                 "max_decode_queue": decode.max_queue, "max_aggregation_queue": aggregation.max_queue,
                 "max_combination_queue": combination.max_queue, "max_writeback_queue": writeback.max_queue,
+                "producer_anchor_ready_pass": all(
+                    producer.starts[i] >= producer_decode.ends[i] >= producer_memory.ends[i]
+                    for i in range(len(local))
+                ),
                 "premature_consumption_pass": all(memory.starts[i] >= producer.ends[i] and decode.starts[i] >= memory.ends[i] for i in range(len(local))),
                 "memory_completion_pass": all(writeback.ends[i] >= writeback.starts[i] for i in range(len(local))),
                 "layer_barrier_pass": layer_done >= barrier, "exact_recurrence_pass": True,

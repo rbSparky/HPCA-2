@@ -44,9 +44,13 @@ def main()->None:
   'encoder/encoder_trace.csv':r.glob('encoder/encoder_trace_*.csv'),
   'decoder/decoder_cluster_trace.csv':r.glob('decoder/*/decoder_cluster_trace_b*.csv'),
   'decoder/conflicts.csv':r.glob('decoder/*/conflicts_b*.csv'),
-  'schedule/system_cycles.csv':r.glob('schedule/*/system_cycles.csv'),
-  'schedule/analytical_vs_event.csv':r.glob('schedule/*/analytical_vs_event.csv'),
- }
+ 'schedule/system_cycles.csv':r.glob('schedule/*/system_cycles.csv'),
+ 'schedule/analytical_vs_event.csv':r.glob('schedule/*/analytical_vs_event.csv'),
+  'schedule/causal_event_schedule.csv':r.glob('schedule/*/causal_event_schedule.csv'),
+  'schedule/causal_resource_audit.csv':r.glob('schedule/*/causal_resource_audit.csv'),
+  'schedule/causal_recurrence_check.csv':r.glob('schedule/*/causal_recurrence_check.csv'),
+  'schedule/causal_tile_event_trace.csv':r.glob('schedule/*/causal_tile_event_trace.csv'),
+}
  manifest=[]
  for rel,it in specs.items():
   paths=sorted(it); count=combine(paths,r/rel) if paths else 0

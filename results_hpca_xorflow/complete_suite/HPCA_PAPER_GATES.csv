@@ -2,5 +2,5 @@ gate_id,status,description,evidence
 common_format_matrix,PASS,All required primary configurations have common format rows.,format_matrix
 exact_format_outputs,PASS,At least one exact common-format source has been audited; final gate requires every primary row.,format_matrix/causal_preflight
 reproducibility,UNASSESSED,Principal matrix rerun hash comparison is required before final decision.,reproduction/
-ppa_subsystem,PASS,CACTI SRAM sweep and routed decoder-lane/Yosys bank evidence are present.,ppa/
+ppa_subsystem,UNASSESSED,CACTI SRAM sweep and routed decoder-lane/Yosys bank evidence are present.,ppa/
 ppa_host_fraction,UNASSESSED,Host-area/host-power percentages are not claimed without a common-host floorplan.,ppa/PPA_RESULTS.md

@@ -1,0 +1,8 @@
+run_id,target_records,producer_recovery_records,premature_encode_targets,dependency_pass
+flickr_deepres16_w128_s7,5584,5520,0,True
+ogbn_arxiv_deepres24_w128_s7,15876,15713,0,True
+ogbn_arxiv_deepres32_w128_s7,21168,20963,0,True
+reddit_deepres12_w128_s7_native,10926,10840,0,True
+reddit_deepres16_w128_s7_native,14568,14487,0,True
+yelp_deepres12_w128_s7_balanced_fallback,33606,33558,0,True
+yelp_deepres16_w128_s7_balanced_fallback,44808,44744,0,True

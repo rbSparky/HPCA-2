@@ -1,0 +1,61 @@
+{
+  "complete_cases": [
+    {
+      "added_percent": 0.2734621153643424,
+      "all_requests_accounted": true,
+      "beicsr_cycles": 6620974,
+      "case": "arxiv_s17_pair4",
+      "completion_error_percent": 0.5605645241952544,
+      "config_id": "ogbn_arxiv_deepres8_w128_s17",
+      "consumer_complete_cycles": 5828767,
+      "consumer_complete_speedup": 1.1359133072226082,
+      "predicted_cycles": 5861441,
+      "producer_cycles": 5812871
+    },
+    {
+      "added_percent": 0.6393976006296764,
+      "all_requests_accounted": true,
+      "beicsr_cycles": null,
+      "case": "flickr_pair4",
+      "completion_error_percent": 0.5387946064747012,
+      "config_id": "flickr_deepres8_w128_s7",
+      "consumer_complete_cycles": 1003722,
+      "consumer_complete_speedup": null,
+      "predicted_cycles": 1009130,
+      "producer_cycles": 997345
+    },
+    {
+      "added_percent": 0.013812734874596444,
+      "all_requests_accounted": true,
+      "beicsr_cycles": 284762277,
+      "case": "reddit_pair4",
+      "completion_error_percent": 0.015780905940068465,
+      "config_id": "reddit_deepres8_w128_s7_native",
+      "consumer_complete_cycles": 182480018,
+      "consumer_complete_speedup": 1.5605121049472934,
+      "predicted_cycles": 182508815,
+      "producer_cycles": 182454816
+    },
+    {
+      "added_percent": 0.16342191673579531,
+      "all_requests_accounted": true,
+      "beicsr_cycles": 44026457,
+      "case": "yelp_pair4",
+      "completion_error_percent": 0.4387986012211705,
+      "config_id": "yelp_deepres8_w128_s7_balanced_fallback",
+      "consumer_complete_cycles": 41036366,
+      "consumer_complete_speedup": 1.0728644198172907,
+      "predicted_cycles": 41216433,
+      "producer_cycles": 40969413
+    }
+  ],
+  "dramsim3_all_service_checks_pass": true,
+  "dramsim3_complete_arxiv_requests": 16382812,
+  "dramsim3_mapping": "modulo 8-GiB + HBM2 internal mapping",
+  "mappings_tested": 2,
+  "max_completion_error_percent": 0.5605645241952544,
+  "ordering": "consumer rereads serialized after exact producer-complete stream (conservative)",
+  "ramulator_mapping": "CacheLineInterleave + RoBaRaCoCh",
+  "representative_all_accounted": true,
+  "status": "PASS_CONSUMER_COMPLETE_EXTERNAL_REPLAY"
+}

@@ -1,0 +1,25 @@
+campaign: xorflow_review5
+configs:
+- flickr_deepres8_w128_s7
+- ogbn_arxiv_deepres8_w128_s7
+- ogbn_arxiv_deepres8_w128_s17
+- ogbn_arxiv_deepres8_w128_s27
+- reddit_deepres8_w128_s7_native
+- reddit_deepres8_w128_s17_native
+- reddit_deepres8_w128_s27_native
+- yelp_deepres8_w128_s7_balanced_fallback
+- ogbn_arxiv_deepres16_w128_s7
+- chameleon_gcnii16
+consumer_capacity_bytes:
+- 16384
+- 262144
+- 1048576
+- 4194304
+queue:
+  input: 4
+  decode: 4
+  aggregation: 4
+  combination: 4
+  writeback: 4
+  memory_workers: 8
+reuse_policy: only consumer-lifecycle-dependent schedules rerun

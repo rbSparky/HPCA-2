@@ -249,6 +249,26 @@ def build_schedule_overlap() -> None:
     write_csv(V3 / "schedule" / "overlap_breakdown.csv", fields, data)
 
 
+def build_causal_schedule_summary() -> None:
+    """Materialize a compact audit of the corrected finite-queue campaign."""
+    source = V3 / "schedule" / "causal_event_schedule.csv"
+    audit = V3 / "schedule" / "causal_resource_audit.csv"
+    if not source.exists() or not audit.exists():
+        return
+    rows = list(csv.DictReader(source.open()))
+    audits = list(csv.DictReader(audit.open()))
+    fields = ["config_id", "variant", "total_cycles", "speedup_vs_BEICSR", "recurrence_relative_error", "independent_check_pass", "max_queue_observed", "anchor_hit_rate", "anchor_recovery_bytes", "premature_consumption_failures", "memory_completion_failures", "layer_barrier_failures"]
+    out: list[dict[str, object]] = []
+    for config in sorted({r["run_id"] for r in rows}):
+        base = next(r for r in rows if r["run_id"] == config and r["variant"] == "BEICSR_OPT")
+        for row in [r for r in rows if r["run_id"] == config]:
+            aa = [a for a in audits if a["run_id"] == config and a["variant"] == row["variant"]]
+            max_q = max((max(int(a[f]) for f in ("max_input_queue", "max_decode_queue", "max_aggregation_queue", "max_combination_queue", "max_writeback_queue")) for a in aa), default=0)
+            hits = sum(int(a["anchor_cache_hits"]) for a in aa); rec = sum(int(a["anchor_recoveries"]) for a in aa)
+            out.append({"config_id": config, "variant": row["variant"], "total_cycles": row["total_cycles"], "speedup_vs_BEICSR": float(base["total_cycles"]) / max(float(row["total_cycles"]), 1), "recurrence_relative_error": row["recurrence_relative_error"], "independent_check_pass": row["independent_check_pass"], "max_queue_observed": max_q, "anchor_hit_rate": hits / max(1, hits + rec), "anchor_recovery_bytes": sum(int(a["anchor_recovery_bytes"]) for a in aa), "premature_consumption_failures": sum(a["premature_consumption_pass"].lower() != "true" for a in aa), "memory_completion_failures": sum(a["memory_completion_pass"].lower() != "true" for a in aa), "layer_barrier_failures": sum(a["layer_barrier_pass"].lower() != "true" for a in aa)})
+    write_csv(V3 / "schedule" / "causal_schedule_summary.csv", fields, out)
+
+
 def build_result_manifest() -> None:
     """Emit the per-value manifest required by the reviewer specification.
 
