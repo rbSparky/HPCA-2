@@ -5,8 +5,8 @@ import random
 import numpy as np
 
 from xorflow.causal_schedule import (
-    QueueConfig, _assert_stage_agreement, _record_services, _stage_event_list,
-    _stage_recurrence,
+    QueueConfig, UnifiedMemory, _assert_stage_agreement, _record_services,
+    _stage_event_list, _stage_recurrence,
 )
 
 
@@ -84,3 +84,23 @@ def test_final_ablation_variants_share_coded_path_without_free_anchors() -> None
     assert a2["consumer_anchor_parts"] == [0]
     assert forced["producer_anchor_parts"] == [128]
     assert forced["consumer_anchor_parts"] == [128]
+
+
+def test_unified_memory_shares_channels_across_reads_and_writes() -> None:
+    memory = UnifiedMemory(channels=8, queue_capacity=32, turnaround_cycles=8)
+    # Same mapped channel: producer read, target read, then writeback contend.
+    _, producer_done = memory.issue(0, 1024, 0x0000, write=False)
+    target_start, target_done = memory.issue(0, 1024, 0x1000, write=False)
+    write_start, _ = memory.issue(0, 1024, 0x2000, write=True)
+    assert 0 < target_start < producer_done  # pipelined issue, delayed callback
+    assert write_start > target_start
+    assert memory.turnaround_total == 8
+    assert memory.read_requests == 2 and memory.write_requests == 1
+
+
+def test_memory_queue_capacity_is_distinct_from_eight_channels() -> None:
+    memory = UnifiedMemory(channels=8, queue_capacity=32)
+    for index in range(40):
+        memory.issue(0, 4096, index * 64, write=False)
+    assert memory.max_inflight <= 32
+    assert memory.wait_cycles > 0

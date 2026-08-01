@@ -26,6 +26,7 @@ from typing import Any, Iterable
 import numpy as np
 
 from mosaic_validation.graph_order import symmetrized_edges_and_rcm
+from mosaic_validation.hpca_scalesim import calibrate_gemm
 from mosaic_validation.hpca_xorflow_cli import _case
 from .online_replay import unpack_supports
 from .system_schedule import _partition, _read, _write
@@ -63,6 +64,11 @@ TRACE_COLUMNS = [
     "input_bytes", "output_bytes", "anchor_read_bytes", "anchor_hit", "anchor_recovery",
 ]
 
+# Derived once from the all-layer Flickr seed-7 calibration stream using the
+# same HBM2/RoBaRaCoCh/CacheLineInterleave setup. Flickr seed 17 is a held-out
+# absolute validation case and is never used to determine this factor.
+HBM2_TIMING_SCALE = 4_004_721 / 2_381_344
+
 
 @dataclass(frozen=True)
 class QueueConfig:
@@ -95,6 +101,72 @@ class StageResult:
     resource_wait: int
     max_queue: int
     busy: int
+
+
+@dataclass
+class UnifiedMemory:
+    """Persistent eight-channel read/write memory resource.
+
+    Queue capacity is independent of the eight active channel slots. Requests
+    are deterministically striped by physical record address. Read/write
+    direction changes pay a turnaround penalty on the selected channel; all
+    producer-anchor reads, target/consumer reads, and output writebacks use the
+    same channel state for the complete run.
+    """
+
+    channels: int = 8
+    queue_capacity: int = 32
+    bytes_per_channel_cycle: int = 32
+    base_latency: int = 50
+    turnaround_cycles: int = 8
+    timing_scale: float = HBM2_TIMING_SCALE
+    free: list[int] | None = None
+    last_write: list[bool | None] | None = None
+    busy_cycles: int = 0
+    wait_cycles: int = 0
+    turnaround_total: int = 0
+    read_requests: int = 0
+    write_requests: int = 0
+    inflight: list[int] | None = None
+    max_inflight: int = 0
+
+    def __post_init__(self) -> None:
+        self.free = [0] * self.channels
+        self.last_write = [None] * self.channels
+        self.inflight = []
+
+    def issue(self, ready: int, size_bytes: int, address: int, *, write: bool) -> tuple[int, int]:
+        assert self.free is not None and self.last_write is not None and self.inflight is not None
+        ready = int(ready)
+        while self.inflight and self.inflight[0] <= ready:
+            heapq.heappop(self.inflight)
+        if len(self.inflight) >= self.queue_capacity:
+            admitted = heapq.heappop(self.inflight)
+            self.wait_cycles += max(0, admitted - ready)
+            ready = max(ready, admitted)
+            while self.inflight and self.inflight[0] <= ready:
+                heapq.heappop(self.inflight)
+        channel = (int(address) // 64) % self.channels
+        direction_change = self.last_write[channel] is not None and self.last_write[channel] != write
+        turn = self.turnaround_cycles if direction_change else 0
+        start = max(ready, self.free[channel])
+        self.wait_cycles += max(0, start - ready)
+        raw_transfer = math.ceil(max(0, int(size_bytes)) / self.bytes_per_channel_cycle)
+        transfer = math.ceil(raw_transfer * self.timing_scale)
+        service = transfer + (self.base_latency if size_bytes else 0) + turn
+        done = start + service
+        # HBM channels are pipelined: latency delays the callback but does not
+        # prevent the next burst from being issued once transfer/turnaround
+        # slots are available.
+        self.free[channel] = start + transfer + turn
+        self.last_write[channel] = write
+        heapq.heappush(self.inflight, done)
+        self.max_inflight = max(self.max_inflight, len(self.inflight))
+        self.busy_cycles += service
+        self.turnaround_total += turn
+        self.write_requests += int(write and size_bytes > 0)
+        self.read_requests += int(not write and size_bytes > 0)
+        return start, done
 
 
 def _stage_event_list(
@@ -165,6 +237,25 @@ def _assert_stage_agreement(releases: list[int], services: list[int], workers: i
     if result.ends != reference:
         raise AssertionError("finite-stage recurrence disagreement")
     return result
+
+
+def _memory_batch(
+    memory: UnifiedMemory, releases: list[int], byte_counts: list[int],
+    addresses: list[int], *, write: bool,
+) -> StageResult:
+    """Issue one dependency-ready batch through the persistent memory fabric."""
+    starts: list[int] = []
+    ends: list[int] = []
+    before_wait = memory.wait_cycles
+    before_busy = memory.busy_cycles
+    for ready, count, address in zip(releases, byte_counts, addresses, strict=True):
+        start, done = memory.issue(ready, count, address, write=write)
+        starts.append(start); ends.append(done)
+    return StageResult(
+        starts=starts, ends=ends, queue_wait=memory.wait_cycles - before_wait,
+        resource_wait=0, max_queue=memory.max_inflight,
+        busy=memory.busy_cycles - before_busy,
+    )
 
 
 def _proportional_services(total: int, weights: np.ndarray) -> list[int]:
@@ -285,13 +376,25 @@ def simulate(
     decoder_rate = float(decoder["achieved_encoded_bits_per_cycle"])
     if decoder_rate <= 0:
         raise ValueError("non-positive decoder rate")
-    _, data, _ = _case(project, config_id)
-    trace = project / "artifacts_hpca_xorflow/workloads" / config_id / "fp8_supports.npz"
-    if not trace.exists():
-        trace = project / "artifacts_final8/masks" / f"{config_id}_fp8_supports.npz"
-    supports = unpack_supports(trace)
-    _, order = symmetrized_edges_and_rcm(data.edge_index, data.num_nodes)
-    src_degree = np.bincount(data.edge_index[0].cpu().numpy(), minlength=data.num_nodes)
+    # Reuse the already-audited per-record activity ledger when available.
+    # This avoids reloading multi-GB graph tensors during a pure timing replay;
+    # the ledger was produced from the exact same packed supports and ordering.
+    reference_path = (project / "results_hpca_xorflow/final_review4/ablation_schedules"
+                      / config_id / "COMPLETE_XORFLOW/causal_tile_event_trace.csv")
+    reference: dict[tuple[str, int, int], dict[str, str]] = {}
+    if reference_path.exists():
+        for r in _read(reference_path):
+            reference[(r["variant"], int(r["layer"]), int(r["ordinal"]))] = r
+        data = order = src_degree = None
+        support_width = max(int(r["slice"]) * int(r["features"]) + int(r["features"]) for r in records)
+    else:
+        _, data, _ = _case(project, config_id)
+        trace = project / "artifacts_hpca_xorflow/workloads" / config_id / "fp8_supports.npz"
+        if not trace.exists(): trace = project / "artifacts_final8/masks" / f"{config_id}_fp8_supports.npz"
+        supports = unpack_supports(trace)
+        _, order = symmetrized_edges_and_rcm(data.edge_index, data.num_nodes)
+        src_degree = np.bincount(data.edge_index[0].cpu().numpy(), minlength=data.num_nodes)
+        support_width = supports.shape[2]
     width = int(records[0]["features"])
     by_layer: dict[int, list[dict[str, str]]] = {}
     for row in records:
@@ -303,30 +406,65 @@ def simulate(
     if "BEICSR_OPT" not in variants:
         raise ValueError("variants must include BEICSR_OPT for a common baseline")
     for variant in variants:
+        memory_fabric = UnifiedMemory(
+            channels=cfg.memory_workers, queue_capacity=max(32, cfg.memory_workers * 4),
+            bytes_per_channel_cycle=cfg.memory_bytes_per_cycle,
+        )
         barrier = 0
         totals = {k: 0 for k in ("memory", "decode", "aggregation", "combination", "encode", "writeback", "queue_wait", "producer_stall", "decoder_stall", "memory_stall")}
         first_ready: int | None = None; final_done = 0; total_recurrence = 0
         for layer in sorted(by_layer):
             local = sorted(by_layer[layer], key=lambda r: (int(r["tile"]), int(r["slice"])))
-            weights = _weighted_activity(supports, layer, local, order, src_degree)
+            addresses = [
+                ((layer & 0xffff) << 40) | ((int(r["tile"]) & 0xfffff) << 16)
+                | ((int(r["slice"]) & 0xff) << 8)
+                for r in local
+            ]
+            ref_variant = "BEICSR_OPT" if variant == "BEICSR_OPT" else "COMPLETE_XORFLOW"
+            refs = [reference.get((ref_variant, layer, i)) for i in range(len(local))]
+            if reference and all(r is not None for r in refs):
+                weights = np.asarray([
+                    max(1, (int(r["aggregation_done"]) - int(r["aggregation_start"])) * 32)
+                    for r in refs if r is not None
+                ], dtype=np.int64)
+            else:
+                assert data is not None and order is not None and src_degree is not None
+                weights = _weighted_activity(supports, layer, local, order, src_degree)
             svc = _record_services(local, weights, traffic[layer], enc.get(layer), decoder_rate, variant, cfg)
-            producer_memory = _assert_stage_agreement([barrier] * len(local), list(svc["producer_memory"]), cfg.memory_workers, cfg.input_depth)
+            producer_memory = _memory_batch(
+                memory_fabric, [barrier] * len(local), list(svc["producer_anchor_parts"]),
+                [a | 0x00 for a in addresses], write=False,
+            )
             producer_decode = _assert_stage_agreement(producer_memory.ends, list(svc["producer_decode"]), cfg.decoder_workers, cfg.decode_depth)
             producer = _assert_stage_agreement(producer_decode.ends, list(svc["producer"]), cfg.encoder_workers, cfg.input_depth)
             # Producer and consumer requests share physical ports.  These
             # conservative phase fences ensure cross-record overlap cannot
             # create a free second memory or decoder resource.
-            producer_memory_fence = max(producer_memory.ends, default=barrier)
-            memory_releases = [max(end, producer_memory_fence) for end in producer.ends]
-            memory = _assert_stage_agreement(memory_releases, list(svc["memory"]), cfg.memory_workers, cfg.input_depth)
+            memory_releases = list(producer.ends)
+            memory = _memory_batch(
+                memory_fabric, memory_releases, list(svc["input_parts"]),
+                [a | 0x40 for a in addresses], write=False,
+            )
             producer_decode_fence = max(producer_decode.ends, default=barrier)
             decode_releases = [max(end, producer_decode_fence) for end in memory.ends]
             decode = _assert_stage_agreement(decode_releases, list(svc["decode"]), cfg.decoder_workers, cfg.decode_depth)
             aggregation = _assert_stage_agreement(decode.ends, list(svc["aggregation"]), cfg.aggregation_workers, cfg.aggregation_depth)
-            # Combination cycles are shape-cached but each record still executes its own GEMM.
-            combo_services = [max(1, math.ceil(int(r["rows"]) / 32) * 32) for r in local]
+            # Versioned SCALE-Sim 32x32 weight-stationary shape cycles. Shape
+            # caching avoids simulator reruns but never reduces execution count.
+            combo_services = []
+            for r in local:
+                result = calibrate_gemm(
+                    project, project / "artifacts_hpca_xorflow/scalesim_final_schedule", m=int(r["rows"]),
+                    k=support_width, n=support_width,
+                )
+                if not result.success:
+                    raise RuntimeError(f"SCALE-Sim combination calibration failed: {result.error}")
+                combo_services.append(result.cycles)
             combination = _assert_stage_agreement(aggregation.ends, combo_services, cfg.combination_workers, cfg.combination_depth)
-            writeback = _assert_stage_agreement(combination.ends, [math.ceil(int(x) / cfg.memory_bytes_per_cycle) + 50 for x in svc["output_parts"]], cfg.memory_workers, cfg.writeback_depth)
+            writeback = _memory_batch(
+                memory_fabric, combination.ends, list(svc["output_parts"]),
+                [a | 0x80 for a in addresses], write=True,
+            )
             layer_done = max(writeback.ends, default=barrier)
             if layer_done < barrier:
                 raise AssertionError("layer barrier moved backwards")
@@ -407,7 +545,7 @@ def simulate(
             "decoder_stall_cycles": totals["decoder_stall"], "memory_stall_cycles": totals["memory_stall"],
             "queue_wait_cycles": totals["queue_wait"], "recurrence_cycles": total_recurrence,
             "recurrence_relative_error": relative, "independent_check_pass": relative <= 0.05,
-            "schedule_model": "CAUSAL_FINITE_QUEUE_LAYER_BARRIER"})
+            "schedule_model": "CAUSAL_UNIFIED_8CH_RW_SCALESIM_LAYER_BARRIER"})
     base = next(x["total_cycles"] for x in outputs if x["variant"] == "BEICSR_OPT")
     for row in outputs:
         row["speedup_vs_selected_baseline"] = base / max(row["total_cycles"], 1)

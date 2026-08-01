@@ -175,6 +175,15 @@ def main() -> None:
             write_path = stage / "results/final_ablation_cycles.csv"; write_path.parent.mkdir(parents=True, exist_ok=True)
             with write_path.open("w", newline="") as h:
                 out = csv.DictWriter(h, fieldnames=fields); out.writeheader(); out.writerows(ablation)
+        # Preserve the compact per-variant event-schedule, resource-audit, and
+        # recurrence evidence.  Tile-level traces are much larger and remain
+        # content-addressed in the source results tree.
+        for cfg_dir in sorted((FINAL / "ablation_schedules").glob("*")):
+            if not cfg_dir.is_dir(): continue
+            for variant_dir in sorted(cfg_dir.glob("*")):
+                if not variant_dir.is_dir() or variant_dir.name == "prepared": continue
+                for name in ("causal_event_schedule.csv", "causal_resource_audit.csv", "causal_recurrence_check.csv"):
+                    copy(variant_dir / name, Path("results/ablation_detail") / cfg_dir.name / variant_dir.name / name, stage)
         expected = {r["run_id"] for r in rows(OLD / "results/final_primary_cycles.csv")}
         expected.update({"flickr_deepres8_w128_s17", "flickr_deepres8_w128_s27"})
         complete = {r["run_id"] for r in ablation if r["variant"] == "COMPLETE_XORFLOW"}
