@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mosaic-validation"
+version = "0.1.0"
+description = "MOSAIC-GNN Phase-0 structural validation harness"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy", "scipy", "pandas", "scikit-learn", "matplotlib",
+  "pyyaml", "tqdm", "psutil", "pytest", "torch", "torch-geometric",
+]
+
+[project.scripts]
+mosaic-validate = "mosaic_validation.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+

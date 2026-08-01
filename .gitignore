@@ -1,0 +1,11 @@
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.so
+obj_dir/
+artifacts_safezone/
+artifacts_*/
+datasets/
+checkpoints/
+*.vcd
+*.saif

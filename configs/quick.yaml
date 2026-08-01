@@ -1,0 +1,22 @@
+seed: 7
+hidden_layers: 16
+width: 64
+dropout: 0.5
+learning_rate: 0.01
+weight_decay: 0.0005
+max_epochs: 120
+min_epochs: 40
+patience_checks: 20
+validation_interval: 2
+bootstrap_replicates: 50
+pair_limit: 50000
+tile_size: 128
+cohort_size: 32
+principal_layer_start: 4
+device: auto
+configs:
+  - {id: cora_gcnii16, dataset: Cora, model: gcnii, min_test_accuracy: 0.70, time_cap_minutes: 8}
+  - {id: pubmed_gcnii16, dataset: PubMed, model: gcnii, min_test_accuracy: 0.70, time_cap_minutes: 18}
+  - {id: chameleon_gcnii16, dataset: chameleon, model: gcnii, min_test_accuracy: 0.35, time_cap_minutes: 10}
+  - {id: cora_resgcn16, dataset: Cora, model: resgcn, min_test_accuracy: 0.65, time_cap_minutes: 8}
+

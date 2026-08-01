@@ -1,0 +1,30 @@
+{
+  "status": "PASS_TILE_STREAM_ENGINE_AND_STREAM_EQUIVALENCE",
+  "reason": "The RTL encoder path includes a finite tile support-ingestion/majority engine and a separate 2,048-bit stream engine. The stream engine discovers every XOR event and internally packs/selects exact dense, fixed-ID, and Gap8 candidates with descriptor offsets and ready/valid output. The software serializer remains the reference for larger full-workload descriptors and byte-for-byte campaign hashes.",
+  "cycle_model": "results_hpca_xorflow/artifact_runs/encoder/encoder_trace.csv",
+  "rtl_synthesis_log": "results_hpca_xorflow/artifact_runs/encoder/encoder_rtl_synthesis.log",
+  "engine_rtl_synthesis_log": "results_hpca_xorflow/artifact_runs/encoder/encoder_engine_rtl_synthesis.log",
+  "tile_stream_rtl_scope": "results_hpca_xorflow/artifact_runs/encoder/encoder_stream_rtl_synthesis.log",
+  "verilator_lint_log": "results_hpca_xorflow/artifact_runs/encoder/encoder_verilator_lint.log",
+  "engine_cosimulation": "results_hpca_xorflow/artifact_runs/encoder/encoder_engine_cosim.log",
+  "tile_stream_cosimulation": "results_hpca_xorflow/artifact_runs/encoder/encoder_stream_cosim.log",
+  "stream_equivalence": "results_hpca_xorflow/artifact_runs/encoder/stream_equivalence.csv",
+  "yosys_cells_boundary": 810,
+  "yosys_cells_engine": 1055,
+  "candidate_discovery_scope": "full 32-row x 64-bit tile event discovery with exact dense/fixed-ID/Gap8 packing and internal minimum selector",
+  "tile_domain_bits": 2048,
+  "implemented_stream_formats": [
+    "DENSE_BITMAP",
+    "FIXED_IDS",
+    "BLOCK_FOR_GAP8"
+  ],
+  "gap8_candidate_length_input": false,
+  "real_trace_vcd": true,
+  "fullstream_activity_scaling": true,
+  "fullstream_activity_scaling_csv": "results_hpca_xorflow/artifact_runs/activity/fullstream_activity_scaling.csv",
+  "vcd_activity_summary": "results_hpca_xorflow/artifact_runs/activity/vcd_summary.csv",
+  "routed_vcd_power_summary": "results_hpca_xorflow/artifact_runs/decoder/vcd_or_saif/openroad_vcd_power.json",
+  "routed_vcd_power_status": "VCD_ANNOTATED_OPENROAD_REPORT",
+  "routed_vcd_total_power_w": "1.27e-02",
+  "required_next_step": "Use cell-annotated power weighted by the full stream if a full-workload energy claim is required; no pass-through claim remains."
+}

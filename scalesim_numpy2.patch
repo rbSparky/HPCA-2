@@ -1,0 +1,15 @@
+diff --git a/scalesim/memory/double_buffered_scratchpad_mem.py b/scalesim/memory/double_buffered_scratchpad_mem.py
+--- a/scalesim/memory/double_buffered_scratchpad_mem.py
++++ b/scalesim/memory/double_buffered_scratchpad_mem.py
+@@ -304,7 +304,9 @@
+         self.ofmap_trace_matrix = np.concatenate((ofmap_services_cycles_np, ofmap_demand_mat),
+                                                  axis=1)
+         #self.total_cycles = int(ofmap_serviced_cycles[-1][0])
+         ## Probable fault in sanity check
+-        self.total_cycles = int(max(ofmap_serviced_cycles))
++        # NumPy 2.x rejects int(array([value])); preserve the v3.0.0 intent
++        # while explicitly reducing the service-cycle array to a scalar.
++        self.total_cycles = int(np.max(ofmap_serviced_cycles))
+ 
+         # END of serving demands from memory
+         self.traces_valid = True

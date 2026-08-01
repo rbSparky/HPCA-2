@@ -1,0 +1,27 @@
+# Fail-closed common-format smoke before any paper-scale queue is submitted.
+campaign_id: "paper_suite_baseline_smoke_20260729_v1"
+deadline_utc: "2026-07-31T18:29:00Z"
+deadline_margin_minutes: 30
+tasks:
+  - task_id: baseline_matrix_arxiv_l4
+    stage: baseline_smoke
+    estimated_minutes: 35
+    weight: 3
+    command: "PYTHONPATH=src python -m mosaic_validation.hpca_baseline_matrix --configs ogbn_arxiv_deepres8_w128_s17 --max-pairs 1 --output results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/baseline_matrix.csv"
+  - task_id: causal_preflight_arxiv_l4
+    stage: baseline_smoke
+    estimated_minutes: 25
+    weight: 2
+    command: "PYTHONPATH=src python -m mosaic_validation.hpca_xorflow_cli --configs ogbn_arxiv_deepres8_w128_s17 --max-pairs 1 --output results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/causal_x1.csv"
+  - task_id: causal_host_arxiv_l4
+    stage: baseline_smoke
+    estimated_minutes: 15
+    weight: 1
+    depends_on: [causal_preflight_arxiv_l4]
+    command: "PYTHONPATH=src python -m mosaic_validation.hpca_host --input results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/causal_x1.csv --output results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/causal_x1_host.csv"
+  - task_id: audit_arxiv_l4
+    stage: baseline_smoke
+    estimated_minutes: 5
+    weight: 1
+    depends_on: [baseline_matrix_arxiv_l4, causal_preflight_arxiv_l4, causal_host_arxiv_l4]
+    command: "python scripts/verify_hpca_baseline_smoke.py --baselines results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/baseline_matrix.csv --causal results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/causal_x1.csv --host results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/causal_x1_host.csv --output results_hpca_xorflow/complete_suite/baselines/smoke_arxiv_l4/audit.json"

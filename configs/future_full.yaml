@@ -1,0 +1,14 @@
+status: documented_not_run
+seeds: [1, 2, 3, 4, 5]
+datasets: [Cora, CiteSeer, PubMed, CitationFull-DBLP, GitHub, Flickr, ogbn-arxiv, Reddit2, Chameleon, Squirrel]
+models:
+  gcnii_depths: [16, 32, 64]
+  residual_gcn_depths: [16, 28]
+  additional: [residual_graphsage, gin]
+arrays: [16, 32, 64]
+sram_kb: [256, 512, 1024, 2048]
+bandwidth_gbps: [64, 128, 256]
+baselines: [dense, csr, csc, blocked_ellpack, bitmap_sparse, dynamic_selector, locality_only, support_oracle, rsh_style, sgcn_style]
+ablations: [no_topology, no_clustering, no_temporal_reuse, majority_template, no_hole_gating, no_template_cache, no_fallback, cohort_sensitivity]
+architecture_outputs: [cycles, dram_traffic, sram_traffic, utilization, stalls, area, energy, metadata_overhead, ordering_overhead, accuracy_equivalence]
+

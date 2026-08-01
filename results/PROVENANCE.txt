@@ -1,0 +1,4 @@
+Anonymous XORFLOW artifact
+Source revision: a0a5ed22f0e91ef3f35bb630187f0c7e3de6ae82
+Only curated tables and selected implementation evidence are included.
+Raw datasets, checkpoints, transient traces, queue logs, automation notes, and local paths are excluded.

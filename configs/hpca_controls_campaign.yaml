@@ -1,0 +1,26 @@
+# Matched-support controls through the same B0--B4/X0--X2/O0/O1 host.
+campaign_id: "paper_suite_controls_20260729_v1"
+deadline_utc: "2026-07-31T18:29:00Z"
+deadline_margin_minutes: 45
+tasks:
+  - task_id: traffic_controls_arxiv
+    stage: controls
+    estimated_minutes: 180
+    weight: 5
+    command: "PYTHONPATH=src python -m mosaic_validation.hpca_format_controls --configs ogbn_arxiv_deepres8_w128_s17 --max-pairs 1 --output results_hpca_xorflow/complete_suite/controls/arxiv_s17/format_controls.csv --audit-output results_hpca_xorflow/complete_suite/controls/arxiv_s17/control_audit.csv"
+  - task_id: traffic_controls_reddit
+    stage: controls
+    estimated_minutes: 240
+    weight: 5
+    command: "PYTHONPATH=src python -m mosaic_validation.hpca_format_controls --configs reddit_deepres8_w128_s7_native --max-pairs 1 --output results_hpca_xorflow/complete_suite/controls/reddit/format_controls.csv --audit-output results_hpca_xorflow/complete_suite/controls/reddit/control_audit.csv"
+  - task_id: traffic_controls_yelp
+    stage: controls
+    estimated_minutes: 90
+    weight: 2
+    command: "PYTHONPATH=src python -m mosaic_validation.hpca_format_controls --configs yelp_deepres8_w128_s7_balanced_fallback --max-pairs 1 --output results_hpca_xorflow/complete_suite/controls/yelp_borderline/format_controls.csv --audit-output results_hpca_xorflow/complete_suite/controls/yelp_borderline/control_audit.csv"
+  - task_id: canonical_evidence_refresh_controls
+    stage: report
+    estimated_minutes: 10
+    weight: 1
+    depends_on: [traffic_controls_arxiv, traffic_controls_reddit, traffic_controls_yelp]
+    command: "PYTHONPATH=src:. python scripts/build_hpca_paper_evidence.py"

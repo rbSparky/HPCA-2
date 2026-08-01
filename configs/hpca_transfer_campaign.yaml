@@ -1,0 +1,36 @@
+# Compact transfer/boundary matrix required for a defensible scope claim.
+campaign_id: "paper_suite_transfer_boundary_20260729_v1"
+deadline_utc: "2026-07-31T18:29:00Z"
+deadline_margin_minutes: 45
+tasks:
+  - task_id: transfer_flickr
+    stage: transfer_boundary
+    estimated_minutes: 90
+    weight: 1
+    command: "PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs flickr_deepres8_w128_s7 --max-pairs 1 --output results_hpca_xorflow/complete_suite/baselines/transfer_boundary/flickr.csv"
+  - task_id: transfer_pubmed
+    stage: transfer_boundary
+    estimated_minutes: 120
+    weight: 1
+    command: "PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs pubmed_gcnii16 --max-pairs 1 --output results_hpca_xorflow/complete_suite/baselines/transfer_boundary/pubmed.csv"
+  - task_id: boundary_cora
+    stage: transfer_boundary
+    estimated_minutes: 60
+    weight: 1
+    command: "PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs cora_gcnii16 --max-pairs 1 --output results_hpca_xorflow/complete_suite/baselines/transfer_boundary/cora.csv"
+  - task_id: boundary_citeseer
+    stage: transfer_boundary
+    estimated_minutes: 60
+    weight: 1
+    command: "PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs citeseer_deepres8_w128_s7 --max-pairs 1 --output results_hpca_xorflow/complete_suite/baselines/transfer_boundary/citeseer.csv"
+  - task_id: boundary_chameleon
+    stage: transfer_boundary
+    estimated_minutes: 60
+    weight: 1
+    command: "PYTHONPATH=src python -m mosaic_validation.hpca_format_matrix --configs chameleon_gcnii16 --max-pairs 1 --output results_hpca_xorflow/complete_suite/baselines/transfer_boundary/chameleon.csv"
+  - task_id: canonical_evidence_refresh_transfer
+    stage: report
+    estimated_minutes: 10
+    weight: 1
+    depends_on: [transfer_flickr, transfer_pubmed, boundary_cora, boundary_citeseer, boundary_chameleon]
+    command: "PYTHONPATH=src:. python scripts/build_hpca_paper_evidence.py"

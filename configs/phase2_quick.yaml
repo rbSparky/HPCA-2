@@ -1,0 +1,20 @@
+seed: 7
+null_seed: 7007
+principal:
+  window: 4
+  tile_size: 128
+  cohort_size: 32
+  rho_delta: 1.25
+  decode_width_bits: 64
+  rebuild_fraction: 0.01
+  eta: 0.05
+windows: [1, 2, 4, 8, 13]
+cohort_sizes: [16, 32, 64]
+tile_sizes: [64, 128, 256]
+rho_delta: [1.10, 1.25, 1.50, 1.75]
+decode_width_bits: [32, 64, 128]
+gap_block_events: [8, 16, 32]
+cross_products: [[16, 4], [16, 8], [32, 4], [32, 8], [32, 13], [64, 4], [64, 8]]
+valid_configs: [cora_gcnii16, pubmed_gcnii16, cora_deepres28_w128, chameleon_gcnii16]
+diagnostic_configs: [cora_resgcn16, pubmed_deepres28_w128]
+
