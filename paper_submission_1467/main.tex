@@ -415,7 +415,7 @@ The operating regime follows Eq.~\ref{eq:breakeven}. Residual connections preser
 \label{fig:depth-scaling}
 \end{figure*}
 
-Figure~\ref{fig:depth-scaling} connects the layerwise persistence in Supplementary Fig.~S1 to subsystem behavior: valid Reddit improves monotonically from 1.272$\times$ at D8 to 1.324$\times$ at D16, while Arxiv exceeds 1.2$\times$ at D16. Flickr's 0.981$\times$ D16 result bounds the claim---depth helps only when positional persistence coincides with exposed memory traffic.
+Figure~\ref{fig:depth-scaling} connects the layerwise persistence in Supplementary Fig.~S1 to subsystem behavior: valid Reddit improves monotonically from 1.279$\times$ at D8 to 1.324$\times$ at D16, while Arxiv exceeds 1.2$\times$ at D16. Flickr's 0.981$\times$ D16 result bounds the claim---depth helps only when positional persistence coincides with exposed memory traffic.
 
 \subsection{Exactness and numerical quality}
 Every evaluated stream reconstructs the original support bit-for-bit, so \sys{} adds no numerical error. The paired quality difference comes only from the FP8/FP16 arithmetic shared with the baseline. Across compatible primary checkpoints, FP8/FP16 minus FP32 accuracy ranges from $-0.053$ to $+0.031$ percentage points. Supplementary Table~S6 reports every compatible primary pair; Supplementary Sec.~IX reports the deeper and negative-control configurations.
